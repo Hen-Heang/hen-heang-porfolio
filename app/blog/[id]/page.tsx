@@ -2,8 +2,10 @@ import { blogPosts } from "@/data/blog"
 import BlogPostClientPage from "./BlogPostClientPage"
 import type { Metadata } from "next"
 
+// Updated Props to match Next.js expectations
 type Props = {
     params: { id: string }
+    searchParams?: Record<string, string | string[] | undefined>
 }
 
 export function generateStaticParams() {
@@ -27,6 +29,7 @@ export function generateMetadata({ params }: Props): Metadata {
     }
 }
 
-export default function BlogPostPage({ params }: Props) {
+// Making the component async to match Next.js expectations
+export default async function BlogPostPage({ params }: Props) {
     return <BlogPostClientPage params={params} />
 }
