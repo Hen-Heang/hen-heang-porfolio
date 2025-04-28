@@ -7,6 +7,9 @@ import { notFound } from "next/navigation"
 import { motion } from "framer-motion"
 import FadeIn from "@/components/animations/fade-in"
 
+type CustomPageProps = {
+    params: { id: string };
+};
 export default function BlogPostClientPage({ params }: { params: { id: string } }) {
     const post = blogPosts.find((p) => p.id === params.id)
 

@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 
 type Props = {
     params: { id: string }
+    searchParams?: Record<string, string | string[] | undefined>
 }
 
 export function generateStaticParams() {
@@ -27,6 +28,6 @@ export function generateMetadata({ params }: Props): Metadata {
     }
 }
 
-export default function ProjectPage({ params }: Props) {
+export default async function ProjectPage({ params }: Props) {
     return <ProjectClientPage params={params} />
 }
