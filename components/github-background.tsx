@@ -54,11 +54,11 @@ export default function GithubBackground() {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
 
             if (isDark) {
-                gradient.addColorStop(0, "#0a0426")
-                gradient.addColorStop(1, "#1f0a4d")
+                gradient.addColorStop(0, "#0d1117") // GitHub dark bg top
+                gradient.addColorStop(1, "#010409") // GitHub dark bg bottom
             } else {
-                gradient.addColorStop(0, "#f8fafc") // Light gray
-                gradient.addColorStop(1, "#f1f5f9") // Slightly darker gray
+                gradient.addColorStop(0, "#f6f8fa") // GitHub light bg top
+                gradient.addColorStop(1, "#ffffff") // GitHub light bg bottom
             }
 
             ctx.fillStyle = gradient
@@ -93,14 +93,14 @@ export default function GithubBackground() {
                     const nebulaGradient = ctx.createRadialGradient(x, y, 0, x, y, radius)
 
                     if (i % 3 === 0) {
-                        nebulaGradient.addColorStop(0, "rgba(147, 51, 234, 0.3)") // Purple
-                        nebulaGradient.addColorStop(1, "rgba(147, 51, 234, 0)")
+                        nebulaGradient.addColorStop(0, "rgba(163, 113, 247, 0.3)") // Purple light (GitHub)
+                        nebulaGradient.addColorStop(1, "rgba(163, 113, 247, 0)")
                     } else if (i % 3 === 1) {
-                        nebulaGradient.addColorStop(0, "rgba(79, 70, 229, 0.2)") // Indigo
-                        nebulaGradient.addColorStop(1, "rgba(79, 70, 229, 0)")
+                        nebulaGradient.addColorStop(0, "rgba(33, 136, 255, 0.2)") // Blue (GitHub)
+                        nebulaGradient.addColorStop(1, "rgba(33, 136, 255, 0)")
                     } else {
-                        nebulaGradient.addColorStop(0, "rgba(219, 39, 119, 0.15)") // Pink
-                        nebulaGradient.addColorStop(1, "rgba(219, 39, 119, 0)")
+                        nebulaGradient.addColorStop(0, "rgba(255, 107, 152, 0.15)") // Pink bright (GitHub)
+                        nebulaGradient.addColorStop(1, "rgba(255, 107, 152, 0)")
                     }
 
                     ctx.fillStyle = nebulaGradient
@@ -115,8 +115,8 @@ export default function GithubBackground() {
                     const radius = Math.min(canvas.width, canvas.height) * 0.3
 
                     const patternGradient = ctx.createRadialGradient(x, y, 0, x, y, radius)
-                    patternGradient.addColorStop(0, "rgba(147, 51, 234, 0.03)") // Very subtle purple
-                    patternGradient.addColorStop(1, "rgba(147, 51, 234, 0)")
+                    patternGradient.addColorStop(0, "rgba(137, 87, 229, 0.03)") // Very subtle purple
+                    patternGradient.addColorStop(1, "rgba(137, 87, 229, 0)")
 
                     ctx.fillStyle = patternGradient
                     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -137,14 +137,14 @@ export default function GithubBackground() {
     return (
         <div className="absolute inset-0 -z-10">
             <canvas ref={canvasRef} className="absolute inset-0" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-900/20 dark:to-purple-900/20"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-github-purple/20 dark:to-github-purple/20"></div>
 
             {/* Only render floating elements after component has mounted to avoid hydration mismatch */}
             {mounted && (
                 <>
                     {/* Floating elements - same for both light and dark modes to avoid hydration issues */}
                     <motion.div
-                        className="absolute w-12 h-12 rounded-full bg-purple-400 opacity-70"
+                        className="absolute w-12 h-12 rounded-full bg-github-purple-light opacity-70"
                         style={{
                             top: "30%",
                             left: "20%",
@@ -164,7 +164,7 @@ export default function GithubBackground() {
                     />
 
                     <motion.div
-                        className="absolute w-8 h-8 rounded-full bg-indigo-500 opacity-60"
+                        className="absolute w-8 h-8 rounded-full bg-github-blue opacity-60"
                         style={{
                             top: "60%",
                             left: "70%",
@@ -184,7 +184,7 @@ export default function GithubBackground() {
                     />
 
                     <motion.div
-                        className="absolute w-16 h-16 rounded-full bg-pink-500 opacity-50"
+                        className="absolute w-16 h-16 rounded-full bg-github-pink-bright opacity-50"
                         style={{
                             top: "40%",
                             left: "80%",

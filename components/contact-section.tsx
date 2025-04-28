@@ -44,13 +44,13 @@ export default function ContactSection() {
     }
 
     return (
-        <section className="py-16 bg-gray-50 dark:bg-[#0a0426]">
+        <section className="py-16 bg-gray-50 dark:bg-github-bg-darker">
             <div className="container mx-auto px-4">
                 <div className="max-w-3xl mx-auto">
                     <ScrollReveal>
                         <div className="text-center mb-12">
-                            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Get In Touch</h2>
-                            <p className="text-gray-600 dark:text-gray-300">
+                            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-github-text-primary">Get In Touch</h2>
+                            <p className="text-gray-600 dark:text-github-text-secondary">
                                 Have a question or want to work together? Send me a message!
                             </p>
                         </div>
@@ -60,7 +60,7 @@ export default function ContactSection() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-green-100 dark:bg-purple-900/30 border border-green-500/30 dark:border-purple-500/30 text-green-700 dark:text-purple-200 px-4 py-3 rounded relative mb-6"
+                            className="bg-green-100 dark:bg-github-green/20 border border-green-500/30 dark:border-github-green/30 text-green-700 dark:text-github-green px-4 py-3 rounded relative mb-6"
                             role="alert"
                         >
                             <strong className="font-bold">Thank you! </strong>
@@ -74,7 +74,7 @@ export default function ContactSection() {
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label htmlFor="name" className="block mb-2 font-medium text-gray-700 dark:text-gray-200">
+                                    <label htmlFor="name" className="block mb-2 font-medium text-gray-700 dark:text-github-text-secondary">
                                         Name
                                     </label>
                                     <motion.input
@@ -85,12 +85,12 @@ export default function ContactSection() {
                                         value={formData.name}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-2 bg-white dark:bg-[#1a103f] border border-gray-300 dark:border-purple-900 rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none text-gray-900 dark:text-white"
+                                        className="w-full px-4 py-2 bg-white dark:bg-github-bg-light border border-gray-300 dark:border-github-border rounded-md focus:ring-2 focus:ring-github-purple focus:outline-none text-gray-900 dark:text-github-text-primary"
                                     />
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 font-medium text-gray-700 dark:text-gray-200">
+                                    <label htmlFor="email" className="block mb-2 font-medium text-gray-700 dark:text-github-text-secondary">
                                         Email
                                     </label>
                                     <motion.input
@@ -101,13 +101,13 @@ export default function ContactSection() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-2 bg-white dark:bg-[#1a103f] border border-gray-300 dark:border-purple-900 rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none text-gray-900 dark:text-white"
+                                        className="w-full px-4 py-2 bg-white dark:bg-github-bg-light border border-gray-300 dark:border-github-border rounded-md focus:ring-2 focus:ring-github-purple focus:outline-none text-gray-900 dark:text-github-text-primary"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label htmlFor="subject" className="block mb-2 font-medium text-gray-700 dark:text-gray-200">
+                                <label htmlFor="subject" className="block mb-2 font-medium text-gray-700 dark:text-github-text-secondary">
                                     Subject
                                 </label>
                                 <motion.input
@@ -118,12 +118,12 @@ export default function ContactSection() {
                                     value={formData.subject}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-2 bg-white dark:bg-[#1a103f] border border-gray-300 dark:border-purple-900 rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-2 bg-white dark:bg-github-bg-light border border-gray-300 dark:border-github-border rounded-md focus:ring-2 focus:ring-github-purple focus:outline-none text-gray-900 dark:text-github-text-primary"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="message" className="block mb-2 font-medium text-gray-700 dark:text-gray-200">
+                                <label htmlFor="message" className="block mb-2 font-medium text-gray-700 dark:text-github-text-secondary">
                                     Message
                                 </label>
                                 <motion.textarea
@@ -134,7 +134,7 @@ export default function ContactSection() {
                                     onChange={handleChange}
                                     required
                                     rows={4}
-                                    className="w-full px-4 py-2 bg-white dark:bg-[#1a103f] border border-gray-300 dark:border-purple-900 rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-2 bg-white dark:bg-github-bg-light border border-gray-300 dark:border-github-border rounded-md focus:ring-2 focus:ring-github-purple focus:outline-none text-gray-900 dark:text-github-text-primary"
                                 ></motion.textarea>
                             </div>
 
@@ -143,7 +143,7 @@ export default function ContactSection() {
                                 disabled={isSubmitting}
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
-                                className={`px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
+                                className={`px-6 py-3 bg-github-purple text-white font-medium rounded-md hover:bg-github-purple-dark focus:outline-none focus:ring-2 focus:ring-github-purple transition-colors ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
                             >
                                 {isSubmitting ? "Sending..." : "Send Message"}
                             </motion.button>

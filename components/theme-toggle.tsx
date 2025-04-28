@@ -6,7 +6,7 @@ import { Moon, Sun } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function ThemeToggle() {
-    const { theme, setTheme, resolvedTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
     // Avoid hydration mismatch by only rendering after mount
@@ -16,20 +16,18 @@ export default function ThemeToggle() {
 
     if (!mounted) return null
 
-    const isDark = theme === "dark" || resolvedTheme === "dark"
-
     return (
         <motion.button
             whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="p-2 rounded-full bg-github-purple/20 text-github-purple-light focus:outline-none shadow-github"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 focus:outline-none"
             aria-label="Toggle theme"
         >
-            {isDark ? (
-                <Sun size={20} className="text-github-pink-bright" />
+            {theme === "dark" ? (
+                <Sun size={20} className="text-yellow-300" />
             ) : (
-                <Moon size={20} className="text-github-purple" />
+                <Moon size={20} className="text-purple-700" />
             )}
         </motion.button>
     )

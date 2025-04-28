@@ -23,7 +23,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
         <ThemeProvider>
-            <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#0a0426] dark:to-[#1f0a4d] text-gray-900 dark:text-white transition-colors duration-300">
+            <div className="min-h-screen bg-white dark:from-[#0a0426] dark:to-[#1f0a4d] dark:bg-gradient-to-b text-gray-900 dark:text-white transition-colors duration-300">
                 <Navbar />
                 <PageTransition>
                     <main>{children}</main>

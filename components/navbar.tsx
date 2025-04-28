@@ -21,7 +21,6 @@ export default function Navbar() {
     const isActive = (path: string) => {
         if (path === "/" && pathname === "/") return true
         return path !== "/" && pathname.startsWith(path);
-
     }
 
     return (
@@ -29,12 +28,12 @@ export default function Navbar() {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white/80 dark:bg-[#080321]/80 backdrop-blur-sm shadow-md sticky top-0 z-10 border-b border-gray-200 dark:border-purple-900/20"
+            className="bg-github-bg-light/80 dark:bg-github-bg-darker/80 backdrop-blur-sm shadow-md sticky top-0 z-10 border-b border-github-border"
         >
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center">
-                        <Link href="/" className="text-xl font-bold text-purple-700 dark:text-purple-300">
+                        <Link href="/" className="text-xl font-bold text-github-purple-light">
                             DevPortfolio
                         </Link>
                     </div>
@@ -47,15 +46,15 @@ export default function Navbar() {
                                 href={link.path}
                                 className={`font-medium relative ${
                                     isActive(link.path)
-                                        ? "text-purple-700 dark:text-purple-300"
-                                        : "text-gray-700 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-200"
+                                        ? "text-github-purple-light"
+                                        : "text-gray-700 hover:text-github-purple dark:text-gray-300 dark:hover:text-github-purple-light"
                                 }`}
                             >
                                 {link.name}
                                 {isActive(link.path) && (
                                     <motion.span
                                         layoutId="activeNavIndicator"
-                                        className="absolute bottom-0 left-0 w-full h-0.5 bg-purple-600 dark:bg-purple-400"
+                                        className="absolute bottom-0 left-0 w-full h-0.5 bg-github-purple-light"
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.3 }}
@@ -72,7 +71,7 @@ export default function Navbar() {
                         <motion.button
                             whileTap={{ scale: 0.9 }}
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-300 focus:outline-none"
+                            className="text-gray-700 dark:text-gray-300 hover:text-github-purple-light dark:hover:text-github-purple-light focus:outline-none"
                         >
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </motion.button>
@@ -87,7 +86,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="md:hidden bg-white dark:bg-[#0a0426] shadow-lg"
+                    className="md:hidden bg-white dark:bg-github-bg-dark shadow-lg"
                 >
                     <div className="container mx-auto px-4 py-3">
                         {navLinks.map((link, index) => (
@@ -101,8 +100,8 @@ export default function Navbar() {
                                     href={link.path}
                                     className={`block py-2 px-4 ${
                                         isActive(link.path)
-                                            ? "text-purple-700 dark:text-purple-300"
-                                            : "text-gray-700 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-200"
+                                            ? "text-github-purple-light"
+                                            : "text-gray-700 hover:text-github-purple dark:text-gray-300 dark:hover:text-github-purple-light"
                                     }`}
                                     onClick={() => setIsMenuOpen(false)}
                                 >

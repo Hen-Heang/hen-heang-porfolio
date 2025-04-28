@@ -11,12 +11,12 @@ export default function BlogSection() {
     const featuredPosts = blogPosts.slice(0, 3)
 
     return (
-        <section className="py-16 bg-gray-50 dark:bg-[#130c3a]">
+        <section className="py-16 bg-gray-50 dark:bg-github-bg-light">
             <div className="container mx-auto px-4">
                 <ScrollReveal>
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Latest Articles</h2>
-                        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-github-text-primary">Latest Articles</h2>
+                        <p className="text-gray-600 dark:text-github-text-secondary max-w-2xl mx-auto">
                             Read my thoughts on web development, technology, and more.
                         </p>
                     </div>
@@ -25,18 +25,18 @@ export default function BlogSection() {
                 <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {featuredPosts.map((post) => (
                         <StaggerItem key={post.id}>
-                            <HoverCard className="bg-white dark:bg-[#1a103f] rounded-lg overflow-hidden shadow-md dark:shadow-purple-900/30 h-full border border-gray-200 dark:border-purple-900/20">
+                            <HoverCard className="bg-white dark:bg-github-bg-dark rounded-lg overflow-hidden shadow-md dark:shadow-github border border-gray-200 dark:border-github-border h-full">
                                 <div className="relative h-48 w-full">
                                     <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
                                 </div>
 
                                 <div className="p-6">
-                                    <p className="text-purple-700 dark:text-purple-300 text-sm mb-2">{post.date}</p>
-                                    <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{post.title}</h3>
-                                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{post.excerpt}</p>
+                                    <p className="text-github-purple dark:text-github-purple-light text-sm mb-2">{post.date}</p>
+                                    <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-github-text-primary">{post.title}</h3>
+                                    <p className="text-gray-600 dark:text-github-text-secondary mb-4 line-clamp-3">{post.excerpt}</p>
                                     <Link
                                         href={`/blog/${post.id}`}
-                                        className="text-purple-700 dark:text-purple-300 font-medium hover:text-purple-800 dark:hover:text-purple-200"
+                                        className="text-github-purple dark:text-github-purple-light font-medium hover:text-github-purple-dark dark:hover:text-white"
                                     >
                                         Read More →
                                     </Link>
@@ -49,7 +49,7 @@ export default function BlogSection() {
                 <ScrollReveal direction="up" className="text-center mt-12">
                     <Link
                         href="/blog"
-                        className="px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 transition-colors"
+                        className="px-6 py-3 bg-github-purple text-white font-medium rounded-md hover:bg-github-purple-dark transition-colors"
                     >
                         View All Articles
                     </Link>

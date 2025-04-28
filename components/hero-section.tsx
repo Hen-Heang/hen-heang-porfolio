@@ -38,19 +38,18 @@ export default function HeroSection() {
                             </FadeIn>
                             <FadeIn delay={0.7} direction="up">
                                 <div className="flex flex-wrap gap-4">
-                                    <Link href="/projects"  className="px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 transition-colors">
-                                        <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="github-button">
+                                    <Link href="/projects" className="px-6 py-3 bg-github-purple text-white font-medium rounded-md hover:bg-github-purple-dark transition-colors">
+                                        <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                             View Projects
-                                        </motion.button>
+                                        </motion.span>
                                     </Link>
-                                    <Link href="/contact" className="px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 transition-colors">
-                                        <motion.button
+                                    <Link href="/contact" className="px-6 py-3 bg-transparent border border-github-purple text-github-purple-light hover:bg-github-purple/10 transition-colors rounded-md">
+                                        <motion.span
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="github-button-secondary"
                                         >
                                             Contact Me
-                                        </motion.button>
+                                        </motion.span>
                                     </Link>
                                 </div>
                             </FadeIn>
@@ -61,7 +60,7 @@ export default function HeroSection() {
                                 <motion.div
                                     animate={isDark ? { y: [0, -15, 0], rotateZ: [0, 5, 0] } : {}}
                                     transition={{ repeat: Number.POSITIVE_INFINITY, duration: 6 }}
-                                    className="relative h-64 w-64 md:h-80 md:w-80 mx-auto rounded-full overflow-hidden border-4 border-github-purple/30 shadow-github"
+                                    className="relative h-64 w-64 md:h-80 md:w-80 mx-auto rounded-full overflow-hidden border-4 border-github-purple/30 shadow-github-glow"
                                 >
                                     <Image
                                         src={personalInfo.profileImage || "/placeholder.svg"}
