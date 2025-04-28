@@ -38,12 +38,12 @@ export default function HeroSection() {
                             </FadeIn>
                             <FadeIn delay={0.7} direction="up">
                                 <div className="flex flex-wrap gap-4">
-                                    <Link href="/projects">
+                                    <Link href="/projects"  className="px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 transition-colors">
                                         <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="github-button">
                                             View Projects
                                         </motion.button>
                                     </Link>
-                                    <Link href="/contact">
+                                    <Link href="/contact" className="px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 transition-colors">
                                         <motion.button
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}

@@ -1,8 +1,9 @@
 "use client"
 
-import Link from "next/link"
-import { Github, Linkedin, Twitter } from "lucide-react"
-import { motion } from "framer-motion"
+import {motion} from "framer-motion"
+import Github from "@/components/ICON/github";
+import LinkIn from "@/components/ICON/linkIn";
+import Telegram from "@/components/ICON/telegram";
 
 export default function Footer() {
     return (
@@ -14,64 +15,61 @@ export default function Footer() {
                         <p className="text-gray-600 dark:text-gray-400 mt-2">Full-stack developer portfolio</p>
                     </div>
 
-                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
-                        <Link
-                            href="/"
-                            className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            href="/projects"
-                            className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"
-                        >
-                            Projects
-                        </Link>
-                        <Link
-                            href="/blog"
-                            className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"
-                        >
-                            Blog
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"
-                        >
-                            Contact
-                        </Link>
-                    </div>
+                    {/*<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">*/}
+                    {/*    <Link*/}
+                    {/*        href="/"*/}
+                    {/*        className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"*/}
+                    {/*    >*/}
+                    {/*        Home*/}
+                    {/*    </Link>*/}
+                    {/*    <Link*/}
+                    {/*        href="/projects"*/}
+                    {/*        className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"*/}
+                    {/*    >*/}
+                    {/*        Projects*/}
+                    {/*    </Link>*/}
+                    {/*    <Link*/}
+                    {/*        href="/blog"*/}
+                    {/*        className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"*/}
+                    {/*    >*/}
+                    {/*        Blog*/}
+                    {/*    </Link>*/}
+                    {/*    <Link*/}
+                    {/*        href="/contact"*/}
+                    {/*        className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"*/}
+                    {/*    >*/}
+                    {/*        Contact*/}
+                    {/*    </Link>*/}
+                    {/*</div>*/}
 
                     <div className="mt-6 md:mt-0">
                         <div className="flex space-x-4">
                             <motion.a
-                                whileHover={{ y: -5 }}
-                                href="https://github.com"
+                                whileHover={{y: -5}}
+                                href="https://github.com/Hen-Heang"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"
-                            >
-                                <Github className="h-6 w-6" />
+                                className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300">
+                                <Github/>
                                 <span className="sr-only">GitHub</span>
                             </motion.a>
                             <motion.a
-                                whileHover={{ y: -5 }}
-                                href="https://linkedin.com"
+                                whileHover={{y: -5}}
+                                href="https://www.linkedin.com/in/hen-heang"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"
-                            >
-                                <Linkedin className="h-6 w-6" />
+                                className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300">
+                                <LinkIn/>
                                 <span className="sr-only">LinkedIn</span>
                             </motion.a>
                             <motion.a
-                                whileHover={{ y: -5 }}
-                                href="https://twitter.com"
+                                whileHover={{y: -5}}
+                                href="https://t.me/henheang"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300"
-                            >
-                                <Twitter className="h-6 w-6" />
-                                <span className="sr-only">Twitter</span>
+                                className="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-300">
+                                <Telegram/>
+                                <span className="sr-only">Telegram</span>
                             </motion.a>
                         </div>
                         <p className="mt-4 text-gray-500 dark:text-gray-500">
