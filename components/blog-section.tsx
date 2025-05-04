@@ -7,7 +7,6 @@ import StaggerItem from "@/components/animations/stagger-item"
 import HoverCard from "@/components/animations/hover-card"
 
 export default function BlogSection() {
-    // Only show the first 3 blog posts on the homepage
     const featuredPosts = blogPosts.slice(0, 3)
 
     return (
@@ -35,7 +34,7 @@ export default function BlogSection() {
                                     <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-github-text-primary">{post.title}</h3>
                                     <p className="text-gray-600 dark:text-github-text-secondary mb-4 line-clamp-3">{post.excerpt}</p>
                                     <Link
-                                        href={`/blog/${post.id}`}
+                                        href={`/about/${post.id}`}
                                         className="text-github-purple dark:text-github-purple-light font-medium hover:text-github-purple-dark dark:hover:text-white"
                                     >
                                         Read More →
