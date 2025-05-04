@@ -10,7 +10,7 @@ interface DesktopNavProps {
 
 export function DesktopNav({ navItems, activeSection, onItemClick }: DesktopNavProps) {
     return (
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1 bg-black">
             {navItems.map((item) => (
                 <a
                     key={item.id}
