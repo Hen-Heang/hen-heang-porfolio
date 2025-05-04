@@ -1,8 +1,9 @@
+// components/about/SkillsTab.tsx
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import type { Skill } from "@/types"
+import type { SkillCategory } from "@/types"
 
 interface SkillsTabProps {
-    skills: Skill[]
+    skills: SkillCategory[]
 }
 
 export function SkillsTab({ skills }: SkillsTabProps) {
@@ -21,13 +22,15 @@ export function SkillsTab({ skills }: SkillsTabProps) {
                 {skills.map((skill) => (
                     <TabsContent key={skill.category} value={skill.category} className="mt-0">
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            {/* Fix: Use item.name as the key, not the whole object */}
                             {skill.items.map((item) => (
                                 <div
-                                    key={item}
+                                    key={item.name} // Use item.name as the key
                                     className="p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center gap-2"
                                 >
                                     <div className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-500 to-indigo-500"></div>
-                                    <span>{item}</span>
+                                    {/* Fix: Render the name property, not the whole object */}
+                                    <span>{item.name}</span>
                                 </div>
                             ))}
                         </div>

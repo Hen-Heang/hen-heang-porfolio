@@ -9,6 +9,7 @@ import { Header } from "./header/Header"
 
 import { AboutSection } from "./about/AboutSection"
 import { ProjectsSection } from "./projects/ProjectsSection"
+import { SkillsSection } from "./skills/SkillsSection"
 import { EducationSection } from "./education/EducationSection"
 import { ContactSection } from "./contact/ContactSection"
 import { Footer } from "./shared/Footer"
@@ -94,6 +95,7 @@ export function MainPortfolio() {
                 <HeroSection />
                 <AboutSection />
                 <ProjectsSection />
+                <SkillsSection />
                 <EducationSection />
                 <ContactSection />
             </motion.main>

@@ -57,7 +57,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-indigo-500 flex items-center justify-center text-white font-bold">
                             YN
                         </div>
-                        <span className="font-bold text-xl hidden sm:block">YourName</span>
+                        <span className="font-bold text-xl hidden sm:block">Hen Heang</span>
                     </div>
 
                     <DesktopNav navItems={navItems} activeSection={activeSection} onItemClick={handleNavItemClick} />

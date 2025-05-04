@@ -11,8 +11,8 @@ import { useThemeToggle } from "@/hooks/useThemeToggle"
 
 import { useState } from "react"
 import {ContactForm} from "@/components/contact/ContactForm";
-import Footer from "@/components/footer";
 import {Header} from "@/components/header/Header";
+import {Footer} from "@/components/shared/Footer";
 
 export default function ContactPage() {
     const router = useRouter()
