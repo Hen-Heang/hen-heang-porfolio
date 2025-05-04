@@ -1,4 +1,8 @@
-import { Github, Linkedin, Mail } from "lucide-react"
+// import { Github, Linkedin, Mail } from "lucid-react"
+import LinkIn from "@/components/ICON/linkIn";
+import { motion } from "framer-motion";
+import Telegram from "@/components/ICON/telegram";
+import Github from "@/components/ICON/github";
 
 export function Footer() {
     return (
@@ -16,25 +20,34 @@ export function Footer() {
                         © {new Date().getFullYear()} YourName. All rights reserved.
                     </div>
 
-                    <div className="flex gap-4 mt-4 md:mt-0">
-                        <a
-                            href="#"
-                            className="text-gray-500 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
-                        >
-                            <Github size={18} />
-                        </a>
-                        <a
-                            href="#"
-                            className="text-gray-500 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
-                        >
-                            <Linkedin size={18} />
-                        </a>
-                        <a
-                            href="#"
-                            className="text-gray-500 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
-                        >
-                            <Mail size={18} />
-                        </a>
+                    <div className="flex space-x-4">
+                        <motion.a
+                            whileHover={{y: -5}}
+                            href="https://github.com/Hen-Heang"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-600 hover:text-github-purple dark:text-github-text-secondary dark:hover:text-github-purple-light transition-colors">
+                            <Github/>
+                            <span className="sr-only">GitHub</span>
+                        </motion.a>
+                        <motion.a
+                            whileHover={{y: -5}}
+                            href="https://www.linkedin.com/in/hen-heang"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-600 hover:text-github-purple dark:text-github-text-secondary dark:hover:text-github-purple-light transition-colors">
+                            <LinkIn/>
+                            <span className="sr-only">LinkedIn</span>
+                        </motion.a>
+                        <motion.a
+                            whileHover={{y: -5}}
+                            href="https://t.me/henheang"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-600 hover:text-github-purple dark:text-github-text-secondary dark:hover:text-github-purple-light transition-colors">
+                            <Telegram/>
+                            <span className="sr-only">Telegram</span>
+                        </motion.a>
                     </div>
                 </div>
             </div>

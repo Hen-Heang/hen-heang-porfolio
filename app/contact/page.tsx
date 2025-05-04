@@ -1,22 +1,55 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+
 import { useRouter } from "next/navigation"
 import { Card } from "@/components/ui/card"
 import { Code, Mail, Github, Linkedin } from "lucide-react"
+
+import { navItems } from "@/data/navigation"
+import { useThemeToggle } from "@/hooks/useThemeToggle"
+
+import { useState } from "react"
 import {ContactForm} from "@/components/contact/ContactForm";
+import Footer from "@/components/footer";
+import {Header} from "@/components/header/Header";
 
 export default function ContactPage() {
     const router = useRouter()
+    const { darkMode, toggleTheme } = useThemeToggle()
+    const [activeSection] = useState("contact")
+
+    // Handle navigation
+    const handleNavigation = (sectionId: string) => {
+        if (sectionId === "contact") {
+            return true // Already on contact page
+        }
+        if (sectionId === "projects") {
+            router.push("/projects")
+            return true
+        }
+        if (sectionId === "about") {
+            router.push("/about")
+            return true
+        }
+        if (sectionId === "home" || sectionId === "education") {
+            router.push(`/#${sectionId}`)
+            return true
+        }
+        return false
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-[#0f172a] text-gray-900 dark:text-gray-100">
-            <div className="container mx-auto px-4 py-20">
-                <Button variant="ghost" onClick={() => router.push("/")} className="mb-8">
-                    Back to Home
-                </Button>
+            <Header
+                navItems={navItems}
+                activeSection={activeSection}
+                darkMode={darkMode}
+                toggleTheme={toggleTheme}
+                onNavItemClick={handleNavigation}
+            />
 
+            <div className="container mx-auto px-4 py-20">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -64,6 +97,8 @@ export default function ContactPage() {
                     </Card>
                 </motion.div>
             </div>
+
+            <Footer />
         </div>
     )
 }

@@ -37,7 +37,7 @@ export function HeroContent() {
                 animate="visible"
                 className="text-4xl md:text-6xl font-bold mb-4">
                 Hello, I&#39;m{" "}
-                <span className="bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent">HEANG</span>
+                <span className="bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent">Heang</span>
             </motion.h1>
 
             <motion.p
