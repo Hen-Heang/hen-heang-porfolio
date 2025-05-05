@@ -11,7 +11,7 @@ interface MobileMenuProps {
     onItemClick: (sectionId: string) => void
 }
 
-export function MobileMenu({ isOpen, navItems, activeSection, onItemClick }: MobileMenuProps) {
+export function MobileMenu({ isOpen, navItems, onItemClick }: MobileMenuProps) {
     return (
         <AnimatePresence>
             {isOpen && (
