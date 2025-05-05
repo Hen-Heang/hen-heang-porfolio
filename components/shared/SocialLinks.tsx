@@ -1,25 +1,37 @@
-import { Github, Linkedin, Mail } from 'lucide-react'
+import React from 'react';
+import Github from '@/components/ICON/github';
+import LinkIn from '@/components/ICON/linkIn';
+import Telegram from '@/components/ICON/telegram';
 
 export function SocialLinks() {
     return (
         <div className="flex gap-4">
             <a
                 href="https://github.com/Hen-Heang"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
             >
-                <Github size={20} />
+                <Github />
+                <span className="sr-only">GitHub</span>
             </a>
             <a
                 href="https://www.linkedin.com/in/hen-heang"
-                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
-            >
-                <Linkedin size={20} />
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">
+                <LinkIn />
+                <span className="sr-only">LinkedIn</span>
             </a>
             <a
                 href="https://t.me/henheang"
-                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">
-                <Mail />
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
+            >
+                <Telegram />
+                <span className="sr-only">Telegram</span>
             </a>
         </div>
-    )
+    );
 }

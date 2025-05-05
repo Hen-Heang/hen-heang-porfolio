@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { navItems } from "@/data/navigation"
 import { useThemeToggle } from "@/hooks/useThemeToggle"
-import Footer from "@/components/footer";
 import {ProjectCard} from "@/components/projects/ProjectCard";
 import {Header} from "@/components/header/Header";
+import {Footer} from "@/components/shared/Footer";
 
 
 // Extract unique technologies from all projects
