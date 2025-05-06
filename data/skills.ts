@@ -1,4 +1,4 @@
-// Updated data/skills.ts
+
 import type { SkillCategory } from "@/types"
 
 export const skills: SkillCategory[] = [

@@ -1,29 +1,37 @@
+// Updated data/projects.ts
 import type { Project } from "@/types"
 
 export const projects: Project[] = [
     {
-        title: "E-commerce App",
-        description: "An e-commerce application with shopping cart and payment gateway.",
-        technologies: ["React", "Node.js", "MongoDB"],
+        title: "Customer Management System",
+        description: "A full-stack web application for managing customer data with advanced filtering and reporting capabilities.",
+        technologies: ["Next.js", "TypeScript", "Spring Boot", "PostgreSQL", "TanStack Query"],
         image: "/placeholder.svg?height=200&width=350",
-        github: "#",
+        github: "https://github.com/Hen-Heang/customer-management",
         demo: "#",
     },
     {
-        title: "Task Manager",
-        description: "Application for managing daily tasks with drag and drop functionality.",
-        technologies: ["JavaScript", "HTML", "CSS"],
+        title: "Inventory Tracker",
+        description: "Real-time inventory management system with RESTful API endpoints and responsive dashboard.",
+        technologies: ["Spring Boot", "Spring Data JPA", "PostgreSQL", "Next.js", "Tailwind CSS"],
         image: "/placeholder.svg?height=200&width=350",
-        github: "#",
+        github: "https://github.com/Hen-Heang/inventory-tracker",
         demo: "#",
     },
     {
-        title: "Weather App",
-        description: "Application that displays current weather and forecast using an external API.",
-        technologies: ["React", "REST API", "Tailwind CSS"],
+        title: "Task Management Portal",
+        description: "Collaborative task management application with user authentication and real-time updates.",
+        technologies: ["TypeScript", "Next.js", "TanStack Query", "Spring Boot", "PostgreSQL"],
         image: "/placeholder.svg?height=200&width=350",
-        github: "#",
+        github: "https://github.com/Hen-Heang/task-management",
+        demo: "#",
+    },
+    {
+        title: "E-commerce Platform",
+        description: "Full-featured online store with product catalog, shopping cart, and payment integration.",
+        technologies: ["Next.js", "TypeScript", "Spring Boot", "PostgreSQL", "Tailwind CSS"],
+        image: "/placeholder.svg?height=200&width=350",
+        github: "https://github.com/Hen-Heang/ecommerce-platform",
         demo: "#",
     },
 ]
-

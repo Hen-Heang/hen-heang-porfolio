@@ -41,9 +41,8 @@ export function HeroImage() {
                         stiffness: 260,
                         damping: 20,
                         delay: 0.6,
-                    }}
-                >
-                    👋
+                    }}>
+                    👨‍💻
                 </motion.div>
             </div>
         </motion.div>

@@ -20,29 +20,31 @@ export function AboutSection() {
                 <SectionHeader
                     badge="About Me"
                     title="Get to know me better"
-                    description="I'm a junior web developer with a passion for learning new technologies and creating innovative solutions."
-                />
+                    description="I'm a web application developer specializing in Spring Boot and Next.js, passionate about creating high-quality, scalable applications."/>
 
                 <motion.div
                     ref={ref}
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.5 }}
-                    className="grid md:grid-cols-2 gap-12 items-center"
-                >
+                    className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h3 className="text-2xl font-semibold mb-4">My Story</h3>
+                        {/*<h3 className="text-2xl font-semibold mb-4">My Story</h3>*/}
                         <p className="text-gray-600 dark:text-gray-300 mb-6">
-                            I&#39;m a junior web developer with a passion for learning new technologies and creating innovative solutions.
-                            My goal is to combine design and functionality to create exceptional user experiences.
+                            I&#39;m a full-stack web developer with a passion for creating modern applications that solve real business problems.
+                            With experience in both frontend and backend technologies, I build cohesive solutions from database design to user interfaces.
                         </p>
                         <p className="text-gray-600 dark:text-gray-300 mb-6">
-                            I&#39;m currently focused on frontend development with React, but I also have experience with Node.js and
-                            databases. I love solving problems and collaborating in multidisciplinary teams.
+                            My expertise includes Spring Boot and Spring Data for backend development, and Next.js with TypeScript for
+                            creating responsive, type-safe frontends. I use PostgreSQL for database management and TanStack Query for
+                            efficient data fetching and state management.
+                        </p>
+                        <p className="text-gray-600 dark:text-gray-300 mb-6">
+                            I enjoy tackling complex problems and continuously learning new technologies to improve my skillset.
                         </p>
 
                         <div className="grid grid-cols-2 gap-4 mt-8">
-                            <StatsCard value="2+" label="Years of experience" color="text-teal-500 dark:text-teal-400" />
+                            <StatsCard value="1.5+" label="Years of experience" color="text-teal-500 dark:text-teal-400" />
                             <StatsCard value="10+" label="Completed projects" color="text-indigo-500 dark:text-indigo-400" />
                         </div>
 
@@ -53,7 +55,6 @@ export function AboutSection() {
                             Learn more about me
                         </Button>
                     </div>
-
                     <SkillsTab skills={skills} />
                 </motion.div>
             </div>

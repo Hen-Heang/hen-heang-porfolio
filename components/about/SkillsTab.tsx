@@ -34,7 +34,7 @@ const getIconForSkill = (skillName: string) => {
 export function SkillsTab({ skills }: SkillsTabProps) {
     return (
         <div>
-            <h3 className="text-2xl font-semibold mb-6">My Skills</h3>
+            {/*<h3 className="text-2xl font-semibold mb-6">My Skills</h3>*/}
             <Tabs defaultValue={skills[0].category} className="w-full">
                 <TabsList className="grid grid-cols-3 mb-6">
                     {skills.map((skill) => (

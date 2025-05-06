@@ -26,7 +26,7 @@ export function HeroContent() {
         <div className="order-2 md:order-1">
             <motion.div custom={0} variants={textVariants} initial="hidden" animate="visible">
                 <Badge className="mb-4 bg-teal-500/10 text-teal-500 dark:bg-teal-400/10 dark:text-teal-400 hover:bg-teal-500/20 dark:hover:bg-teal-400/20">
-                    Junior Web Application Developer
+                    Full-Stack Web Application Developer
                 </Badge>
             </motion.div>
 
@@ -47,7 +47,8 @@ export function HeroContent() {
                 animate="visible"
                 className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
             >
-                Frontend developer passionate about creating attractive and functional web experiences.
+                I build modern, scalable web applications with Spring Boot, Next.js, TypeScript, and PostgreSQL.
+                With expertise in both frontend and backend development, I create seamless digital experiences.
             </motion.p>
 
             <motion.div

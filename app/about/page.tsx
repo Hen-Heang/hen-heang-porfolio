@@ -10,6 +10,8 @@ import {StatsCard} from "@/components/about/StatsCard";
 import {SkillsTab} from "@/components/about/SkillsTab";
 import {Header} from "@/components/header/Header";
 import {Footer} from "@/components/shared/Footer";
+import {personalInfo} from "@/data/personal-info";
+import Image from "next/image";
 
 
 export default function AboutPage() {
@@ -57,10 +59,12 @@ export default function AboutPage() {
                                 <div className="relative">
                                     <div className="w-full aspect-square rounded-xl bg-gradient-to-br from-teal-500 to-indigo-500 blur-2xl opacity-20 absolute -inset-4"></div>
                                     <div className="w-full aspect-square rounded-xl border-2 border-gray-200 dark:border-gray-800 overflow-hidden relative z-10">
-                                        <img
-                                            src="/placeholder.svg?height=400&width=400"
-                                            alt="Your photo"
-                                            className="w-full h-full object-cover"
+                                        <Image
+                                            src={personalInfo.myImage || "/placeholder.svg"}
+                                            alt={personalInfo.name}
+                                            fill
+                                            className="object-cover"
+                                            priority
                                         />
                                     </div>
                                 </div>
