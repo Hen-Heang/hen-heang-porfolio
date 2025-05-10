@@ -4,8 +4,9 @@ export const personalInfo = {
     title: "Web Application Developer",
     description:
         "I'm a web application developer specializing in full-stack development with Spring Boot and Next.js. I have experience building modern, responsive applications with TypeScript, PostgreSQL, and TanStack Query.",
-    profileImage: "/image/placeholder_image.png",
-    myImage: "/image/image_update.png",
+    profileImage: "/image/personal_image.jpg",
+    myImage: "/image/my_image.jpg",
+
     email: "henheang15@gmail.com",
     location: "Sen Sok, Phnom Penh",
     socialLinks: {

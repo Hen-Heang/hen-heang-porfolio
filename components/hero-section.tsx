@@ -71,7 +71,7 @@ export default function HeroSection() {
                                     />
                                 </motion.div>
 
-                                {/* Only render floating elements after component has mounted */}
+                                {/* Only render floating elements after the component has mounted */}
                                 {mounted && isDark && (
                                     <>
                                         <motion.div

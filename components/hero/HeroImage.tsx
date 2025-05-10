@@ -4,7 +4,14 @@ import { motion } from "framer-motion"
 import Image from "next/image";
 import {personalInfo} from "@/data/personal-info";
 
-export function HeroImage() {
+interface HeroImageProps {
+    useAvatar?: boolean;
+}
+
+export function HeroImage({ useAvatar = false }: HeroImageProps) {
+    // Use either the cartoon avatar or the actual profile image
+    const imageSrc = useAvatar ? personalInfo.myImage : personalInfo.profileImage;
+
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -24,11 +31,12 @@ export function HeroImage() {
                     }}></motion.div>
                 <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-gray-200 dark:border-gray-800 overflow-hidden relative z-10">
                     <Image
-                        src={personalInfo.profileImage || "/placeholder.svg"}
+                        src={imageSrc}
                         alt={personalInfo.name}
                         fill
-                        className="object-cover"
+                        className={`${useAvatar ? 'object-contain bg-gray-800' : 'object-cover'}`}
                         priority
+                        sizes="(max-width: 768px) 256px, 320px"
                     />
                 </div>
 
