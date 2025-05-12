@@ -3,12 +3,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { SkillCategory } from "@/types"
 import { motion } from "framer-motion"
 import {
-    CssIcon,
+
+    CssIcon, GitHubIcon, HtmlIcon, IntellijIcon, JavaIcon, JavaScriptIcon,
     NextJsIcon,
-    PostgreSQLIcon,
-    SpringBootIcon,
-    SpringDataIcon,
-    TanStackIcon
+    PostgreSQLIcon, ReactIcon, SpringIcon,
+    TanStackIcon, TypeScriptIcon, WebstormIcon
+
 } from "@/components/ICON/TechIcons";
 
 
@@ -16,19 +16,34 @@ interface SkillsTabProps {
     skills: SkillCategory[]
 }
 
-// Map skill names to their respective icon components
 const getIconForSkill = (skillName: string) => {
     const skillNameLower = skillName.toLowerCase();
-    if (skillNameLower.includes('next.js')) return <NextJsIcon />;
-    if (skillNameLower.includes('spring boot')) return <SpringBootIcon />;
-    if (skillNameLower.includes('spring data')) return <SpringDataIcon />;
-    if (skillNameLower.includes('postgresql')) return <PostgreSQLIcon />;
-    if (skillNameLower.includes('tanstack')) return <TanStackIcon />;
-    if (skillNameLower.includes('css')) return <CssIcon/>;
+    let IconComponent = null;
+
+    if (skillNameLower.includes('next.js')) IconComponent = <NextJsIcon />;
+    // if (skillNameLower.includes('spring boot')) IconComponent = <SpringBootIcon />;
+    if (skillNameLower.includes('tanstack')) IconComponent = <TanStackIcon />;
+    if (skillNameLower.includes('css')) IconComponent = <CssIcon />;
+    if (skillNameLower.includes('html')) IconComponent = <HtmlIcon />;
+    if (skillNameLower.includes('javascript')) IconComponent = <JavaScriptIcon />;
+    if (skillNameLower.includes('typescript')) IconComponent = <TypeScriptIcon />;
+    if (skillNameLower.includes('react')) IconComponent = <ReactIcon />;
+
+    // Backend Icons
+    if (skillNameLower.includes('java')) IconComponent = <JavaIcon />;
+    if (skillNameLower.includes('spring')) IconComponent = <SpringIcon />;
+    if (skillNameLower.includes('postgresql')) IconComponent = <PostgreSQLIcon />;
 
 
-    // Default icon or return null
-    return null;
+    // Tools Icons
+    if (skillNameLower.includes('git')) IconComponent = <GitHubIcon />;
+    if (skillNameLower.includes('intellij')) IconComponent = <IntellijIcon/>;
+    if (skillNameLower.includes('webstorm')) IconComponent = <WebstormIcon />;
+    return IconComponent ? (
+        <div className="icon-wrapper">
+            {IconComponent}
+        </div>
+    ) : null;
 };
 
 export function SkillsTab({ skills }: SkillsTabProps) {

@@ -48,6 +48,15 @@
     --ring: 142.4 71.8% 29.2%;
   }
 }
+.icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6; /* Example background */
+  border-radius: 50%;
+}
 
 @layer base {
   * {

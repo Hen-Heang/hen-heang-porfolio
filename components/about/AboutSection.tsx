@@ -4,7 +4,6 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionHeader } from "../shared/SectionHeader"
 import { SkillsTab } from "./SkillsTab"
-import { StatsCard } from "./StatsCard"
 import { skills } from "@/data/skills"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -43,15 +42,14 @@ export function AboutSection() {
                             I enjoy tackling complex problems and continuously learning new technologies to improve my skillset.
                         </p>
 
-                        <div className="grid grid-cols-2 gap-4 mt-8">
-                            <StatsCard value="1.5+" label="Years of experience" color="text-teal-500 dark:text-teal-400" />
-                            <StatsCard value="10+" label="Completed projects" color="text-indigo-500 dark:text-indigo-400" />
-                        </div>
+                        {/*<div className="grid grid-cols-2 gap-4 mt-8">*/}
+                        {/*    <StatsCard value="1.5+" label="Years of experience" color="text-teal-500 dark:text-teal-400" />*/}
+                        {/*    <StatsCard value="10+" label="Completed projects" color="text-indigo-500 dark:text-indigo-400" />*/}
+                        {/*</div>*/}
 
                         <Button
                             className="mt-8 bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white border-0"
-                            onClick={() => router.push("/about")}
-                        >
+                            onClick={() => router.push("/about")}>
                             Learn more about me
                         </Button>
                     </div>

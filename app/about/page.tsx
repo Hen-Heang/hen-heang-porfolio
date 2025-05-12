@@ -92,10 +92,10 @@ export default function AboutPage() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-                            <StatsCard value="4+" label="Years of experience" color="text-teal-500 dark:text-teal-400" />
-                            <StatsCard value="20+" label="Completed projects" color="text-indigo-500 dark:text-indigo-400" />
-                            <StatsCard value="12+" label="Happy clients" color="text-purple-500 dark:text-purple-400" />
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-16">
+                            <StatsCard value="1.5+" label="Years of experience" color="text-teal-500 dark:text-teal-400" />
+                            <StatsCard value="4+" label="Completed projects" color="text-indigo-500 dark:text-indigo-400" />
+                            {/*<StatsCard value="12+" label="Happy clients" color="text-purple-500 dark:text-purple-400" />*/}
                             <StatsCard value="5+" label="Tech stack mastery" color="text-amber-500 dark:text-amber-400" />
                         </div>
 
