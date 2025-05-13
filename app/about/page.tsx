@@ -104,41 +104,86 @@ export default function AboutPage() {
                             <SkillsTab skills={skills} />
                         </div>
 
-                        <div>
-                            <h2 className="text-3xl font-semibold mb-6">My Professional Journey</h2>
-                            <div className="space-y-8">
-                                <div className="relative pl-8 border-l-2 border-teal-500 pb-8">
-                                    <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-teal-500" />
-                                    <div className="mb-1 text-teal-500">2022 - Present</div>
-                                    <h3 className="text-xl font-semibold">Senior Web Application Developer</h3>
-                                    <p className="text-gray-400">Tech Solutions Inc.</p>
-                                    <p className="mt-2 text-gray-600 dark:text-gray-300">
-                                        Leading development of enterprise web applications using React, Node.js, and cloud services.
-                                        Implementing CI/CD pipelines and mentoring junior developers.
-                                    </p>
+                        <div className="bg-gray-900 text-white p-8 rounded-lg">
+                            <h1 className="text-4xl font-bold mb-8">My Professional Journey</h1>
+
+                            <div className="relative">
+                                {/* Timeline line */}
+                                <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 to-indigo-500"></div>
+
+                                {/* Web Developer Position */}
+                                <div className="relative mb-12">
+                                    <div className="flex">
+                                        <div className="relative">
+                                            <motion.div
+                                                initial={{ scale: 0 }}
+                                                animate={{ scale: 1 }}
+                                                transition={{ duration: 0.5 }}
+                                                className="w-14 h-14 rounded-full bg-teal-500 flex items-center justify-center z-10 relative"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M18 10h-4v4h4v-4z" />
+                                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                                    <path d="M2 10h16" />
+                                                    <path d="M6 14h.01" />
+                                                    <path d="M6 18h12" />
+                                                </svg>
+                                            </motion.div>
+                                        </div>
+                                        <div className="ml-8">
+                                            <span className="text-teal-400 text-lg">2024 - Present</span>
+                                            <h2 className="text-2xl font-bold mb-1">Junior Web Application Developer</h2>
+                                            <h3 className="text-gray-400 mb-3">KOSIGN (Cambodia) Investment Co., Ltd.</h3>
+                                            <p className="text-gray-300">
+                                                Currently working as a Junior Web Application Developer, focusing on building and maintaining web applications
+                                                using Spring Boot and Next.js. Collaborating with cross-functional teams to deliver high-quality software
+                                                solutions.
+                                            </p>
+                                            <div className="flex mt-4 space-x-3">
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Spring Boot</span>
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Next.js</span>
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">TypeScript</span>
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">PostgreSQL</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="relative pl-8 border-l-2 border-indigo-500 pb-8">
-                                    <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-indigo-500" />
-                                    <div className="mb-1 text-indigo-500">2020 - 2022</div>
-                                    <h3 className="text-xl font-semibold">Full Stack Developer</h3>
-                                    <p className="text-gray-400">Digital Innovations Co.</p>
-                                    <p className="mt-2 text-gray-600 dark:text-gray-300">
-                                        Developed and maintained multiple web applications using the MERN stack. Implemented RESTful APIs
-                                        and integrated third-party services.
-                                    </p>
+                                {/* Android Developer Position */}
+                                <div className="relative">
+                                    <div className="flex">
+                                        <div className="relative">
+                                            <motion.div
+                                                initial={{ scale: 0 }}
+                                                animate={{ scale: 1 }}
+                                                transition={{ duration: 0.5, delay: 0.3 }}
+                                                className="w-14 h-14 rounded-full bg-indigo-500 flex items-center justify-center z-10 relative"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                                                    <path d="M12 18h.01" />
+                                                </svg>
+                                            </motion.div>
+                                        </div>
+                                        <div className="ml-8">
+                                            <span className="text-indigo-400 text-lg">2020</span>
+                                            <h2 className="text-2xl font-bold mb-1">Internship Android Mobile Developer</h2>
+                                            <h3 className="text-gray-400 mb-3">KOSIGN (Cambodia) Investment Co., Ltd.</h3>
+                                            <p className="text-gray-300">
+                                                Completed an internship as an Android Mobile Developer, where I gained hands-on experience in developing
+                                                mobile applications using Java. Worked on various projects, enhancing my skills in mobile app development and
+                                                user interface design.
+                                            </p>
+                                            <div className="flex mt-4 space-x-3">
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Android</span>
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Java</span>
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">UI Design</span>
+                                                <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Mobile Development</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="relative pl-8 border-l-2 border-purple-500">
-                                    <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500" />
-                                    <div className="mb-1 text-purple-500">2019 - 2020</div>
-                                    <h3 className="text-xl font-semibold">Frontend Developer</h3>
-                                    <p className="text-gray-400">WebTech Startup</p>
-                                    <p className="mt-2 text-gray-600 dark:text-gray-300">
-                                        Built responsive user interfaces with React and implemented state management with Redux.
-                                        Collaborated with UX designers to create intuitive user experiences.
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>

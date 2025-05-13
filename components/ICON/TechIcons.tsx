@@ -18,12 +18,12 @@ export const NextJsIcon = () => (
             <linearGradient id="paint0_linear_408_139" x1="109" y1="116.5" x2="144.5" y2="160.5"
                             gradientUnits="userSpaceOnUse">
                 <stop stopColor="white"/>
-                <stop offset="1" stopColor="white" stop-opacity="0"/>
+                <stop offset="1" stopColor="white" stopOpacity="0"/>
             </linearGradient>
             <linearGradient id="paint1_linear_408_139" x1="121" y1="54" x2="120.799" y2="106.875"
                             gradientUnits="userSpaceOnUse">
                 <stop stopColor="white"/>
-                <stop offset="1" stopColor="white" stop-opacity="0"/>
+                <stop offset="1" stopColor="white" stopOpacity="0"/>
             </linearGradient>
         </defs>
     </svg>
@@ -33,8 +33,8 @@ export const NextJsIcon = () => (
 // React Icon
 export const ReactIcon = () => (
     <svg width="569px" height="512px" viewBox="0 0 569 512" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <g fill="none" fill-rule="evenodd">
-            <g transform="translate(-227, -256)" fill="#58C4DC" fill-rule="nonzero">
+        <g fill="none" fillRule="evenodd">
+            <g transform="translate(-227, -256)" fill="#58C4DC" fillRule="nonzero">
                 <g transform="translate(227, 256)">
                     <path
                         d="M285.5,201 C255.400481,201 231,225.400481 231,255.5 C231,285.599519 255.400481,310 285.5,310 C315.599519,310 340,285.599519 340,255.5 C340,225.400481 315.599519,201 285.5,201"
@@ -135,7 +135,7 @@ export const TanStackIcon = () => (
             <circle id="a" cx="308.5" cy="308.5" r="308.5"/>
             <circle id="v" cx="307.5" cy="308.5" r="316.5"/>
         </defs>
-        <g fill="none" fill-rule="evenodd" transform="translate(9 8)">
+        <g fill="none" fillRule="evenodd" transform="translate(9 8)">
             <mask id="c" fill="#fff">
                 <use href="#a"/>
             </mask>
@@ -175,17 +175,17 @@ export const TanStackIcon = () => (
                     <path fill="url(#j)" strokeWidth="9.343"
                           d="M108.544 67.138C76.206 82.6 57.608 105.366 52.75 135.436c-4.858 30.07-.292 62.89 13.698 98.462 24.873-41.418 38.905-71.368 42.096-89.849 3.191-18.48 3.191-44.118 0-76.91Z"
                           transform="rotate(1 -6061.691 5926.397)"/>
-                    <path stroke-linecap="round" strokeWidth="5.91"
+                    <path strokeLinecap="round" strokeWidth="5.91"
                           d="M211.284 173.477c-13.851 21.992-23.291 42.022-28.32 60.093-5.03 18.071-8.175 33.143-9.436 45.216"/>
-                    <path stroke-linecap="round" strokeWidth="5.91"
+                    <path strokeLinecap="round" strokeWidth="5.91"
                           d="M209.814 176.884c-23.982 2.565-42.792 10.469-56.428 23.714-13.639 13.245-23.483 26.136-29.536 38.674M219.045 167.299c29.028-7.723 50.972-10.173 65.831-7.352 14.859 2.822 26.807 7.659 35.842 14.51M211.31 172.618c20.29 9.106 38.353 19.052 54.186 29.837 15.833 10.786 27.714 20.99 35.643 30.617"/>
                 </g>
-                <path stroke="#830305" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="6.937"
+                <path stroke="#830305" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="6.937"
                       d="m409.379 398.157-23.176 18.556M328.04 375.516l-22.313 28.398M312.904 353.698l53.18 59.816"/>
                 <path fill="url(#k)"
                       d="M67.585 27.463H5.68C1.893 28.148 0 30.38 0 34.16c0 3.78 1.893 6.211 5.68 7.293h67.17l41.751-30.356c2.488-2.646 2.794-5.315.92-8.006s-4.6-3.626-8.177-2.803l-39.76 27.174Z"
                       transform="scale(-1 1) rotate(-9 2092.128 2856.854)"/>
-                <path fill="#D8D8D8" stroke="#FFF" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="4.414"
+                <path fill="#D8D8D8" stroke="#FFF" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="4.414"
                       d="m402.861 391.51.471-4.088M382.21 388.752l.472-4.087M361.546 385.404l.485-3.845M337.59 371.883l2.56-2.498M324.276 359.567l2.56-2.497"/>
             </g>
             <ellipse cx="308.5" cy="720.5" fill="url(#l)" mask="url(#c)" rx="266" ry="316.5"/>
@@ -195,21 +195,21 @@ export const TanStackIcon = () => (
                 <g transform="translate(389 -32)">
                     <circle cx="168.5" cy="113.5" r="113.5" fill="url(#m)"/>
                     <circle cx="168.5" cy="113.5" r="106" stroke="#FFC900" stroke-opacity=".529" strokeWidth="15"/>
-                    <path stroke="url(#n)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#n)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="M30 113H0"/>
-                    <path stroke="url(#o)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#o)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="M33.5 79.5 7 74"/>
-                    <path stroke="url(#p)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#p)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="m34 146-29 8"/>
-                    <path stroke="url(#q)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#q)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="m45 177-24 13"/>
-                    <path stroke="url(#r)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#r)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="m67 204-20 19"/>
-                    <path stroke="url(#s)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#s)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="m94.373 227-13.834 22.847"/>
-                    <path stroke="url(#t)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#t)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="M127.5 243.5 120 268"/>
-                    <path stroke="url(#u)" stroke-linecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#u)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
                           d="m167.5 252.5.5 24.5"/>
                 </g>
             </g>
@@ -308,7 +308,7 @@ export const GitHubIcon = () => (
         <defs>
 
         </defs>
-        <g id="Page-1" stroke="none" strokeWidth ="1" fill="none" fill-rule="evenodd">
+        <g id="Page-1" stroke="none" strokeWidth ="1" fill="none" fillRule="evenodd">
             <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000000">
                 <g id="icons" transform="translate(56.000000, 160.000000)">
                     <path d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399" id="github-[#142]">
@@ -324,33 +324,33 @@ export const IntellijIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256" width="30px" height="30px">
         <defs>
             <linearGradient x1="37%" y1="51%" x2="178.1%" y2="41.9%" id="a">
-                <stop stop-color="#FC801D" offset="9%"/>
-                <stop stop-color="#B07F61" offset="23%"/>
-                <stop stop-color="#577DB3" offset="41%"/>
-                <stop stop-color="#1E7CE6" offset="53%"/>
-                <stop stop-color="#087CFA" offset="59%"/>
+                <stop stopColor="#FC801D" offset="9%"/>
+                <stop stopColor="#B07F61" offset="23%"/>
+                <stop stopColor="#577DB3" offset="41%"/>
+                <stop stopColor="#1E7CE6" offset="53%"/>
+                <stop stopColor="#087CFA" offset="59%"/>
             </linearGradient>
             <linearGradient x1="73.6%" y1="114.8%" x2="35.6%" y2="1.1%" id="b">
-                <stop stop-color="#FE2857" offset="0%"/>
-                <stop stop-color="#CB3979" offset="8%"/>
-                <stop stop-color="#9E4997" offset="16%"/>
-                <stop stop-color="#7557B2" offset="25%"/>
-                <stop stop-color="#5362C8" offset="34%"/>
-                <stop stop-color="#386CDA" offset="44%"/>
-                <stop stop-color="#2373E8" offset="54%"/>
-                <stop stop-color="#1478F2" offset="66%"/>
-                <stop stop-color="#0B7BF8" offset="79%"/>
-                <stop stop-color="#087CFA" offset="100%"/>
+                <stop stopColor="#FE2857" offset="0%"/>
+                <stop stopColor="#CB3979" offset="8%"/>
+                <stop stopColor="#9E4997" offset="16%"/>
+                <stop stopColor="#7557B2" offset="25%"/>
+                <stop stopColor="#5362C8" offset="34%"/>
+                <stop stopColor="#386CDA" offset="44%"/>
+                <stop stopColor="#2373E8" offset="54%"/>
+                <stop stopColor="#1478F2" offset="66%"/>
+                <stop stopColor="#0B7BF8" offset="79%"/>
+                <stop stopColor="#087CFA" offset="100%"/>
             </linearGradient>
             <linearGradient x1="28.6%" y1="23.6%" x2="81.8%" y2="129.8%" id="c">
-                <stop stop-color="#FE2857" offset="0%"/>
-                <stop stop-color="#FE295F" offset="8%"/>
-                <stop stop-color="#FF2D76" offset="21%"/>
-                <stop stop-color="#FF318C" offset="30%"/>
-                <stop stop-color="#EA3896" offset="38%"/>
-                <stop stop-color="#B248AE" offset="55%"/>
-                <stop stop-color="#5A63D6" offset="79%"/>
-                <stop stop-color="#087CFA" offset="100%"/>
+                <stop stopColor="#FE2857" offset="0%"/>
+                <stop stopColor="#FE295F" offset="8%"/>
+                <stop stopColor="#FF2D76" offset="21%"/>
+                <stop stopColor="#FF318C" offset="30%"/>
+                <stop stopColor="#EA3896" offset="38%"/>
+                <stop stopColor="#B248AE" offset="55%"/>
+                <stop stopColor="#5A63D6" offset="79%"/>
+                <stop stopColor="#087CFA" offset="100%"/>
             </linearGradient>
         </defs>
         <path fill="url(#a)" d="M40.5 180.6 2.9 150.8l22.1-41 33.3 11.1z"/>
@@ -367,26 +367,26 @@ export const WebstormIcon = () => (
     <svg width="30px" height="30px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
         <defs>
             <linearGradient x1="41.7030965%" y1="1.92488263%" x2="71.8761384%" y2="95.2347418%" id="linearGradient-1">
-                <stop stop-color="#00CDD7" offset="28%">
+                <stop stopColor="#00CDD7" offset="28%">
 
                 </stop>
-                <stop stop-color="#2086D7" offset="94%">
+                <stop stopColor="#2086D7" offset="94%">
 
                 </stop>
             </linearGradient>
             <linearGradient x1="22.4892241%" y1="15.1271186%" x2="82.8771552%" y2="84.7627119%" id="linearGradient-2">
-                <stop stop-color="#FFF045" offset="14%">
+                <stop stopColor="#FFF045" offset="14%">
 
                 </stop>
-                <stop stop-color="#00CDD7" offset="37%">
+                <stop stopColor="#00CDD7" offset="37%">
 
                 </stop>
             </linearGradient>
             <linearGradient x1="11171%" y1="-27691.7984%" x2="11907%" y2="-28759.6256%" id="linearGradient-3">
-                <stop stop-color="#00CDD7" offset="28%">
+                <stop stopColor="#00CDD7" offset="28%">
 
                 </stop>
-                <stop stop-color="#2086D7" offset="94%">
+                <stop stopColor="#2086D7" offset="94%">
 
                 </stop>
             </linearGradient>
