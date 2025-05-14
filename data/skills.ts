@@ -5,8 +5,8 @@ export const skills: SkillCategory[] = [
     {
         category: "Frontend",
         items: [
-            {name : "HTML", level: 4, experience: "1.5 years"},
-            { name: "css", level: 4, experience: "1.5 years" },
+            {name : "HTML", level: 4, experience: "2 years"},
+            { name: "css", level: 4, experience: "2 years" },
             { name: "JavaScript", level: 4, experience: "1.5 years" },
             { name: "TypeScript", level: 4, experience: "1.5 years" },
             { name: "React", level: 4, experience: "1.5 years" },
@@ -18,11 +18,11 @@ export const skills: SkillCategory[] = [
     {
         category: "Backend",
         items: [
-            { name: "Java", level: 3, experience: "1 year" },
-            { name: "Spring Boot", level: 3, experience: "1 year" },
+            { name: "Java", level: 3, experience: "2.5 year" },
+            { name: "Spring Boot", level: 3, experience: "2 year" },
             // { name: "Spring Data", level: 3, experience: "1 year" },
             // { name: "RESTful APIs", level: 3, experience: "1.5 years" },
-            { name: "PostgreSQL", level: 3, experience: "1 year" },
+            { name: "PostgreSQL", level: 3, experience: "2 year" },
         ]
     },
     {

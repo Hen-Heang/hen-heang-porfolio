@@ -25,7 +25,8 @@ export function HeroContent() {
     return (
         <div className="order-2 md:order-1">
             <motion.div custom={0} variants={textVariants} initial="hidden" animate="visible">
-                <Badge className="mb-4 bg-teal-500/10 text-teal-500 dark:bg-teal-400/10 dark:text-teal-400 hover:bg-teal-500/20 dark:hover:bg-teal-400/20">
+                <Badge
+                    className="mb-4 px-4 py-2 text-base bg-teal-500/10 text-teal-500 dark:bg-teal-400/10 dark:text-teal-400 hover:bg-teal-500/20 dark:hover:bg-teal-400/20">
                     Full-Stack Web Application Developer
                 </Badge>
             </motion.div>

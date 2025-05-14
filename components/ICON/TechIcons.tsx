@@ -180,36 +180,36 @@ export const TanStackIcon = () => (
                     <path strokeLinecap="round" strokeWidth="5.91"
                           d="M209.814 176.884c-23.982 2.565-42.792 10.469-56.428 23.714-13.639 13.245-23.483 26.136-29.536 38.674M219.045 167.299c29.028-7.723 50.972-10.173 65.831-7.352 14.859 2.822 26.807 7.659 35.842 14.51M211.31 172.618c20.29 9.106 38.353 19.052 54.186 29.837 15.833 10.786 27.714 20.99 35.643 30.617"/>
                 </g>
-                <path stroke="#830305" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="6.937"
+                <path stroke="#830305" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="6.937"
                       d="m409.379 398.157-23.176 18.556M328.04 375.516l-22.313 28.398M312.904 353.698l53.18 59.816"/>
                 <path fill="url(#k)"
                       d="M67.585 27.463H5.68C1.893 28.148 0 30.38 0 34.16c0 3.78 1.893 6.211 5.68 7.293h67.17l41.751-30.356c2.488-2.646 2.794-5.315.92-8.006s-4.6-3.626-8.177-2.803l-39.76 27.174Z"
                       transform="scale(-1 1) rotate(-9 2092.128 2856.854)"/>
-                <path fill="#D8D8D8" stroke="#FFF" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="4.414"
+                <path fill="#D8D8D8" stroke="#FFF" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="4.414"
                       d="m402.861 391.51.471-4.088M382.21 388.752l.472-4.087M361.546 385.404l.485-3.845M337.59 371.883l2.56-2.498M324.276 359.567l2.56-2.497"/>
             </g>
             <ellipse cx="308.5" cy="720.5" fill="url(#l)" mask="url(#c)" rx="266" ry="316.5"/>
-            <ellipse cx="308.5" cy="720.5" stroke="#6DA300" stroke-opacity=".502" strokeWidth="26" mask="url(#c)"
+            <ellipse cx="308.5" cy="720.5" stroke="#6DA300" strokeOpacity=".502" strokeWidth="26" mask="url(#c)"
                      rx="253" ry="303.5"/>
             <g mask="url(#c)">
                 <g transform="translate(389 -32)">
                     <circle cx="168.5" cy="113.5" r="113.5" fill="url(#m)"/>
-                    <circle cx="168.5" cy="113.5" r="106" stroke="#FFC900" stroke-opacity=".529" strokeWidth="15"/>
-                    <path stroke="url(#n)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <circle cx="168.5" cy="113.5" r="106" stroke="#FFC900" strokeOpacity=".529" strokeWidth="15"/>
+                    <path stroke="url(#n)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="M30 113H0"/>
-                    <path stroke="url(#o)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#o)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="M33.5 79.5 7 74"/>
-                    <path stroke="url(#p)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#p)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="m34 146-29 8"/>
-                    <path stroke="url(#q)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#q)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="m45 177-24 13"/>
-                    <path stroke="url(#r)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#r)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="m67 204-20 19"/>
-                    <path stroke="url(#s)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#s)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="m94.373 227-13.834 22.847"/>
-                    <path stroke="url(#t)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#t)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="M127.5 243.5 120 268"/>
-                    <path stroke="url(#u)" strokeLinecap="round" stroke-linejoin="bevel" strokeWidth="12"
+                    <path stroke="url(#u)" strokeLinecap="round" strokeLinejoin="bevel" strokeWidth="12"
                           d="m167.5 252.5.5 24.5"/>
                 </g>
             </g>

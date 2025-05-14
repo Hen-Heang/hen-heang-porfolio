@@ -104,22 +104,22 @@ export default function AboutPage() {
                             <SkillsTab skills={skills} />
                         </div>
 
-                        <div className="bg-gray-900 text-white p-8 rounded-lg">
-                            <h1 className="text-4xl font-bold mb-8">My Professional Journey</h1>
+                        <div className="bg-gray-900 text-white p-4 md:p-8 rounded-lg w-full">
+                            <h1 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8">My Professional Journey</h1>
 
                             <div className="relative">
-                                {/* Timeline line */}
-                                <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 to-indigo-500"></div>
+                                {/* Timeline line - hidden on very small screens */}
+                                <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 to-indigo-500 hidden sm:block"></div>
 
                                 {/* Web Developer Position */}
-                                <div className="relative mb-12">
-                                    <div className="flex">
-                                        <div className="relative">
+                                <div className="relative mb-8 md:mb-12">
+                                    <div className="flex flex-col sm:flex-row">
+                                        <div className="relative mb-4 sm:mb-0">
                                             <motion.div
                                                 initial={{ scale: 0 }}
                                                 animate={{ scale: 1 }}
                                                 transition={{ duration: 0.5 }}
-                                                className="w-14 h-14 rounded-full bg-teal-500 flex items-center justify-center z-10 relative"
+                                                className="w-14 h-14 rounded-full bg-teal-500 flex items-center justify-center z-10 relative mx-auto sm:mx-0"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                     <path d="M18 10h-4v4h4v-4z" />
@@ -130,16 +130,16 @@ export default function AboutPage() {
                                                 </svg>
                                             </motion.div>
                                         </div>
-                                        <div className="ml-8">
-                                            <span className="text-teal-400 text-lg">2024 - Present</span>
-                                            <h2 className="text-2xl font-bold mb-1">Junior Web Application Developer</h2>
+                                        <div className="sm:ml-8 text-center sm:text-left">
+                                            <span className="text-teal-400 text-lg block">2024 - Present</span>
+                                            <h2 className="text-xl md:text-2xl font-bold mb-1">Junior Web Application Developer</h2>
                                             <h3 className="text-gray-400 mb-3">KOSIGN (Cambodia) Investment Co., Ltd.</h3>
                                             <p className="text-gray-300">
                                                 Currently working as a Junior Web Application Developer, focusing on building and maintaining web applications
                                                 using Spring Boot and Next.js. Collaborating with cross-functional teams to deliver high-quality software
                                                 solutions.
                                             </p>
-                                            <div className="flex mt-4 space-x-3">
+                                            <div className="flex flex-wrap justify-center sm:justify-start mt-4 gap-2">
                                                 <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Spring Boot</span>
                                                 <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Next.js</span>
                                                 <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">TypeScript</span>
@@ -151,13 +151,13 @@ export default function AboutPage() {
 
                                 {/* Android Developer Position */}
                                 <div className="relative">
-                                    <div className="flex">
-                                        <div className="relative">
+                                    <div className="flex flex-col sm:flex-row">
+                                        <div className="relative mb-4 sm:mb-0">
                                             <motion.div
                                                 initial={{ scale: 0 }}
                                                 animate={{ scale: 1 }}
                                                 transition={{ duration: 0.5, delay: 0.3 }}
-                                                className="w-14 h-14 rounded-full bg-indigo-500 flex items-center justify-center z-10 relative"
+                                                className="w-14 h-14 rounded-full bg-indigo-500 flex items-center justify-center z-10 relative mx-auto sm:mx-0"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                     <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
@@ -165,16 +165,16 @@ export default function AboutPage() {
                                                 </svg>
                                             </motion.div>
                                         </div>
-                                        <div className="ml-8">
-                                            <span className="text-indigo-400 text-lg">2020</span>
-                                            <h2 className="text-2xl font-bold mb-1">Internship Android Mobile Developer</h2>
+                                        <div className="sm:ml-8 text-center sm:text-left">
+                                            <span className="text-indigo-400 text-lg block">2024</span>
+                                            <h2 className="text-xl md:text-2xl font-bold mb-1">Internship Android Mobile Developer</h2>
                                             <h3 className="text-gray-400 mb-3">KOSIGN (Cambodia) Investment Co., Ltd.</h3>
                                             <p className="text-gray-300">
                                                 Completed an internship as an Android Mobile Developer, where I gained hands-on experience in developing
                                                 mobile applications using Java. Worked on various projects, enhancing my skills in mobile app development and
                                                 user interface design.
                                             </p>
-                                            <div className="flex mt-4 space-x-3">
+                                            <div className="flex flex-wrap justify-center sm:justify-start mt-4 gap-2">
                                                 <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Android</span>
                                                 <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">Java</span>
                                                 <span className="bg-gray-700 px-3 py-1 rounded-full text-xs">UI Design</span>
@@ -183,7 +183,6 @@ export default function AboutPage() {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -3,27 +3,46 @@ import type { EducationItem } from "@/types"
 
 export const education: EducationItem[] = [
     {
-        period: "2021 - 2023",
-        title: "Bachelor's Degree in Computer Science",
-        institution: "Royal University of Phnom Penh",
-        description: "Focused on software engineering, database management, and web application development.",
+        period: "2020",
+        title: "Basic Computer ",
+        institution: "Addbook Computer Centre",
+        description: "Basic computer skills training, including Microsoft Office and internet usage.",
     },
+
+
+    {
+        period: "2021",
+        title: "Basic C++ Programming",
+        institution: " ANT Technology Training Center",
+        description: "Introduction to programming concepts using C++.",
+    },
+
     {
         period: "2023",
         title: "Full-Stack Development Bootcamp",
-        institution: "Code Institute Cambodia",
-        description: "Intensive training in modern web application development using Spring Boot, Next.js, and PostgreSQL.",
+        institution: "Korea Software HRD Center",
+        description: "Intensive training in full-stack development, covering HTML, CSS, JavaScript, React, Java, and database management.",
     },
+
     {
-        period: "2023 - Present",
-        title: "Professional Web Application Developer",
-        institution: "Tech Solutions Company",
-        description: "Building enterprise applications with Spring Boot, Next.js, TypeScript, and PostgreSQL.",
+        period: "2023-2024",
+        title: "Mobile Application Development",
+        institution: "Korea Software HRD Center",
+        description: "Training in mobile application development using Java and Android Studio.",
     },
+
+    {
+        period: "2020-2024",
+        title: "Computer Science",
+        institution: "Royal University of Phnom Penh",
+        description: "Pursuing a Bachelor's degree in Computer Science with a focus on software development and web technologies.",
+    },
+
+
     {
         period: "In progress",
-        title: "Advanced Spring Framework Certification",
-        institution: "Spring Academy",
-        description: "Expanding expertise in Spring Boot, Spring Data, and enterprise application architecture.",
+        title: "Deepening Java, Spring Framework Skills & Data Structures and Algorithms",
+        institution: "Self-Learning",
+        description: "Continuously improving Java and Spring Framework skills, focusing on data structures and algorithms for better problem-solving.",
     },
 ]
