@@ -248,15 +248,15 @@ export default function AboutPage() {
                                     </h2>
                                     <div className="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed">
                                         <p>
-                                            I'm a passionate web application developer with a strong foundation in both frontend and backend
+                                            I&#39;m a passionate web application developer with a strong foundation in both frontend and backend
                                             technologies. My journey in web development began with a curiosity about how interactive websites
                                             work, which led me to pursue formal education in computer science and specialized training in
                                             modern web technologies.
                                         </p>
                                         <p>
-                                            Throughout my career, I've focused on building scalable, maintainable web applications that solve
+                                            Throughout my career, I&#39;ve focused on building scalable, maintainable web applications that solve
                                             real-world problems. I enjoy the challenge of translating complex business requirements into
-                                            elegant technical solutions, always keeping the end user's experience at the forefront of my
+                                            elegant technical solutions, always keeping the end user&#39;s experience at the forefront of my
                                             development process.
                                         </p>
                                         <p>
@@ -273,7 +273,7 @@ export default function AboutPage() {
                                 <CardContent className="p-0">
                                     <h3 className="text-2xl font-bold mb-4">What I Love</h3>
                                     <div className="grid grid-cols-2 gap-3">
-                                        {interests.map((interest, index) => (
+                                        {interests.map((interest) => (
                                             <motion.div
                                                 key={interest.label}
                                                 className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50"
