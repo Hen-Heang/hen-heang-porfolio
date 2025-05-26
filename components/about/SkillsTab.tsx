@@ -1,59 +1,81 @@
-// components/about/SkillsTab.tsx
+"use client"
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { SkillCategory } from "@/types"
 import { motion } from "framer-motion"
 import {
-
-    CssIcon, GitHubIcon, HtmlIcon, IntellijIcon, JavaIcon, JavaScriptIcon,
+    CssIcon,
+    GitHubIcon,
+    HtmlIcon,
+    IntellijIcon,
+    JavaIcon,
+    JavaScriptIcon,
     NextJsIcon,
-    PostgreSQLIcon, ReactIcon, SpringIcon,
-    TanStackIcon, TypeScriptIcon, WebstormIcon
-
-} from "@/components/ICON/TechIcons";
-
+    PostgreSQLIcon,
+    ReactIcon,
+    SpringIcon,
+    TanStackIcon,
+    TypeScriptIcon,
+    WebstormIcon,
+} from "@/components/ICON/TechIcons"
 
 interface SkillsTabProps {
     skills: SkillCategory[]
 }
 
 const getIconForSkill = (skillName: string) => {
-    const skillNameLower = skillName.toLowerCase();
-    let IconComponent = null;
+    const skillNameLower = skillName.toLowerCase()
+    let IconComponent = null
 
-    if (skillNameLower.includes('next.js')) IconComponent = <NextJsIcon />;
-    // if (skillNameLower.includes('spring boot')) IconComponent = <SpringBootIcon />;
-    if (skillNameLower.includes('tanstack')) IconComponent = <TanStackIcon />;
-    if (skillNameLower.includes('css')) IconComponent = <CssIcon />;
-    if (skillNameLower.includes('html')) IconComponent = <HtmlIcon />;
-    if (skillNameLower.includes('javascript')) IconComponent = <JavaScriptIcon />;
-    if (skillNameLower.includes('typescript')) IconComponent = <TypeScriptIcon />;
-    if (skillNameLower.includes('react')) IconComponent = <ReactIcon />;
+    if (skillNameLower.includes("next.js")) IconComponent = <NextJsIcon />
+    if (skillNameLower.includes("tanstack")) IconComponent = <TanStackIcon />
+    if (skillNameLower.includes("css")) IconComponent = <CssIcon />
+    if (skillNameLower.includes("html")) IconComponent = <HtmlIcon />
+    if (skillNameLower.includes("javascript")) IconComponent = <JavaScriptIcon />
+    if (skillNameLower.includes("typescript")) IconComponent = <TypeScriptIcon />
+    if (skillNameLower.includes("react")) IconComponent = <ReactIcon />
+    if (skillNameLower.includes("java")) IconComponent = <JavaIcon />
+    if (skillNameLower.includes("spring")) IconComponent = <SpringIcon />
+    if (skillNameLower.includes("postgresql")) IconComponent = <PostgreSQLIcon />
+    if (skillNameLower.includes("git")) IconComponent = <GitHubIcon />
+    if (skillNameLower.includes("intellij")) IconComponent = <IntellijIcon />
+    if (skillNameLower.includes("webstorm")) IconComponent = <WebstormIcon />
 
-    // Backend Icons
-    if (skillNameLower.includes('java')) IconComponent = <JavaIcon />;
-    if (skillNameLower.includes('spring')) IconComponent = <SpringIcon />;
-    if (skillNameLower.includes('postgresql')) IconComponent = <PostgreSQLIcon />;
-
-
-    // Tools Icons
-    if (skillNameLower.includes('git')) IconComponent = <GitHubIcon />;
-    if (skillNameLower.includes('intellij')) IconComponent = <IntellijIcon/>;
-    if (skillNameLower.includes('webstorm')) IconComponent = <WebstormIcon />;
-    return IconComponent ? (
-        <div className="icon-wrapper">
-            {IconComponent}
-        </div>
-    ) : null;
-};
+    return IconComponent ? <div className="icon-wrapper">{IconComponent}</div> : null
+}
 
 export function SkillsTab({ skills }: SkillsTabProps) {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+            },
+        },
+    }
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+            },
+        },
+    }
+
     return (
         <div>
-            {/*<h3 className="text-2xl font-semibold mb-6">My Skills</h3>*/}
             <Tabs defaultValue={skills[0].category} className="w-full">
-                <TabsList className="grid grid-cols-3 mb-6">
+                <TabsList className="grid grid-cols-3 mb-8 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
                     {skills.map((skill) => (
-                        <TabsTrigger key={skill.category} value={skill.category}>
+                        <TabsTrigger
+                            key={skill.category}
+                            value={skill.category}
+                            className="rounded-lg data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:shadow-sm transition-all duration-200"
+                        >
                             {skill.category}
                         </TabsTrigger>
                     ))}
@@ -61,28 +83,38 @@ export function SkillsTab({ skills }: SkillsTabProps) {
 
                 {skills.map((skill) => (
                     <TabsContent key={skill.category} value={skill.category} className="mt-0">
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                            {skill.items.map((item) => (
+                        <motion.div
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            {skill.items.map((item, index) => (
                                 <motion.div
                                     key={item.name}
-                                    className="p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center gap-3"
-                                    whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}
+                                    variants={itemVariants}
+                                    className="group p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 transition-all duration-300 hover:shadow-lg"
+                                    whileHover={{ scale: 1.02, y: -2 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
-                                    {getIconForSkill(item.name) ? (
-                                        <div className="flex-shrink-0">
-                                            {getIconForSkill(item.name)}
+                                    <div className="flex items-center gap-4">
+                                        {getIconForSkill(item.name) ? (
+                                            <div className="flex-shrink-0 p-2 bg-slate-100 dark:bg-slate-700 rounded-lg group-hover:bg-teal-100 dark:group-hover:bg-teal-900/30 transition-colors duration-300">
+                                                {getIconForSkill(item.name)}
+                                            </div>
+                                        ) : (
+                                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-teal-500 to-indigo-500 flex-shrink-0"></div>
+                                        )}
+                                        <div className="flex-1">
+                                            <div className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                                                {item.name}
+                                            </div>
+                                            <div className="text-sm text-slate-500 dark:text-slate-400">{item.experience}</div>
                                         </div>
-                                    ) : (
-                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-500 to-indigo-500"></div>
-                                    )}
-                                    <div>
-                                        <div className="font-medium">{item.name}</div>
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">{item.experience}</div>
                                     </div>
                                 </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                     </TabsContent>
                 ))}
             </Tabs>
