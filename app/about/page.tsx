@@ -3,57 +3,30 @@
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { skills } from "@/data/skills"
-import { navItems } from "@/data/navigation"
-import { useThemeToggle } from "@/hooks/useThemeToggle"
-import { useState } from "react"
-import { StatsCard } from "@/components/about/StatsCard"
-import { SkillsTab } from "@/components/about/SkillsTab"
-import { Header } from "@/components/header/Header"
-import { Footer } from "@/components/shared/Footer"
+import { PageLayout } from "@/components/layout/PageLayout"
+import { StatsCard } from "@/src/components/sections/about/StatsCard"
+import { SkillsTab } from "@/src/components/sections/about/SkillsTab"
 import { personalInfo } from "@/data/personal-info"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/src/components/ui/button"
+import { Card, CardContent } from "@/src/components/ui/card"
+import { Badge } from "@/src/components/ui/badge"
 import Image from "next/image"
 import {
-    Download,
     Mail,
     MapPin,
     Calendar,
     Award,
     Target,
-    Heart,
-    Coffee,
     Code,
-    Briefcase,
-    GraduationCap,
-    Star,
+    Globe,
+    Zap,
+    Users,
+    Server,
 } from "lucide-react"
+import type { SkillItem } from "@/src/lib/types"
 
 export default function AboutPage() {
     const router = useRouter()
-    const { darkMode, toggleTheme } = useThemeToggle()
-    const [activeSection] = useState("about")
-
-    // Handle navigation
-    const handleNavigation = (sectionId: string) => {
-        if (sectionId === "about") {
-            return true // Already on about page
-        }
-        if (sectionId === "projects") {
-            router.push("/projects")
-            return true
-        }
-        if (sectionId === "contact") {
-            router.push("/contact")
-            return true
-        }
-        if (sectionId === "home" || sectionId === "education") {
-            router.push(`/#${sectionId}`)
-            return true
-        }
-        return false
-    }
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -78,393 +51,257 @@ export default function AboutPage() {
         },
     }
 
-    const interests = [
-        { icon: Code, label: "Clean Code", color: "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400" },
-        {
-            icon: Coffee,
-            label: "Coffee Lover",
-            color: "bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400",
+    const coreValues = [
+        { 
+            icon: Code, 
+            title: "Clean Code", 
+            description: "Writing maintainable, readable, and efficient code that others can easily understand and build upon.",
+            color: "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400" 
         },
         {
             icon: Target,
-            label: "Problem Solving",
+            title: "Problem Solving",
+            description: "Approaching complex challenges with analytical thinking and creative solutions.",
             color: "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
         },
-        { icon: Heart, label: "Open Source", color: "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400" },
+        {
+            icon: Users,
+            title: "Team Collaboration",
+            description: "Working effectively with cross-functional teams to deliver exceptional results.",
+            color: "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
+        },
+        {
+            icon: Zap,
+            title: "Continuous Learning",
+            description: "Staying updated with the latest technologies and best practices in software development.",
+            color: "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400",
+        },
     ]
 
-    const achievements = [
-        { icon: Award, title: "Best Intern", description: "Outstanding performance during internship" },
-        { icon: Star, title: "Quick Learner", description: "Rapidly adapted to new technologies" },
-        { icon: Target, title: "Goal Oriented", description: "Consistently meets project deadlines" },
-    ]
+    // Helper function to get skills by category
+    const getSkillsByCategory = (category: string): SkillItem[] => {
+        return skills.find(skill => skill.category.toLowerCase() === category.toLowerCase())?.items || []
+    }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-gray-900 dark:text-gray-100">
-            <Header
-                navItems={navItems}
-                activeSection={activeSection}
-                darkMode={darkMode}
-                toggleTheme={toggleTheme}
-                onNavItemClick={handleNavigation}
-            />
-
-            {/* Background Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <PageLayout>
+            <div className="container mx-auto px-4 py-20">
                 <motion.div
-                    className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-blue-400/20 rounded-full blur-xl"
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{
-                        duration: 8,
-                        repeat: Number.POSITIVE_INFINITY,
-                        ease: "easeInOut",
-                    }}
-                />
-                <motion.div
-                    className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl"
-                    animate={{
-                        scale: [1, 1.1, 1],
-                        opacity: [0.2, 0.5, 0.2],
-                    }}
-                    transition={{
-                        duration: 6,
-                        repeat: Number.POSITIVE_INFINITY,
-                        ease: "easeInOut",
-                        delay: 2,
-                    }}
-                />
-            </div>
-
-            <div className="container mx-auto px-4 py-20 relative z-10">
-                <motion.div variants={containerVariants} initial="hidden" animate="visible" className="max-w-6xl mx-auto">
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="max-w-6xl mx-auto"
+                >
                     {/* Hero Section */}
                     <motion.div variants={itemVariants} className="text-center mb-16">
-                        <Badge className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-teal-500/10 to-indigo-500/10 text-teal-600 dark:text-teal-400 border border-teal-200/50 dark:border-teal-400/20">
-              <span className="relative flex items-center gap-2">
-                <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
-                About Me
-              </span>
-                        </Badge>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
-                            Get to Know Me Better
+                        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent">
+                            About Me
                         </h1>
-                        <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                            I&#39;m a passionate web developer who loves creating digital experiences that make a difference.
+                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                            {personalInfo.description}
                         </p>
                     </motion.div>
 
-                    {/* Main Content Grid */}
-                    <div className="grid lg:grid-cols-3 gap-8 mb-16">
-                        {/* Profile Image & Quick Info */}
-                        <motion.div variants={itemVariants} className="lg:col-span-1">
-                            <Card className="p-6 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 shadow-xl">
-                                <CardContent className="p-0">
-                                    <div className="relative mb-6">
-                                        <motion.div
-                                            className="w-full aspect-square rounded-2xl bg-gradient-to-br from-teal-500 to-indigo-500 blur-2xl opacity-20 absolute -inset-4"
-                                            animate={{
-                                                scale: [1, 1.05, 1],
-                                            }}
-                                            transition={{
-                                                duration: 4,
-                                                repeat: Number.POSITIVE_INFINITY,
-                                                ease: "easeInOut",
-                                            }}
-                                        />
-                                        <div className="relative">
-                                            <div className="absolute inset-0 bg-gradient-to-br from-teal-500 via-blue-500 to-indigo-500 rounded-2xl p-1">
-                                                <div className="w-full h-full bg-white dark:bg-slate-900 rounded-xl overflow-hidden">
-                                                    <Image
-                                                        src={personalInfo.myImage || "/placeholder.svg"}
-                                                        alt={personalInfo.name}
-                                                        fill
-                                                        className="object-cover hover:scale-110 transition-transform duration-500"
-                                                        priority
-                                                        sizes="400px"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    {/* Profile Section */}
+                    <motion.div variants={itemVariants} className="grid lg:grid-cols-3 gap-8 mb-16">
+                        {/* Profile Image */}
+                        <div className="lg:col-span-1">
+                            <div className="relative">
+                                <div className="w-full aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                                    <Image
+                                        src={personalInfo.myImage}
+                                        alt={personalInfo.fullName || personalInfo.name}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/20 to-indigo-500/20 rounded-2xl" />
+                            </div>
+                        </div>
 
-                                    {/* Quick Info Cards */}
-                                    <div className="space-y-3">
-                                        <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                                            <div className="p-2 bg-teal-100 dark:bg-teal-900/30 rounded-lg">
-                                                <MapPin className="h-4 w-4 text-teal-600 dark:text-teal-400" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium">Location</p>
-                                                <p className="text-xs text-slate-600 dark:text-slate-400">Phnom Penh, Cambodia</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                                            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                                                <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium">Experience</p>
-                                                <p className="text-xs text-slate-600 dark:text-slate-400">1.5+ Years</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                                            <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-                                                <Briefcase className="h-4 w-4 text-green-600 dark:text-green-400" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium">Status</p>
-                                                <p className="text-xs text-slate-600 dark:text-slate-400">Available for Work</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                        {/* Personal Info */}
+                        <div className="lg:col-span-2 space-y-6">
+                            <div>
+                                <h2 className="text-3xl font-bold mb-4">{personalInfo.fullName || personalInfo.name}</h2>
+                                <p className="text-xl text-teal-600 dark:text-teal-400 font-medium mb-6">
+                                    {personalInfo.title}
+                                </p>
+                            </div>
 
-                                    {/* Contact Buttons */}
-                                    <div className="mt-6 space-y-3">
-                                        <Button className="w-full bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white">
-                                            <Mail className="mr-2 h-4 w-4" />
-                                            Get in Touch
-                                        </Button>
-                                        <Button variant="outline" className="w-full">
-                                            <Download className="mr-2 h-4 w-4" />
-                                            Download Resume
-                                        </Button>
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                                    <Mail className="text-teal-600 dark:text-teal-400" size={20} />
+                                    <div>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                                        <p className="font-medium">{personalInfo.email}</p>
                                     </div>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
+                                </div>
 
-                        {/* Story & Details */}
-                        <motion.div variants={itemVariants} className="lg:col-span-2 space-y-8">
-                            <Card className="p-6 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 shadow-xl">
-                                <CardContent className="p-0">
-                                    <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                                        <div className="p-2 bg-gradient-to-br from-teal-500 to-indigo-500 rounded-lg">
-                                            <GraduationCap className="h-6 w-6 text-white" />
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                                    <MapPin className="text-teal-600 dark:text-teal-400" size={20} />
+                                    <div>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
+                                        <p className="font-medium">{personalInfo.location}</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                                    <Calendar className="text-teal-600 dark:text-teal-400" size={20} />
+                                    <div>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Experience</p>
+                                        <p className="font-medium">{personalInfo.experience}</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                                    <Award className="text-teal-600 dark:text-teal-400" size={20} />
+                                    <div>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Focus</p>
+                                        <p className="font-medium">Full-Stack Development</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Core Values */}
+                    <motion.div variants={itemVariants} className="mb-16">
+                        <h2 className="text-3xl font-bold text-center mb-12">Core Values</h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {coreValues.map((value, index) => (
+                                <Card key={index} className="p-6 text-center hover:shadow-xl transition-shadow duration-300">
+                                    <CardContent className="p-0">
+                                        <div className={`w-16 h-16 rounded-full ${value.color} flex items-center justify-center mx-auto mb-4`}>
+                                            <value.icon size={24} />
                                         </div>
-                                        My Story
-                                    </h2>
-                                    <div className="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed">
-                                        <p>
-                                            I&#39;m a passionate web application developer with a strong foundation in both frontend and backend
-                                            technologies. My journey in web development began with a curiosity about how interactive websites
-                                            work, which led me to pursue formal education in computer science and specialized training in
-                                            modern web technologies.
-                                        </p>
-                                        <p>
-                                            Throughout my career, I&#39;ve focused on building scalable, maintainable web applications that solve
-                                            real-world problems. I enjoy the challenge of translating complex business requirements into
-                                            elegant technical solutions, always keeping the end user&#39;s experience at the forefront of my
-                                            development process.
-                                        </p>
-                                        <p>
-                                            When I&#39;m not coding, I stay current with emerging technologies and best practices through
-                                            continuous learning, contributing to open-source projects, and participating in developer
-                                            communities.
-                                        </p>
-                                    </div>
-                                </CardContent>
-                            </Card>
-
-                            {/* Interests */}
-                            <Card className="p-6 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 shadow-xl">
-                                <CardContent className="p-0">
-                                    <h3 className="text-2xl font-bold mb-4">What I Love</h3>
-                                    <div className="grid grid-cols-2 gap-3">
-                                        {interests.map((interest) => (
-                                            <motion.div
-                                                key={interest.label}
-                                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50"
-                                                whileHover={{ scale: 1.05 }}
-                                                transition={{ duration: 0.2 }}
-                                            >
-                                                <div className={`p-2 rounded-lg ${interest.color}`}>
-                                                    <interest.icon className="h-4 w-4" />
-                                                </div>
-                                                <span className="font-medium text-sm">{interest.label}</span>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
-                    </div>
+                                        <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
+                                        <p className="text-gray-600 dark:text-gray-300">{value.description}</p>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </motion.div>
 
                     {/* Stats Section */}
                     <motion.div variants={itemVariants} className="mb-16">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <StatsCard value="1.5+" label="Years of experience" color="text-teal-500 dark:text-teal-400" />
-                            <StatsCard value="4+" label="Completed projects" color="text-indigo-500 dark:text-indigo-400" />
-                            <StatsCard value="5+" label="Tech stack mastery" color="text-amber-500 dark:text-amber-400" />
-                            <StatsCard value="100%" label="Client satisfaction" color="text-green-500 dark:text-green-400" />
+                        <h2 className="text-3xl font-bold text-center mb-12">Quick Stats</h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <StatsCard
+                                value="10+"
+                                label="Projects Completed"
+                                color="text-teal-500 dark:text-teal-400"
+                            />
+                            <StatsCard
+                                value="15+"
+                                label="Technologies"
+                                color="text-indigo-500 dark:text-indigo-400"
+                            />
+                            <StatsCard
+                                value="Bachelor&apos;s"
+                                label="Education"
+                                color="text-blue-500 dark:text-blue-400"
+                            />
+                            <StatsCard
+                                value="1.5+ Years"
+                                label="Experience"
+                                color="text-green-500 dark:text-green-400"
+                            />
                         </div>
                     </motion.div>
 
                     {/* Skills Section */}
                     <motion.div variants={itemVariants} className="mb-16">
-                        <Card className="p-8 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 shadow-xl">
-                            <CardContent className="p-0">
-                                <h2 className="text-3xl font-bold mb-8 text-center">My Technical Skills</h2>
-                                <SkillsTab skills={skills} />
-                            </CardContent>
-                        </Card>
+                        <h2 className="text-3xl font-bold text-center mb-12">Technical Skills</h2>
+                        <SkillsTab skills={skills} />
                     </motion.div>
 
-                    {/* Achievements */}
+                    {/* Technology Stack */}
                     <motion.div variants={itemVariants} className="mb-16">
-                        <Card className="p-8 bg-gradient-to-br from-teal-500 to-indigo-500 text-white shadow-xl">
-                            <CardContent className="p-0">
-                                <h2 className="text-3xl font-bold mb-8 text-center">Key Achievements</h2>
-                                <div className="grid md:grid-cols-3 gap-6">
-                                    {achievements.map((achievement) => (
-                                        <motion.div
-                                            key={achievement.title}
-                                            className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl"
-                                            whileHover={{ scale: 1.05 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                                <achievement.icon className="h-8 w-8" />
-                                            </div>
-                                            <h3 className="text-xl font-bold mb-2">{achievement.title}</h3>
-                                            <p className="text-blue-100">{achievement.description}</p>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </CardContent>
-                        </Card>
+                        <h2 className="text-3xl font-bold text-center mb-12">Technology Stack</h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {/* Frontend */}
+                            <Card className="p-6">
+                                <CardContent className="p-0">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                            <Globe className="text-blue-600 dark:text-blue-400" size={24} />
+                                        </div>
+                                        <h3 className="text-xl font-semibold">Frontend</h3>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {getSkillsByCategory("Frontend").map((skill: SkillItem) => (
+                                            <Badge key={skill.name} variant="secondary" className="text-sm">
+                                                {skill.name}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            {/* Backend */}
+                            <Card className="p-6">
+                                <CardContent className="p-0">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                            <Server className="text-green-600 dark:text-green-400" size={24} />
+                                        </div>
+                                        <h3 className="text-xl font-semibold">Backend</h3>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {getSkillsByCategory("Backend").map((skill: SkillItem) => (
+                                            <Badge key={skill.name} variant="secondary" className="text-sm">
+                                                {skill.name}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            {/* Tools */}
+                            <Card className="p-6">
+                                <CardContent className="p-0">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                                            <Zap className="text-purple-600 dark:text-purple-400" size={24} />
+                                        </div>
+                                        <h3 className="text-xl font-semibold">Tools</h3>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {getSkillsByCategory("Tools").map((skill: SkillItem) => (
+                                            <Badge key={skill.name} variant="secondary" className="text-sm">
+                                                {skill.name}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </motion.div>
 
-                    {/* Professional Journey */}
-                    <motion.div variants={itemVariants} className="mb-16">
-                        <Card className="p-8 bg-slate-900 text-white shadow-xl">
-                            <CardContent className="p-0">
-                                <h2 className="text-3xl font-bold mb-8 text-center">My Professional Journey</h2>
-
-                                <div className="relative">
-                                    {/* Timeline line */}
-                                    <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 to-indigo-500 hidden sm:block"></div>
-
-                                    {/* Current Position */}
-                                    <div className="relative mb-12">
-                                        <div className="flex flex-col sm:flex-row">
-                                            <div className="relative mb-4 sm:mb-0">
-                                                <motion.div
-                                                    initial={{ scale: 0 }}
-                                                    animate={{ scale: 1 }}
-                                                    transition={{ duration: 0.5 }}
-                                                    className="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500 to-indigo-500 flex items-center justify-center z-10 relative mx-auto sm:mx-0 shadow-lg"
-                                                >
-                                                    <Code className="h-6 w-6 text-white" />
-                                                </motion.div>
-                                            </div>
-                                            <div className="sm:ml-8 text-center sm:text-left">
-                                                <Badge className="mb-2 bg-teal-500/20 text-teal-300 border-teal-400/30">2024 - Present</Badge>
-                                                <h3 className="text-2xl font-bold mb-2">Junior Web Application Developer</h3>
-                                                <h4 className="text-teal-400 mb-4 text-lg">KOSIGN (Cambodia) Investment Co., Ltd.</h4>
-                                                <p className="text-gray-300 mb-4 leading-relaxed">
-                                                    Currently working as a Junior Web Application Developer, focusing on building and maintaining
-                                                    web applications using Spring Boot and Next.js. Collaborating with cross-functional teams to
-                                                    deliver high-quality software solutions that meet business requirements and user needs.
-                                                </p>
-                                                <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        Spring Boot
-                                                    </Badge>
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        Next.js
-                                                    </Badge>
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        TypeScript
-                                                    </Badge>
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        PostgreSQL
-                                                    </Badge>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Internship */}
-                                    <div className="relative">
-                                        <div className="flex flex-col sm:flex-row">
-                                            <div className="relative mb-4 sm:mb-0">
-                                                <motion.div
-                                                    initial={{ scale: 0 }}
-                                                    animate={{ scale: 1 }}
-                                                    transition={{ duration: 0.5, delay: 0.3 }}
-                                                    className="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center z-10 relative mx-auto sm:mx-0 shadow-lg"
-                                                >
-                                                    <GraduationCap className="h-6 w-6 text-white" />
-                                                </motion.div>
-                                            </div>
-                                            <div className="sm:ml-8 text-center sm:text-left">
-                                                <Badge className="mb-2 bg-indigo-500/20 text-indigo-300 border-indigo-400/30">2024</Badge>
-                                                <h3 className="text-2xl font-bold mb-2">Internship Android Mobile Developer</h3>
-                                                <h4 className="text-indigo-400 mb-4 text-lg">KOSIGN (Cambodia) Investment Co., Ltd.</h4>
-                                                <p className="text-gray-300 mb-4 leading-relaxed">
-                                                    Completed an intensive internship as an Android Mobile Developer, gaining hands-on experience
-                                                    in developing mobile applications using Java. Worked on various projects, enhancing skills in
-                                                    mobile app development, user interface design, and collaborative software development
-                                                    practices.
-                                                </p>
-                                                <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        Android
-                                                    </Badge>
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        Java
-                                                    </Badge>
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        UI Design
-                                                    </Badge>
-                                                    <Badge variant="secondary" className="bg-gray-700 text-gray-200">
-                                                        Mobile Development
-                                                    </Badge>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-
-                    {/* Call to Action */}
+                    {/* CTA Section */}
                     <motion.div variants={itemVariants} className="text-center">
-                        <Card className="p-8 bg-gradient-to-r from-teal-500 to-indigo-500 text-white shadow-xl">
-                            <CardContent className="p-0">
-                                <h2 className="text-3xl font-bold mb-4">Let&#39;s Work Together</h2>
-                                <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                                    I&#39;m always excited to take on new challenges and collaborate on innovative projects.
-                                </p>
-                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <Button
-                                        size="lg"
-                                        className="bg-white text-teal-600 hover:bg-blue-50"
-                                        onClick={() => router.push("/contact")}
-                                    >
-                                        <Mail className="mr-2 h-5 w-5" />
-                                        Get in Touch
-                                    </Button>
-                                    <Button
-                                        size="lg"
-                                        variant="outline"
-                                        className="border-white text-white hover:bg-white hover:text-teal-600"
-                                        onClick={() => router.push("/projects")}
-                                    >
-                                        View My Work
-                                    </Button>
-                                </div>
-                            </CardContent>
-                        </Card>
+                        <h2 className="text-3xl font-bold mb-6">Ready to Work Together?</h2>
+                        <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                            Let&apos;s discuss your project and see how I can help bring your ideas to life.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Button
+                                onClick={() => router.push("/contact")}
+                                className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white px-8 py-3 text-lg"
+                            >
+                                Get In Touch
+                            </Button>
+                            <Button
+                                variant="outline"
+                                onClick={() => router.push("/projects")}
+                                className="border-2 border-teal-500 text-teal-600 dark:text-teal-400 hover:bg-teal-500 hover:text-white px-8 py-3 text-lg"
+                            >
+                                View My Work
+                            </Button>
+                        </div>
                     </motion.div>
                 </motion.div>
             </div>
-
-            <Footer />
-        </div>
+        </PageLayout>
     )
 }

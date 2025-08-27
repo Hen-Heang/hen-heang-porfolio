@@ -1,54 +1,17 @@
 "use client"
 
 import {motion} from "framer-motion"
-
 import {useRouter} from "next/navigation"
-import {Card} from "@/components/ui/card"
+import {Card} from "@/src/components/ui/card"
 import {Code, Mail, Github, Linkedin, Send} from "lucide-react"
-
-import {navItems} from "@/data/navigation"
-import {useThemeToggle} from "@/hooks/useThemeToggle"
-
-import {useState} from "react"
-import {ContactForm} from "@/components/contact/ContactForm";
-import {Header} from "@/components/header/Header";
-import {Footer} from "@/components/shared/Footer";
+import {PageLayout} from "@/components/layout/PageLayout"
+import {ContactForm} from "@/src/components/sections/contact/ContactForm";
 
 export default function ContactPage() {
     const router = useRouter()
-    const {darkMode, toggleTheme} = useThemeToggle()
-    const [activeSection] = useState("contact")
-
-    // Handle navigation
-    const handleNavigation = (sectionId: string) => {
-        if (sectionId === "contact") {
-            return true // Already on contact page
-        }
-        if (sectionId === "projects") {
-            router.push("/projects")
-            return true
-        }
-        if (sectionId === "about") {
-            router.push("/about")
-            return true
-        }
-        if (sectionId === "home" || sectionId === "education") {
-            router.push(`/#${sectionId}`)
-            return true
-        }
-        return false
-    }
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-[#0f172a] text-gray-900 dark:text-gray-100">
-            <Header
-                navItems={navItems}
-                activeSection={activeSection}
-                darkMode={darkMode}
-                toggleTheme={toggleTheme}
-                onNavItemClick={handleNavigation}
-            />
-
+        <PageLayout>
             <div className="container mx-auto px-4 py-20">
                 <motion.div
                     initial={{opacity: 0, y: 20}}
@@ -99,21 +62,15 @@ export default function ContactPage() {
                                            className="hover:text-teal-200 transition-colors duration-200 hover:underline flex items-center">Telegram</a>
                                     </div>
                                 </div>
-
-                                <div className="absolute bottom-8 left-8 right-8 opacity-10">
-                                    <Code size={180}/>
-                                </div>
                             </div>
 
                             <div className="md:col-span-3 p-8">
-                                <ContactForm/>
+                                <ContactForm />
                             </div>
                         </div>
                     </Card>
                 </motion.div>
             </div>
-
-            <Footer/>
-        </div>
+        </PageLayout>
     )
 }

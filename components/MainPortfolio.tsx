@@ -2,19 +2,20 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useActiveSection } from "@/hooks/useActiveSection"
-import { useThemeToggle } from "@/hooks/useThemeToggle"
+import { useActiveSection } from "@/src/lib/hooks/useActiveSection"
+import { useThemeToggle } from "@/src/lib/hooks/useThemeToggle"
 import { navItems } from "@/data/navigation"
-import { Header } from "./header/Header"
+import { Header } from "@/src/components/features/navigation/Header"
 
-import { AboutSection } from "./about/AboutSection"
-import { ProjectsSection } from "./projects/ProjectsSection"
-import { SkillsSection } from "./skills/SkillsSection"
-import { EducationSection } from "./education/EducationSection"
-import { ContactSection } from "./contact/ContactSection"
-import { Footer } from "./shared/Footer"
+import { AboutSection } from "@/src/components/sections/about/AboutSection"
+import { ProjectsSection } from "@/src/components/sections/projects/ProjectsSection"
+import { SkillsSection } from "@/src/components/sections/skills/SkillsSection"
+import { EducationSection } from "@/src/components/sections/education/EducationSection"
+import { AchievementsSection } from "@/src/components/sections/achievements/AchievementsSection"
+import { ContactSection } from "@/src/components/sections/contact/ContactSection"
+import { Footer } from "@/src/components/ui/Footer"
 import { useRouter } from "next/navigation"
-import HeroSection from "@/components/hero/HeroSection";
+import HeroSection from "@/src/components/sections/hero/HeroSection";
 
 export function MainPortfolio() {
     const activeSection = useActiveSection()
@@ -97,6 +98,7 @@ export function MainPortfolio() {
                 <ProjectsSection />
                 <SkillsSection />
                 <EducationSection />
+                <AchievementsSection />
                 <ContactSection />
             </motion.main>
 
