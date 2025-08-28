@@ -1,11 +1,6 @@
+import { redirect } from 'next/navigation'
+import { defaultLocale } from '@/src/lib/i18n/config'
 
-import {MainPortfolio} from "@/components/MainPortfolio";
-
-export default function Home() {
-  return (
-   <>
-       <MainPortfolio/>
-
-   </>
-  );
+export default async function RootPage() {
+  redirect(`/${defaultLocale}`)
 }

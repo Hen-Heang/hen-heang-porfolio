@@ -4,9 +4,12 @@ import { useState, useEffect } from "react"
 import { Menu, X, Sun, Moon, Download, Mail, Home, User, Briefcase, BarChart, GraduationCap, Trophy } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
+import { useLocale } from 'next-intl'
 import Image from "next/image"
 import type { NavItem } from "@/src/lib/types"
 import { personalInfo } from "@/data/personal-info"
+import { LanguageSwitcher } from "@/src/components/ui/LanguageSwitcher"
+import { useTranslations } from 'next-intl'
 
 interface HeaderProps {
     navItems: NavItem[]
@@ -21,6 +24,8 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
     const [scrolled, setScrolled] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
+    const locale = useLocale();
+    const t = useTranslations();
 
     // Handle scroll effect for navbar
     useEffect(() => {
@@ -59,8 +64,8 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
         }
 
         // If we're not on the home page, navigate to home with hash
-        if (pathname !== "/") {
-            router.push(`/#${sectionId}`);
+        if (!pathname.endsWith(`/${locale}`) && !pathname.endsWith(`/${locale}/`)) {
+            router.push(`/${locale}#${sectionId}`);
             return;
         }
 
@@ -169,7 +174,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                         >
                                             {getIcon(item.id)}
                                         </motion.span>
-                                        {item.label}
+                                        {item.labelKey ? t(item.labelKey) : item.label}
                                         {activeSection === item.id && (
                                             <motion.div
                                                 className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-400 to-indigo-500 rounded-full"
@@ -186,6 +191,9 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
 
                         {/* Enhanced Action Buttons */}
                         <div className="flex items-center gap-3">
+                            {/* Language Switcher */}
+                            <LanguageSwitcher />
+                            
                             {/* Download Resume Button */}
                             <motion.button
                                 whileHover={{ scale: 1.05, y: -2 }}
@@ -236,11 +244,11 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             className="flex items-center cursor-pointer group"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            onClick={() => router.push("/")}
+                            onClick={() => router.push(`/${locale}`)}
                             role="button"
                             tabIndex={0}
                             aria-label="Go to home page"
-                            onKeyDown={(e) => e.key === 'Enter' && router.push("/")}>
+                            onKeyDown={(e) => e.key === 'Enter' && router.push(`/${locale}`)}>
                             <div className="relative w-12 h-12 rounded-full overflow-hidden border-3 border-white/20 shadow-2xl group-hover:border-teal-400/50 transition-all duration-500 ring-2 ring-transparent group-hover:ring-teal-400/30">
                                 <Image
                                     src={personalInfo.profileImage}
@@ -329,7 +337,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                             >
                                                 {getIcon(item.id)}
                                             </motion.span>
-                                            {item.label}
+                                            {item.labelKey ? t(item.labelKey) : item.label}
                                         </motion.a>
                                     ))}
                                     

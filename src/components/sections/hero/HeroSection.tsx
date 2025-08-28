@@ -9,11 +9,20 @@ import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { personalInfo } from "@/data/personal-info"
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from "react"
 
 const HeroSection = () => {
+    const [mounted, setMounted] = useState(false)
     const pathname = usePathname()
     const router = useRouter()
-    const useAvatar = pathname !== "/"
+    const t = useTranslations()
+    
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+    
+    const useAvatar = mounted && pathname !== "/"
 
     // Animation variants
     const containerVariants = {
@@ -105,7 +114,6 @@ const HeroSection = () => {
                     style={{ animationDelay: "4s" }}
                 />
             </div>
-
             <div className="container mx-auto px-4 py-12 relative z-10">
                 <motion.div
                     className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center max-w-7xl mx-auto"
@@ -119,7 +127,7 @@ const HeroSection = () => {
                             <Badge className="mb-6 px-4 py-2 text-sm font-medium bg-gradient-to-r from-teal-500/10 to-indigo-500/10 text-teal-600 dark:text-teal-400 border border-teal-200/50 dark:border-teal-400/20 hover:from-teal-500/20 hover:to-indigo-500/20 transition-all duration-300">
                 <span className="relative flex items-center gap-2">
                   <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
-                  {personalInfo.title}
+                  {t('hero.title')}
                 </span>
                             </Badge>
                         </motion.div>
@@ -128,7 +136,7 @@ const HeroSection = () => {
                             variants={itemVariants}
                             className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
                         >
-                            <span className="block text-slate-900 dark:text-white">Hello, I&#39;m</span>
+                            <span className="block text-slate-900 dark:text-white">{t('hero.greeting')}</span>
                             <span className="block bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
                 {personalInfo.fullName}
               </span>
@@ -138,7 +146,7 @@ const HeroSection = () => {
                             variants={itemVariants}
                             className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
                         >
-                            {personalInfo.description}
+                            {t('hero.description')}
                         </motion.p>
 
                         <motion.div
@@ -148,18 +156,18 @@ const HeroSection = () => {
                             <Button
                                 size="lg"
                                 className="group bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                                onClick={() => router.push("/projects")}
+                                onClick={() => mounted && router.push("/projects")}
                             >
-                                View Projects
+                                {t('hero.viewProjects')}
                                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                             </Button>
                             <Button
                                 size="lg"
                                 variant="outline"
                                 className="group border-slate-300 dark:border-slate-600 hover:border-teal-500 dark:hover:border-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all duration-300"
-                                onClick={() => router.push("/about")}
+                                onClick={() => mounted && router.push("/about")}
                             >
-                                About Me
+                                {t('hero.aboutMe')}
                             </Button>
                             {/* <Button
                                 size="lg"
@@ -178,8 +186,8 @@ const HeroSection = () => {
                                         <MapPin className="h-4 w-4 text-teal-600 dark:text-teal-400" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Location</p>
-                                        <p className="text-xs text-slate-600 dark:text-slate-400">     {personalInfo.location}</p>
+                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{t('hero.location')}</p>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400">{t('hero.locationValue')}</p>
                                     </div>
                                 </div>
                             </Card>
@@ -189,8 +197,8 @@ const HeroSection = () => {
                                         <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Experience</p>
-                                        <p className="text-xs text-slate-600 dark:text-slate-400">{personalInfo.experience}</p>
+                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{t('hero.experience')}</p>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400">{t('hero.experienceValue')}</p>
                                     </div>
                                 </div>
                             </Card>

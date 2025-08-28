@@ -1,20 +1,34 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { Badge } from "@/src/components/ui/badge"
-import { Trophy, Award, GraduationCap, Calendar, Building } from "lucide-react"
-import { groupedAchievements, type AchievementGroup } from "@/data/achievements"
+import { Trophy, Award, GraduationCap, Calendar, Building, X, Eye, ExternalLink } from "lucide-react"
+import { groupedAchievements, type Achievement } from "@/data/achievements"
+import { useTranslations } from 'next-intl'
+import Image from "next/image"
 
 export function AchievementsSection() {
+    const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
+    const t = useTranslations()
+
+    const openModal = (achievement: Achievement) => {
+        setSelectedAchievement(achievement)
+    }
+
+    const closeModal = () => {
+        setSelectedAchievement(null)
+    }
+
     return (
         <section id="achievements" className="py-20 bg-white dark:bg-gray-900">
             <div className="container mx-auto px-4">
                 <SectionHeader
-                    badge="Achievements"
-                    title="Achievements & Certificates"
-                    description="My academic and professional accomplishments"
+                    badge={t('achievements.badge')}
+                    title={t('achievements.title')}
+                    description={t('achievements.description')}
                 />
 
                 <motion.div
@@ -72,12 +86,12 @@ export function AchievementsSection() {
                                                         )}
                                                     </div>
                                                     <Badge variant="secondary" className="text-xs">
-                                                        {achievement.type}
+                                                        {t(`common.${achievement.type}`)}
                                                     </Badge>
                                                 </div>
 
                                                 <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-                                                    {achievement.title}
+                                                    {t(achievement.titleKey)}
                                                 </h3>
 
                                                 <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-4">
@@ -85,35 +99,51 @@ export function AchievementsSection() {
                                                     {achievement.date}
                                                 </div>
 
-                                                {achievement.description && (
+                                                {achievement.descriptionKey && (
                                                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                                                        {achievement.description}
+                                                        {t(achievement.descriptionKey)}
                                                     </p>
                                                 )}
 
                                                 {achievement.image && (
                                                     <div className="relative overflow-hidden rounded-lg mb-4">
-                                                        <img
+                                                        <Image
                                                             src={achievement.image}
-                                                            alt={achievement.title}
-                                                            className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300"
+                                                            alt={t(achievement.titleKey)}
+                                                            width={400}
+                                                            height={128}
+                                                            className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                                                            onClick={() => openModal(achievement)}
                                                         />
+                                                        <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                                            <Eye className="w-6 h-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                                                        </div>
                                                     </div>
                                                 )}
 
-                                                {achievement.link && (
-                                                    <a
-                                                        href={achievement.link}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="inline-flex items-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
-                                                    >
-                                                        View Certificate
-                                                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                        </svg>
-                                                    </a>
-                                                )}
+                                                <div className="flex items-center justify-between">
+                                                    {achievement.link && (
+                                                        <a
+                                                            href={achievement.link}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="inline-flex items-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
+                                                        >
+                                                            {t('common.viewCertificate')}
+                                                            <ExternalLink className="w-4 h-4 ml-1" />
+                                                        </a>
+                                                    )}
+                                                    
+                                                    {achievement.image && (
+                                                        <button
+                                                            onClick={() => openModal(achievement)}
+                                                            className="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                                                        >
+                                                            {t('common.viewDetails')}
+                                                            <Eye className="w-4 h-4 ml-1" />
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </CardContent>
                                         </Card>
                                     </motion.div>
@@ -123,6 +153,104 @@ export function AchievementsSection() {
                     ))}
                 </motion.div>
             </div>
+
+            {/* Modal for viewing certificate details */}
+            <AnimatePresence>
+                {selectedAchievement && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+                        onClick={closeModal}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="bg-white dark:bg-gray-800 rounded-lg max-w-6xl w-full max-h-[95vh] overflow-y-auto"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="flex items-center space-x-3">
+                                        {selectedAchievement.type === 'certificate' && (
+                                            <Award className="w-8 h-8 text-teal-500" />
+                                        )}
+                                        {selectedAchievement.type === 'graduation' && (
+                                            <GraduationCap className="w-8 h-8 text-blue-500" />
+                                        )}
+                                        {selectedAchievement.type === 'award' && (
+                                            <Trophy className="w-8 h-8 text-yellow-500" />
+                                        )}
+                                        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                                            {t(selectedAchievement.titleKey)}
+                                        </h2>
+                                    </div>
+                                    <button
+                                        onClick={closeModal}
+                                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+                                    >
+                                        <X className="w-6 h-6 text-gray-500" />
+                                    </button>
+                                </div>
+
+                                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                                    <div>
+                                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+                                            <Building className="w-4 h-4 mr-2" />
+                                            <span className="font-medium">{t('common.issuer')}:</span>
+                                            <span className="ml-2">{selectedAchievement.issuer}</span>
+                                        </div>
+                                        
+                                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+                                            <Calendar className="w-4 h-4 mr-2" />
+                                            <span className="font-medium">{t('common.date')}:</span>
+                                            <span className="ml-2">{selectedAchievement.date}</span>
+                                        </div>
+
+                                        <Badge variant="secondary" className="mb-4">
+                                            {t(`common.${selectedAchievement.type}`)}
+                                        </Badge>
+
+                                        {selectedAchievement.descriptionKey && (
+                                            <p className="text-gray-600 dark:text-gray-400 mb-4">
+                                                {t(selectedAchievement.descriptionKey)}
+                                            </p>
+                                        )}
+
+                                        {selectedAchievement.link && (
+                                            <a
+                                                href={selectedAchievement.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
+                                            >
+                                                {t('common.viewCertificateOnline')}
+                                                <ExternalLink className="w-4 h-4 ml-1" />
+                                            </a>
+                                        )}
+                                    </div>
+
+                                    {selectedAchievement.image && (
+                                        <div className="flex items-center justify-center">
+                                            <div className="relative w-full">
+                                                                                                                                                 <Image
+                                                    src={selectedAchievement.image}
+                                                    alt={t(selectedAchievement.titleKey)}
+                                                    width={800}
+                                                    height={600}
+                                                    className="w-full h-auto max-h-[70vh] object-contain rounded-lg shadow-lg"
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     )
 }

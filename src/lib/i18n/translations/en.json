@@ -1,0 +1,72 @@
+{
+  "common": {
+    "view": "View",
+    "close": "Close",
+    "details": "Details",
+    "online": "Online",
+    "certificate": "Certificate",
+    "graduation": "Graduation",
+    "award": "Award",
+    "issuer": "Issuer",
+    "date": "Date",
+    "viewCertificate": "View Certificate",
+    "viewDetails": "View Details",
+    "viewCertificateOnline": "View Certificate Online"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "achievements": "Achievements",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "achievements": {
+    "title": "Achievements & Certificates",
+    "badge": "Achievements",
+    "description": "My academic and professional accomplishments",
+    "bachelorsDegree": "Bachelor's Degree in Computer Science",
+    "bachelorsDescription": "Graduated with honors in Computer Science with focus on web development and software engineering.",
+    "kshrdBasic": "KSHRD Basic Course Certificate",
+    "kshrdBasicDescription": "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge.",
+    "kshrdAdvanced": "KSHRD Advanced Course Certificate",
+    "kshrdAdvancedDescription": "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise."
+  },
+  "hero": {
+    "title": "Web Application Developer",
+    "greeting": "Hello, I'm",
+    "description": "I'm a web application developer specializing in full-stack development with Spring Boot and Next.js. I have experience building modern, responsive applications with TypeScript, PostgreSQL, and TanStack Query.",
+    "viewProjects": "View Projects",
+    "aboutMe": "About Me",
+    "location": "Location",
+    "experience": "Experience",
+    "locationValue": "Phnom Penh, Cambodia",
+    "experienceValue": "1 year and 5 months"
+  },
+  "about": {
+    "title": "About Me",
+    "badge": "About",
+    "description": "Learn more about my background and experience"
+  },
+  "projects": {
+    "title": "Projects",
+    "badge": "Portfolio",
+    "description": "Showcase of my recent work and projects"
+  },
+  "skills": {
+    "title": "Skills & Technologies",
+    "badge": "Skills",
+    "description": "Technologies and tools I work with"
+  },
+  "education": {
+    "title": "Education",
+    "badge": "Education",
+    "description": "My academic background and qualifications"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "badge": "Contact",
+    "description": "Let's discuss your next project"
+  }
+}

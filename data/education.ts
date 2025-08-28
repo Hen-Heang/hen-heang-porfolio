@@ -1,5 +1,5 @@
 
-import type { EducationItem } from "@/types"
+import type { EducationItem } from "@/src/lib/types"
 
 export const education: EducationItem[] = [
     {

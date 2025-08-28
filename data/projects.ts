@@ -39,7 +39,7 @@ export const projects: Project[] = [
     {
         title: "EasyCart - Mobile E-commerce Platform",
         description: "A modern mobile e-commerce application with product discovery, personalized recommendations, and seamless shopping experience. Features grid/list views, save functionality, and real-time notifications.",
-        technologies: [ "TypeScript", "Node.js", "MongoDB", "Firebase", "Redux Toolkit", "Stripe API"],
+        technologies: [ "TypeScript"],
         image: "/image/easycart.svg",
         github: "https://github.com/Hen-Heang/easycart",
         demo: "#",
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     {
         title: "Warehouse Master - B2B E-commerce Platform",
         description: "A comprehensive B2B e-commerce platform connecting quality products with trusted distributors and retailers. Features order tracking, export reports, product alerts, and large volume purchasing capabilities.",
-        technologies: ["Next.js", "TypeScript", "Spring Boot", "PostgreSQL", "Redis", "AWS S3", "Chart.js", "JWT"],
+        technologies: ["Next.js", "TypeScript", "Spring Boot", "PostgreSQL", "Chart.js", "JWT"],
         image: "/image/warehouse-master.svg",
         github: "https://github.com/Hen-Heang/warehouse-master",
         demo: "#",

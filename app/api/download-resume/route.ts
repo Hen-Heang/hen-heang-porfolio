@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     try {
         // Path to the resume file
         const filePath = join(process.cwd(), 'public', 'Hen_Heang_Personal Application Form_KO_EN.pdf')

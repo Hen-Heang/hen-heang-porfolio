@@ -3,7 +3,8 @@ import type { ReactNode } from "react"
 
 export interface NavItem {
     id: string
-    label: string
+    label?: string
+    labelKey?: string
     icon: ReactNode
 }
 

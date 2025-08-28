@@ -1,5 +1,5 @@
 
-import type { SkillCategory } from "@/types"
+import type { SkillCategory } from "@/src/lib/types"
 export const skills: SkillCategory[] = [
 
     {
@@ -20,20 +20,16 @@ export const skills: SkillCategory[] = [
         items: [
             { name: "Java", level: 3, experience: "2.5 year" },
             { name: "Spring Boot", level: 3, experience: "2 year" },
-            // { name: "Spring Data", level: 3, experience: "1 year" },
-            // { name: "RESTful APIs", level: 3, experience: "1.5 years" },
             { name: "PostgreSQL", level: 3, experience: "2 year" },
         ]
     },
     {
         category: "Tools",
         items: [
-            // { name: "Git", level: 4, experience: "1.5 years" },
+             { name: "Git", level: 4, experience: "1.5 years" },
             { name: "IntelliJ IDEA", level: 3, experience: "1 year" },
             { name: "WebStorm", level: 4, experience: "1.5 years" },
-            // { name: "Docker", level: 2, experience: "6 months" },
-            { name: "GitHub", level: 4, experience: "1.5 years" },
-            // { name: "Data Grid", level: 3, experience: "8 months" }
+            { name: "GitHub", level: 4, experience: "1.5 years" }
         ]
-    },
+    }
 ]

@@ -15,12 +15,14 @@ import { AchievementsSection } from "@/src/components/sections/achievements/Achi
 import { ContactSection } from "@/src/components/sections/contact/ContactSection"
 import { Footer } from "@/src/components/ui/Footer"
 import { useRouter } from "next/navigation"
+import { useLocale } from 'next-intl'
 import HeroSection from "@/src/components/sections/hero/HeroSection";
 
 export function MainPortfolio() {
     const activeSection = useActiveSection()
     const { darkMode, toggleTheme } = useThemeToggle()
     const router = useRouter()
+    const locale = useLocale()
     const [isLoading, setIsLoading] = useState(true)
 
     // Simulate loading for animation
@@ -35,15 +37,15 @@ export function MainPortfolio() {
     // Handle navigation to separate pages
     const handleNavigation = (sectionId: string) => {
         if (sectionId === "projects") {
-            router.push("/projects")
+            router.push(`/${locale}/projects`)
             return true
         }
         if (sectionId === "about") {
-            router.push("/about")
+            router.push(`/${locale}/about`)
             return true
         }
         if (sectionId === "contact") {
-            router.push("/contact")
+            router.push(`/${locale}/contact`)
             return true
         }
         return false

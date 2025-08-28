@@ -4,10 +4,10 @@ import { Code, User, Briefcase, GraduationCap, BarChart, Trophy } from 'lucide-r
 import type { NavItem } from "@/src/lib/types"
 
 export const navItems: NavItem[] = [
-    { id: "home", label: "Home", icon: <Code size={18} /> },
-    { id: "about", label: "About Me", icon: <User size={18} /> },
-    { id: "projects", label: "Projects", icon: <Briefcase size={18} /> },
-    { id: "skills", label: "Skills", icon: <BarChart size={18} /> },
-    { id: "education", label: "Education", icon: <GraduationCap size={18} /> },
-    { id: "achievements", label: "Achievements", icon: <Trophy size={18} /> },
+    { id: "home", labelKey: "navigation.home", icon: <Code size={18} /> },
+    { id: "about", labelKey: "navigation.about", icon: <User size={18} /> },
+    { id: "projects", labelKey: "navigation.projects", icon: <Briefcase size={18} /> },
+    { id: "skills", labelKey: "navigation.skills", icon: <BarChart size={18} /> },
+    { id: "education", labelKey: "navigation.education", icon: <GraduationCap size={18} /> },
+    { id: "achievements", labelKey: "navigation.achievements", icon: <Trophy size={18} /> },
 ]
