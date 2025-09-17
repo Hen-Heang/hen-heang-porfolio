@@ -1,0 +1,20 @@
+import { NextResponse } from 'next/server'
+
+export function middleware(request) {
+  console.log('Middleware running for:', request.nextUrl.pathname)
+  
+  // If accessing root, redirect to /en
+  if (request.nextUrl.pathname === '/') {
+    return NextResponse.redirect(new URL('/en', request.url))
+  }
+  
+  // Allow all other requests to pass through
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: [
+    // Disable middleware temporarily for testing
+    '/((?!.*).*)'
+  ]
+}

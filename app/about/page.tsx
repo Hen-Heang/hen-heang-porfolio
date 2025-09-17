@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
-// Removed next-intl import - using static locale for now
 import { skills } from "@/data/skills"
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { StatsCard } from "@/src/components/sections/about/StatsCard"
@@ -28,7 +27,6 @@ import type { SkillItem } from "@/src/lib/types"
 
 export default function AboutPage() {
     const router = useRouter()
-    const locale = 'en' // Static locale for now
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -199,7 +197,7 @@ export default function AboutPage() {
                                 color="text-indigo-500 dark:text-indigo-400"
                             />
                             <StatsCard
-                                value="Bachelor&apos;s"
+                                value="Bachelor's"
                                 label="Education"
                                 color="text-blue-500 dark:text-blue-400"
                             />
@@ -284,18 +282,18 @@ export default function AboutPage() {
                     <motion.div variants={itemVariants} className="text-center">
                         <h2 className="text-3xl font-bold mb-6">Ready to Work Together?</h2>
                         <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                            Let&apos;s discuss your project and see how I can help bring your ideas to life.
+                            Let's discuss your project and see how I can help bring your ideas to life.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button
-                                onClick={() => router.push(`/${locale}/contact`)}
+                                onClick={() => router.push("/contact")}
                                 className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white px-8 py-3 text-lg"
                             >
                                 Get In Touch
                             </Button>
                             <Button
                                 variant="outline"
-                                onClick={() => router.push(`/${locale}/projects`)}
+                                onClick={() => router.push("/projects")}
                                 className="border-2 border-teal-500 text-teal-600 dark:text-teal-400 hover:bg-teal-500 hover:text-white px-8 py-3 text-lg"
                             >
                                 View My Work

@@ -7,12 +7,10 @@ import { Card, CardContent } from "@/src/components/ui/card"
 import { Badge } from "@/src/components/ui/badge"
 import { Trophy, Award, GraduationCap, Calendar, Building, X, Eye, ExternalLink } from "lucide-react"
 import { groupedAchievements, type Achievement } from "@/data/achievements"
-import { useTranslations } from 'next-intl'
 import Image from "next/image"
 
 export function AchievementsSection() {
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
-    const t = useTranslations()
 
     const openModal = (achievement: Achievement) => {
         setSelectedAchievement(achievement)
@@ -26,9 +24,9 @@ export function AchievementsSection() {
         <section id="achievements" className="py-20 bg-white dark:bg-gray-900">
             <div className="container mx-auto px-4">
                 <SectionHeader
-                    badge={t('achievements.badge')}
-                    title={t('achievements.title')}
-                    description={t('achievements.description')}
+                    badge="Achievements"
+                    title="Achievements & Certificates"
+                    description="My academic and professional accomplishments"
                 />
 
                 <motion.div
@@ -86,12 +84,17 @@ export function AchievementsSection() {
                                                         )}
                                                     </div>
                                                     <Badge variant="secondary" className="text-xs">
-                                                        {t(`common.${achievement.type}`)}
+                                                        {achievement.type === 'certificate' ? 'Certificate' : 
+                                                         achievement.type === 'graduation' ? 'Graduation' : 
+                                                         achievement.type === 'award' ? 'Award' : achievement.type}
                                                     </Badge>
                                                 </div>
 
                                                 <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-                                                    {t(achievement.titleKey)}
+                                                    {achievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
+                                                     achievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
+                                                     achievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
+                                                     achievement.titleKey}
                                                 </h3>
 
                                                 <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-4">
@@ -101,7 +104,10 @@ export function AchievementsSection() {
 
                                                 {achievement.descriptionKey && (
                                                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                                                        {t(achievement.descriptionKey)}
+                                                        {achievement.descriptionKey === 'achievements.bachelorsDescription' ? "Graduated with honors in Computer Science with focus on web development and software engineering." :
+                                                         achievement.descriptionKey === 'achievements.kshrdBasicDescription' ? "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge." :
+                                                         achievement.descriptionKey === 'achievements.kshrdAdvancedDescription' ? "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise." :
+                                                         achievement.descriptionKey}
                                                     </p>
                                                 )}
 
@@ -109,7 +115,10 @@ export function AchievementsSection() {
                                                     <div className="relative overflow-hidden rounded-lg mb-4">
                                                         <Image
                                                             src={achievement.image}
-                                                            alt={t(achievement.titleKey)}
+                                                            alt={achievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
+                                                                 achievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
+                                                                 achievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
+                                                                 achievement.titleKey}
                                                             width={400}
                                                             height={128}
                                                             className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
@@ -129,7 +138,7 @@ export function AchievementsSection() {
                                                             rel="noopener noreferrer"
                                                             className="inline-flex items-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
                                                         >
-                                                            {t('common.viewCertificate')}
+                                                            View Certificate
                                                             <ExternalLink className="w-4 h-4 ml-1" />
                                                         </a>
                                                     )}
@@ -139,7 +148,7 @@ export function AchievementsSection() {
                                                             onClick={() => openModal(achievement)}
                                                             className="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                                                         >
-                                                            {t('common.viewDetails')}
+                                                            View Details
                                                             <Eye className="w-4 h-4 ml-1" />
                                                         </button>
                                                     )}
@@ -184,7 +193,10 @@ export function AchievementsSection() {
                                             <Trophy className="w-8 h-8 text-yellow-500" />
                                         )}
                                         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                                            {t(selectedAchievement.titleKey)}
+                                            {selectedAchievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
+                                             selectedAchievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
+                                             selectedAchievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
+                                             selectedAchievement.titleKey}
                                         </h2>
                                     </div>
                                     <button
@@ -199,23 +211,28 @@ export function AchievementsSection() {
                                     <div>
                                         <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                                             <Building className="w-4 h-4 mr-2" />
-                                            <span className="font-medium">{t('common.issuer')}:</span>
+                                            <span className="font-medium">Issuer:</span>
                                             <span className="ml-2">{selectedAchievement.issuer}</span>
                                         </div>
                                         
                                         <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                                             <Calendar className="w-4 h-4 mr-2" />
-                                            <span className="font-medium">{t('common.date')}:</span>
+                                            <span className="font-medium">Date:</span>
                                             <span className="ml-2">{selectedAchievement.date}</span>
                                         </div>
 
                                         <Badge variant="secondary" className="mb-4">
-                                            {t(`common.${selectedAchievement.type}`)}
+                                            {selectedAchievement.type === 'certificate' ? 'Certificate' : 
+                                             selectedAchievement.type === 'graduation' ? 'Graduation' : 
+                                             selectedAchievement.type === 'award' ? 'Award' : selectedAchievement.type}
                                         </Badge>
 
                                         {selectedAchievement.descriptionKey && (
                                             <p className="text-gray-600 dark:text-gray-400 mb-4">
-                                                {t(selectedAchievement.descriptionKey)}
+                                                {selectedAchievement.descriptionKey === 'achievements.bachelorsDescription' ? "Graduated with honors in Computer Science with focus on web development and software engineering." :
+                                                 selectedAchievement.descriptionKey === 'achievements.kshrdBasicDescription' ? "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge." :
+                                                 selectedAchievement.descriptionKey === 'achievements.kshrdAdvancedDescription' ? "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise." :
+                                                 selectedAchievement.descriptionKey}
                                             </p>
                                         )}
 
@@ -226,7 +243,7 @@ export function AchievementsSection() {
                                                 rel="noopener noreferrer"
                                                 className="inline-flex items-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
                                             >
-                                                {t('common.viewCertificateOnline')}
+                                                View Certificate Online
                                                 <ExternalLink className="w-4 h-4 ml-1" />
                                             </a>
                                         )}
@@ -237,7 +254,10 @@ export function AchievementsSection() {
                                             <div className="relative w-full">
                                                                                                                                                  <Image
                                                     src={selectedAchievement.image}
-                                                    alt={t(selectedAchievement.titleKey)}
+                                                    alt={selectedAchievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
+                                                           selectedAchievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
+                                                           selectedAchievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
+                                                           selectedAchievement.titleKey}
                                                     width={800}
                                                     height={600}
                                                     className="w-full h-auto max-h-[70vh] object-contain rounded-lg shadow-lg"

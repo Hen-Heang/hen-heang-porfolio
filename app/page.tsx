@@ -1,6 +1,11 @@
-import { redirect } from 'next/navigation'
-import { defaultLocale } from '@/src/lib/i18n/config'
+"use client"
 
-export default async function RootPage() {
-  redirect(`/${defaultLocale}`)
+import { MainPortfolio } from "@/src/components/MainPortfolio"
+
+export default function HomePage() {
+  return (
+    <main className="min-h-screen">
+      <MainPortfolio />
+    </main>
+  )
 }

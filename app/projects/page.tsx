@@ -5,7 +5,6 @@ import { motion } from "framer-motion"
 import { projects } from "@/data/projects"
 import { Button } from "@/src/components/ui/button"
 import { useRouter } from "next/navigation"
-// Removed next-intl import - using static locale for now
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { ProjectCard } from "@/src/components/sections/projects/ProjectCard"
 
@@ -14,7 +13,6 @@ const allTechnologies = Array.from(new Set(projects.flatMap((project) => project
 
 export default function ProjectsPage() {
     const router = useRouter()
-    const locale = 'en' // Static locale for now
     const [filter, setFilter] = useState("All")
 
     const filteredProjects =
@@ -54,7 +52,7 @@ export default function ProjectsPage() {
                                 index={index}
                                 onClick={() => {
                                     const slug = project.title.toLowerCase().replace(/\s+/g, "-")
-                                    router.push(`/${locale}/projects/${slug}`)
+                                    router.push(`/projects/${slug}`)
                                 }}
                             />
                         ))}

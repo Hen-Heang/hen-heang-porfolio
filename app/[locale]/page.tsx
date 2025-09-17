@@ -1,6 +1,6 @@
 "use client"
 
-import { MainPortfolio } from "@/components/MainPortfolio"
+import { MainPortfolio } from "@/src/components/MainPortfolio"
 
 export default function HomePage() {
   return (

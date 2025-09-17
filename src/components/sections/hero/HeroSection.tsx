@@ -1,6 +1,6 @@
 "use client"
-import { motion } from "framer-motion"
-import { ArrowRight, Mail, MapPin, Calendar } from "lucide-react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { ArrowRight, Mail, MapPin, Calendar, Sparkles, Code, Database, Globe } from "lucide-react"
 import { Badge } from "@/src/components/ui/badge"
 import { Button } from "@/src/components/ui/button"
 import { Card } from "@/src/components/ui/card"
@@ -9,64 +9,79 @@ import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { personalInfo } from "@/data/personal-info"
-import { useTranslations } from 'next-intl'
 import { useEffect, useState } from "react"
 
 const HeroSection = () => {
     const [mounted, setMounted] = useState(false)
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
     const pathname = usePathname()
     const router = useRouter()
-    const t = useTranslations()
+    const { scrollY } = useScroll()
     
     useEffect(() => {
         setMounted(true)
     }, [])
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({ x: e.clientX, y: e.clientY })
+        }
+        window.addEventListener('mousemove', handleMouseMove)
+        return () => window.removeEventListener('mousemove', handleMouseMove)
+    }, [])
     
     const useAvatar = mounted && pathname !== "/"
+    
+    // Parallax effects
+    const y1 = useTransform(scrollY, [0, 500], [0, -50])
+    const y2 = useTransform(scrollY, [0, 500], [0, -100])
 
-    // Animation variants
+    // Enhanced Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2,
+                staggerChildren: 0.15,
+                delayChildren: 0.3,
             },
         },
     }
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 50, scale: 0.9 },
         visible: {
             opacity: 1,
             y: 0,
+            scale: 1,
             transition: {
-                duration: 0.6,
-                ease: "easeOut",
+                duration: 0.8,
+                ease: [0.25, 0.46, 0.45, 0.94],
             },
         },
     }
 
     const imageVariants = {
-        hidden: { opacity: 0, scale: 0.8, rotate: -10 },
+        hidden: { opacity: 0, scale: 0.5, rotate: -20, y: 100 },
         visible: {
             opacity: 1,
             scale: 1,
             rotate: 0,
+            y: 0,
             transition: {
-                duration: 0.8,
-                ease: "easeOut",
-                delay: 0.3,
+                duration: 1.2,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.5,
             },
         },
     }
 
     const floatingVariants = {
         animate: {
-            y: [-10, 10, -10],
+            y: [-15, 15, -15],
+            rotate: [0, 5, -5, 0],
             transition: {
-                duration: 6,
+                duration: 8,
                 repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
             },
@@ -75,10 +90,39 @@ const HeroSection = () => {
 
     const pulseVariants = {
         animate: {
-            scale: [1, 1.05, 1],
-            opacity: [0.5, 0.8, 0.5],
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
             transition: {
-                duration: 4,
+                duration: 6,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+            },
+        },
+    }
+
+    const techIconVariants = {
+        hidden: { opacity: 0, scale: 0, rotate: -180 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            transition: {
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+            },
+        },
+    }
+
+    const textGlowVariants = {
+        animate: {
+            textShadow: [
+                "0 0 20px rgba(20, 184, 166, 0.3)",
+                "0 0 30px rgba(20, 184, 166, 0.6)",
+                "0 0 20px rgba(20, 184, 166, 0.3)"
+            ],
+            transition: {
+                duration: 3,
                 repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
             },
@@ -94,18 +138,20 @@ const HeroSection = () => {
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
             aria-label="Hero section"
         >
-            {/* Background Elements */}
+            {/* Enhanced Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {/* Animated gradient orbs */}
                 <motion.div
                     className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-blue-400/20 rounded-full blur-xl"
                     variants={pulseVariants}
                     animate="animate"
+                    style={{ y: y1 }}
                 />
                 <motion.div
                     className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl"
                     variants={pulseVariants}
                     animate="animate"
-                    style={{ animationDelay: "2s" }}
+                    style={{ y: y2, animationDelay: "2s" }}
                 />
                 <motion.div
                     className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-xl"
@@ -113,6 +159,51 @@ const HeroSection = () => {
                     animate="animate"
                     style={{ animationDelay: "4s" }}
                 />
+                
+                {/* Mouse-following cursor effect */}
+                <motion.div
+                    className="absolute w-96 h-96 bg-gradient-to-r from-teal-500/10 to-indigo-500/10 rounded-full blur-3xl pointer-events-none"
+                    animate={{
+                        x: mousePosition.x - 192,
+                        y: mousePosition.y - 192,
+                    }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 50,
+                        damping: 15,
+                    }}
+                />
+                
+                {/* Floating tech icons */}
+                <motion.div
+                    className="absolute top-32 right-32 w-16 h-16 bg-white/10 dark:bg-slate-800/20 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                    variants={techIconVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 1 }}
+                >
+                    <Code className="w-8 h-8 text-teal-500" />
+                </motion.div>
+                
+                <motion.div
+                    className="absolute bottom-32 left-32 w-16 h-16 bg-white/10 dark:bg-slate-800/20 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                    variants={techIconVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 1.5 }}
+                >
+                    <Database className="w-8 h-8 text-blue-500" />
+                </motion.div>
+                
+                <motion.div
+                    className="absolute top-1/3 right-1/4 w-16 h-16 bg-white/10 dark:bg-slate-800/20 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                    variants={techIconVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 2 }}
+                >
+                    <Globe className="w-8 h-8 text-indigo-500" />
+                </motion.div>
             </div>
             <div className="container mx-auto px-4 py-12 relative z-10">
                 <motion.div
@@ -121,98 +212,183 @@ const HeroSection = () => {
                     initial="hidden"
                     animate="visible"
                 >
-                    {/* Content Section */}
+                    {/* Enhanced Content Section */}
                     <motion.div className="order-2 lg:order-1 text-center lg:text-left" variants={itemVariants}>
                         <motion.div variants={itemVariants}>
-                            <Badge className="mb-6 px-4 py-2 text-sm font-medium bg-gradient-to-r from-teal-500/10 to-indigo-500/10 text-teal-600 dark:text-teal-400 border border-teal-200/50 dark:border-teal-400/20 hover:from-teal-500/20 hover:to-indigo-500/20 transition-all duration-300">
-                <span className="relative flex items-center gap-2">
-                  <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
-                  {t('hero.title')}
-                </span>
-                            </Badge>
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <Badge className="mb-6 px-6 py-3 text-sm font-medium bg-gradient-to-r from-teal-500/10 to-indigo-500/10 text-teal-600 dark:text-teal-400 border border-teal-200/50 dark:border-teal-400/20 hover:from-teal-500/20 hover:to-indigo-500/20 transition-all duration-300 backdrop-blur-sm shadow-lg">
+                                    <span className="relative flex items-center gap-3">
+                                        <motion.span 
+                                            className="w-2 h-2 bg-teal-500 rounded-full"
+                                            animate={{ 
+                                                scale: [1, 1.5, 1],
+                                                opacity: [0.5, 1, 0.5]
+                                            }}
+                                            transition={{ 
+                                                duration: 2, 
+                                                repeat: Number.POSITIVE_INFINITY 
+                                            }}
+                                        />
+                                        <Sparkles className="w-4 h-4 text-teal-500" />
+                                        Web Application Developer
+                                    </span>
+                                </Badge>
+                            </motion.div>
                         </motion.div>
 
                         <motion.h1
                             variants={itemVariants}
                             className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
                         >
-                            <span className="block text-slate-900 dark:text-white">{t('hero.greeting')}</span>
-                            <span className="block bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
-                {personalInfo.fullName}
-              </span>
+                            <motion.span 
+                                className="block text-slate-900 dark:text-white"
+                                variants={textGlowVariants}
+                                animate="animate"
+                            >
+                                Hello, I&apos;m
+                            </motion.span>
+                            <motion.span 
+                                className="block bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 bg-clip-text text-transparent"
+                                whileHover={{ 
+                                    backgroundPosition: "200% center",
+                                    transition: { duration: 0.5 }
+                                }}
+                                style={{
+                                    backgroundSize: "200% 200%",
+                                    backgroundImage: "linear-gradient(45deg, #14b8a6, #3b82f6, #6366f1, #8b5cf6, #14b8a6)",
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                }}
+                            >
+                                {personalInfo.fullName}
+                            </motion.span>
                         </motion.h1>
 
                         <motion.p
                             variants={itemVariants}
                             className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
                         >
-                            {t('hero.description')}
+                            I&apos;m a web application developer specializing in full-stack development with Spring Boot and Next.js. I have experience building modern, responsive applications with TypeScript, PostgreSQL, and TanStack Query.
                         </motion.p>
 
                         <motion.div
                             variants={itemVariants}
                             className="flex flex-col sm:flex-row gap-4 mb-8 justify-center lg:justify-start"
                         >
-                            <Button
-                                size="lg"
-                                className="group bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                                onClick={() => mounted && router.push("/projects")}
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                {t('hero.viewProjects')}
-                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                            </Button>
-                            <Button
-                                size="lg"
-                                variant="outline"
-                                className="group border-slate-300 dark:border-slate-600 hover:border-teal-500 dark:hover:border-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all duration-300"
-                                onClick={() => mounted && router.push("/about")}
+                                <Button
+                                    size="lg"
+                                    className="group bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden"
+                                    onClick={() => mounted && router.push("/projects")}
+                                >
+                                    <motion.div
+                                        className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
+                                        initial={{ x: "-100%" }}
+                                        whileHover={{ x: "100%" }}
+                                        transition={{ duration: 0.6 }}
+                                    />
+                                    <span className="relative z-10 flex items-center">
+                                        View Projects
+                                        <motion.div
+                                            whileHover={{ x: 5 }}
+                                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                        >
+                                            <ArrowRight className="ml-2 h-4 w-4" />
+                                        </motion.div>
+                                    </span>
+                                </Button>
+                            </motion.div>
+                            
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                {t('hero.aboutMe')}
-                            </Button>
-                            {/* <Button
-                                size="lg"
-                                variant="outline"
-                                className="group border-slate-300 dark:border-slate-600 hover:border-indigo-500 dark:hover:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/20 transition-all duration-300">
-                                <Download className="mr-2 h-4 w-4 group-hover:translate-y-1 transition-transform duration-300" />
-                                Resume
-                            </Button> */}
+                                <Button
+                                    size="lg"
+                                    variant="outline"
+                                    className="group border-slate-300 dark:border-slate-600 hover:border-teal-500 dark:hover:border-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all duration-300 backdrop-blur-sm"
+                                    onClick={() => mounted && router.push("/about")}
+                                >
+                                    <motion.span
+                                        whileHover={{ scale: 1.1 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                    >
+                                        About Me
+                                    </motion.span>
+                                </Button>
+                            </motion.div>
                         </motion.div>
 
-                        {/* Quick Info Cards */}
+                        {/* Enhanced Quick Info Cards */}
                         <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                            <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300">
-                                <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-teal-100 dark:bg-teal-900/30 rounded-lg">
-                                        <MapPin className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -5 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:shadow-lg group">
+                                    <div className="flex items-center gap-3">
+                                        <motion.div 
+                                            className="p-2 bg-teal-100 dark:bg-teal-900/30 rounded-lg group-hover:bg-teal-200 dark:group-hover:bg-teal-900/50 transition-colors"
+                                            whileHover={{ rotate: 360 }}
+                                            transition={{ duration: 0.5 }}
+                                        >
+                                            <MapPin className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                                        </motion.div>
+                                        <div>
+                                            <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Location</p>
+                                            <p className="text-xs text-slate-600 dark:text-slate-400">Phnom Penh, Cambodia</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{t('hero.location')}</p>
-                                        <p className="text-xs text-slate-600 dark:text-slate-400">{t('hero.locationValue')}</p>
+                                </Card>
+                            </motion.div>
+                            
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -5 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:shadow-lg group">
+                                    <div className="flex items-center gap-3">
+                                        <motion.div 
+                                            className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors"
+                                            whileHover={{ rotate: 360 }}
+                                            transition={{ duration: 0.5 }}
+                                        >
+                                            <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                                        </motion.div>
+                                        <div>
+                                            <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Experience</p>
+                                            <p className="text-xs text-slate-600 dark:text-slate-400">1 year and 5 months</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </Card>
-                            <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300">
-                                <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                                        <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                                </Card>
+                            </motion.div>
+                            
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -5 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:shadow-lg group">
+                                    <div className="flex items-center gap-3">
+                                        <motion.div 
+                                            className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg group-hover:bg-indigo-200 dark:group-hover:bg-indigo-900/50 transition-colors"
+                                            whileHover={{ rotate: 360 }}
+                                            transition={{ duration: 0.5 }}
+                                        >
+                                            <Mail className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                                        </motion.div>
+                                        <div>
+                                            <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Status</p>
+                                            <p className="text-xs text-slate-600 dark:text-slate-400">Available</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{t('hero.experience')}</p>
-                                        <p className="text-xs text-slate-600 dark:text-slate-400">{t('hero.experienceValue')}</p>
-                                    </div>
-                                </div>
-                            </Card>
-                            <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300">
-                                <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
-                                        <Mail className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                                    </div>
-                                    <div>
-                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Status</p>
-                                        <p className="text-xs text-slate-600 dark:text-slate-400">Available</p>
-                                    </div>
-                                </div>
-                            </Card>
+                                </Card>
+                            </motion.div>
                         </motion.div>
 
                         <motion.div variants={itemVariants}>

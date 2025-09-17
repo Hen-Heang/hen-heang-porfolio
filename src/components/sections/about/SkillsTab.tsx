@@ -16,8 +16,8 @@ import {
     SpringIcon,
     TanStackIcon,
     TypeScriptIcon,
-    WebstormIcon,
-} from "@/components/ICON/TechIcons"
+    WebStormIcon,
+} from "@/src/components/icons/TechIcons"
 
 interface SkillsTabProps {
     skills: SkillCategory[]
@@ -39,7 +39,7 @@ const getIconForSkill = (skillName: string) => {
     if (skillNameLower.includes("postgresql")) IconComponent = <PostgreSQLIcon />
     if (skillNameLower.includes("git")) IconComponent = <GitHubIcon />
     if (skillNameLower.includes("intellij")) IconComponent = <IntellijIcon />
-    if (skillNameLower.includes("webstorm")) IconComponent = <WebstormIcon />
+    if (skillNameLower.includes("webstorm")) IconComponent = <WebStormIcon />
 
     return IconComponent ? <div className="icon-wrapper">{IconComponent}</div> : null
 }
@@ -89,7 +89,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
                             initial="hidden"
                             animate="visible"
                         >
-                            {skill.items.map((item, index) => (
+                            {skill.items.map((item) => (
                                 <motion.div
                                     key={item.name}
                                     variants={itemVariants}

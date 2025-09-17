@@ -1,10 +1,17 @@
-import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
-import { locales } from '@/src/lib/i18n/config'
-import { ThemeProvider } from "@/components/ThemeProvider"
+import type React from "react"
+import { Inter } from "next/font/google"
+import { ThemeProvider } from "@/src/components/ThemeProvider"
+import "../globals.css"
+
+const inter = Inter({ subsets: ["latin"] })
+
+export const metadata = {
+  title: "HenHeang - Portfolio",
+  description: "Frontend developer portfolio showcasing projects and skills",
+}
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }))
+  return [{ locale: 'en' }]
 }
 
 export default async function LocaleLayout({
@@ -15,13 +22,14 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const messages = await getMessages()
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        {children}
-      </ThemeProvider>
-    </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
   )
 }
