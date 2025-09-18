@@ -141,6 +141,22 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo/Brand - Just the image */}
+                        <div className="flex-shrink-0">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.1 }}
+                                className="w-10 h-10 rounded-full overflow-hidden shadow-lg border-2 border-transparent hover:border-teal-400 transition-colors duration-300"
+                            >
+                                <Image
+                                    src={personalInfo.profileImage}
+                                    alt={personalInfo.fullName || personalInfo.name}
+                                    width={40}
+                                    height={40}
+                                    className="object-cover"
+                                />
+                            </motion.div>
+                        </div>
                         
 
                         {/* Enhanced Desktop Navigation */}

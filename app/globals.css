@@ -4,12 +4,14 @@
 
 @layer base {
   :root {
+    /* Base */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+
+    /* Brand & Accent */
     --primary: 142.1 76.2% 36.3%;
     --primary-foreground: 355.7 100% 97.3%;
     --secondary: 240 4.8% 95.9%;
@@ -18,54 +20,69 @@
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
+
+    /* Surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    /* Status */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
+
+    /* Shadcn Radius */
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 0 0% 95%;
-    --card: 24 9.8% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 142.4 71.8% 29.2%;
-  }
-}
-.icon-wrapper {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f3f4f6; /* Example background */
-  border-radius: 50%;
-}
+    /* Base */
+    --background: 220 20% 9%; /* Softer dark background */
+    --foreground: 210 20% 95%; /* Light gray text */
+    --border: 215 15% 25%;
+    --input: 215 15% 25%;
+    --ring: 160 50% 50%;
 
-@layer base {
-  * {
-    @apply border-border;
+    /* Brand & Accent */
+    --primary: 160 50% 50%; /* A subtle teal */
+    --primary-foreground: 210 20% 95%;
+    --secondary: 215 15% 15%;
+    --secondary-foreground: 210 20% 95%;
+    --muted: 215 15% 15%;
+    --muted-foreground: 210 10% 65%;
+    --accent: 215 15% 25%;
+    --accent-foreground: 210 20% 95%;
+
+    /* Surfaces */
+    --card: 215 15% 12%; /* Dark card background */
+    --card-foreground: 210 20% 95%;
+    --popover: 215 15% 10%;
+    --popover-foreground: 210 20% 95%;
+
+    /* Status */
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 210 20% 95%;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
   }
-  html {
-    scroll-behavior: smooth;
+
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }
