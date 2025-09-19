@@ -16,6 +16,643 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
+        id: "java8-api-development",
+        title: "Java 8 API Development: Modern Backend Development with Spring Boot",
+        excerpt: "Master Java 8 features for building robust REST APIs with Spring Boot. Learn about Stream API, Lambda expressions, Optional, CompletableFuture, and best practices for enterprise-grade applications.",
+        content: `# Java 8 API Development: Modern Backend Development with Spring Boot
+
+Java 8 revolutionized the way we write Java code, introducing powerful features that make API development more efficient and expressive. In this comprehensive guide, we'll explore how to leverage Java 8 features in building modern REST APIs with Spring Boot.
+
+## Why Java 8 for API Development?
+
+Java 8 introduced several game-changing features that are essential for modern API development:
+
+- **Lambda Expressions**: Enable functional programming and cleaner code
+- **Stream API**: Powerful data processing capabilities
+- **Optional**: Better null handling and safer code
+- **CompletableFuture**: Asynchronous programming made easy
+- **Method References**: Cleaner, more readable code
+- **Date/Time API**: Modern date and time handling
+
+## Setting Up a Java 8 Spring Boot Project
+
+### 1. Project Dependencies
+
+\`\`\`xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+    </dependency>
+</dependencies>
+\`\`\`
+
+### 2. Application Configuration
+
+\`\`\`properties
+# application.properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/api_db
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Server configuration
+server.port=8080
+server.servlet.context-path=/api
+
+# Logging
+logging.level.com.yourpackage=DEBUG
+\`\`\`
+
+## Building a User Management API with Java 8
+
+### 1. Entity with Java 8 Features
+
+\`\`\`java
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    @Column(nullable = false, unique = true)
+    private String email;
+    
+    @Column(nullable = false)
+    private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+    
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+    
+    // Constructors
+    public User() {}
+    
+    public User(String name, String email, String password, UserRole role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+    
+    // Getters and setters...
+    
+    // Java 8 method for role checking
+    public boolean isAdmin() {
+        return Optional.ofNullable(role)
+                .map(UserRole.ADMIN::equals)
+                .orElse(false);
+    }
+    
+    // Java 8 method for date formatting
+    public String getFormattedCreatedDate() {
+        return Optional.ofNullable(createdAt)
+                .map(date -> date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                .orElse("N/A");
+    }
+}
+\`\`\`
+
+### 2. Repository with Stream API
+
+\`\`\`java
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    
+    Optional<User> findByEmail(String email);
+    
+    List<User> findByRole(UserRole role);
+    
+    @Query("SELECT u FROM User u WHERE u.createdAt >= :date")
+    List<User> findUsersCreatedAfter(@Param("date") LocalDateTime date);
+    
+    // Custom method using Java 8 features
+    default List<User> findActiveUsers() {
+        return findAll().stream()
+                .filter(user -> user.getRole() != null)
+                .filter(user -> !user.getRole().equals(UserRole.INACTIVE))
+                .collect(Collectors.toList());
+    }
+    
+    // Method to get user statistics
+    default Map<UserRole, Long> getUserStatistics() {
+        return findAll().stream()
+                .filter(user -> user.getRole() != null)
+                .collect(Collectors.groupingBy(
+                    User::getRole,
+                    Collectors.counting()
+                ));
+    }
+}
+\`\`\`
+
+### 3. Service Layer with Java 8 Features
+
+\`\`\`java
+@Service
+@Transactional
+public class UserService {
+    
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+    
+    // Create user with validation
+    public CompletableFuture<User> createUser(CreateUserRequest request) {
+        return CompletableFuture.supplyAsync(() -> {
+            // Validate email uniqueness
+            if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+                throw new UserAlreadyExistsException("Email already exists: " + request.getEmail());
+            }
+            
+            // Create user
+            User user = new User(
+                request.getName(),
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getRole()
+            );
+            
+            return userRepository.save(user);
+        });
+    }
+    
+    // Get users with filtering and pagination
+    public Page<User> getUsers(UserFilter filter, Pageable pageable) {
+        return userRepository.findAll((root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            
+            // Filter by role using Optional
+            Optional.ofNullable(filter.getRole())
+                    .ifPresent(role -> predicates.add(criteriaBuilder.equal(root.get("role"), role)));
+            
+            // Filter by name using Optional and like
+            Optional.ofNullable(filter.getName())
+                    .ifPresent(name -> predicates.add(
+                        criteriaBuilder.like(
+                            criteriaBuilder.lower(root.get("name")),
+                            "%" + name.toLowerCase() + "%"
+                        )
+                    ));
+            
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        }, pageable);
+    }
+    
+    // Update user with Java 8 features
+    public Optional<User> updateUser(Long id, UpdateUserRequest request) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    Optional.ofNullable(request.getName())
+                            .ifPresent(user::setName);
+                    Optional.ofNullable(request.getRole())
+                            .ifPresent(user::setRole);
+                    return userRepository.save(user);
+                });
+    }
+    
+    // Delete user with validation
+    public boolean deleteUser(Long id) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    userRepository.delete(user);
+                    return true;
+                })
+                .orElse(false);
+    }
+    
+    // Get user statistics using Stream API
+    public UserStatistics getUserStatistics() {
+        List<User> users = userRepository.findAll();
+        
+        return UserStatistics.builder()
+                .totalUsers(users.size())
+                .adminCount(users.stream()
+                        .filter(User::isAdmin)
+                        .count())
+                .recentUsers(users.stream()
+                        .filter(user -> user.getCreatedAt()
+                                .isAfter(LocalDateTime.now().minusDays(30)))
+                        .count())
+                .roleDistribution(userRepository.getUserStatistics())
+                .build();
+    }
+    
+    // Process users asynchronously
+    public CompletableFuture<List<User>> processUsersAsync(List<Long> userIds) {
+        List<CompletableFuture<User>> futures = userIds.stream()
+                .map(id -> CompletableFuture.supplyAsync(() -> 
+                    userRepository.findById(id)
+                            .orElseThrow(() -> new UserNotFoundException("User not found: " + id))
+                ))
+                .collect(Collectors.toList());
+        
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .thenApply(v -> futures.stream()
+                        .map(CompletableFuture::join)
+                        .collect(Collectors.toList()));
+    }
+}
+\`\`\`
+
+### 4. Controller with Modern Java 8 Patterns
+
+\`\`\`java
+@RestController
+@RequestMapping("/users")
+@Validated
+public class UserController {
+    
+    private final UserService userService;
+    
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+    
+    // Create user endpoint
+    @PostMapping
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
+        return userService.createUser(request)
+                .thenApply(user -> ResponseEntity.status(HttpStatus.CREATED)
+                        .body(UserResponse.from(user)))
+                .exceptionally(throwable -> {
+                    if (throwable.getCause() instanceof UserAlreadyExistsException) {
+                        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+                    }
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                })
+                .join();
+    }
+    
+    // Get users with filtering
+    @GetMapping
+    public ResponseEntity<Page<UserResponse>> getUsers(
+            @RequestParam(required = false) UserRole role,
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        
+        UserFilter filter = UserFilter.builder()
+                .role(role)
+                .name(name)
+                .build();
+        
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        Page<User> users = userService.getUsers(filter, pageable);
+        
+        Page<UserResponse> response = users.map(UserResponse::from);
+        return ResponseEntity.ok(response);
+    }
+    
+    // Get user by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
+        return userService.getUserById(id)
+                .map(user -> ResponseEntity.ok(UserResponse.from(user)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
+    // Update user
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponse> updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateUserRequest request) {
+        
+        return userService.updateUser(id, request)
+                .map(user -> ResponseEntity.ok(UserResponse.from(user)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
+    // Delete user
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        boolean deleted = userService.deleteUser(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+    
+    // Get user statistics
+    @GetMapping("/statistics")
+    public ResponseEntity<UserStatistics> getUserStatistics() {
+        UserStatistics statistics = userService.getUserStatistics();
+        return ResponseEntity.ok(statistics);
+    }
+    
+    // Bulk operations
+    @PostMapping("/bulk")
+    public ResponseEntity<List<UserResponse>> processUsersBulk(@RequestBody List<Long> userIds) {
+        return userService.processUsersAsync(userIds)
+                .thenApply(users -> users.stream()
+                        .map(UserResponse::from)
+                        .collect(Collectors.toList()))
+                .thenApply(ResponseEntity::ok)
+                .exceptionally(throwable -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build())
+                .join();
+    }
+}
+\`\`\`
+
+### 5. DTOs with Java 8 Features
+
+\`\`\`java
+// Request DTOs
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateUserRequest {
+    @NotBlank(message = "Name is required")
+    private String name;
+    
+    @Email(message = "Email must be valid")
+    @NotBlank(message = "Email is required")
+    private String email;
+    
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters")
+    private String password;
+    
+    @NotNull(message = "Role is required")
+    private UserRole role;
+}
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UpdateUserRequest {
+    private String name;
+    private UserRole role;
+}
+
+// Response DTOs
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserResponse {
+    private Long id;
+    private String name;
+    private String email;
+    private UserRole role;
+    private String createdAt;
+    private String updatedAt;
+    
+    public static UserResponse from(User user) {
+        return UserResponse.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .createdAt(user.getFormattedCreatedDate())
+                .updatedAt(Optional.ofNullable(user.getUpdatedAt())
+                        .map(date -> date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                        .orElse("N/A"))
+                .build();
+    }
+}
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserStatistics {
+    private long totalUsers;
+    private long adminCount;
+    private long recentUsers;
+    private Map<UserRole, Long> roleDistribution;
+}
+\`\`\`
+
+## Java 8 Best Practices for API Development
+
+### 1. Use Optional for Null Safety
+
+\`\`\`java
+// Good: Using Optional
+public Optional<User> findUserByEmail(String email) {
+    return userRepository.findByEmail(email);
+}
+
+// Usage
+userService.findUserByEmail("user@example.com")
+    .ifPresent(user -> log.info("User found: {}", user.getName()));
+
+// Bad: Returning null
+public User findUserByEmail(String email) {
+    return userRepository.findByEmail(email).orElse(null);
+}
+\`\`\`
+
+### 2. Leverage Stream API for Data Processing
+
+\`\`\`java
+// Process collections efficiently
+public List<UserResponse> getActiveUsers() {
+    return userRepository.findAll().stream()
+            .filter(user -> user.getRole() != UserRole.INACTIVE)
+            .map(UserResponse::from)
+            .collect(Collectors.toList());
+}
+
+// Group and aggregate data
+public Map<UserRole, List<User>> groupUsersByRole() {
+    return userRepository.findAll().stream()
+            .collect(Collectors.groupingBy(User::getRole));
+}
+\`\`\`
+
+### 3. Use CompletableFuture for Async Operations
+
+\`\`\`java
+// Async operations
+public CompletableFuture<List<User>> getUsersAsync() {
+    return CompletableFuture.supplyAsync(() -> userRepository.findAll());
+}
+
+// Combine multiple async operations
+public CompletableFuture<UserStatistics> getStatisticsAsync() {
+    CompletableFuture<List<User>> usersFuture = getUsersAsync();
+    CompletableFuture<Long> countFuture = CompletableFuture.supplyAsync(() -> userRepository.count());
+    
+    return usersFuture.thenCombine(countFuture, (users, count) -> 
+        UserStatistics.builder()
+                .totalUsers(count)
+                .adminCount(users.stream().filter(User::isAdmin).count())
+                .build()
+    );
+}
+\`\`\`
+
+### 4. Exception Handling with Java 8
+
+\`\`\`java
+// Custom exception handling
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException ex) {
+        ErrorResponse error = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+    
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
+        List<String> errors = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(FieldError::getDefaultMessage)
+                .collect(Collectors.toList());
+        
+        ErrorResponse error = ErrorResponse.builder()
+                .message("Validation failed")
+                .errors(errors)
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .build();
+        
+        return ResponseEntity.badRequest().body(error);
+    }
+}
+\`\`\`
+
+## Performance Optimization with Java 8
+
+### 1. Parallel Streams for Large Datasets
+
+\`\`\`java
+// Use parallel streams for CPU-intensive operations
+public List<UserResponse> processLargeUserList(List<User> users) {
+    return users.parallelStream()
+            .filter(user -> user.getRole() != UserRole.INACTIVE)
+            .map(UserResponse::from)
+            .collect(Collectors.toList());
+}
+\`\`\`
+
+### 2. Caching with Java 8
+
+\`\`\`java
+@Service
+public class CachedUserService {
+    
+    private final Map<String, User> userCache = new ConcurrentHashMap<>();
+    
+    public Optional<User> getUserByEmail(String email) {
+        return Optional.ofNullable(userCache.computeIfAbsent(email, 
+            key -> userRepository.findByEmail(key).orElse(null)));
+    }
+}
+\`\`\`
+
+## Testing Java 8 APIs
+
+### 1. Unit Testing with Java 8
+
+\`\`\`java
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+    
+    @Mock
+    private UserRepository userRepository;
+    
+    @InjectMocks
+    private UserService userService;
+    
+    @Test
+    void shouldCreateUserSuccessfully() {
+        // Given
+        CreateUserRequest request = CreateUserRequest.builder()
+                .name("John Doe")
+                .email("john@example.com")
+                .password("password123")
+                .role(UserRole.USER)
+                .build();
+        
+        User savedUser = new User("John Doe", "john@example.com", "encoded", UserRole.USER);
+        when(userRepository.findByEmail("john@example.com")).thenReturn(Optional.empty());
+        when(userRepository.save(any(User.class))).thenReturn(savedUser);
+        
+        // When
+        CompletableFuture<User> result = userService.createUser(request);
+        
+        // Then
+        assertThat(result.join()).isEqualTo(savedUser);
+    }
+    
+    @Test
+    void shouldReturnEmptyWhenUserNotFound() {
+        // Given
+        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+        
+        // When
+        Optional<User> result = userService.getUserById(1L);
+        
+        // Then
+        assertThat(result).isEmpty();
+    }
+}
+\`\`\`
+
+## Conclusion
+
+Java 8 features have transformed the way we build APIs, making code more readable, maintainable, and efficient. By leveraging:
+
+- **Lambda expressions** for cleaner, more functional code
+- **Stream API** for powerful data processing
+- **Optional** for null safety
+- **CompletableFuture** for asynchronous operations
+- **Method references** for better readability
+
+You can build robust, scalable REST APIs that are both performant and maintainable. These features, combined with Spring Boot's powerful ecosystem, provide a solid foundation for enterprise-grade API development.
+
+Remember to always consider performance implications, especially when using parallel streams and async operations, and ensure proper error handling and validation throughout your API.`,
+        date: "2024-01-15",
+        readTime: "15 min",
+        category: "Backend Development",
+        tags: ["Java 8", "Spring Boot", "REST API", "Lambda Expressions", "Stream API", "Optional", "CompletableFuture"],
+        image: "/image/java8-api-development.svg",
+        author: "Hen Heang",
+        featured: true,
+        slug: "java8-api-development"
+    },
+    {
         id: "1",
         title: "Getting Started with Java Programming",
         excerpt: "Learn the fundamentals of Java programming language, from basic syntax to object-oriented concepts. Perfect for beginners who want to start their Java journey.",
@@ -135,7 +772,7 @@ Happy coding!`,
         readTime: "8 min read",
         category: "Java Basics",
         tags: ["Java", "Programming", "Beginner", "OOP"],
-        image: "/image/placeholder_image.png",
+        image: "/image/java-basics.svg",
         author: "Hen Heang",
         featured: true,
         slug: "getting-started-with-java-programming"
@@ -422,7 +1059,7 @@ Happy coding!
         readTime: "12 min read",
         category: "Spring Boot",
         tags: ["Spring Boot", "REST API", "Java", "Backend"],
-        image: "/image/placeholder_image.png",
+        image: "/image/spring-boot-fundamentals.svg",
         author: "Hen Heang",
         featured: true,
         slug: "spring-boot-fundamentals-rest-api"

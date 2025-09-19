@@ -5,7 +5,7 @@ export const projects: Project[] = [
     {
         title: "WeBill365 - Billing & Collection Platform",
         description: "A comprehensive digital billing and payment collection platform with QR code payments, multi-channel delivery, and real-time payment tracking. Features bulk billing, customer management, and integration with Vietnamese banking systems.",
-        technologies: ["Next.js", "TypeScript", "Spring Boot", "PostgreSQL",  " API", ],
+        technologies: ["Next.js", "TypeScript", "Spring Boot", "Spring Web", "Spring Security", "Java 8", "PostgreSQL", "Redis", "Maven"],
         image: "/image/webill365.svg",
         github: "https://github.com/Hen-Heang/webill365",
         demo: "https://webill365.vn/",
@@ -19,7 +19,7 @@ export const projects: Project[] = [
             "API integration for ERP systems",
             "Mobile app for on-the-go management"
         ],
-        technicalDetails: "Built with a modern tech stack featuring Next.js for the web frontend, React Native for mobile apps, Spring Boot for backend services, and PostgreSQL for data persistence.",
+        technicalDetails: "Built with a modern tech stack featuring Next.js for the web frontend, React Native for mobile apps, and Spring Boot with Java 8 for backend services. Utilized Spring Web for RESTful APIs, Spring Security for authentication, Spring Data JPA with Hibernate for data persistence, and Redis for caching. Implemented Java 8 features including Stream API for data processing, Lambda expressions for functional programming, and CompletableFuture for asynchronous operations.",
         challenges: [
             "Complex integration with multiple Vietnamese banking systems",
             "Real-time payment status synchronization",
@@ -27,10 +27,10 @@ export const projects: Project[] = [
             "Ensuring security compliance for financial transactions"
         ],
         solutions: [
-            "Implemented robust API architecture for banking integrations",
-            "Used WebSocket connections for real-time updates",
-            "Optimized database queries and implemented caching with Redis",
-            "Implemented comprehensive security measures and audit trails"
+            "Implemented robust RESTful API architecture using Spring Web with proper error handling and validation",
+            "Used WebSocket connections for real-time updates and CompletableFuture for async payment processing",
+            "Optimized database queries using Spring Data JPA and implemented Redis caching with Java 8 Stream API for data transformation",
+            "Implemented comprehensive security measures using Spring Security with JWT tokens and audit trails using Java 8 Optional for null safety"
         ],
         role: "Full Stack Developer",
         duration: "6 months",
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     {
         title: "Warehouse Master - B2B E-commerce Platform",
         description: "A comprehensive B2B e-commerce platform connecting quality products with trusted distributors and retailers. Features order tracking, export reports, product alerts, and large volume purchasing capabilities.",
-        technologies: ["Next.js", "TypeScript", "Spring Boot", "PostgreSQL", "Chart.js", "JWT"],
+        technologies: ["Next.js", "TypeScript", "Spring Boot", "Spring Web", "Spring Security", "Java 8", "PostgreSQL", "Redis", "Chart.js", "JWT", "Maven"],
         image: "/image/warehouse-master.svg",
         github: "https://github.com/Hen-Heang/warehouse-master",
         demo: "#",
@@ -89,7 +89,7 @@ export const projects: Project[] = [
             "Multi-user roles (distributors, retailers, admins)",
             "Advanced search and filtering capabilities"
         ],
-        technicalDetails: "Built with Next.js for the frontend, Spring Boot for backend services, PostgreSQL for relational data, Redis for caching, and AWS S3 for file storage. Integrated Chart.js for data visualization.",
+        technicalDetails: "Built with Next.js for the frontend and Spring Boot with Java 8 for backend services. Utilized Spring Web for RESTful APIs, Spring Security for authentication, Spring Data JPA for data access, PostgreSQL for relational data, and Redis for caching. Implemented Java 8 features including Stream API for complex data processing, Lambda expressions for event handling, Optional for null safety, and CompletableFuture for concurrent operations. Integrated Chart.js for data visualization.",
         challenges: [
             "Handling large volumes of concurrent orders",
             "Implementing complex role-based access control",
@@ -97,10 +97,10 @@ export const projects: Project[] = [
             "Ensuring data consistency across distributed systems"
         ],
         solutions: [
-            "Implemented Redis caching for frequently accessed data",
-            "Created comprehensive RBAC system with JWT tokens",
-            "Optimized database schema and implemented indexing",
-            "Used database transactions and event sourcing for consistency"
+            "Implemented Redis caching with Java 8 Stream API for efficient data transformation and filtering",
+            "Created comprehensive RBAC system using Spring Security with JWT tokens and Lambda expressions for role-based filtering",
+            "Optimized database schema using Spring Data JPA with custom queries and implemented indexing with Optional for null-safe operations",
+            "Used database transactions with CompletableFuture for async operations and event sourcing for consistency"
         ],
         role: "Full Stack Developer",
         duration: "8 months",

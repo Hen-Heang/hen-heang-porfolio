@@ -29,14 +29,15 @@ export function HeroImage({ useAvatar = false }: HeroImageProps) {
                         repeat: Number.POSITIVE_INFINITY,
                         repeatType: "reverse",
                     }}></motion.div>
-                <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-gray-200 dark:border-gray-800 overflow-hidden relative z-10">
+                <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl border-2 border-gray-200 dark:border-gray-800 overflow-hidden relative z-10">
                     <Image
                         src={imageSrc}
                         alt={personalInfo.name}
                         fill
-                        className={`${useAvatar ? 'object-contain bg-gray-800' : 'object-cover'}`}
+                        className="object-cover object-center"
                         priority
                         sizes="(max-width: 768px) 256px, 320px"
+                        style={{ objectPosition: 'center 25%' }}
                     />
                 </div>
 

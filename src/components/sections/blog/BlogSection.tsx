@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { Badge } from "@/src/components/ui/badge"
-import { blogPosts, getFeaturedPosts } from "@/src/data/blog-posts"
+import { getFeaturedPosts } from "@/src/data/blog-posts"
+import Image from 'next/image'
 
 export function BlogSection() {
     const containerVariants = {
@@ -68,7 +69,7 @@ export function BlogSection() {
                         variants={containerVariants}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
                     >
-                        {getFeaturedPosts().slice(0, 3).map((post, index) => (
+                        {getFeaturedPosts().slice(0, 3).map((post) => (
                             <motion.div
                                 key={post.id}
                                 variants={itemVariants}
@@ -76,10 +77,14 @@ export function BlogSection() {
                                 transition={{ duration: 0.3 }}
                             >
                                 <Card className="overflow-hidden h-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 hover:shadow-2xl transition-all duration-300 group">
-                                    <div className="relative h-48 bg-gradient-to-br from-teal-100 to-indigo-100 dark:from-teal-900/20 dark:to-indigo-900/20">
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <BookOpen size={48} className="text-teal-500 opacity-50" />
-                                        </div>
+                                    <div className="relative h-48 overflow-hidden">
+                                        <Image 
+                                            src={post.image} 
+                                            alt={post.title}
+                                            fill
+                                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        />
                                         <div className="absolute top-4 left-4">
                                             <Badge className="bg-teal-500/90 text-white border-0">
                                                 {post.category}

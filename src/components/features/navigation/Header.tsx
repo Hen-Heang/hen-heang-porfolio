@@ -136,29 +136,11 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                     scrolled
                         ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-2xl border-b border-gray-200/30 dark:border-gray-700/30 shadow-2xl"
                         : "bg-transparent"
-                }`}
-            >
+                }`}>
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
-                        {/* Logo/Brand - Just the image */}
-                        <div className="flex-shrink-0">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.5, delay: 0.1 }}
-                                className="w-10 h-10 rounded-full overflow-hidden shadow-lg border-2 border-transparent hover:border-teal-400 transition-colors duration-300"
-                            >
-                                <Image
-                                    src={personalInfo.profileImage}
-                                    alt={personalInfo.fullName || personalInfo.name}
-                                    width={40}
-                                    height={40}
-                                    className="object-cover"
-                                />
-                            </motion.div>
-                        </div>
-                        
-
+                    
+    
                         {/* Enhanced Desktop Navigation */}
                         <nav className="hidden lg:flex items-center gap-1" role="navigation" aria-label="Main navigation">
                             {navItems.map((item, index) => (
@@ -302,18 +284,19 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                     className="flex items-center cursor-pointer group"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => setProfileModalOpen(true)}
+                                    onClick={() => router.push('/profile')}
                                     role="button"
                                     tabIndex={0}
                                     aria-label="View profile"
-                                    onKeyDown={(e) => e.key === 'Enter' && setProfileModalOpen(true)}
+                                    onKeyDown={(e) => e.key === 'Enter' && router.push('/profile')}
                                 >
-                                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-lg group-hover:border-teal-400/50 transition-all duration-300 ring-2 ring-transparent group-hover:ring-teal-400/30">
+                                    <div className="relative w-12 h-12 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg group-hover:border-teal-400/50 transition-all duration-300 ring-2 ring-transparent group-hover:ring-teal-400/30">
                                         <Image
-                                            src={personalInfo.profileImage}
+                                            src={personalInfo.profileImage || personalInfo.myImage || "/image/personal_image.jpg"}
                                             alt={personalInfo.fullName || personalInfo.name}
                                             fill
-                                            className="object-cover group-hover:scale-110 transition-transform duration-300"
+                                            className="object-cover object-center group-hover:scale-110 transition-transform duration-300"
+                                            style={{ objectPosition: 'center 25%' }}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-br from-teal-400/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </div>

@@ -114,7 +114,8 @@ export default function AboutPage() {
                                         src={personalInfo.myImage}
                                         alt={personalInfo.fullName || personalInfo.name}
                                         fill
-                                        className="object-cover"
+                                        className="object-cover object-center"
+                                        style={{ objectPosition: 'center 25%' }}
                                     />
                                 </div>
                                 <div className="absolute inset-0 bg-gradient-to-br from-teal-400/20 to-indigo-500/20 rounded-2xl" />

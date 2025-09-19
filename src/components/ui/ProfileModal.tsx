@@ -109,14 +109,15 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                                     className="text-center"
                                 >
                                     <div className="relative w-32 h-32 mx-auto mb-6">
-                                        <div className="w-full h-full rounded-full bg-gradient-to-r from-teal-500 to-indigo-500 p-1">
-                                            <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full overflow-hidden">
+                                        <div className="w-full h-full rounded-2xl bg-gradient-to-r from-teal-500 to-indigo-500 p-1">
+                                            <div className="w-full h-full bg-white dark:bg-slate-900 rounded-xl overflow-hidden">
                                                 <Image
-                                                    src={personalInfo.profileImage || "/placeholder.svg"}
+                                                    src={personalInfo.profileImage || personalInfo.myImage || "/image/personal_image.jpg"}
                                                     alt={`${personalInfo.fullName} - Full-Stack Developer`}
                                                     fill
-                                                    className="object-cover"
+                                                    className="object-cover object-center"
                                                     priority
+                                                    style={{ objectPosition: 'center 25%' }}
                                                 />
                                             </div>
                                         </div>

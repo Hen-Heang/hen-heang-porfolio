@@ -3,6 +3,7 @@ import { blogPosts } from "@/src/data/blog-posts"
 import { Badge } from "@/src/components/ui/badge"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function BlogPage() {
     return (
@@ -29,9 +30,15 @@ export default function BlogPage() {
                                     className="group block"
                                 >
                                     <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
-                                        {/* Image Placeholder */}
-                                        <div className="h-48 bg-gradient-to-br from-teal-100 to-indigo-100 dark:from-teal-900/20 dark:to-indigo-900/20 flex items-center justify-center">
-                                            <div className="text-4xl opacity-50">📝</div>
+                                        {/* Blog Post Image */}
+                                        <div className="h-48 relative overflow-hidden">
+                                            <Image 
+                                                src={post.image} 
+                                                alt={post.title}
+                                                fill
+                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
                                         </div>
                                         
                                         <div className="p-6">

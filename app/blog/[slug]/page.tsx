@@ -5,6 +5,7 @@ import { Badge } from "@/src/components/ui/badge"
 import { BlogPostRenderer } from "@/src/components/ui/BlogPostRenderer"
 import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react"
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>
@@ -38,12 +39,29 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             Back to Blog
                         </Link>
 
+                        {/* Hero Image */}
+                        <div className="mb-12">
+                            <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-2xl">
+                                <Image 
+                                    src={post.image} 
+                                    alt={post.title}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                                    priority
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                <div className="absolute bottom-6 left-6 right-6">
+                                    <Badge className="bg-teal-500/90 text-white border-0 mb-4">
+                                        {post.category}
+                                    </Badge>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Article Header */}
                         <header className="mb-12">
                             <div className="flex items-center gap-4 mb-6">
-                                <Badge className="bg-teal-500/90 text-white border-0">
-                                    {post.category}
-                                </Badge>
                                 <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
                                     <div className="flex items-center gap-1">
                                         <Calendar size={16} />

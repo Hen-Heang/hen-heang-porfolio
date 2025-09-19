@@ -416,7 +416,7 @@ const HeroSection = () => {
                                 <div className="absolute inset-0 bg-gradient-to-br from-teal-500 via-blue-500 to-indigo-500 rounded-full p-1">
                                     <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full overflow-hidden">
                                         <Image
-                                            src={imageSrc || "/placeholder.svg"}
+                                            src={imageSrc || personalInfo.profileImage || personalInfo.myImage || "/image/personal_image.jpg"}
                                             alt={`${personalInfo.name} - Full-Stack Developer`}
                                             fill
                                             className={`${
