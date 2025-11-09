@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Menu, X, Sun, Moon, Download, Mail, Home, User, Briefcase, BarChart, GraduationCap, Trophy } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
@@ -19,6 +19,7 @@ interface HeaderProps {
 
 export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavItemClick }: HeaderProps) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const firstNavLinkRef = useRef<HTMLAnchorElement | null>(null);
     const [scrolled, setScrolled] = useState(false);
     const [profileModalOpen, setProfileModalOpen] = useState(false);
     const router = useRouter();
@@ -49,6 +50,14 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
 
         document.addEventListener('keydown', handleEscape);
         return () => document.removeEventListener('keydown', handleEscape);
+    }, [mobileMenuOpen]);
+
+    // When opening mobile menu, focus the first nav link for keyboard users
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            // slight delay to ensure element is mounted
+            setTimeout(() => firstNavLinkRef.current?.focus(), 50);
+        }
     }, [mobileMenuOpen]);
 
     const handleNavItemClick = (sectionId: string) => {
@@ -346,6 +355,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             transition={{ duration: 0.3 }}
                             className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-30"
                             onClick={() => setMobileMenuOpen(false)}
+                            aria-hidden="true"
                         />
                         
                         {/* Menu Content */}
@@ -354,9 +364,22 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="fixed inset-x-0 top-20 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border-b border-gray-200/30 dark:border-gray-700/30 shadow-2xl"
+                            className="fixed inset-x-0 top-20 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border-b border-gray-200/30 dark:border-gray-700/30 shadow-2xl max-h-[70vh] overflow-auto"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-label="Mobile menu"
                         >
-                            <div className="container mx-auto px-4 py-6">
+                            <div className="container mx-auto px-4 py-4">
+                                <div className="flex items-center justify-end mb-2">
+                                    <button
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                        aria-label="Close menu"
+                                    >
+                                        <X size={18} />
+                                    </button>
+                                </div>
+
                                 <nav className="flex flex-col space-y-3" role="navigation" aria-label="Mobile navigation">
                                     {navItems.map((item, index) => (
                                         <motion.a
@@ -377,6 +400,8 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: index * 0.1 }}
                                             aria-current={activeSection === item.id ? "page" : undefined}
+                                            ref={index === 0 ? firstNavLinkRef : undefined}
+                                            tabIndex={0}
                                         >
                                             <motion.span 
                                                 className="opacity-70"
