@@ -19,7 +19,8 @@ export function AboutSection() {
                 <SectionHeader
                     badge="About Me"
                     title="Get to know me better"
-                    description="I'm a web application developer specializing in Spring Boot and Next.js, passionate about creating high-quality, scalable applications."/>
+                    description=""
+            />
 
                 <motion.div
                     ref={ref}

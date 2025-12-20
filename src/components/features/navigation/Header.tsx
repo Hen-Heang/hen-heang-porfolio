@@ -1,12 +1,10 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, Sun, Moon, Download, Mail, Home, User, Briefcase, BarChart, GraduationCap, Trophy } from "lucide-react"
+import { Menu, X, Sun, Moon, Download, Mail, Home, User, Briefcase, BarChart } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
-import Image from "next/image"
 import type { NavItem } from "@/src/lib/types"
-import { personalInfo } from "@/data/personal-info"
 import { ProfileModal } from "@/src/components/ui/ProfileModal"
 
 interface HeaderProps {
@@ -130,9 +128,8 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
             home: <Home size={18} />,
             about: <User size={18} />,
             projects: <Briefcase size={18} />,
+            experience: <Briefcase size={18} />,
             skills: <BarChart size={18} />,
-            education: <GraduationCap size={18} />,
-            achievements: <Trophy size={18} />,
             contact: <Mail size={18} />
         };
         return iconMap[id] || navItems.find(item => item.id === id)?.icon;
@@ -147,11 +144,18 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                         : "bg-transparent"
                 }`}>
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-20">
-                    
-    
+                    <div className="grid grid-cols-[1fr_auto_1fr] items-center h-20">
+                        {/* Brand / Home */}
+                        <button
+                            className="justify-self-start hidden lg:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
+                            onClick={() => router.push("/")}
+                            aria-label="Back to home"
+                        >
+                            {/* <span className="text-lg font-semibold">Hen Heang</span> */}
+                        </button>
+
                         {/* Enhanced Desktop Navigation */}
-                        <nav className="hidden lg:flex items-center gap-1" role="navigation" aria-label="Main navigation">
+                        <nav className="hidden lg:flex items-center justify-center gap-1" role="navigation" aria-label="Main navigation">
                             {navItems.map((item, index) => (
                                 <motion.div
                                     key={item.id}
@@ -216,9 +220,9 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                         </nav>
 
                         {/* Enhanced Action Buttons */}
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-end gap-3">
                             {/* Download Resume Button */}
-                            <motion.button
+                            {/* <motion.button
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
@@ -241,7 +245,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                     <Download size={16} />
                                 </motion.div>
                                 <span className="relative z-10">Resume</span>
-                            </motion.button>
+                            </motion.button> */}
 
                             {/* Enhanced Theme Toggle */}
                             <motion.button
@@ -288,7 +292,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             </motion.button>
 
                             {/* Enhanced Profile Section */}
-                            <div className="hidden lg:flex items-center gap-4 ml-6 pl-6 border-l border-gray-200/50 dark:border-gray-700/50">
+                            {/* <div className="hidden lg:flex items-center gap-4 ml-6 pl-6 border-l border-gray-200/50 dark:border-gray-700/50">
                                 <motion.div
                                     className="flex items-center cursor-pointer group"
                                     whileHover={{ scale: 1.05 }}
@@ -310,7 +314,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                         <div className="absolute inset-0 bg-gradient-to-br from-teal-400/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </div>
                                 </motion.div>
-                            </div>
+                            </div> */}
 
                             {/* Enhanced Mobile Menu Button */}
                             <motion.button

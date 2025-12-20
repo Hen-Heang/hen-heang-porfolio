@@ -130,7 +130,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                                     <Badge className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-teal-500/10 to-indigo-500/10 text-teal-600 dark:text-teal-400 border border-teal-200/50 dark:border-teal-400/20">
                                         <span className="flex items-center gap-2">
                                             <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
-                                            Web Application Developer
+                                            Full Stack Web Developer
                                         </span>
                                     </Badge>
                                 </motion.div>

@@ -43,3 +43,13 @@ export interface EducationItem {
     institution: string
     description: string
 }
+
+export interface ExperienceItem {
+    role: string
+    company: string
+    period: string
+    location?: string
+    summary: string
+    highlights?: string[]
+    stack?: string[]
+}

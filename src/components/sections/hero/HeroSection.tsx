@@ -233,7 +233,7 @@ const HeroSection = () => {
                                             }}
                                         />
                                         <Sparkles className="w-4 h-4 text-teal-500" />
-                                        Web Application Developer
+                                        Full-Stack Developer
                                     </span>
                                 </Badge>
                             </motion.div>
@@ -271,7 +271,7 @@ const HeroSection = () => {
                             variants={itemVariants}
                             className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
                         >
-                            I&apos;m a web application developer specializing in full-stack development with Spring Boot and Next.js. I have experience building modern, responsive applications with TypeScript, PostgreSQL, and TanStack Query.
+                            I&apos;m a Full Stack Developer specializing in full-stack development with Spring Boot and Next.js. I have experience building modern, responsive applications with TypeScript, PostgreSQL, and TanStack Query.
                         </motion.p>
 
                         <motion.div
@@ -342,7 +342,7 @@ const HeroSection = () => {
                                         </motion.div>
                                         <div>
                                             <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Location</p>
-                                            <p className="text-xs text-slate-600 dark:text-slate-400">Phnom Penh, Cambodia</p>
+                                            <p className="text-xs text-slate-600 dark:text-slate-400">Cambodia</p>
                                         </div>
                                     </div>
                                 </Card>

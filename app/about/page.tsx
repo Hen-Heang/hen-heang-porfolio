@@ -24,6 +24,7 @@ import {
     Server,
 } from "lucide-react"
 import type { SkillItem } from "@/src/lib/types"
+import { ExperienceSection } from "@/src/components/sections/experience/ExperienceSection"
 
 export default function AboutPage() {
     const router = useRouter()
@@ -188,12 +189,12 @@ export default function AboutPage() {
                         <h2 className="text-3xl font-bold text-center mb-12"></h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             <StatsCard
-                                value="10+"
+                                value="3+"
                                 label="Projects Completed"
                                 color="text-teal-500 dark:text-teal-400"
                             />
                             <StatsCard
-                                value="15+"
+                                value="8+"
                                 label="Technologies"
                                 color="text-indigo-500 dark:text-indigo-400"
                             />
@@ -203,11 +204,16 @@ export default function AboutPage() {
                                 color="text-blue-500 dark:text-blue-400"
                             />
                             <StatsCard
-                                value="1.5+ Years"
+                                value="2 Years"
                                 label="Experience"
                                 color="text-green-500 dark:text-green-400"
                             />
                         </div>
+                    </motion.div>
+
+                    {/* Experience Section */}
+                    <motion.div variants={itemVariants} className="mb-16 -mx-4 sm:-mx-6 lg:-mx-8">
+                        <ExperienceSection />
                     </motion.div>
 
                     {/* Skills Section */}
@@ -283,7 +289,7 @@ export default function AboutPage() {
                     <motion.div variants={itemVariants} className="text-center">
                         <h2 className="text-3xl font-bold mb-6">Ready to Work Together?</h2>
                         <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                            Let's discuss your project and see how I can help bring your ideas to life.
+                            Let&apos;s discuss your project and see how I can help bring your ideas to life.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button

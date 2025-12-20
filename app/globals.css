@@ -80,6 +80,42 @@
     }
     body {
       @apply bg-background text-foreground;
+      background-color: #0b1224;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 35%),
+        radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.16), transparent 30%),
+        radial-gradient(circle at 15% 70%, rgba(34, 197, 94, 0.12), transparent 28%),
+        linear-gradient(120deg, rgba(14, 165, 233, 0.06), rgba(67, 56, 202, 0.06)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size:
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        120px 120px,
+        120px 120px;
+      background-attachment: fixed;
+      background-blend-mode: screen, screen, screen, normal, overlay, overlay;
+    }
+    .dark body {
+      background-color: #050915;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.14), transparent 35%),
+        radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.18), transparent 30%),
+        radial-gradient(circle at 15% 70%, rgba(34, 197, 94, 0.14), transparent 28%),
+        linear-gradient(120deg, rgba(14, 165, 233, 0.12), rgba(67, 56, 202, 0.12)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        120px 120px,
+        120px 120px;
+      background-attachment: fixed;
+      background-blend-mode: screen, screen, screen, normal, overlay, overlay;
     }
     html {
       scroll-behavior: smooth;

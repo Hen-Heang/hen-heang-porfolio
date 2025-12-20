@@ -190,12 +190,12 @@ export default function AboutPage() {
                         <h2 className="text-3xl font-bold text-center mb-12"></h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             <StatsCard
-                                value="10+"
+                                value="3+"
                                 label="Projects Completed"
                                 color="text-teal-500 dark:text-teal-400"
                             />
                             <StatsCard
-                                value="15+"
+                                value="8+"
                                 label="Technologies"
                                 color="text-indigo-500 dark:text-indigo-400"
                             />
@@ -205,7 +205,7 @@ export default function AboutPage() {
                                 color="text-blue-500 dark:text-blue-400"
                             />
                             <StatsCard
-                                value="1.5+ Years"
+                                value="2 Years"
                                 label="Experience"
                                 color="text-green-500 dark:text-green-400"
                             />

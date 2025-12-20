@@ -6,7 +6,6 @@ import { useActiveSection } from "@/src/lib/hooks/useActiveSection"
 import { useThemeToggle } from "@/src/lib/hooks/useThemeToggle"
 import { navItems } from "@/data/navigation"
 import { Header } from "@/src/components/features/navigation/Header"
-
 import { AboutSection } from "@/src/components/sections/about/AboutSection"
 import { ProjectsSection } from "@/src/components/sections/projects/ProjectsSection"
 import { SkillsSection } from "@/src/components/sections/skills/SkillsSection"
@@ -18,6 +17,7 @@ import { Footer } from "@/src/components/ui/Footer"
 import { LoadingDots } from "@/src/components/ui/LoadingSpinner"
 import { useRouter } from "next/navigation"
 import HeroSection from "@/src/components/sections/hero/HeroSection"
+import { ExperienceSection } from "@/src/components/sections/experience/ExperienceSection"
 
 export function MainPortfolio() {
     const activeSection = useActiveSection()
@@ -52,7 +52,7 @@ export function MainPortfolio() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+        <div className="min-h-screen text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
             <AnimatePresence>
                 {isLoading ? (
                     <motion.div
@@ -197,6 +197,7 @@ export function MainPortfolio() {
                 <HeroSection />
                 <AboutSection />
                 <ProjectsSection />
+                <ExperienceSection />
                 <SkillsSection />
                 <EducationSection />
                 <AchievementsSection />
