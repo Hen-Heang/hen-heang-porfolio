@@ -8,6 +8,7 @@ import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { ContactForm } from "./ContactForm"
 import { useRouter } from "next/navigation"
 import { Button } from "@/src/components/ui/button"
+import { personalInfo } from "@/data/personal-info"
 
 export function ContactSection() {
     const router = useRouter()
@@ -15,7 +16,7 @@ export function ContactSection() {
     const isInView = useInView(ref, { once: true, amount: 0.2 })
 
     return (
-        <section id="contact" className="py-20">
+        <section id="contact" className="section-base section-plain">
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Contact"
@@ -30,7 +31,7 @@ export function ContactSection() {
                     transition={{ duration: 0.5 }}
                     className="max-w-5xl mx-auto"
                 >
-                    <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <Card className="surface-card overflow-hidden">
                         <div className="grid md:grid-cols-5">
                             <div className="md:col-span-2 bg-gradient-to-br from-teal-500 to-indigo-500 p-8 text-white relative overflow-hidden">
                                 <motion.div
@@ -59,19 +60,25 @@ export function ContactSection() {
                                         <div className="p-2 rounded-full bg-white/20">
                                             <Mail size={20} />
                                         </div>
-                                        <span>yourname@example.com</span>
+                                        <a href={`mailto:${personalInfo.email}`} className="hover:underline">
+                                            {personalInfo.email}
+                                        </a>
                                     </div>
                                     <div className="flex items-center gap-4">
                                         <div className="p-2 rounded-full bg-white/20">
                                             <Github size={20} />
                                         </div>
-                                        <span>github.com/yourname</span>
+                                        <a href={personalInfo.socialLinks.github} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                            github.com/Hen-Heang
+                                        </a>
                                     </div>
                                     <div className="flex items-center gap-4">
                                         <div className="p-2 rounded-full bg-white/20">
                                             <Linkedin size={20} />
                                         </div>
-                                        <span>linkedin.com/in/yourname</span>
+                                        <a href={personalInfo.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                            linkedin.com/in/hen-heang
+                                        </a>
                                     </div>
                                 </div>
 
@@ -89,7 +96,7 @@ export function ContactSection() {
                     <div className="text-center mt-8">
                         <Button
                             variant="outline"
-                            className="border-gray-300 dark:border-gray-700"
+                            className="border-slate-300 dark:border-slate-700"
                             onClick={() => router.push("/contact")}
                         >
                             View full contact page

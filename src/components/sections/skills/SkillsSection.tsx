@@ -9,6 +9,7 @@ import { skills } from "@/data/skills"
 import { Badge } from "@/src/components/ui/badge"
 import { Card } from "@/src/components/ui/card"
 import { SkillItem } from "./SkillItem"
+import { ScrollVelocity } from "@/src/components/ui/ScrollVelocity"
 
 export function SkillsSection() {
     const ref = useRef(null)
@@ -16,13 +17,17 @@ export function SkillsSection() {
     const [activeTab, setActiveTab] = useState(skills[0].category)
 
     return (
-        <section id="skills" className="py-20 bg-gray-100 dark:bg-gray-900/50">
+        <section id="skills" className="section-base section-muted">
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Skills"
                     title="My Technical Skills"
                     description="Here are the technologies and tools I work with."
                 />
+                
+                <div className="mb-12">
+                   <ScrollVelocity text="Spring Boot • Next.js • React • PostgreSQL • Kafka • Docker • AWS •" />
+                </div>
 
                 <motion.div
                     ref={ref}
@@ -32,9 +37,9 @@ export function SkillsSection() {
                     className="max-w-4xl mx-auto"
                 >
                     <Tabs defaultValue={skills[0].category} className="w-full" onValueChange={setActiveTab}>
-                        <TabsList className="grid grid-cols-3 mb-8 w-full">
+                        <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-8 w-full h-auto gap-1">
                             {skills.map((skill) => (
-                                <TabsTrigger key={skill.category} value={skill.category}>
+                                <TabsTrigger key={skill.category} value={skill.category} className="text-xs sm:text-sm">
                                     {skill.category}
                                 </TabsTrigger>
                             ))}
@@ -42,7 +47,7 @@ export function SkillsSection() {
 
                         {skills.map((skill) => (
                             <TabsContent key={skill.category} value={skill.category} className="mt-0">
-                                <Card className="p-6 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                                <Card className="p-6 surface-card">
                                     <h3 className="text-xl font-semibold mb-6 text-center">
                     <span className="bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent">
                       {skill.category} Skills

@@ -1,27 +1,27 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import Github from '@/src/components/icons/github';
 import LinkIn from '@/src/components/icons/linkIn';
 import Telegram from '@/src/components/icons/telegram';
+import { personalInfo } from "@/data/personal-info";
 
 export function SocialLinks() {
     const socialLinks = [
         {
-            href: "https://github.com/Hen-Heang",
+            href: personalInfo.socialLinks.github,
             icon: Github,
             label: "GitHub",
             color: "hover:text-gray-900 dark:hover:text-gray-100",
             bgColor: "hover:bg-gray-200 dark:hover:bg-gray-700"
         },
         {
-            href: "https://www.linkedin.com/in/hen-heang",
+            href: personalInfo.socialLinks.linkedin,
             icon: LinkIn,
             label: "LinkedIn",
             color: "hover:text-blue-600 dark:hover:text-blue-400",
             bgColor: "hover:bg-blue-100 dark:hover:bg-blue-900/30"
         },
         {
-            href: "https://t.me/henheang",
+            href: personalInfo.socialLinks.telegram,
             icon: Telegram,
             label: "Telegram",
             color: "hover:text-teal-500 dark:hover:text-teal-400",

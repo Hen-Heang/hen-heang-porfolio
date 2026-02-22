@@ -32,7 +32,7 @@ export function BlogSection() {
     }
 
     return (
-        <section id="blog" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+        <section id="blog" className="section-base section-muted">
             <div className="container mx-auto px-4">
                 <motion.div
                     variants={containerVariants}
@@ -76,7 +76,7 @@ export function BlogSection() {
                                 whileHover={{ y: -10, scale: 1.02 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <Card className="overflow-hidden h-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 hover:shadow-2xl transition-all duration-300 group">
+                                <Card className="overflow-hidden h-full surface-card hover:shadow-2xl transition-all duration-300 group">
                                     <div className="relative h-48 overflow-hidden">
                                         <Image 
                                             src={post.image} 
@@ -130,7 +130,7 @@ export function BlogSection() {
                     <motion.div variants={itemVariants} className="text-center">
                         <motion.a
                             href="/blog"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-teal-500 hover:bg-teal-600 text-white rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.95 }}
                         >

@@ -11,7 +11,7 @@ export function EducationSection() {
     const isInView = useInView(ref, { once: true, amount: 0.1 })
 
     return (
-        <section id="education" className="py-20 bg-gray-100 dark:bg-gray-900/50">
+        <section id="education" className="section-base section-muted">
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Education"

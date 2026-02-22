@@ -30,7 +30,7 @@ export function ProjectsSection() {
     }
 
     return (
-        <section id="projects" className="py-20">
+        <section id="projects" className="section-base section-plain">
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Projects"
@@ -53,7 +53,7 @@ export function ProjectsSection() {
                 <div className="text-center mt-12">
                     <Button
                         variant="outline"
-                        className="border-gray-300 dark:border-gray-700"
+                        className="border-slate-300 dark:border-slate-700"
                         onClick={() => router.push("/projects")}
                     >
                         View all projects

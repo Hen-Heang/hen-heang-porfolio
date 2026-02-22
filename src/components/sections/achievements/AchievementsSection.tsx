@@ -21,7 +21,7 @@ export function AchievementsSection() {
     }
 
     return (
-        <section id="achievements" className="py-20 bg-white dark:bg-gray-900">
+        <section id="achievements" className="section-base section-plain">
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Achievements"
@@ -69,7 +69,7 @@ export function AchievementsSection() {
                                         viewport={{ once: true }}
                                         whileHover={{ y: -5 }}
                                     >
-                                        <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 hover:border-teal-500 dark:hover:border-teal-400">
+                                        <Card className="h-full surface-card hover:shadow-lg transition-all duration-300 border-2 hover:border-teal-500 dark:hover:border-teal-400">
                                             <CardContent className="p-6">
                                                 <div className="flex items-start justify-between mb-4">
                                                     <div className="flex items-center space-x-3">
@@ -177,7 +177,7 @@ export function AchievementsSection() {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-white dark:bg-gray-800 rounded-lg max-w-6xl w-full max-h-[95vh] overflow-y-auto"
+                            className="surface-card rounded-lg max-w-6xl w-full max-h-[95vh] overflow-y-auto"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="p-6">

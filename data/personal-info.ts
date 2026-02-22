@@ -2,9 +2,9 @@
 export const personalInfo = {
     name: "Hen Heang",
     fullName: "Hen Heang",
-    title: "Full Stack Developer",
+    title: "Full-Stack Engineer",
     description:
-        "I'm a Full Stack Developer specializing in full-stack development with Spring Boot and Next.js. I have experience building modern, responsive applications with TypeScript, PostgreSQL, and TanStack Query.",
+        "I build reliable, user-focused web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL. I focus on clean architecture, performance, and smooth user experience from frontend to backend.",
     profileImage: "/image/personal_image.jpg",
     myImage: "/image/heang_new.jpeg",
 

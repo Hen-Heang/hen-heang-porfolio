@@ -5,6 +5,7 @@ import {Card} from "@/src/components/ui/card"
 import {Mail, Github, Linkedin, Send} from "lucide-react"
 import {PageLayout} from "@/src/components/layout/PageLayout"
 import {ContactForm} from "@/src/components/sections/contact/ContactForm";
+import { personalInfo } from "@/data/personal-info";
 
 export default function ContactPage() {
 
@@ -31,7 +32,7 @@ export default function ContactPage() {
                                         <div className="p-2 rounded-full bg-white/20">
                                             <Mail size={20}/>
                                         </div>
-                                        <a href="mailto:henheang15@gmail.com" target="_blank" rel="noopener noreferrer"
+                                        <a href={`mailto:${personalInfo.email}`} target="_blank" rel="noopener noreferrer"
                                            className="hover:text-teal-200 transition-colors duration-200 hover:underline flex items-center">Heang
                                             Hen</a>
                                     </div>
@@ -39,14 +40,14 @@ export default function ContactPage() {
                                         <div className="p-2 rounded-full bg-white/20">
                                             <Github size={20}/>
                                         </div>
-                                        <a href="https://github.com/Hen-Heang" target="_blank" rel="noopener noreferrer"
+                                        <a href={personalInfo.socialLinks.github} target="_blank" rel="noopener noreferrer"
                                            className="hover:text-teal-200 transition-colors duration-200 hover:underline flex items-center">Hen-Heang</a>
                                     </div>
                                     <div className="flex items-center gap-4">
                                         <div className="p-2 rounded-full bg-white/20">
                                             <Linkedin size={20}/>
                                         </div>
-                                        <a href="https://www.linkedin.com/in/hen-heang" target="_blank"
+                                        <a href={personalInfo.socialLinks.linkedin} target="_blank"
                                            rel="noopener noreferrer"
                                            className="hover:text-teal-200 transition-colors duration-200 hover:underline flex items-center">Hen
                                             Heang</a>
@@ -55,7 +56,7 @@ export default function ContactPage() {
                                         <div className="p-2 rounded-full bg-white/20">
                                             <Send size={20}/>
                                         </div>
-                                        <a href="https://t.me/henheang" target="_blank"
+                                        <a href={personalInfo.socialLinks.telegram} target="_blank"
                                            rel="noopener noreferrer"
                                            className="hover:text-teal-200 transition-colors duration-200 hover:underline flex items-center">Telegram</a>
                                     </div>

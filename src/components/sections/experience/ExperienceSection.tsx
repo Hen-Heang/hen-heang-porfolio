@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Briefcase, Calendar, MapPin, Sparkles } from "lucide-react"
 import { experiences } from "@/data/experience"
 import { Badge } from "@/src/components/ui/badge"
@@ -24,10 +25,17 @@ const item = {
 }
 
 export function ExperienceSection() {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end end"]
+    })
+    const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+
     return (
         <section
             id="experience"
-            className="py-20 bg-white dark:bg-gray-950"
+            className="section-base section-plain"
             aria-label="Experience timeline"
         >
             <div className="container mx-auto px-4">
@@ -57,12 +65,17 @@ export function ExperienceSection() {
                         </p>
                     </motion.div>
 
-                    <div className="relative">
-                        <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-teal-400/60 via-indigo-400/40 to-transparent hidden md:block" />
+                    <div className="relative" ref={containerRef}>
+                        {/* Animated Line */}
+                        <div className="absolute left-8 top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-800 hidden md:block" />
+                        <motion.div 
+                            style={{ height }}
+                            className="absolute left-8 top-0 w-px bg-gradient-to-b from-teal-500 via-indigo-500 to-purple-500 hidden md:block origin-top" 
+                        />
                         <div className="space-y-6">
                             {experiences.map((experience, idx) => (
                                 <motion.div key={experience.company + experience.period} variants={item}>
-                                    <Card className="relative overflow-hidden border border-slate-200/70 dark:border-slate-800/70 bg-white/80 dark:bg-slate-900/60 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                    <Card className="relative overflow-hidden surface-card shadow-lg hover:shadow-xl transition-shadow duration-300">
                                         <div className="absolute inset-0 bg-gradient-to-r from-teal-500/5 via-indigo-500/5 to-transparent pointer-events-none" />
                                         <div className="p-6 md:p-8">
                                             <div className="flex items-start gap-4">

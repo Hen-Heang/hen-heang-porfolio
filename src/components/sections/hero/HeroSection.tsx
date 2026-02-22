@@ -1,508 +1,147 @@
 "use client"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, Mail, MapPin, Calendar, Sparkles, Code, Database, Globe } from "lucide-react"
+
+import { useEffect, useState } from "react"
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion"
+import { ArrowRight, Mail, MapPin, Calendar, Sparkles } from "lucide-react"
 import { Badge } from "@/src/components/ui/badge"
 import { Button } from "@/src/components/ui/button"
 import { Card } from "@/src/components/ui/card"
 import { SocialLinks } from "@/src/components/ui/SocialLinks"
 import { useRouter } from "next/navigation"
-import { usePathname } from "next/navigation"
-import Image from "next/image"
 import { personalInfo } from "@/data/personal-info"
-import { useEffect, useState } from "react"
+import Hero3D from "./Hero3D"
 
 const HeroSection = () => {
     const [mounted, setMounted] = useState(false)
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-    const pathname = usePathname()
     const router = useRouter()
+    const reduceMotion = useReducedMotion()
     const { scrollY } = useScroll()
-    
+
     useEffect(() => {
         setMounted(true)
     }, [])
 
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY })
-        }
-        window.addEventListener('mousemove', handleMouseMove)
-        return () => window.removeEventListener('mousemove', handleMouseMove)
-    }, [])
-    
-    const useAvatar = mounted && pathname !== "/"
-    
-    // Parallax effects
-    const y1 = useTransform(scrollY, [0, 500], [0, -50])
-    const y2 = useTransform(scrollY, [0, 500], [0, -100])
-
-    // Enhanced Animation variants
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.3,
-            },
-        },
-    }
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 50, scale: 0.9 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            transition: {
-                duration: 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94],
-            },
-        },
-    }
-
-    const imageVariants = {
-        hidden: { opacity: 0, scale: 0.5, rotate: -20, y: 100 },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            rotate: 0,
-            y: 0,
-            transition: {
-                duration: 1.2,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.5,
-            },
-        },
-    }
-
-    const floatingVariants = {
-        animate: {
-            y: [-15, 15, -15],
-            rotate: [0, 5, -5, 0],
-            transition: {
-                duration: 8,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-            },
-        },
-    }
-
-    const pulseVariants = {
-        animate: {
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.7, 0.3],
-            transition: {
-                duration: 6,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-            },
-        },
-    }
-
-    const techIconVariants = {
-        hidden: { opacity: 0, scale: 0, rotate: -180 },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            rotate: 0,
-            transition: {
-                type: "spring",
-                stiffness: 200,
-                damping: 15,
-            },
-        },
-    }
-
-    const textGlowVariants = {
-        animate: {
-            textShadow: [
-                "0 0 20px rgba(20, 184, 166, 0.3)",
-                "0 0 30px rgba(20, 184, 166, 0.6)",
-                "0 0 20px rgba(20, 184, 166, 0.3)"
-            ],
-            transition: {
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-            },
-        },
-    }
-
-    // Use either the cartoon avatar or the actual profile image
-    const imageSrc = useAvatar ? personalInfo.myImage : personalInfo.profileImage
+    const orbOffset = useTransform(scrollY, [0, 600], [0, reduceMotion ? 0 : -80])
 
     return (
         <section
             id="home"
-            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-teal-50/40 to-indigo-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900"
             aria-label="Hero section"
         >
-            {/* Enhanced Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Animated gradient orbs */}
                 <motion.div
-                    className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-blue-400/20 rounded-full blur-xl"
-                    variants={pulseVariants}
-                    animate="animate"
-                    style={{ y: y1 }}
+                    className="absolute top-16 left-8 w-40 h-40 bg-teal-400/20 rounded-full blur-3xl"
+                    style={{ y: orbOffset }}
+                    animate={reduceMotion ? undefined : { scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+                    transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY }}
                 />
                 <motion.div
-                    className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl"
-                    variants={pulseVariants}
-                    animate="animate"
-                    style={{ y: y2, animationDelay: "2s" }}
+                    className="absolute bottom-16 right-8 w-52 h-52 bg-indigo-400/20 rounded-full blur-3xl"
+                    animate={reduceMotion ? undefined : { scale: [1.1, 1, 1.1], opacity: [0.5, 0.25, 0.5] }}
+                    transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
                 />
-                <motion.div
-                    className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-xl"
-                    variants={pulseVariants}
-                    animate="animate"
-                    style={{ animationDelay: "4s" }}
-                />
-                
-                {/* Mouse-following cursor effect */}
-                <motion.div
-                    className="absolute w-96 h-96 bg-gradient-to-r from-teal-500/10 to-indigo-500/10 rounded-full blur-3xl pointer-events-none"
-                    animate={{
-                        x: mousePosition.x - 192,
-                        y: mousePosition.y - 192,
-                    }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 50,
-                        damping: 15,
-                    }}
-                />
-                
-                {/* Floating tech icons */}
-                <motion.div
-                    className="absolute top-32 right-32 w-16 h-16 bg-white/10 dark:bg-slate-800/20 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center"
-                    variants={techIconVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: 1 }}
-                >
-                    <Code className="w-8 h-8 text-teal-500" />
-                </motion.div>
-                
-                <motion.div
-                    className="absolute bottom-32 left-32 w-16 h-16 bg-white/10 dark:bg-slate-800/20 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center"
-                    variants={techIconVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: 1.5 }}
-                >
-                    <Database className="w-8 h-8 text-blue-500" />
-                </motion.div>
-                
-                <motion.div
-                    className="absolute top-1/3 right-1/4 w-16 h-16 bg-white/10 dark:bg-slate-800/20 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center"
-                    variants={techIconVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: 2 }}
-                >
-                    <Globe className="w-8 h-8 text-indigo-500" />
-                </motion.div>
             </div>
-            <div className="container mx-auto px-4 py-12 relative z-10">
+
+            <div className="container mx-auto px-4 py-14 relative z-10">
                 <motion.div
                     className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center max-w-7xl mx-auto"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
                 >
-                    {/* Enhanced Content Section */}
-                    <motion.div className="order-2 lg:order-1 text-center lg:text-left" variants={itemVariants}>
-                        <motion.div variants={itemVariants}>
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Badge className="mb-6 px-6 py-3 text-sm font-medium bg-gradient-to-r from-teal-500/10 to-indigo-500/10 text-teal-600 dark:text-teal-400 border border-teal-200/50 dark:border-teal-400/20 hover:from-teal-500/20 hover:to-indigo-500/20 transition-all duration-300 backdrop-blur-sm shadow-lg">
-                                    <span className="relative flex items-center gap-3">
-                                        <motion.span 
-                                            className="w-2 h-2 bg-teal-500 rounded-full"
-                                            animate={{ 
-                                                scale: [1, 1.5, 1],
-                                                opacity: [0.5, 1, 0.5]
-                                            }}
-                                            transition={{ 
-                                                duration: 2, 
-                                                repeat: Number.POSITIVE_INFINITY 
-                                            }}
-                                        />
-                                        <Sparkles className="w-4 h-4 text-teal-500" />
-                                        Full-Stack Developer
-                                    </span>
-                                </Badge>
-                            </motion.div>
-                        </motion.div>
+                    <div className="order-2 lg:order-1 text-center lg:text-left">
+                        <Badge className="mb-6 px-5 py-2 text-sm font-medium bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-500/30">
+                            <span className="flex items-center gap-2">
+                                <Sparkles className="w-4 h-4" />
+                                {personalInfo.title}
+                            </span>
+                        </Badge>
 
-                        <motion.h1
-                            variants={itemVariants}
-                            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
-                        >
-                            <motion.span 
-                                className="block text-slate-900 dark:text-white"
-                                variants={textGlowVariants}
-                                animate="animate"
-                            >
-                                Hello, I&apos;m
-                            </motion.span>
-                            <motion.span 
-                                className="block bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 bg-clip-text text-transparent"
-                                whileHover={{ 
-                                    backgroundPosition: "200% center",
-                                    transition: { duration: 0.5 }
-                                }}
-                                style={{
-                                    backgroundSize: "200% 200%",
-                                    backgroundImage: "linear-gradient(45deg, #14b8a6, #3b82f6, #6366f1, #8b5cf6, #14b8a6)",
-                                    WebkitBackgroundClip: "text",
-                                    WebkitTextFillColor: "transparent",
-                                }}
-                            >
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
+                            <span className="block text-slate-900 dark:text-white">Hello, I&apos;m</span>
+                            <span className="block bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
                                 {personalInfo.fullName}
-                            </motion.span>
-                        </motion.h1>
+                            </span>
+                        </h1>
 
-                        <motion.p
-                            variants={itemVariants}
-                            className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
-                        >
-                            I&apos;m a Full Stack Developer specializing in full-stack development with Spring Boot and Next.js. I have experience building modern, responsive applications with TypeScript, PostgreSQL, and TanStack Query.
-                        </motion.p>
+                        <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            {personalInfo.description}
+                        </p>
 
-                        <motion.div
-                            variants={itemVariants}
-                            className="flex flex-col sm:flex-row gap-4 mb-8 justify-center lg:justify-start"
-                        >
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
+                        <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center lg:justify-start">
+                            <Button
+                                size="lg"
+                                className="group bg-teal-500 hover:bg-teal-600 text-white border-0 shadow-md hover:shadow-lg transition-all"
+                                onClick={() => mounted && router.push("/projects")}
                             >
-                                <Button
-                                    size="lg"
-                                    className="group bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden"
-                                    onClick={() => mounted && router.push("/projects")}
-                                >
-                                    <motion.div
-                                        className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
-                                        initial={{ x: "-100%" }}
-                                        whileHover={{ x: "100%" }}
-                                        transition={{ duration: 0.6 }}
-                                    />
-                                    <span className="relative z-10 flex items-center">
-                                        View Projects
-                                        <motion.div
-                                            whileHover={{ x: 5 }}
-                                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                                        >
-                                            <ArrowRight className="ml-2 h-4 w-4" />
-                                        </motion.div>
-                                    </span>
-                                </Button>
-                            </motion.div>
-                            
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Button
-                                    size="lg"
-                                    variant="outline"
-                                    className="group border-slate-300 dark:border-slate-600 hover:border-teal-500 dark:hover:border-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all duration-300 backdrop-blur-sm"
-                                    onClick={() => mounted && router.push("/about")}
-                                >
-                                    <motion.span
-                                        whileHover={{ scale: 1.1 }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                                    >
-                                        About Me
-                                    </motion.span>
-                                </Button>
-                            </motion.div>
-                        </motion.div>
+                                View Projects
+                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                            </Button>
 
-                        {/* Enhanced Quick Info Cards */}
-                        <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -5 }}
-                                whileTap={{ scale: 0.95 }}
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                className="border-slate-300 dark:border-slate-600 hover:border-teal-500 dark:hover:border-teal-400"
+                                onClick={() => mounted && router.push("/about")}
                             >
-                                <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:shadow-lg group">
-                                    <div className="flex items-center gap-3">
-                                        <motion.div 
-                                            className="p-2 bg-teal-100 dark:bg-teal-900/30 rounded-lg group-hover:bg-teal-200 dark:group-hover:bg-teal-900/50 transition-colors"
-                                            whileHover={{ rotate: 360 }}
-                                            transition={{ duration: 0.5 }}
-                                        >
-                                            <MapPin className="h-4 w-4 text-teal-600 dark:text-teal-400" />
-                                        </motion.div>
-                                        <div>
-                                            <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Location</p>
-                                            <p className="text-xs text-slate-600 dark:text-slate-400">Cambodia</p>
-                                        </div>
+                                About Me
+                            </Button>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                            <Card className="p-4 bg-white/70 dark:bg-slate-800/60 border-slate-200/70 dark:border-slate-700/70">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 bg-teal-100 dark:bg-teal-900/30 rounded-lg">
+                                        <MapPin className="h-4 w-4 text-teal-600 dark:text-teal-400" />
                                     </div>
-                                </Card>
-                            </motion.div>
-                            
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -5 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:shadow-lg group">
-                                    <div className="flex items-center gap-3">
-                                        <motion.div 
-                                            className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors"
-                                            whileHover={{ rotate: 360 }}
-                                            transition={{ duration: 0.5 }}
-                                        >
-                                            <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                                        </motion.div>
-                                        <div>
-                                            <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Experience</p>
-                                            <p className="text-xs text-slate-600 dark:text-slate-400">1 year and 5 months</p>
-                                        </div>
-                                    </div>
-                                </Card>
-                            </motion.div>
-                            
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -5 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Card className="p-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:shadow-lg group">
-                                    <div className="flex items-center gap-3">
-                                        <motion.div 
-                                            className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg group-hover:bg-indigo-200 dark:group-hover:bg-indigo-900/50 transition-colors"
-                                            whileHover={{ rotate: 360 }}
-                                            transition={{ duration: 0.5 }}
-                                        >
-                                            <Mail className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                                        </motion.div>
-                                        <div>
-                                            <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Status</p>
-                                            <p className="text-xs text-slate-600 dark:text-slate-400">Available</p>
-                                        </div>
-                                    </div>
-                                </Card>
-                            </motion.div>
-                        </motion.div>
-
-                        <motion.div variants={itemVariants}>
-                            <SocialLinks />
-                        </motion.div>
-                    </motion.div>
-
-                    {/* Image Section */}
-                    <motion.div className="order-1 lg:order-2 flex justify-center lg:justify-end" variants={imageVariants}>
-                        <div className="relative">
-                            {/* Floating background elements */}
-                            <motion.div
-                                className="absolute -inset-8 bg-gradient-to-br from-teal-400/20 via-blue-400/20 to-indigo-400/20 rounded-full blur-2xl"
-                                variants={floatingVariants}
-                                animate="animate"
-                            />
-
-                            {/* Main image container */}
-                            <motion.div
-                                className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96"
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                {/* Gradient border */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-teal-500 via-blue-500 to-indigo-500 rounded-full p-1">
-                                    <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full overflow-hidden">
-                                        <Image
-                                            src={imageSrc || personalInfo.profileImage || personalInfo.myImage || "/image/personal_image.jpg"}
-                                            alt={`${personalInfo.name} - Full-Stack Developer`}
-                                            fill
-                                            className={`${
-                                                useAvatar
-                                                    ? "object-contain bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900"
-                                                    : "object-cover"
-                                            } transition-transform duration-300 hover:scale-110`}
-                                            priority
-                                            sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
-                                        />
+                                    <div>
+                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Location</p>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400">{personalInfo.location}</p>
                                     </div>
                                 </div>
+                            </Card>
 
-                                {/* Status indicator */}
-                                <motion.div
-                                    className="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-br from-teal-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg z-20"
-                                    initial={{ scale: 0, rotate: -180 }}
-                                    animate={{ scale: 1, rotate: 0 }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 260,
-                                        damping: 20,
-                                        delay: 0.8,
-                                    }}
-                                    whileHover={{ rotate: 360 }}
-                                >
-                                    👨‍💻
-                                </motion.div>
+                            <Card className="p-4 bg-white/70 dark:bg-slate-800/60 border-slate-200/70 dark:border-slate-700/70">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                                        <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Experience</p>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400">{personalInfo.experience}</p>
+                                    </div>
+                                </div>
+                            </Card>
 
-                                {/* Floating tech icons */}
-                                <motion.div
-                                    className="absolute -top-6 -left-6 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center border border-slate-200 dark:border-slate-700"
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 1, duration: 0.5 }}
-                                    variants={floatingVariants}
-                                >
-                                    <span className="text-lg">⚛️</span>
-                                </motion.div>
+                            <Card className="p-4 bg-white/70 dark:bg-slate-800/60 border-slate-200/70 dark:border-slate-700/70">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
+                                        <Mail className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Email</p>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400 truncate">{personalInfo.email}</p>
+                                    </div>
+                                </div>
+                            </Card>
+                        </div>
 
-                                <motion.div
-                                    className="absolute -top-2 -right-8 w-10 h-10 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center border border-slate-200 dark:border-slate-700"
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 1.2, duration: 0.5 }}
-                                    variants={floatingVariants}
-                                    style={{ animationDelay: "1s" }}
-                                >
-                                    <span className="text-sm">🚀</span>
-                                </motion.div>
+                        <SocialLinks />
+                    </div>
 
-                                <motion.div
-                                    className="absolute -bottom-2 -left-8 w-14 h-14 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center border border-slate-200 dark:border-slate-700"
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 1.4, duration: 0.5 }}
-                                    variants={floatingVariants}
-                                    style={{ animationDelay: "2s" }}
-                                >
-                                    <span className="text-lg">💻</span>
-                                </motion.div>
-                            </motion.div>
+                    <motion.div
+                        className="order-1 lg:order-2 flex justify-center lg:justify-end w-full h-[500px]"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2, duration: 0.6 }}
+                    >
+                        <div className="relative w-full h-full">
+                            <Hero3D />
                         </div>
                     </motion.div>
                 </motion.div>
             </div>
-
-            {/* Scroll indicator */}
-            <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2, duration: 0.5 }}
-            >
-                <motion.div
-                    className="w-6 h-10 border-2 border-slate-400 dark:border-slate-600 rounded-full flex justify-center"
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                >
-                    <motion.div
-                        className="w-1 h-3 bg-slate-400 dark:bg-slate-600 rounded-full mt-2"
-                        animate={{ y: [0, 12, 0] }}
-                        transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                    />
-                </motion.div>
-            </motion.div>
         </section>
     )
 }

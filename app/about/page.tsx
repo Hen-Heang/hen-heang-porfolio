@@ -28,6 +28,21 @@ import { ExperienceSection } from "@/src/components/sections/experience/Experien
 
 export default function AboutPage() {
     const router = useRouter()
+    const aboutSummary = [
+        "I’m a Full-Stack Developer who builds web applications end-to-end - from frontend screens to backend APIs and databases. I’ve worked in both Cambodia and South Korea, and I’m currently based in Seoul at Webcash.",
+        "In my work, I develop frontend pages with HTML/CSS and JavaScript (including jQuery), and I also build backend services with Java and MyBatis. I regularly work with SQL to design queries, connect APIs to the database, and improve performance and stability. I’m used to working in enterprise environments where clean code, reliable releases, and teamwork matter.",
+        "I enjoy solving real business problems, collaborating closely with teammates, and continuously improving my skills in system design, database architecture, and scalable web development.",
+    ]
+    const linkedinCoreSkills = [
+        "Java",
+        "Spring Boot",
+        "MyBatis",
+        "SQL",
+        "JavaScript",
+        "jQuery",
+        "HTML/CSS",
+        "REST APIs",
+    ]
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -98,8 +113,8 @@ export default function AboutPage() {
                         <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent">
                             About Me
                         </h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                            {personalInfo.description}
+                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                            {aboutSummary[0]}
                         </p>
                     </motion.div>
 
@@ -133,9 +148,9 @@ export default function AboutPage() {
                             <div className="grid sm:grid-cols-2 gap-4">
                                 <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
                                     <Mail className="text-teal-600 dark:text-teal-400" size={20} />
-                                    <div>
+                                    <div className="min-w-0">
                                         <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                                        <p className="font-medium">{personalInfo.email}</p>
+                                        <p className="font-medium truncate">{personalInfo.email}</p>
                                     </div>
                                 </div>
 
@@ -164,6 +179,26 @@ export default function AboutPage() {
                                 </div>
                             </div>
                         </div>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants} className="mb-16">
+                        <Card className="p-8 bg-white/95 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-700">
+                            <CardContent className="p-0 space-y-5">
+                                <h2 className="text-3xl font-bold">Professional Summary</h2>
+                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{aboutSummary[1]}</p>
+                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{aboutSummary[2]}</p>
+                                <div>
+                                    <p className="font-semibold mb-3">Core Skills</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {linkedinCoreSkills.map((skill) => (
+                                            <Badge key={skill} variant="secondary" className="text-sm">
+                                                {skill}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
 
                     {/* Core Values */}

@@ -4,14 +4,12 @@
 
 @layer base {
   :root {
-    /* Base */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
 
-    /* Brand & Accent */
     --primary: 142.1 76.2% 36.3%;
     --primary-foreground: 355.7 100% 97.3%;
     --secondary: 240 4.8% 95.9%;
@@ -21,30 +19,24 @@
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
 
-    /* Surfaces */
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    /* Status */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-
-    /* Shadcn Radius */
     --radius: 0.5rem;
   }
 
   .dark {
-    /* Base */
-    --background: 220 20% 9%; /* Softer dark background */
-    --foreground: 210 20% 95%; /* Light gray text */
+    --background: 220 20% 9%;
+    --foreground: 210 20% 95%;
     --border: 215 15% 25%;
     --input: 215 15% 25%;
     --ring: 160 50% 50%;
 
-    /* Brand & Accent */
-    --primary: 160 50% 50%; /* A subtle teal */
+    --primary: 160 50% 50%;
     --primary-foreground: 210 20% 95%;
     --secondary: 215 15% 15%;
     --secondary-foreground: 210 20% 95%;
@@ -53,72 +45,65 @@
     --accent: 215 15% 25%;
     --accent-foreground: 210 20% 95%;
 
-    /* Surfaces */
-    --card: 215 15% 12%; /* Dark card background */
+    --card: 215 15% 12%;
     --card-foreground: 210 20% 95%;
     --popover: 215 15% 10%;
     --popover-foreground: 210 20% 95%;
 
-    /* Status */
     --destructive: 0 70% 45%;
     --destructive-foreground: 210 20% 95%;
   }
 
-  .icon-wrapper {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border-radius: 50%;
+  * {
+    @apply border-border;
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-      background-color: #0b1224;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 35%),
-        radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.16), transparent 30%),
-        radial-gradient(circle at 15% 70%, rgba(34, 197, 94, 0.12), transparent 28%),
-        linear-gradient(120deg, rgba(14, 165, 233, 0.06), rgba(67, 56, 202, 0.06)),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size:
-        100% 100%,
-        100% 100%,
-        100% 100%,
-        100% 100%,
-        120px 120px,
-        120px 120px;
-      background-attachment: fixed;
-      background-blend-mode: screen, screen, screen, normal, overlay, overlay;
-    }
-    .dark body {
-      background-color: #050915;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.14), transparent 35%),
-        radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.18), transparent 30%),
-        radial-gradient(circle at 15% 70%, rgba(34, 197, 94, 0.14), transparent 28%),
-        linear-gradient(120deg, rgba(14, 165, 233, 0.12), rgba(67, 56, 202, 0.12)),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size:
-        100% 100%,
-        100% 100%,
-        100% 100%,
-        100% 100%,
-        120px 120px,
-        120px 120px;
-      background-attachment: fixed;
-      background-blend-mode: screen, screen, screen, normal, overlay, overlay;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.08), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(99, 102, 241, 0.1), transparent 34%),
+      linear-gradient(120deg, rgba(15, 23, 42, 0.02), rgba(30, 41, 59, 0.01));
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.14), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(99, 102, 241, 0.16), transparent 34%),
+      linear-gradient(120deg, rgba(2, 6, 23, 0.35), rgba(15, 23, 42, 0.2));
+    background-attachment: fixed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
     }
+  }
+}
+
+@layer components {
+  .section-base {
+    @apply py-20;
+  }
+
+  .section-muted {
+    @apply bg-slate-50/70 dark:bg-slate-900/40;
+  }
+
+  .section-plain {
+    @apply bg-transparent;
+  }
+
+  .surface-card {
+    @apply bg-white/80 dark:bg-slate-900/65 border border-slate-200/70 dark:border-slate-700/70 backdrop-blur-sm;
+  }
+
+  .surface-soft {
+    @apply bg-white/65 dark:bg-slate-900/45 border border-slate-200/60 dark:border-slate-700/60 backdrop-blur-sm;
   }
 }
