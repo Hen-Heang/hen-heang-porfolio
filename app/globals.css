@@ -8,10 +8,12 @@
     --foreground: 240 10% 3.9%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
+    --ring: 240 10% 3.9%; /* Black focus ring for clean aesthetic */
 
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
+    /* Accent color: A refined, darker teal/slate */
+    --primary: 240 10% 3.9%;
+    --primary-foreground: 0 0% 98%;
+    
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
@@ -26,32 +28,35 @@
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --radius: 0.5rem;
+    
+    /* Slightly sharper corners for minimalist look */
+    --radius: 0.35rem;
   }
 
   .dark {
-    --background: 220 20% 9%;
-    --foreground: 210 20% 95%;
-    --border: 215 15% 25%;
-    --input: 215 15% 25%;
-    --ring: 160 50% 50%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
 
-    --primary: 160 50% 50%;
-    --primary-foreground: 210 20% 95%;
-    --secondary: 215 15% 15%;
-    --secondary-foreground: 210 20% 95%;
-    --muted: 215 15% 15%;
-    --muted-foreground: 210 10% 65%;
-    --accent: 215 15% 25%;
-    --accent-foreground: 210 20% 95%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
-    --card: 215 15% 12%;
-    --card-foreground: 210 20% 95%;
-    --popover: 215 15% 10%;
-    --popover-foreground: 210 20% 95%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 210 20% 95%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
   }
 
   * {
@@ -63,20 +68,8 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.08), transparent 40%),
-      radial-gradient(circle at 85% 0%, rgba(99, 102, 241, 0.1), transparent 34%),
-      linear-gradient(120deg, rgba(15, 23, 42, 0.02), rgba(30, 41, 59, 0.01));
-    background-attachment: fixed;
-  }
-
-  .dark body {
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.14), transparent 40%),
-      radial-gradient(circle at 85% 0%, rgba(99, 102, 241, 0.16), transparent 34%),
-      linear-gradient(120deg, rgba(2, 6, 23, 0.35), rgba(15, 23, 42, 0.2));
-    background-attachment: fixed;
+    @apply bg-background text-foreground antialiased;
+    /* Clean, solid background. No gradients. */
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -88,22 +81,23 @@
 
 @layer components {
   .section-base {
-    @apply py-20;
+    @apply py-24; /* Slightly more padding for airy feel */
   }
 
   .section-muted {
-    @apply bg-slate-50/70 dark:bg-slate-900/40;
+    @apply bg-zinc-50 dark:bg-zinc-900/50;
   }
 
   .section-plain {
     @apply bg-transparent;
   }
 
+  /* Flat, clean cards instead of glassmorphism */
   .surface-card {
-    @apply bg-white/80 dark:bg-slate-900/65 border border-slate-200/70 dark:border-slate-700/70 backdrop-blur-sm;
+    @apply bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm transition-shadow hover:shadow-md;
   }
 
   .surface-soft {
-    @apply bg-white/65 dark:bg-slate-900/45 border border-slate-200/60 dark:border-slate-700/60 backdrop-blur-sm;
+    @apply bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800;
   }
 }

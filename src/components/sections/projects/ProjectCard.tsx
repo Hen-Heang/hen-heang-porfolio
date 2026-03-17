@@ -24,64 +24,54 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
             className={onClick ? "cursor-pointer" : ""}
             whileHover={{ y: -6 }}
         >
-            <Card className="overflow-hidden h-full surface-card group hover:shadow-2xl">
-                <div className="relative overflow-hidden">
+            <Card className="overflow-hidden h-full border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-sm transition-all duration-300 hover:shadow-md group">
+                <div className="relative overflow-hidden aspect-video">
                     <Image
                         src={project.image || "/image/placeholder_image.png"}
                         alt={project.title}
                         width={400}
-                        height={200}
-                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                        height={225}
+                        className="w-full h-full object-cover grayscale-[0.2] transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
                     />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
-                        <div className="flex gap-2">
-                            <a
-                                href={project.github}
-                                className="p-2.5 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors border border-white/20"
-                                onClick={(e) => e.stopPropagation()}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Github size={17} className="text-white" />
-                            </a>
-                            <a
-                                href={project.demo}
-                                className="p-2.5 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors border border-white/20"
-                                onClick={(e) => e.stopPropagation()}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <ExternalLink size={17} className="text-white" />
-                            </a>
-                        </div>
-
-                        <button
-                            className="px-3 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-full text-xs font-medium transition-colors flex items-center gap-1.5"
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                if (onClick) onClick()
-                            }}
-                        >
-                            <Eye size={14} />
-                            Details
-                        </button>
-                    </div>
                 </div>
 
                 <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-2 text-slate-900 dark:text-slate-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
-                        {project.title}
-                    </h3>
+                    <div className="flex justify-between items-start mb-4">
+                        <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors">
+                            {project.title}
+                        </h3>
+                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+                            <a
+                                href={project.github}
+                                className="p-2 rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                                onClick={(e) => e.stopPropagation()}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Github size={16} className="text-zinc-700 dark:text-zinc-300" />
+                            </a>
+                            <a
+                                href={project.demo}
+                                className="p-2 rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                                onClick={(e) => e.stopPropagation()}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <ExternalLink size={16} className="text-zinc-700 dark:text-zinc-300" />
+                            </a>
+                        </div>
+                    </div>
 
-                    <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">{project.description}</p>
+                    <p className="text-zinc-600 dark:text-zinc-400 mb-6 text-sm leading-relaxed line-clamp-2">
+                        {project.description}
+                    </p>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                         {project.technologies.map((tech) => (
                             <Badge
                                 key={tech}
                                 variant="outline"
-                                className="bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-700"
+                                className="bg-zinc-50 dark:bg-zinc-900 text-[10px] text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800"
                             >
                                 {tech}
                             </Badge>

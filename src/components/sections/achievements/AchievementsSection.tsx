@@ -25,8 +25,8 @@ export function AchievementsSection() {
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Achievements"
-                    title="Achievements & Certificates"
-                    description="My academic and professional accomplishments"
+                    title="Recognition & Credentials"
+                    description="Academic milestones and professional certifications."
                 />
 
                 <motion.div
@@ -34,7 +34,7 @@ export function AchievementsSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="mt-12 space-y-12"
+                    className="mt-12 space-y-16"
                 >
                     {groupedAchievements.map((group, groupIndex) => (
                         <motion.div
@@ -43,23 +43,23 @@ export function AchievementsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: groupIndex * 0.1 }}
                             viewport={{ once: true }}
-                            className="space-y-6"
+                            className="space-y-8"
                         >
                             {/* Group Header */}
-                            <div className="flex items-center space-x-4 mb-6">
+                            <div className="flex items-center space-x-4 border-b border-zinc-100 dark:border-zinc-900 pb-4">
                                 <div className="flex items-center space-x-3">
-                                    <Building className="w-6 h-6 text-teal-500" />
-                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                                    <Building className="w-5 h-5 text-zinc-400" />
+                                    <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-tight">
                                         {group.issuer}
                                     </h2>
                                 </div>
-                                <Badge variant="outline" className="text-sm">
+                                <Badge variant="outline" className="text-xs border-zinc-200 dark:border-zinc-800 text-zinc-500">
                                     {group.year}
                                 </Badge>
                             </div>
 
                             {/* Achievements Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {group.achievements.map((achievement, index) => (
                                     <motion.div
                                         key={achievement.id}
@@ -67,43 +67,41 @@ export function AchievementsSection() {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.6, delay: (groupIndex * 0.1) + (index * 0.05) }}
                                         viewport={{ once: true }}
-                                        whileHover={{ y: -5 }}
+                                        whileHover={{ y: -4 }}
                                     >
-                                        <Card className="h-full surface-card hover:shadow-lg transition-all duration-300 border-2 hover:border-teal-500 dark:hover:border-teal-400">
+                                        <Card className="h-full border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:shadow-md transition-all duration-300">
                                             <CardContent className="p-6">
-                                                <div className="flex items-start justify-between mb-4">
-                                                    <div className="flex items-center space-x-3">
+                                                <div className="flex items-start justify-between mb-6">
+                                                    <div className="p-2.5 bg-zinc-100 dark:bg-zinc-900 rounded-lg">
                                                         {achievement.type === 'certificate' && (
-                                                            <Award className="w-8 h-8 text-teal-500" />
+                                                            <Award className="w-6 h-6 text-zinc-900 dark:text-zinc-100" />
                                                         )}
                                                         {achievement.type === 'graduation' && (
-                                                            <GraduationCap className="w-8 h-8 text-blue-500" />
+                                                            <GraduationCap className="w-6 h-6 text-zinc-900 dark:text-zinc-100" />
                                                         )}
                                                         {achievement.type === 'award' && (
-                                                            <Trophy className="w-8 h-8 text-yellow-500" />
+                                                            <Trophy className="w-6 h-6 text-zinc-900 dark:text-zinc-100" />
                                                         )}
                                                     </div>
-                                                    <Badge variant="secondary" className="text-xs">
-                                                        {achievement.type === 'certificate' ? 'Certificate' : 
-                                                         achievement.type === 'graduation' ? 'Graduation' : 
-                                                         achievement.type === 'award' ? 'Award' : achievement.type}
+                                                    <Badge variant="secondary" className="text-[10px] uppercase tracking-wider bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-0">
+                                                        {achievement.type}
                                                     </Badge>
                                                 </div>
 
-                                                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                                                <h3 className="text-lg font-semibold mb-2 text-zinc-900 dark:text-zinc-100 leading-tight">
                                                     {achievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
                                                      achievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
                                                      achievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
                                                      achievement.titleKey}
                                                 </h3>
 
-                                                <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-4">
-                                                    <Calendar className="w-4 h-4 mr-1" />
+                                                <div className="flex items-center text-xs text-zinc-500 dark:text-zinc-500 mb-4">
+                                                    <Calendar className="w-3.5 h-3.5 mr-1.5" />
                                                     {achievement.date}
                                                 </div>
 
                                                 {achievement.descriptionKey && (
-                                                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed line-clamp-3">
                                                         {achievement.descriptionKey === 'achievements.bachelorsDescription' ? "Graduated with honors in Computer Science with focus on web development and software engineering." :
                                                          achievement.descriptionKey === 'achievements.kshrdBasicDescription' ? "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge." :
                                                          achievement.descriptionKey === 'achievements.kshrdAdvancedDescription' ? "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise." :
@@ -112,44 +110,43 @@ export function AchievementsSection() {
                                                 )}
 
                                                 {achievement.image && (
-                                                    <div className="relative overflow-hidden rounded-lg mb-4">
+                                                    <div className="relative overflow-hidden rounded-xl mb-6 aspect-video border border-zinc-100 dark:border-zinc-900">
                                                         <Image
                                                             src={achievement.image}
-                                                            alt={achievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
-                                                                 achievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
-                                                                 achievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
-                                                                 achievement.titleKey}
-                                                            width={400}
-                                                            height={128}
-                                                            className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                                                            alt={achievement.titleKey}
+                                                            fill
+                                                            className="object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500 cursor-pointer"
                                                             onClick={() => openModal(achievement)}
                                                         />
-                                                        <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                                                            <Eye className="w-6 h-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                                                        <div 
+                                                            className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-all duration-300 flex items-center justify-center group cursor-pointer"
+                                                            onClick={() => openModal(achievement)}
+                                                        >
+                                                            <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                                                         </div>
                                                     </div>
                                                 )}
 
-                                                <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-4">
                                                     {achievement.link && (
                                                         <a
                                                             href={achievement.link}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="inline-flex items-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
+                                                            className="inline-flex items-center text-xs font-semibold text-zinc-900 dark:text-zinc-100 hover:opacity-70 transition-opacity"
                                                         >
-                                                            View Certificate
-                                                            <ExternalLink className="w-4 h-4 ml-1" />
+                                                            Verify
+                                                            <ExternalLink className="w-3 h-3 ml-1" />
                                                         </a>
                                                     )}
                                                     
                                                     {achievement.image && (
                                                         <button
                                                             onClick={() => openModal(achievement)}
-                                                            className="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                                                            className="inline-flex items-center text-xs font-semibold text-zinc-900 dark:text-zinc-100 hover:opacity-70 transition-opacity"
                                                         >
-                                                            View Details
-                                                            <Eye className="w-4 h-4 ml-1" />
+                                                            Details
+                                                            <Eye className="w-3 h-3 ml-1" />
                                                         </button>
                                                     )}
                                                 </div>
@@ -170,29 +167,25 @@ export function AchievementsSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+                        className="fixed inset-0 bg-zinc-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
                         onClick={closeModal}
                     >
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
+                            initial={{ scale: 0.95, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            className="surface-card rounded-lg max-w-6xl w-full max-h-[95vh] overflow-y-auto"
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="p-6">
-                                <div className="flex items-center justify-between mb-6">
+                            <div className="flex flex-col h-full">
+                                <div className="flex items-center justify-between p-6 border-b border-zinc-100 dark:border-zinc-900">
                                     <div className="flex items-center space-x-3">
-                                        {selectedAchievement.type === 'certificate' && (
-                                            <Award className="w-8 h-8 text-teal-500" />
-                                        )}
-                                        {selectedAchievement.type === 'graduation' && (
-                                            <GraduationCap className="w-8 h-8 text-blue-500" />
-                                        )}
-                                        {selectedAchievement.type === 'award' && (
-                                            <Trophy className="w-8 h-8 text-yellow-500" />
-                                        )}
-                                        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                                        <div className="p-2 bg-zinc-100 dark:bg-zinc-900 rounded-lg">
+                                            {selectedAchievement.type === 'certificate' ? <Award className="w-5 h-5" /> : 
+                                             selectedAchievement.type === 'graduation' ? <GraduationCap className="w-5 h-5" /> : 
+                                             <Trophy className="w-5 h-5" />}
+                                        </div>
+                                        <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
                                             {selectedAchievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
                                              selectedAchievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
                                              selectedAchievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
@@ -201,70 +194,62 @@ export function AchievementsSection() {
                                     </div>
                                     <button
                                         onClick={closeModal}
-                                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+                                        className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full transition-colors"
                                     >
-                                        <X className="w-6 h-6 text-gray-500" />
+                                        <X className="w-5 h-5 text-zinc-500" />
                                     </button>
                                 </div>
 
-                                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                    <div>
-                                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
-                                            <Building className="w-4 h-4 mr-2" />
-                                            <span className="font-medium">Issuer:</span>
-                                            <span className="ml-2">{selectedAchievement.issuer}</span>
+                                <div className="flex-1 overflow-y-auto p-8">
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                        <div className="space-y-8">
+                                            <div className="space-y-4">
+                                                <div className="flex items-center text-sm text-zinc-500">
+                                                    <Building className="w-4 h-4 mr-3" />
+                                                    <span className="font-medium mr-2 text-zinc-900 dark:text-zinc-100">Issuer:</span>
+                                                    {selectedAchievement.issuer}
+                                                </div>
+                                                <div className="flex items-center text-sm text-zinc-500">
+                                                    <Calendar className="w-4 h-4 mr-3" />
+                                                    <span className="font-medium mr-2 text-zinc-900 dark:text-zinc-100">Date:</span>
+                                                    {selectedAchievement.date}
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                <h4 className="text-sm font-bold uppercase tracking-widest text-zinc-400">Description</h4>
+                                                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                                                    {selectedAchievement.descriptionKey === 'achievements.bachelorsDescription' ? "Graduated with honors in Computer Science with focus on web development and software engineering." :
+                                                     selectedAchievement.descriptionKey === 'achievements.kshrdBasicDescription' ? "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge." :
+                                                     selectedAchievement.descriptionKey === 'achievements.kshrdAdvancedDescription' ? "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise." :
+                                                     selectedAchievement.descriptionKey}
+                                                </p>
+                                            </div>
+
+                                            {selectedAchievement.link && (
+                                                <a
+                                                    href={selectedAchievement.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center px-6 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-semibold transition-all hover:shadow-md"
+                                                >
+                                                    Verify Online
+                                                    <ExternalLink className="w-4 h-4 ml-2" />
+                                                </a>
+                                            )}
                                         </div>
-                                        
-                                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
-                                            <Calendar className="w-4 h-4 mr-2" />
-                                            <span className="font-medium">Date:</span>
-                                            <span className="ml-2">{selectedAchievement.date}</span>
-                                        </div>
 
-                                        <Badge variant="secondary" className="mb-4">
-                                            {selectedAchievement.type === 'certificate' ? 'Certificate' : 
-                                             selectedAchievement.type === 'graduation' ? 'Graduation' : 
-                                             selectedAchievement.type === 'award' ? 'Award' : selectedAchievement.type}
-                                        </Badge>
-
-                                        {selectedAchievement.descriptionKey && (
-                                            <p className="text-gray-600 dark:text-gray-400 mb-4">
-                                                {selectedAchievement.descriptionKey === 'achievements.bachelorsDescription' ? "Graduated with honors in Computer Science with focus on web development and software engineering." :
-                                                 selectedAchievement.descriptionKey === 'achievements.kshrdBasicDescription' ? "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge." :
-                                                 selectedAchievement.descriptionKey === 'achievements.kshrdAdvancedDescription' ? "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise." :
-                                                 selectedAchievement.descriptionKey}
-                                            </p>
-                                        )}
-
-                                        {selectedAchievement.link && (
-                                            <a
-                                                href={selectedAchievement.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
-                                            >
-                                                View Certificate Online
-                                                <ExternalLink className="w-4 h-4 ml-1" />
-                                            </a>
-                                        )}
-                                    </div>
-
-                                    {selectedAchievement.image && (
-                                        <div className="flex items-center justify-center">
-                                            <div className="relative w-full">
-                                                                                                                                                 <Image
+                                        {selectedAchievement.image && (
+                                            <div className="relative aspect-[4/3] lg:aspect-auto w-full border border-zinc-100 dark:border-zinc-900 rounded-xl overflow-hidden shadow-sm">
+                                                <Image
                                                     src={selectedAchievement.image}
-                                                    alt={selectedAchievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
-                                                           selectedAchievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
-                                                           selectedAchievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
-                                                           selectedAchievement.titleKey}
-                                                    width={800}
-                                                    height={600}
-                                                    className="w-full h-auto max-h-[70vh] object-contain rounded-lg shadow-lg"
+                                                    alt="Achievement Detail"
+                                                    fill
+                                                    className="object-contain bg-zinc-50 dark:bg-zinc-900"
                                                 />
                                             </div>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>

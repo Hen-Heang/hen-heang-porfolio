@@ -8,15 +8,15 @@ import Image from 'next/image'
 export default function BlogPage() {
     return (
         <PageLayout>
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+            <div className="min-h-screen bg-transparent">
                 <div className="container mx-auto px-4 py-20">
                     <div className="max-w-6xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-16">
-                            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent">
-                                My Blog
+                            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-900 dark:text-zinc-100">
+                                Blog Insights
                             </h1>
-                            <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                            <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
                                 Thoughts, tutorials, and insights about web development, technology, and my journey as a developer.
                             </p>
                         </div>
@@ -29,14 +29,14 @@ export default function BlogPage() {
                                     href={`/blog/${post.slug}`}
                                     className="group block"
                                 >
-                                    <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
+                                    <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
                                         {/* Blog Post Image */}
                                         <div className="h-48 relative overflow-hidden">
                                             <Image 
                                                 src={post.image} 
                                                 alt={post.title}
                                                 fill
-                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                                className="object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             />
                                         </div>
@@ -44,26 +44,26 @@ export default function BlogPage() {
                                         <div className="p-6">
                                             {/* Category Badge */}
                                             <div className="mb-4">
-                                                <Badge className="bg-teal-500/90 text-white border-0">
+                                                <Badge className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-0">
                                                     {post.category}
                                                 </Badge>
                                             </div>
 
                                             {/* Title */}
-                                            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-3 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+                                            <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors line-clamp-2">
                                                 {post.title}
                                             </h3>
 
                                             {/* Excerpt */}
-                                            <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
+                                            <p className="text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-3 text-sm leading-relaxed">
                                                 {post.excerpt}
                                             </p>
 
                                             {/* Metadata */}
-                                            <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400 mb-4">
+                                            <div className="flex items-center gap-4 text-xs text-zinc-500 dark:text-zinc-500 mb-4">
                                                 <div className="flex items-center gap-1">
                                                     <Calendar size={14} />
-                                                    {new Date(post.date).toLocaleDateString()}
+                                                    {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                                                 </div>
                                                 <div className="flex items-center gap-1">
                                                     <Clock size={14} />
@@ -72,7 +72,7 @@ export default function BlogPage() {
                                             </div>
 
                                             {/* Read More */}
-                                            <div className="flex items-center gap-2 text-teal-600 dark:text-teal-400 font-medium group-hover:gap-3 transition-all duration-300">
+                                            <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-medium group-hover:gap-3 transition-all duration-300 text-sm">
                                                 <span>Read More</span>
                                                 <ArrowRight size={16} />
                                             </div>
@@ -83,16 +83,16 @@ export default function BlogPage() {
                         </div>
 
                         {/* Categories */}
-                        <div className="mt-16 pt-8 border-t border-slate-200/50 dark:border-slate-700/50">
-                            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-6 text-center">
+                        <div className="mt-20 pt-12 border-t border-zinc-200 dark:border-zinc-800 text-center">
+                            <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-8">
                                 Browse by Category
                             </h3>
-                            <div className="flex flex-wrap justify-center gap-4">
+                            <div className="flex flex-wrap justify-center gap-3">
                                 {Array.from(new Set(blogPosts.map(post => post.category))).map((category) => (
                                     <Link
                                         key={category}
                                         href={`/blog?category=${category.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className="px-6 py-3 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-slate-700/50 hover:bg-teal-50 dark:hover:bg-teal-900/20 hover:border-teal-300 dark:hover:border-teal-600 transition-all duration-300"
+                                        className="px-6 py-2.5 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-900 dark:hover:border-zinc-100 transition-all duration-300 text-sm font-medium"
                                     >
                                         {category}
                                     </Link>

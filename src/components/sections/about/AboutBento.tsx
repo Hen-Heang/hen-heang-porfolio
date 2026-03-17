@@ -1,9 +1,8 @@
 "use client"
 
 import { BentoGrid, BentoGridItem } from "@/src/components/ui/BentoGrid"
-import { IconClipboardCopy, IconFileBroken, IconSignature, IconTableColumn } from "@tabler/icons-react"
 import { motion } from "framer-motion"
-import { Code, Database, Globe, Server, Cpu, Layers } from "lucide-react"
+import { ClipboardCopy, FileX, PenLine, Columns2, Code, Database, Globe, Server, Cpu } from "lucide-react"
 
 export function AboutBento() {
     return (
@@ -12,28 +11,28 @@ export function AboutBento() {
                 title="Full Stack Developer"
                 description="I specialize in building robust applications with Spring Boot and Next.js."
                 header={<CodeSnippet />}
-                icon={<IconClipboardCopy className="h-4 w-4 text-neutral-500" />}
+                icon={<ClipboardCopy className="h-4 w-4 text-neutral-500" />}
                 className="md:col-span-2"
             />
             <BentoGridItem
                 title="Tech Enthusiast"
                 description="Always exploring new technologies like Three.js and AI integration."
                 header={<TechStackViz />}
-                icon={<IconFileBroken className="h-4 w-4 text-neutral-500" />}
+                icon={<FileX className="h-4 w-4 text-neutral-500" />}
                 className="md:col-span-1"
             />
             <BentoGridItem
                 title="Problem Solver"
                 description="Turning complex requirements into clean, maintainable code."
                 header={<LogicViz />}
-                icon={<IconSignature className="h-4 w-4 text-neutral-500" />}
+                icon={<PenLine className="h-4 w-4 text-neutral-500" />}
                 className="md:col-span-1"
             />
             <BentoGridItem
                 title="Constantly Learning"
                 description="Currently diving deep into Advanced React Patterns and System Design."
                 header={<TopicsList />}
-                icon={<IconTableColumn className="h-4 w-4 text-neutral-500" />}
+                icon={<Columns2 className="h-4 w-4 text-neutral-500" />}
                 className="md:col-span-2"
             />
         </BentoGrid>

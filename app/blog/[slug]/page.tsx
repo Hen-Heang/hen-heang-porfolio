@@ -1,14 +1,57 @@
+import type { Metadata } from "next"
 import { notFound } from 'next/navigation'
 import { getPostBySlug, blogPosts } from '@/src/data/blog-posts'
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { Badge } from "@/src/components/ui/badge"
-import { BlogPostRenderer } from "@/src/components/ui/BlogPostRenderer"
+import dynamic from "next/dynamic"
+
+const BlogPostRenderer = dynamic(
+    () => import("@/src/components/ui/BlogPostRenderer").then(m => ({ default: m.BlogPostRenderer })),
+    {
+        loading: () => (
+            <div className="space-y-4 animate-pulse">
+                {[...Array(6)].map((_, i) => (
+                    <div key={i} className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" style={{ width: `${85 + Math.random() * 15}%` }} />
+                ))}
+            </div>
+        ),
+    }
+)
 import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react"
 import Link from 'next/link'
 import Image from 'next/image'
 
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+    const { slug } = await params
+    const post = getPostBySlug(slug)
+
+    if (!post) return {}
+
+    return {
+        title: post.title,
+        description: post.excerpt,
+        keywords: post.tags,
+        openGraph: {
+            type: "article",
+            title: post.title,
+            description: post.excerpt,
+            url: `https://hen-heang.vercel.app/blog/${post.slug}`,
+            images: [{ url: post.image, alt: post.title }],
+            publishedTime: post.date,
+            authors: [post.author],
+            tags: post.tags,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: post.excerpt,
+            images: [post.image],
+        },
+    }
 }
 
 export async function generateStaticParams() {

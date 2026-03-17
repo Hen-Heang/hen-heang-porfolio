@@ -72,29 +72,28 @@ export default function AboutPage() {
             icon: Code, 
             title: "Clean Code", 
             description: "Writing maintainable, readable, and efficient code that others can easily understand and build upon.",
-            color: "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400" 
+            color: "bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100" 
         },
         {
             icon: Target,
             title: "Problem Solving",
             description: "Approaching complex challenges with analytical thinking and creative solutions.",
-            color: "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+            color: "bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100",
         },
         {
             icon: Users,
             title: "Team Collaboration",
             description: "Working effectively with cross-functional teams to deliver exceptional results.",
-            color: "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
+            color: "bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100",
         },
         {
             icon: Zap,
             title: "Continuous Learning",
             description: "Staying updated with the latest technologies and best practices in software development.",
-            color: "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400",
+            color: "bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100",
         },
     ]
 
-    // Helper function to get skills by category
     const getSkillsByCategory = (category: string): SkillItem[] => {
         return skills.find(skill => skill.category.toLowerCase() === category.toLowerCase())?.items || []
     }
@@ -110,10 +109,10 @@ export default function AboutPage() {
                 >
                     {/* Hero Section */}
                     <motion.div variants={itemVariants} className="text-center mb-16">
-                        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent">
+                        <h1 className="text-5xl font-bold mb-6 text-zinc-900 dark:text-zinc-100">
                             About Me
                         </h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                        <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-4xl mx-auto leading-relaxed">
                             {aboutSummary[0]}
                         </p>
                     </motion.div>
@@ -123,58 +122,57 @@ export default function AboutPage() {
                         {/* Profile Image */}
                         <div className="lg:col-span-1">
                             <div className="relative">
-                                <div className="w-full aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                                <div className="w-full aspect-square rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-sm group">
                                     <Image
                                         src={personalInfo.myImage}
                                         alt={personalInfo.fullName || personalInfo.name}
                                         fill
-                                        className="object-cover object-center"
+                                        className="object-cover object-center grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                                         style={{ objectPosition: 'center 25%' }}
                                     />
                                 </div>
-                                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/20 to-indigo-500/20 rounded-2xl" />
                             </div>
                         </div>
 
                         {/* Personal Info */}
                         <div className="lg:col-span-2 space-y-6">
                             <div>
-                                <h2 className="text-3xl font-bold mb-4">{personalInfo.fullName || personalInfo.name}</h2>
-                                <p className="text-xl text-teal-600 dark:text-teal-400 font-medium mb-6">
+                                <h2 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">{personalInfo.fullName || personalInfo.name}</h2>
+                                <p className="text-xl text-zinc-600 dark:text-zinc-400 font-medium mb-6">
                                     {personalInfo.title}
                                 </p>
                             </div>
 
                             <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-                                    <Mail className="text-teal-600 dark:text-teal-400" size={20} />
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm">
+                                    <Mail className="text-zinc-900 dark:text-zinc-100" size={20} />
                                     <div className="min-w-0">
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                                        <p className="font-medium truncate">{personalInfo.email}</p>
+                                        <p className="text-sm text-zinc-500 dark:text-zinc-500">Email</p>
+                                        <p className="font-medium truncate text-zinc-900 dark:text-zinc-100">{personalInfo.email}</p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-                                    <MapPin className="text-teal-600 dark:text-teal-400" size={20} />
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm">
+                                    <MapPin className="text-zinc-900 dark:text-zinc-100" size={20} />
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
-                                        <p className="font-medium">{personalInfo.location}</p>
+                                        <p className="text-sm text-zinc-500 dark:text-zinc-500">Location</p>
+                                        <p className="font-medium text-zinc-900 dark:text-zinc-100">{personalInfo.location}</p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-                                    <Calendar className="text-teal-600 dark:text-teal-400" size={20} />
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm">
+                                    <Calendar className="text-zinc-900 dark:text-zinc-100" size={20} />
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Experience</p>
-                                        <p className="font-medium">{personalInfo.experience}</p>
+                                        <p className="text-sm text-zinc-500 dark:text-zinc-500">Experience</p>
+                                        <p className="font-medium text-zinc-900 dark:text-zinc-100">{personalInfo.experience}</p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-                                    <Award className="text-teal-600 dark:text-teal-400" size={20} />
+                                <div className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm">
+                                    <Award className="text-zinc-900 dark:text-zinc-100" size={20} />
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Focus</p>
-                                        <p className="font-medium">Full-Stack Development</p>
+                                        <p className="text-sm text-zinc-500 dark:text-zinc-500">Focus</p>
+                                        <p className="font-medium text-zinc-900 dark:text-zinc-100">Full-Stack Development</p>
                                     </div>
                                 </div>
                             </div>
@@ -182,16 +180,16 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div variants={itemVariants} className="mb-16">
-                        <Card className="p-8 bg-white/95 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-700">
+                        <Card className="p-8 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800">
                             <CardContent className="p-0 space-y-5">
-                                <h2 className="text-3xl font-bold">Professional Summary</h2>
-                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{aboutSummary[1]}</p>
-                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{aboutSummary[2]}</p>
+                                <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">Professional Summary</h2>
+                                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">{aboutSummary[1]}</p>
+                                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">{aboutSummary[2]}</p>
                                 <div>
-                                    <p className="font-semibold mb-3">Core Skills</p>
+                                    <p className="font-semibold mb-3 text-zinc-900 dark:text-zinc-100">Core Skills</p>
                                     <div className="flex flex-wrap gap-2">
                                         {linkedinCoreSkills.map((skill) => (
-                                            <Badge key={skill} variant="secondary" className="text-sm">
+                                            <Badge key={skill} variant="secondary" className="text-sm bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100">
                                                 {skill}
                                             </Badge>
                                         ))}
@@ -203,46 +201,19 @@ export default function AboutPage() {
 
                     {/* Core Values */}
                     <motion.div variants={itemVariants} className="mb-16">
-                        <h2 className="text-3xl font-bold text-center mb-12">Core Values</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-zinc-900 dark:text-zinc-100">Core Values</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {coreValues.map((value, index) => (
-                                <Card key={index} className="p-6 text-center hover:shadow-xl transition-shadow duration-300">
+                                <Card key={index} className="p-6 text-center border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:shadow-md transition-all duration-300">
                                     <CardContent className="p-0">
-                                        <div className={`w-16 h-16 rounded-full ${value.color} flex items-center justify-center mx-auto mb-4`}>
+                                        <div className={`w-16 h-16 rounded-full ${value.color} flex items-center justify-center mx-auto mb-4 border border-zinc-200 dark:border-zinc-800`}>
                                             <value.icon size={24} />
                                         </div>
-                                        <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">{value.description}</p>
+                                        <h3 className="text-xl font-semibold mb-3 text-zinc-900 dark:text-zinc-100">{value.title}</h3>
+                                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">{value.description}</p>
                                     </CardContent>
                                 </Card>
                             ))}
-                        </div>
-                    </motion.div>
-
-                    {/* Stats Section */}
-                    <motion.div variants={itemVariants} className="mb-16">
-                        <h2 className="text-3xl font-bold text-center mb-12"></h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <StatsCard
-                                value="3+"
-                                label="Projects Completed"
-                                color="text-teal-500 dark:text-teal-400"
-                            />
-                            <StatsCard
-                                value="8+"
-                                label="Technologies"
-                                color="text-indigo-500 dark:text-indigo-400"
-                            />
-                            <StatsCard
-                                value="Bachelor's"
-                                label="Education"
-                                color="text-blue-500 dark:text-blue-400"
-                            />
-                            <StatsCard
-                                value="2 Years"
-                                label="Experience"
-                                color="text-green-500 dark:text-green-400"
-                            />
                         </div>
                     </motion.div>
 
@@ -253,90 +224,27 @@ export default function AboutPage() {
 
                     {/* Skills Section */}
                     <motion.div variants={itemVariants} className="mb-16">
-                        <h2 className="text-3xl font-bold text-center mb-12">Technical Skills</h2>
+                        <h2 className="text-3xl font-bold text-center mb-12 text-zinc-900 dark:text-zinc-100">Technical Skills</h2>
                         <SkillsTab skills={skills} />
-                    </motion.div>
-
-                    {/* Technology Stack */}
-                    <motion.div variants={itemVariants} className="mb-16">
-                        <h2 className="text-3xl font-bold text-center mb-12">Technology Stack</h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {/* Frontend */}
-                            <Card className="p-6">
-                                <CardContent className="p-0">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                                            <Globe className="text-blue-600 dark:text-blue-400" size={24} />
-                                        </div>
-                                        <h3 className="text-xl font-semibold">Frontend</h3>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2">
-                                        {getSkillsByCategory("Frontend").map((skill: SkillItem) => (
-                                            <Badge key={skill.name} variant="secondary" className="text-sm">
-                                                {skill.name}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                </CardContent>
-                            </Card>
-
-                            {/* Backend */}
-                            <Card className="p-6">
-                                <CardContent className="p-0">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                                            <Server className="text-green-600 dark:text-green-400" size={24} />
-                                        </div>
-                                        <h3 className="text-xl font-semibold">Backend</h3>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2">
-                                        {getSkillsByCategory("Backend").map((skill: SkillItem) => (
-                                            <Badge key={skill.name} variant="secondary" className="text-sm">
-                                                {skill.name}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                </CardContent>
-                            </Card>
-
-                            {/* Tools */}
-                            <Card className="p-6">
-                                <CardContent className="p-0">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                                            <Zap className="text-purple-600 dark:text-purple-400" size={24} />
-                                        </div>
-                                        <h3 className="text-xl font-semibold">Tools</h3>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2">
-                                        {getSkillsByCategory("Tools").map((skill: SkillItem) => (
-                                            <Badge key={skill.name} variant="secondary" className="text-sm">
-                                                {skill.name}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
                     </motion.div>
 
                     {/* CTA Section */}
                     <motion.div variants={itemVariants} className="text-center">
-                        <h2 className="text-3xl font-bold mb-6">Ready to Work Together?</h2>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-6 text-zinc-900 dark:text-zinc-100">Ready to Work Together?</h2>
+                        <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-8 max-w-2xl mx-auto">
                             Let&apos;s discuss your project and see how I can help bring your ideas to life.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button
                                 onClick={() => router.push("/contact")}
-                                className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white px-8 py-3 text-lg"
+                                className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-3 text-lg"
                             >
                                 Get In Touch
                             </Button>
                             <Button
                                 variant="outline"
                                 onClick={() => router.push("/projects")}
-                                className="border-2 border-teal-500 text-teal-600 dark:text-teal-400 hover:bg-teal-500 hover:text-white px-8 py-3 text-lg"
+                                className="border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 px-8 py-3 text-lg"
                             >
                                 View My Work
                             </Button>

@@ -3,7 +3,6 @@
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Float, MeshDistortMaterial, Sphere } from "@react-three/drei"
 import { Suspense, useRef, useState } from "react"
-import { motion } from "framer-motion-3d"
 import * as THREE from "three"
 
 function AnimatedSphere(props: any) {

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    optimizeFonts: false,
     typescript: {
         // !! WARN !!
         // Dangerously allow production builds to successfully complete even if

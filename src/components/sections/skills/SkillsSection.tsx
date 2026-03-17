@@ -21,14 +21,10 @@ export function SkillsSection() {
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Skills"
-                    title="My Technical Skills"
-                    description="Here are the technologies and tools I work with."
+                    title="Technical Arsenal"
+                    description="A comprehensive list of technologies and tools I've mastered over the years."
                 />
                 
-                <div className="mb-12">
-                   <ScrollVelocity text="Spring Boot • Next.js • React • PostgreSQL • Kafka • Docker • AWS •" />
-                </div>
-
                 <motion.div
                     ref={ref}
                     initial={{ opacity: 0, y: 20 }}
@@ -37,23 +33,25 @@ export function SkillsSection() {
                     className="max-w-4xl mx-auto"
                 >
                     <Tabs defaultValue={skills[0].category} className="w-full" onValueChange={setActiveTab}>
-                        <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-8 w-full h-auto gap-1">
+                        <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-10 w-full h-auto gap-2 bg-transparent p-0">
                             {skills.map((skill) => (
-                                <TabsTrigger key={skill.category} value={skill.category} className="text-xs sm:text-sm">
+                                <TabsTrigger 
+                                    key={skill.category} 
+                                    value={skill.category} 
+                                    className="text-xs sm:text-sm border border-zinc-200 dark:border-zinc-800 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-zinc-100 dark:data-[state=active]:text-zinc-900 rounded-md py-2.5 transition-all"
+                                >
                                     {skill.category}
                                 </TabsTrigger>
                             ))}
                         </TabsList>
 
                         {skills.map((skill) => (
-                            <TabsContent key={skill.category} value={skill.category} className="mt-0">
-                                <Card className="p-6 surface-card">
-                                    <h3 className="text-xl font-semibold mb-6 text-center">
-                    <span className="bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent">
-                      {skill.category} Skills
-                    </span>
+                            <TabsContent key={skill.category} value={skill.category} className="mt-0 outline-none">
+                                <Card className="p-8 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+                                    <h3 className="text-xl font-semibold mb-8 text-zinc-900 dark:text-zinc-100">
+                                        {skill.category} Expertise
                                     </h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         {skill.items.map((item, index) => (
                                             <SkillItem key={item.name} skill={item} index={index} />
                                         ))}
@@ -64,7 +62,7 @@ export function SkillsSection() {
                     </Tabs>
 
                     <div className="mt-12 text-center">
-                        <Badge className="text-sm px-3 py-1 bg-teal-500/10 text-teal-500 dark:bg-teal-400/10 dark:text-teal-400 hover:bg-teal-500/20 dark:hover:bg-teal-400/20">
+                        <Badge variant="outline" className="text-xs px-4 py-1.5 border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400">
                             Currently focused on: {activeTab}
                         </Badge>
                     </div>

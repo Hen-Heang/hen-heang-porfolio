@@ -21,36 +21,36 @@ export function Footer() {
     ]
 
     return (
-        <footer className="section-muted border-t border-slate-200/70 dark:border-slate-700/70">
-            <div className="container mx-auto px-4 py-12">
-                <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="lg:col-span-2">
-                        <h3 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-3">
+        <footer className="bg-zinc-50 dark:bg-zinc-900/50 border-t border-zinc-200 dark:border-zinc-800">
+            <div className="container mx-auto px-4 py-16">
+                <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="lg:col-span-2 space-y-6">
+                        <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
                             {personalInfo.fullName}
                         </h3>
-                        <p className="text-slate-600 dark:text-slate-300 mb-5 max-w-xl leading-relaxed">
-                            {personalInfo.title}. I build reliable products from frontend UI to backend APIs and databases.
+                        <p className="text-zinc-600 dark:text-zinc-400 max-w-md leading-relaxed text-sm">
+                            {personalInfo.title}. Dedicated to building high-quality, scalable applications with a focus on clean code and user experience.
                         </p>
-                        <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                            <p className="inline-flex items-center gap-2">
-                                <Mail size={14} className="text-teal-500" />
+                        <div className="space-y-3 text-sm text-zinc-500 dark:text-zinc-500">
+                            <p className="flex items-center gap-3">
+                                <Mail size={14} className="text-zinc-400 dark:text-zinc-600" />
                                 {personalInfo.email}
                             </p>
-                            <p className="inline-flex items-center gap-2">
-                                <MapPin size={14} className="text-teal-500" />
+                            <p className="flex items-center gap-3">
+                                <MapPin size={14} className="text-zinc-400 dark:text-zinc-600" />
                                 {personalInfo.location}
                             </p>
                         </div>
                     </div>
 
                     <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-4">Navigation</h4>
-                        <ul className="space-y-2">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-zinc-100 mb-6">Navigation</h4>
+                        <ul className="space-y-3">
                             {links.map((link) => (
                                 <li key={link.name}>
                                     <a
                                         href={link.href}
-                                        className="text-sm text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+                                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                                     >
                                         {link.name}
                                     </a>
@@ -60,7 +60,7 @@ export function Footer() {
                     </div>
 
                     <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-4">Connect</h4>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-zinc-100 mb-6">Connect</h4>
                         <div className="space-y-2">
                             {socialLinks.map((link) => (
                                 <a
@@ -68,19 +68,19 @@ export function Footer() {
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center justify-between p-2.5 rounded-lg surface-soft hover:border-teal-400/60 dark:hover:border-teal-500/60 transition-colors"
+                                    className="flex items-center justify-between p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-zinc-900 dark:hover:border-zinc-100 transition-all duration-300 group"
                                 >
-                                    <span className="text-sm text-slate-700 dark:text-slate-200">{link.label}</span>
-                                    <span className="text-slate-500 dark:text-slate-400"><ArrowUpRight size={14} /></span>
+                                    <span className="text-sm text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 font-medium">{link.label}</span>
+                                    <ArrowUpRight size={14} className="text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
                                 </a>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-10 pt-6 border-t border-slate-200/70 dark:border-slate-700/70 text-sm text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+                <div className="mt-20 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-500 dark:text-zinc-600">
                     <p>© {currentYear} {personalInfo.fullName}. All rights reserved.</p>
-                    <p>Built with Next.js and TypeScript.</p>
+                    <p className="flex items-center gap-1">Built with Next.js, TypeScript & Tailwind CSS</p>
                 </div>
             </div>
         </footer>

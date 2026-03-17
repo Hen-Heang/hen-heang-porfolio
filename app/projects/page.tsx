@@ -22,22 +22,25 @@ export default function ProjectsPage() {
         <PageLayout>
             <div className="container mx-auto px-4 py-20">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                    <h1 className="text-4xl font-bold mb-8 text-center">My Projects</h1>
+                    <h1 className="text-4xl font-bold mb-4 text-center text-zinc-900 dark:text-zinc-100">Featured Projects</h1>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12 max-w-2xl mx-auto">
+                        A curated selection of my work across web development, from enterprise systems to experimental apps.
+                    </p>
 
-                    <div className="flex flex-wrap justify-center gap-2 mb-12">
+                    <div className="flex flex-wrap justify-center gap-2 mb-16">
                         <Button
                             variant={filter === "All" ? "default" : "outline"}
                             onClick={() => setFilter("All")}
-                            className={filter === "All" ? "bg-gradient-to-r from-teal-500 to-indigo-500" : ""}
+                            className={filter === "All" ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-zinc-200 dark:border-zinc-800" : "border-zinc-200 dark:border-zinc-800"}
                         >
-                            All
+                            All Projects
                         </Button>
                         {allTechnologies.map((tech) => (
                             <Button
                                 key={tech}
                                 variant={filter === tech ? "default" : "outline"}
                                 onClick={() => setFilter(tech)}
-                                className={filter === tech ? "bg-gradient-to-r from-teal-500 to-indigo-500" : ""}
+                                className={filter === tech ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-zinc-200 dark:border-zinc-800" : "border-zinc-200 dark:border-zinc-800"}
                             >
                                 {tech}
                             </Button>

@@ -115,7 +115,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-[1fr_auto_1fr] items-center h-20">
                         <button
-                            className="justify-self-start hidden lg:inline-flex items-center gap-2 text-slate-700 dark:text-slate-200 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
+                            className="justify-self-start hidden lg:inline-flex items-center gap-2 text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                             onClick={() => router.push("/")}
                             aria-label="Back to home"
                         >
@@ -133,8 +133,8 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                         }}
                                         className={`relative px-4 py-2 text-sm rounded-lg transition-colors duration-200 flex items-center gap-2 ${
                                             activeSection === item.id
-                                                ? "text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/25"
-                                                : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60"
+                                                ? "text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800"
+                                                : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60"
                                         }`}
                                         aria-current={activeSection === item.id ? "page" : undefined}
                                         whileHover={{ y: -1 }}
@@ -144,7 +144,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                         <span>{item.label}</span>
                                         {activeSection === item.id && (
                                             <motion.span
-                                                className="absolute -bottom-[2px] left-3 right-3 h-[2px] bg-teal-500 rounded-full"
+                                                className="absolute -bottom-[2px] left-3 right-3 h-[2px] bg-zinc-900 dark:bg-zinc-100 rounded-full"
                                                 layoutId="activeNavIndicator"
                                             />
                                         )}
@@ -158,7 +158,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                 whileHover={{ scale: 1.04 }}
                                 whileTap={{ scale: 0.96 }}
                                 onClick={handleDownloadResume}
-                                className="hidden md:flex items-center gap-2 px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-colors duration-200 text-sm font-medium"
+                                className="hidden md:flex items-center gap-2 px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-lg transition-colors duration-200 text-sm font-medium"
                                 aria-label="Download resume"
                             >
                                 <Download size={15} />
@@ -169,7 +169,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                 whileHover={{ scale: 1.06 }}
                                 whileTap={{ scale: 0.94 }}
                                 onClick={toggleTheme}
-                                className="p-2.5 rounded-lg bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/80 hover:text-teal-500 dark:hover:text-teal-400 transition-colors duration-200"
+                                className="p-2.5 rounded-lg bg-white/80 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-800/80 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200"
                                 aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
                             >
                                 <AnimatePresence mode="wait">
@@ -189,7 +189,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             <motion.button
                                 whileHover={{ scale: 1.04 }}
                                 whileTap={{ scale: 0.96 }}
-                                className="hidden md:flex items-center gap-2 px-4 py-2 border border-teal-500 text-teal-600 dark:text-teal-400 rounded-lg hover:bg-teal-500 hover:text-white transition-colors duration-200 text-sm font-medium"
+                                className="hidden md:flex items-center gap-2 px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-lg hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all duration-200 text-sm font-medium"
                                 onClick={() => handleNavItemClick("contact")}
                                 aria-label="Contact me"
                             >
@@ -256,8 +256,8 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                         }}
                                         className={`flex items-center gap-3 rounded-lg px-4 py-3 transition-colors duration-200 ${
                                             activeSection === item.id
-                                                ? "bg-teal-500 text-white"
-                                                : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                                                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                                                : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                                         }`}
                                         aria-current={activeSection === item.id ? "page" : undefined}
                                         ref={index === 0 ? firstNavLinkRef : undefined}
@@ -269,7 +269,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
 
                                 <button
                                     onClick={handleDownloadResume}
-                                    className="w-full flex items-center gap-3 rounded-lg px-4 py-3 bg-teal-500 text-white"
+                                    className="w-full flex items-center gap-3 rounded-lg px-4 py-3 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
                                     aria-label="Download resume"
                                 >
                                     <Download size={16} />
@@ -277,7 +277,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                 </button>
 
                                 <button
-                                    className="w-full flex items-center gap-3 rounded-lg px-4 py-3 border border-teal-500 text-teal-600 dark:text-teal-400"
+                                    className="w-full flex items-center gap-3 rounded-lg px-4 py-3 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
                                     onClick={() => handleNavItemClick("contact")}
                                     aria-label="Contact me"
                                 >

@@ -14,7 +14,6 @@ import { AchievementsSection } from "@/src/components/sections/achievements/Achi
 import { BlogSection } from "@/src/components/sections/blog/BlogSection"
 import { ContactSection } from "@/src/components/sections/contact/ContactSection"
 import { Footer } from "@/src/components/ui/Footer"
-import { LoadingDots } from "@/src/components/ui/LoadingSpinner"
 import { useRouter } from "next/navigation"
 import HeroSection from "@/src/components/sections/hero/HeroSection"
 import { ExperienceSection } from "@/src/components/sections/experience/ExperienceSection"
@@ -59,122 +58,29 @@ export function MainPortfolio() {
                         key="loader"
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-                        
-                        {/* Background animated elements */}
-                        <div className="absolute inset-0 overflow-hidden">
-                            <motion.div
-                                className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-blue-400/20 rounded-full blur-xl"
-                                animate={{
-                                    scale: [1, 1.2, 1],
-                                    opacity: [0.3, 0.6, 0.3],
-                                    rotate: [0, 180, 360]
-                                }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Number.POSITIVE_INFINITY,
-                                    ease: "easeInOut"
-                                }}
-                            />
-                            <motion.div
-                                className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl"
-                                animate={{
-                                    scale: [1.2, 1, 1.2],
-                                    opacity: [0.6, 0.3, 0.6],
-                                    rotate: [360, 180, 0]
-                                }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Number.POSITIVE_INFINITY,
-                                    ease: "easeInOut",
-                                    delay: 2
-                                }}
-                            />
-                        </div>
-
+                        transition={{ duration: 0.4 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-zinc-950">
                         <motion.div
-                            initial={{ scale: 0.8, opacity: 0, y: 20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 1.2, opacity: 0, y: -20 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="flex flex-col items-center relative z-10"
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 1.1, opacity: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="flex flex-col items-center"
                         >
-                            {/* Animated logo/profile */}
-                            <motion.div
-                                className="relative w-24 h-24 mb-8"
-                                animate={{
-                                    rotate: [0, 5, -5, 0],
-                                    scale: [1, 1.05, 1]
-                                }}
-                                transition={{
-                                    duration: 3,
-                                    repeat: Number.POSITIVE_INFINITY,
-                                    ease: "easeInOut"
-                                }}
-                            >
-                                <div className="w-full h-full rounded-full bg-gradient-to-r from-teal-500 to-indigo-500 p-1">
-                                    <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full flex items-center justify-center">
-                                        <motion.div
-                                            className="text-3xl"
-                                            animate={{ rotate: 360 }}
-                                            transition={{
-                                                duration: 2,
-                                                repeat: Number.POSITIVE_INFINITY,
-                                                ease: "linear"
-                                            }}
-                                        >
-                                            👨‍💻
-                                        </motion.div>
-                                    </div>
-                                </div>
-                                
-                                {/* Floating particles */}
-                                {[...Array(6)].map((_, i) => (
-                                    <motion.div
-                                        key={i}
-                                        className="absolute w-2 h-2 bg-teal-500 rounded-full"
-                                        style={{
-                                            top: `${20 + (i * 10)}%`,
-                                            left: `${20 + (i * 10)}%`,
-                                        }}
-                                        animate={{
-                                            y: [-10, 10, -10],
-                                            opacity: [0.3, 1, 0.3],
-                                            scale: [0.5, 1, 0.5]
-                                        }}
-                                        transition={{
-                                            duration: 2 + (i * 0.2),
-                                            repeat: Number.POSITIVE_INFINITY,
-                                            delay: i * 0.3,
-                                            ease: "easeInOut"
-                                        }}
-                                    />
-                                ))}
-                            </motion.div>
-
-                            {/* Loading text */}
                             <motion.h2
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.3, duration: 0.5 }}
-                                className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent mb-4"
+                                className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6 tracking-tight"
                             >
                                 Hen Heang
                             </motion.h2>
-
-                            {/* Enhanced loading bar */}
-                            <div className="h-2 w-64 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-4">
+                            
+                            <div className="h-1 w-48 bg-zinc-100 dark:bg-zinc-900 rounded-full overflow-hidden">
                                 <motion.div
-                                    className="h-full bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-500"
+                                    className="h-full bg-zinc-900 dark:bg-zinc-100"
                                     initial={{ width: "0%" }}
                                     animate={{ width: "100%" }}
-                                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                                    transition={{ duration: 1, ease: "easeInOut" }}
                                 />
                             </div>
-
-                            {/* Loading dots */}
-                            <LoadingDots />
                         </motion.div>
                     </motion.div>
                 ) : null}
