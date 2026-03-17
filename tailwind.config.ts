@@ -25,6 +25,15 @@ module.exports = {
 				heading: ["Montserrat", "sans-serif"],
 			},
 			colors: {
+				navy: {
+					50: "#f7fafc",
+					100: "#edf2f7",
+					200: "#bee3f8",
+					600: "#2d3748",
+					700: "#2a4a7f",
+					800: "#1a365d",
+					900: "#1a202c",
+				},
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				border: "hsl(var(--border))",

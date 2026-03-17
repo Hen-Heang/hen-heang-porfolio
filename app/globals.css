@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm;
+  }
+
+  /* Hide everything outside the CV document when printing */
+  body > * {
+    display: none !important;
+  }
+
+  /* Show only the CV content */
+  #cv-print-root,
+  #cv-print-root * {
+    display: revert !important;
+  }
+}
+
 @layer base {
   :root {
     /* Bento Dashboard Design Tokens */
