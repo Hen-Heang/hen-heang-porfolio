@@ -1,20 +1,18 @@
-// Updated data/personal-info.ts
 export const personalInfo = {
     name: "Hen Heang",
     fullName: "Hen Heang",
-    title: "Full-Stack Engineer",
+    title: "Full-Stack Software Engineer",
     description:
-        "I build reliable, user-focused web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL. I focus on clean architecture, performance, and smooth user experience from frontend to backend.",
+        "Highly motivated Full-Stack Software Engineer based in Seoul, specializing in architecting scalable enterprise web applications. With 2+ years of experience in the Korean IT sector, I excel at bridging robust backend systems (Java, Spring Boot, MyBatis) with modern, performant frontends (Next.js, TypeScript).",
     profileImage: "/image/personal_image.jpg",
     myImage: "/image/heang_new.jpeg",
-
     email: "henheang15@gmail.com",
-    location: "Phnom Penh, Cambodia",
+    location: "Seoul, South Korea",
     socialLinks: {
         github: "https://github.com/Hen-Heang",
         linkedin: "https://www.linkedin.com/in/hen-heang",
         telegram: "https://t.me/henheang",
     },
-    experience: "2 Years",
+    experience: "2+ Years",
     ides: ["IntelliJ IDEA", "WebStorm"],
 }

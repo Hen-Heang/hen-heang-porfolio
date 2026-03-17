@@ -1,4 +1,3 @@
-// types/index.ts
 import type { ReactNode } from "react"
 
 export interface NavItem {
@@ -8,7 +7,6 @@ export interface NavItem {
     icon: ReactNode
 }
 
-// Update: Changed from Skill to SkillCategory 
 export interface SkillItem {
     name: string
     level: number
@@ -25,8 +23,8 @@ export interface Project {
     description: string
     technologies: string[]
     image: string
-    github: string
-    demo: string
+    github?: string
+    demo?: string
     overview?: string
     features?: string[]
     technicalDetails?: string

@@ -8,37 +8,37 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://hen-heang.vercel.app"),
+    metadataBase: new URL("https://hen-heang-porfolio.vercel.app"),
     title: {
-        default: "Hen Heang — Full-Stack Engineer",
+        default: "Hen Heang — Full-Stack Developer",
         template: "%s | Hen Heang",
     },
     description:
-        "Full-Stack Engineer based in Phnom Penh, Cambodia. I build reliable web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL.",
-    keywords: ["Full-Stack Engineer", "Next.js", "Spring Boot", "TypeScript", "PostgreSQL", "Hen Heang", "Cambodia"],
+        "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
+    keywords: ["Full-Stack Developer", "Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Hen Heang", "Seoul", "South Korea", "Enterprise Web Development"],
     authors: [{ name: "Hen Heang", url: "https://github.com/Hen-Heang" }],
     openGraph: {
         type: "website",
         locale: "en_US",
         url: "https://hen-heang.vercel.app",
         siteName: "Hen Heang Portfolio",
-        title: "Hen Heang — Full-Stack Engineer",
+        title: "Hen Heang — Full-Stack Developer",
         description:
-            "Full-Stack Engineer based in Phnom Penh, Cambodia. I build reliable web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL.",
+            "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
         images: [
             {
                 url: "/image/personal_image.jpg",
                 width: 1200,
                 height: 630,
-                alt: "Hen Heang — Full-Stack Engineer",
+                alt: "Hen Heang — Full-Stack Developer",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Hen Heang — Full-Stack Engineer",
+        title: "Hen Heang — Full-Stack Developer",
         description:
-            "Full-Stack Engineer based in Phnom Penh, Cambodia. I build reliable web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL.",
+            "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
         images: ["/image/personal_image.jpg"],
     },
     robots: {

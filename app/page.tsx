@@ -1,11 +1,5 @@
-"use client"
-
-import { MainPortfolio } from "@/src/components/MainPortfolio"
+import { BentoDashboard } from "@/src/components/dashboard/BentoDashboard"
 
 export default function HomePage() {
-  return (
-    <main className="min-h-screen">
-      <MainPortfolio />
-    </main>
-  )
+    return <BentoDashboard />
 }

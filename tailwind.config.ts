@@ -17,31 +17,27 @@ module.exports = {
 			},
 		},
 		extend: {
+			screens: {
+				"xs": "480px",
+			},
 			fontFamily: {
 				sans: ["Inter", "sans-serif"],
-				heading: ["Montserrat", "sans-serif"], // New heading font
+				heading: ["Montserrat", "sans-serif"],
 			},
 			colors: {
-				// Base Palette
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
-				
-				// Primary Accent
 				primary: {
 					DEFAULT: "hsl(var(--primary))",
 					foreground: "hsl(var(--primary-foreground))",
 				},
-				
-				// Secondary Accent
 				secondary: {
 					DEFAULT: "hsl(var(--secondary))",
 					foreground: "hsl(var(--secondary-foreground))",
 				},
-				
-				// Card & Popover Colors
 				card: {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",
@@ -50,8 +46,6 @@ module.exports = {
 					DEFAULT: "hsl(var(--popover))",
 					foreground: "hsl(var(--popover-foreground))",
 				},
-				
-				// Other utility colors
 				destructive: {
 					DEFAULT: "hsl(var(--destructive))",
 					foreground: "hsl(var(--destructive-foreground))",
@@ -79,17 +73,10 @@ module.exports = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: 0 },
 				},
-				// New keyframes for advanced animations
 				"shine-pulse": {
-					"0%": {
-						"box-shadow": "0 0 0 0px rgba(0, 204, 153, 0.2)",
-					},
-					"50%": {
-						"box-shadow": "0 0 0 10px rgba(0, 204, 153, 0)",
-					},
-					"100%": {
-						"box-shadow": "0 0 0 0px rgba(0, 204, 153, 0)",
-					},
+					"0%": { "box-shadow": "0 0 0 0px rgba(0, 204, 153, 0.2)" },
+					"50%": { "box-shadow": "0 0 0 10px rgba(0, 204, 153, 0)" },
+					"100%": { "box-shadow": "0 0 0 0px rgba(0, 204, 153, 0)" },
 				},
 			},
 			animation: {
@@ -99,5 +86,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [import("tailwindcss-animate")],
+	plugins: [require("tailwindcss-animate")],
 };

@@ -1,13 +1,15 @@
-import LinkIn from "@/src/components/icons/linkIn"
-import Telegram from "@/src/components/icons/telegram"
-import Github from "@/src/components/icons/github"
-import { Mail, MapPin, ArrowUpRight } from "lucide-react"
+"use client"
+
+import { Mail, MapPin, ArrowUpRight, Github, Linkedin, Send, Sparkles } from "lucide-react"
 import { personalInfo } from "@/data/personal-info"
+import Link from "next/link"
+import { motion } from "framer-motion"
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
 
-    const links = [
+    const navLinks = [
+        { name: "Home", href: "/" },
         { name: "About", href: "/about" },
         { name: "Projects", href: "/projects" },
         { name: "Blog", href: "/blog" },
@@ -15,72 +17,135 @@ export function Footer() {
     ]
 
     const socialLinks = [
-        { href: personalInfo.socialLinks.github, icon: Github, label: "GitHub" },
-        { href: personalInfo.socialLinks.linkedin, icon: LinkIn, label: "LinkedIn" },
-        { href: personalInfo.socialLinks.telegram, icon: Telegram, label: "Telegram" },
+        { 
+            href: personalInfo.socialLinks.github, 
+            icon: Github, 
+            label: "GitHub",
+            hoverColor: "hover:text-white"
+        },
+        { 
+            href: personalInfo.socialLinks.linkedin, 
+            icon: Linkedin, 
+            label: "LinkedIn",
+            hoverColor: "hover:text-[#0A66C2]"
+        },
+        { 
+            href: personalInfo.socialLinks.telegram, 
+            icon: Send, 
+            label: "Telegram",
+            hoverColor: "hover:text-[#26A5E4]"
+        },
     ]
 
     return (
-        <footer className="bg-zinc-50 dark:bg-zinc-900/50 border-t border-zinc-200 dark:border-zinc-800">
-            <div className="container mx-auto px-4 py-16">
-                <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="lg:col-span-2 space-y-6">
-                        <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-                            {personalInfo.fullName}
-                        </h3>
-                        <p className="text-zinc-600 dark:text-zinc-400 max-w-md leading-relaxed text-sm">
-                            {personalInfo.title}. Dedicated to building high-quality, scalable applications with a focus on clean code and user experience.
-                        </p>
-                        <div className="space-y-3 text-sm text-zinc-500 dark:text-zinc-500">
-                            <p className="flex items-center gap-3">
-                                <Mail size={14} className="text-zinc-400 dark:text-zinc-600" />
-                                {personalInfo.email}
+        <footer className="relative bg-[#09090b] pt-24 pb-32 md:pb-12 border-t border-white/5 overflow-hidden">
+            {/* Background Decorative Element */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent opacity-30" />
+            
+            <div className="container mx-auto px-6 lg:px-12 relative z-10">
+                <div className="grid gap-16 lg:grid-cols-12 mb-20">
+                    
+                    {/* Brand Column */}
+                    <div className="lg:col-span-5 space-y-8">
+                        <div className="space-y-4">
+                            <Link href="/" className="inline-flex items-center gap-2 group">
+                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-all duration-300">
+                                    <span className="text-white text-lg font-bold">H</span>
+                                </div>
+                                <span className="text-xl font-bold tracking-tight text-white group-hover:text-indigo-400 transition-colors">
+                                    {personalInfo.fullName}
+                                </span>
+                            </Link>
+                            <p className="text-zinc-400 max-w-sm leading-relaxed text-base font-medium">
+                                Crafting scalable enterprise solutions and modern digital experiences in the heart of <span className="text-white">Seoul</span>.
                             </p>
-                            <p className="flex items-center gap-3">
-                                <MapPin size={14} className="text-zinc-400 dark:text-zinc-600" />
-                                {personalInfo.location}
-                            </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-4 items-center">
+                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-emerald-400 uppercase tracking-widest">
+                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]" />
+                                Available for projects
+                            </div>
+                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-indigo-400 uppercase tracking-widest">
+                                <Sparkles size={12} />
+                                Full-Stack Specialist
+                            </div>
                         </div>
                     </div>
 
-                    <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-zinc-100 mb-6">Navigation</h4>
-                        <ul className="space-y-3">
-                            {links.map((link) => (
-                                <li key={link.name}>
-                                    <a
-                                        href={link.href}
-                                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                                    >
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    {/* Links Grid */}
+                    <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-12">
+                        {/* Navigation */}
+                        <div className="space-y-6">
+                            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Sitemap</h4>
+                            <ul className="space-y-4">
+                                {navLinks.map((link) => (
+                                    <li key={link.name}>
+                                        <Link
+                                            href={link.href}
+                                            className="text-sm font-medium text-zinc-500 hover:text-white transition-colors duration-200"
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                    <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-zinc-100 mb-6">Connect</h4>
-                        <div className="space-y-2">
-                            {socialLinks.map((link) => (
-                                <a
-                                    key={link.label}
-                                    href={link.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-between p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-zinc-900 dark:hover:border-zinc-100 transition-all duration-300 group"
-                                >
-                                    <span className="text-sm text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 font-medium">{link.label}</span>
-                                    <ArrowUpRight size={14} className="text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
-                                </a>
-                            ))}
+                        {/* Social */}
+                        <div className="space-y-6">
+                            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Connect</h4>
+                            <ul className="space-y-4">
+                                {socialLinks.map((social) => (
+                                    <li key={social.label}>
+                                        <a
+                                            href={social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`flex items-center gap-2 text-sm font-medium text-zinc-500 transition-colors duration-200 ${social.hoverColor} group/link`}
+                                        >
+                                            <social.icon size={16} />
+                                            {social.label}
+                                            <ArrowUpRight size={12} className="opacity-0 group-hover/link:opacity-100 transition-all -translate-y-0.5" />
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Location/Contact */}
+                        <div className="col-span-2 md:col-span-1 space-y-6">
+                            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Local</h4>
+                            <div className="space-y-4">
+                                <div className="space-y-1">
+                                    <p className="text-xs text-zinc-600 font-bold uppercase">Location</p>
+                                    <p className="text-sm text-zinc-300 font-medium">{personalInfo.location}</p>
+                                </div>
+                                <div className="space-y-1">
+                                    <p className="text-xs text-zinc-600 font-bold uppercase">Timezone</p>
+                                    <p className="text-sm text-zinc-300 font-medium">GMT+9 (KST)</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-20 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-500 dark:text-zinc-600">
-                    <p>© {currentYear} {personalInfo.fullName}. All rights reserved.</p>
-                    <p className="flex items-center gap-1">Built with Next.js, TypeScript & Tailwind CSS</p>
+                {/* Bottom Bar */}
+                <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="flex items-center gap-6 text-[11px] font-bold text-zinc-600 uppercase tracking-widest">
+                        <p>© {currentYear} {personalInfo.fullName}</p>
+                        <span className="hidden md:block w-1 h-1 bg-zinc-800 rounded-full" />
+                        <p className="hidden md:block">Handcrafted with Passion</p>
+                    </div>
+                    
+                    <div className="flex items-center gap-4 text-[11px] font-bold text-zinc-600 uppercase tracking-widest">
+                        <span>Built with</span>
+                        <div className="flex items-center gap-3 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                            <span className="text-white">Next.js</span>
+                            <span className="text-white">Tailwind</span>
+                            <span className="text-white">Framer</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </footer>

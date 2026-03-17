@@ -89,10 +89,7 @@ export function AchievementsSection() {
                                                 </div>
 
                                                 <h3 className="text-lg font-semibold mb-2 text-zinc-900 dark:text-zinc-100 leading-tight">
-                                                    {achievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
-                                                     achievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
-                                                     achievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
-                                                     achievement.titleKey}
+                                                    {achievement.title}
                                                 </h3>
 
                                                 <div className="flex items-center text-xs text-zinc-500 dark:text-zinc-500 mb-4">
@@ -100,12 +97,9 @@ export function AchievementsSection() {
                                                     {achievement.date}
                                                 </div>
 
-                                                {achievement.descriptionKey && (
+                                                {achievement.description && (
                                                     <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed line-clamp-3">
-                                                        {achievement.descriptionKey === 'achievements.bachelorsDescription' ? "Graduated with honors in Computer Science with focus on web development and software engineering." :
-                                                         achievement.descriptionKey === 'achievements.kshrdBasicDescription' ? "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge." :
-                                                         achievement.descriptionKey === 'achievements.kshrdAdvancedDescription' ? "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise." :
-                                                         achievement.descriptionKey}
+                                                        {achievement.description}
                                                     </p>
                                                 )}
 
@@ -113,7 +107,7 @@ export function AchievementsSection() {
                                                     <div className="relative overflow-hidden rounded-xl mb-6 aspect-video border border-zinc-100 dark:border-zinc-900">
                                                         <Image
                                                             src={achievement.image}
-                                                            alt={achievement.titleKey}
+                                                            alt={achievement.title}
                                                             fill
                                                             className="object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500 cursor-pointer"
                                                             onClick={() => openModal(achievement)}
@@ -186,10 +180,7 @@ export function AchievementsSection() {
                                              <Trophy className="w-5 h-5" />}
                                         </div>
                                         <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
-                                            {selectedAchievement.titleKey === 'achievements.bachelorsDegree' ? "Bachelor's Degree in Computer Science" :
-                                             selectedAchievement.titleKey === 'achievements.kshrdBasic' ? "KSHRD Basic Course Certificate" :
-                                             selectedAchievement.titleKey === 'achievements.kshrdAdvanced' ? "KSHRD Advanced Course Certificate" :
-                                             selectedAchievement.titleKey}
+                                            {selectedAchievement.title}
                                         </h2>
                                     </div>
                                     <button
@@ -219,10 +210,7 @@ export function AchievementsSection() {
                                             <div className="space-y-4">
                                                 <h4 className="text-sm font-bold uppercase tracking-widest text-zinc-400">Description</h4>
                                                 <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                                                    {selectedAchievement.descriptionKey === 'achievements.bachelorsDescription' ? "Graduated with honors in Computer Science with focus on web development and software engineering." :
-                                                     selectedAchievement.descriptionKey === 'achievements.kshrdBasicDescription' ? "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge." :
-                                                     selectedAchievement.descriptionKey === 'achievements.kshrdAdvancedDescription' ? "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise." :
-                                                     selectedAchievement.descriptionKey}
+                                                    {selectedAchievement.description}
                                                 </p>
                                             </div>
 

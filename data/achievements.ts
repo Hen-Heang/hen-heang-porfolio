@@ -1,10 +1,10 @@
 export interface Achievement {
     id: string
-    titleKey: string
+    title: string
     issuer: string
     date: string
     type: 'certificate' | 'graduation' | 'award'
-    descriptionKey?: string
+    description?: string
     image?: string
     link?: string
 }
@@ -15,90 +15,62 @@ export interface AchievementGroup {
     achievements: Achievement[]
 }
 
-// Helper function to group achievements by year and issuer
-export const groupAchievementsByYearAndIssuer = (achievements: Achievement[]): AchievementGroup[] => {
+const groupAchievementsByYearAndIssuer = (achievements: Achievement[]): AchievementGroup[] => {
     const groups: { [key: string]: { [issuer: string]: Achievement[] } } = {}
-    
+
     achievements.forEach(achievement => {
-        const year = achievement.date
-        const issuer = achievement.issuer
-        
-        if (!groups[year]) {
-            groups[year] = {}
-        }
-        if (!groups[year][issuer]) {
-            groups[year][issuer] = []
-        }
-        
+        const { date: year, issuer } = achievement
+        if (!groups[year]) groups[year] = {}
+        if (!groups[year][issuer]) groups[year][issuer] = []
         groups[year][issuer].push(achievement)
     })
-    
-    // Convert to array format and sort by year (descending) and issuer
+
     const result: AchievementGroup[] = []
-    
     Object.keys(groups)
-        .sort((a, b) => parseInt(b) - parseInt(a)) // Sort years descending
+        .sort((a, b) => parseInt(b) - parseInt(a))
         .forEach(year => {
             Object.keys(groups[year])
-                .sort() // Sort issuers alphabetically
+                .sort()
                 .forEach(issuer => {
                     result.push({
                         year,
                         issuer,
-                        achievements: groups[year][issuer].sort((a, b) => a.titleKey.localeCompare(b.titleKey))
+                        achievements: groups[year][issuer].sort((a, b) => a.title.localeCompare(b.title))
                     })
                 })
         })
-    
+
     return result
 }
 
-// Raw achievements data with translation keys
 export const rawAchievements: Achievement[] = [
     {
         id: "1",
-        titleKey: "achievements.bachelorsDegree",
+        title: "Bachelor's Degree in Computer Science",
         issuer: "University Name",
         date: "2023",
         type: "graduation",
-        descriptionKey: "achievements.bachelorsDescription",
+        description: "Graduated with honors in Computer Science with focus on web development and software engineering.",
         image: "/graduate-image.jpg",
     },
     {
         id: "10",
-        titleKey: "achievements.kshrdBasic",
+        title: "KSHRD Basic Course Certificate",
         issuer: "KSHRD",
         date: "2023",
         type: "certificate",
-        descriptionKey: "achievements.kshrdBasicDescription",
+        description: "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge.",
         image: "/certificate/kshrd-basic-course.png",
     },
     {
         id: "11",
-        titleKey: "achievements.kshrdAdvanced",
+        title: "KSHRD Advanced Course Certificate",
         issuer: "KSHRD",
         date: "2023",
         type: "certificate",
-        descriptionKey: "achievements.kshrdAdvancedDescription",
+        description: "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise.",
         image: "/certificate/kshrd-advance-course.png",
     },
-    // Add more achievements as needed
 ]
 
-// Grouped achievements for display
 export const groupedAchievements = groupAchievementsByYearAndIssuer(rawAchievements)
-
-// Flattened achievements (for backward compatibility if needed)
-export const achievements = rawAchievements
-
-// Utility function to add new achievements easily
-export const addAchievement = (achievement: Omit<Achievement, 'id'>) => {
-    const newId = (rawAchievements.length + 1).toString()
-    const newAchievement: Achievement = {
-        id: newId,
-        ...achievement
-    }
-    rawAchievements.push(newAchievement)
-    return newAchievement
-}
-
