@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-export function middleware() {
+export function proxy() {
   // Allow all requests to pass through without locale handling
   return NextResponse.next()
 }
