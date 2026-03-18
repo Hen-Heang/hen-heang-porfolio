@@ -1,7 +1,7 @@
 // components/skills/SkillsSection.tsx
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
@@ -15,6 +15,9 @@ export function SkillsSection() {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, amount: 0.2 })
     const [activeTab, setActiveTab] = useState(skills[0].category)
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => setMounted(true), [])
 
     return (
         <section id="skills" className="section-base section-muted">
@@ -32,7 +35,7 @@ export function SkillsSection() {
                     transition={{ duration: 0.5 }}
                     className="max-w-4xl mx-auto"
                 >
-                    <Tabs defaultValue={skills[0].category} className="w-full" onValueChange={setActiveTab}>
+                    {mounted && <Tabs defaultValue={skills[0].category} className="w-full" onValueChange={setActiveTab}>
                         <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-10 w-full h-auto gap-2 bg-transparent p-0">
                             {skills.map((skill) => (
                                 <TabsTrigger 
@@ -59,7 +62,7 @@ export function SkillsSection() {
                                 </Card>
                             </TabsContent>
                         ))}
-                    </Tabs>
+                    </Tabs>}
 
                     <div className="mt-12 text-center">
                         <Badge variant="outline" className="text-xs px-4 py-1.5 border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400">

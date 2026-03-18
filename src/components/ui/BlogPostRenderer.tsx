@@ -1,9 +1,14 @@
 "use client"
 
+import React, { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { CodePlayground } from './CodePlayground'
+import dynamic from 'next/dynamic'
+
+const CodePlayground = dynamic(
+    () => import('./CodePlayground').then(mod => ({ default: mod.CodePlayground })),
+    { ssr: false }
+)
 
 interface BlogPostRendererProps {
     content: string
@@ -26,7 +31,7 @@ export function BlogPostRenderer({ content, isDark = false }: BlogPostRendererPr
     // Parse content and render with proper formatting
     const renderContent = (content: string) => {
         const lines = content.split('\n')
-        const elements: JSX.Element[] = []
+        const elements: React.ReactNode[] = []
         let currentCodeBlock: string[] = []
         let currentLanguage = ''
         let inCodeBlock = false

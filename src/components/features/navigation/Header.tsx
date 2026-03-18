@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Menu, X, Sun, Moon, Download, Mail, Home, User, Briefcase, BarChart, BookOpen } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
@@ -90,7 +90,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
     }
 
     const getIcon = (id: string) => {
-        const iconMap: { [key: string]: JSX.Element } = {
+        const iconMap: { [key: string]: React.ReactNode } = {
             home: <Home size={16} />,
             about: <User size={16} />,
             projects: <Briefcase size={16} />,

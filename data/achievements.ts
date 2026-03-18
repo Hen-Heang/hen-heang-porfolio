@@ -60,7 +60,7 @@ export const rawAchievements: Achievement[] = [
         date: "2023",
         type: "certificate",
         description: "Completed the basic course training program at KSHRD, covering fundamental skills and knowledge.",
-        image: "/certificate/kshrd-basic-course.png",
+        image: "/certificate/kshrd-basic-course.webp",
     },
     {
         id: "11",
@@ -69,7 +69,7 @@ export const rawAchievements: Achievement[] = [
         date: "2023",
         type: "certificate",
         description: "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise.",
-        image: "/certificate/kshrd-advance-course.png",
+        image: "/certificate/kshrd-advance-course.webp",
     },
 ]
 

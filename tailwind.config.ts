@@ -22,7 +22,6 @@ module.exports = {
 			},
 			fontFamily: {
 				sans: ["Inter", "sans-serif"],
-				heading: ["Montserrat", "sans-serif"],
 			},
 			colors: {
 				navy: {
@@ -95,5 +94,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };

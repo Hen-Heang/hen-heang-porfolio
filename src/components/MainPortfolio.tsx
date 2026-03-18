@@ -2,21 +2,47 @@
 
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import dynamic from "next/dynamic"
 import { useActiveSection } from "@/src/lib/hooks/useActiveSection"
 import { useThemeToggle } from "@/src/lib/hooks/useThemeToggle"
 import { navItems } from "@/data/navigation"
 import { Header } from "@/src/components/features/navigation/Header"
-import { AboutSection } from "@/src/components/sections/about/AboutSection"
-import { ProjectsSection } from "@/src/components/sections/projects/ProjectsSection"
-import { SkillsSection } from "@/src/components/sections/skills/SkillsSection"
-import { EducationSection } from "@/src/components/sections/education/EducationSection"
-import { AchievementsSection } from "@/src/components/sections/achievements/AchievementsSection"
-import { BlogSection } from "@/src/components/sections/blog/BlogSection"
-import { ContactSection } from "@/src/components/sections/contact/ContactSection"
 import { Footer } from "@/src/components/ui/Footer"
 import { useRouter } from "next/navigation"
 import HeroSection from "@/src/components/sections/hero/HeroSection"
-import { ExperienceSection } from "@/src/components/sections/experience/ExperienceSection"
+
+// Loading component for lazy-loaded sections
+const SectionLoader = () => (
+    <div className="w-full h-48 flex items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-200 border-t-zinc-900 dark:border-zinc-800 dark:border-t-zinc-100" />
+    </div>
+)
+
+// Dynamic imports for sections to improve performance
+const AboutSection = dynamic(() => import("@/src/components/sections/about/AboutSection").then(mod => mod.AboutSection), {
+    loading: () => <SectionLoader />,
+})
+const ProjectsSection = dynamic(() => import("@/src/components/sections/projects/ProjectsSection").then(mod => mod.ProjectsSection), {
+    loading: () => <SectionLoader />,
+})
+const SkillsSection = dynamic(() => import("@/src/components/sections/skills/SkillsSection").then(mod => mod.SkillsSection), {
+    loading: () => <SectionLoader />,
+})
+const EducationSection = dynamic(() => import("@/src/components/sections/education/EducationSection").then(mod => mod.EducationSection), {
+    loading: () => <SectionLoader />,
+})
+const AchievementsSection = dynamic(() => import("@/src/components/sections/achievements/AchievementsSection").then(mod => mod.AchievementsSection), {
+    loading: () => <SectionLoader />,
+})
+const BlogSection = dynamic(() => import("@/src/components/sections/blog/BlogSection").then(mod => mod.BlogSection), {
+    loading: () => <SectionLoader />,
+})
+const ContactSection = dynamic(() => import("@/src/components/sections/contact/ContactSection").then(mod => mod.ContactSection), {
+    loading: () => <SectionLoader />,
+})
+const ExperienceSection = dynamic(() => import("@/src/components/sections/experience/ExperienceSection").then(mod => mod.ExperienceSection), {
+    loading: () => <SectionLoader />,
+})
 
 export function MainPortfolio() {
     const activeSection = useActiveSection()

@@ -76,7 +76,7 @@ export function KoriAICard() {
 
                 {/* Stats row */}
                 <div className="flex flex-wrap items-center gap-6 md:gap-10 mb-8">
-                    {project.stats.map((stat, i) => (
+                    {project.stats?.map((stat, i) => (
                         <div key={i} className="flex items-center gap-3">
                             {i > 0 && <span className="hidden sm:inline text-[#1e3a5f] text-2xl select-none">/</span>}
                             <div className="flex flex-col">
@@ -89,14 +89,17 @@ export function KoriAICard() {
 
                 {/* Tech tags */}
                 <div className="flex flex-wrap gap-2.5">
-                    {project.tech.map((tech) => (
-                        <span
-                            key={tech}
-                            className="bg-white/5 border border-white/10 text-[#a1a1aa] text-[11px] md:text-xs font-bold px-4 py-2 rounded-xl hover:bg-white/10 transition-colors"
-                        >
-                            {tech}
-                        </span>
-                    ))}
+                    {project.tech.map((tech) => {
+                        const name = typeof tech === "string" ? tech : tech.name;
+                        return (
+                            <span
+                                key={name}
+                                className="bg-white/5 border border-white/10 text-[#a1a1aa] text-[11px] md:text-xs font-bold px-4 py-2 rounded-xl hover:bg-white/10 transition-colors"
+                            >
+                                {name}
+                            </span>
+                        );
+                    })}
                 </div>
             </div>
         </motion.div>
