@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Github, Linkedin } from "lucide-react"
 import { profile } from "@/data/dashboard"
+import { HHLogo } from "@/src/components/icons/HHLogo"
 
 function GitHubIcon() {
     return (
@@ -45,9 +46,7 @@ export function DashboardHeader() {
             {/* Left: Logo + Identity */}
             <div className="flex items-center gap-3 shrink-0">
                 <Link href="/" className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                        <span className="text-white text-sm md:text-base font-bold">H</span>
-                    </div>
+                    <HHLogo size={40} className="hover:rotate-6 active:scale-95" />
                     <div className="hidden xs:block">
                         <p className="text-[#fafafa] text-sm md:text-base font-bold leading-tight">{profile.name}</p>
                         <p className="text-[#71717a] text-xs font-medium leading-tight">{profile.title}</p>

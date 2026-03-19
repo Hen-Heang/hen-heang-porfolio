@@ -10,6 +10,7 @@ import { Header } from "@/src/components/features/navigation/Header"
 import { Footer } from "@/src/components/ui/Footer"
 import { useRouter } from "next/navigation"
 import HeroSection from "@/src/components/sections/hero/HeroSection"
+import { HHLogo } from "@/src/components/icons/HHLogo"
 
 // Loading component for lazy-loaded sections
 const SectionLoader = () => (
@@ -93,6 +94,7 @@ export function MainPortfolio() {
                             transition={{ duration: 0.4 }}
                             className="flex flex-col items-center"
                         >
+                            <HHLogo size={80} className="mb-8" />
                             <motion.h2
                                 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6 tracking-tight"
                             >

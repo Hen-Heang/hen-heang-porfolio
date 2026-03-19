@@ -18,20 +18,31 @@ const inter = localFont({
 })
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://hen-heang-porfolio.vercel.app"),
+    metadataBase: new URL("https://henheang.site"),
     title: {
         default: "Hen Heang — Full-Stack Developer",
         template: "%s | Hen Heang",
     },
     description:
         "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
-    keywords: ["Full-Stack Developer", "Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Hen Heang", "Seoul", "South Korea", "Enterprise Web Development"],
-    authors: [{ name: "Hen Heang", url: "https://github.com/Hen-Heang" }],
+    keywords: [
+        "Hen Heang", "Full-Stack Developer", "Java Developer", "Spring Boot",
+        "MyBatis", "JavaScript", "jQuery", "SQL", "Seoul", "South Korea",
+        "Cambodia Developer", "Enterprise Web Development", "Portfolio",
+    ],
+    authors: [{ name: "Hen Heang", url: "https://henheang.site" }],
+    alternates: {
+        canonical: "https://henheang.site",
+    },
+    icons: {
+        icon: "/icon",
+        apple: "/apple-icon",
+    },
     openGraph: {
         type: "website",
         locale: "en_US",
-        url: "https://hen-heang.vercel.app",
-        siteName: "Hen Heang Portfolio",
+        url: "https://henheang.site",
+        siteName: "Hen Heang — Portfolio",
         title: "Hen Heang — Full-Stack Developer",
         description:
             "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
@@ -54,13 +65,39 @@ export const metadata: Metadata = {
     robots: {
         index: true,
         follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
     },
+}
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Hen Heang",
+    url: "https://henheang.site",
+    jobTitle: "Full-Stack Developer",
+    worksFor: { "@type": "Organization", name: "Webcash Inc." },
+    address: { "@type": "PostalAddress", addressLocality: "Seoul", addressCountry: "KR" },
+    email: "henheang15@gmail.com",
+    sameAs: [
+        "https://github.com/Hen-Heang",
+        "https://linkedin.com/in/hen-heang",
+    ],
+    knowsAbout: ["Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Next.js"],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                 {children}
             </ThemeProvider>

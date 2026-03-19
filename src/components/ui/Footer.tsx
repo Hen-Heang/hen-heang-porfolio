@@ -4,6 +4,7 @@ import { Mail, MapPin, ArrowUpRight, Github, Linkedin, Send, Sparkles } from "lu
 import { personalInfo } from "@/data/personal-info"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { HHLogo } from "@/src/components/icons/HHLogo"
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -49,9 +50,7 @@ export function Footer() {
                     <div className="lg:col-span-5 space-y-8">
                         <div className="space-y-4">
                             <Link href="/" className="inline-flex items-center gap-2 group">
-                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-all duration-300">
-                                    <span className="text-white text-lg font-bold">H</span>
-                                </div>
+                                <HHLogo size={40} className="group-hover:rotate-6" />
                                 <span className="text-xl font-bold tracking-tight text-white group-hover:text-indigo-400 transition-colors">
                                     {personalInfo.fullName}
                                 </span>
