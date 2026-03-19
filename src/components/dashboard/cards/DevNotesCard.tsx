@@ -8,7 +8,7 @@ export function DevNotesCard() {
         <Link
             href="https://dev-learning-notes.vercel.app/"
             target="_blank"
-            className="group col-span-4 md:col-span-4 lg:col-span-5 bg-gradient-to-br from-[#0c0a09] to-[#1a1816] rounded-2xl overflow-hidden border border-[#292524] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="group col-span-4 md:col-span-4 lg:col-span-4 bg-gradient-to-br from-[#0c0a09] to-[#1a1816] rounded-2xl overflow-hidden border border-[#292524] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
             {/* Screenshot */}
             <div className="relative h-[120px] overflow-hidden">

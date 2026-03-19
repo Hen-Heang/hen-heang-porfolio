@@ -5,7 +5,7 @@ import { workProjects } from "@/data/dashboard"
 
 export function WorkProjectsCard() {
     return (
-        <BentoCard className="col-span-4 md:col-span-8 lg:col-span-5 p-6 md:p-8">
+        <BentoCard className="col-span-4 md:col-span-4 lg:col-span-3 p-6 md:p-8">
             <p className="text-[#52525b] text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-6">
                 Work Projects @ KOSIGN
             </p>

@@ -44,7 +44,7 @@ export function KoriAICard() {
                 hidden:   { opacity: 0, y: 20 },
                 visible:  { opacity: 1, y: 0, transition: { duration: 0.4 } },
             }}
-            className="glow-border col-span-4 md:col-span-8 row-span-2 relative overflow-hidden rounded-[20px] md:rounded-[24px] border flex flex-col md:flex-row min-h-[480px]"
+            className="glow-border col-span-4 md:col-span-8 lg:col-span-8 row-span-2 relative overflow-hidden rounded-[20px] md:rounded-[24px] border flex flex-col md:flex-row min-h-[480px]"
             style={{ background: bg, borderColor: project.borderColor }}
             whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.4)" }}
             transition={{ duration: 0.2 }}

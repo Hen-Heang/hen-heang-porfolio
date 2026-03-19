@@ -38,24 +38,22 @@ export function BentoDashboard() {
                     animate="visible"
                     className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 auto-rows-auto"
                 >
-                    {/* Row 1+2: Profile (col-4) | KoriAI (col-8, row-span-2) */}
+                    {/* Top Section */}
                     <HeroProfileCard />
                     <KoriAICard />
-
-                    {/* Row 2 left: Stats (col-4, fills under profile) */}
                     <StatsGrid />
 
-                    {/* Row 3: DevNotes | MoneyFlow (KoriAI) | TechStack */}
+                    {/* Middle Section */}
                     <DevNotesCard />
                     <MoneyFlowCard />
                     <TechStackCard />
 
-                    {/* Row 4: WorkProjects | Achievements | JourneyTimeline */}
+                    {/* Bottom Section */}
                     <WorkProjectsCard />
                     <AchievementsCard />
                     <JourneyTimeline />
 
-                    {/* Row 5: ContactCTA full width */}
+                    {/* Footer Section */}
                     <ContactCTA />
                 </motion.div>
             </main>

@@ -16,7 +16,7 @@ export function KoriAISmallCard() {
     return (
         <div
             onClick={() => window.open(project.url, "_blank")}
-            className="group col-span-4 md:col-span-4 lg:col-span-3 relative overflow-hidden rounded-2xl border p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer min-h-[220px]"
+            className="group col-span-4 md:col-span-4 lg:col-span-4 relative overflow-hidden rounded-2xl border p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer min-h-[220px]"
             style={{
                 background: `linear-gradient(145deg, ${(project as { gradientFrom?: string }).gradientFrom ?? "#0c1929"}, ${(project as { gradientTo?: string }).gradientTo ?? "#0f2744"})`,
                 borderColor: project.borderColor,
