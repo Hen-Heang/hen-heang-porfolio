@@ -24,6 +24,9 @@ import {
     ChevronRight,
 } from "lucide-react"
 import { ExperienceSection } from "@/src/components/sections/experience/ExperienceSection"
+import { AchievementsSection } from "@/src/components/sections/achievements/AchievementsSection"
+import { education } from "@/data/education"
+import { GraduationCap } from "lucide-react"
 
 export default function AboutPage() {
     const router = useRouter()
@@ -211,6 +214,49 @@ export default function AboutPage() {
                             {/* Work Journey Section */}
                             <motion.div variants={itemVariants} className="mb-32">
                                 <ExperienceSection />
+                            </motion.div>
+
+                            {/* Education Section */}
+                            <motion.div variants={itemVariants} className="mb-32">
+                                <div className="text-center mb-16">
+                                    <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                                        <GraduationCap className="text-blue-600" size={36} />
+                                        Education
+                                    </h2>
+                                    <p className="text-zinc-500 font-medium">Academic background and certifications that shaped my skills.</p>
+                                </div>
+
+                                <div className="relative pl-6 space-y-10 border-l-2 border-zinc-200 dark:border-zinc-800 ml-4">
+                                    {education.map((item, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.4, delay: i * 0.08 }}
+                                            className="relative"
+                                        >
+                                            {/* Timeline dot */}
+                                            <div className="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 shadow-[0_0_10px_rgba(99,102,241,0.4)]" />
+
+                                            <div className="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-6 hover:border-blue-500/30 dark:hover:border-blue-400/30 hover:shadow-lg transition-all duration-300">
+                                                <span className="inline-block text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+                                                    {item.period}
+                                                </span>
+                                                <h3 className="text-lg font-black text-zinc-900 dark:text-white mb-1">{item.title}</h3>
+                                                <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-3">{item.institution}</p>
+                                                {item.description && (
+                                                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{item.description}</p>
+                                                )}
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* Achievements & Certificates Section */}
+                            <motion.div variants={itemVariants} className="mb-32">
+                                <AchievementsSection />
                             </motion.div>
 
                             {/* Skills Section */}

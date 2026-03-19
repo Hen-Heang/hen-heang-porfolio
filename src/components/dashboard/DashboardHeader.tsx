@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { Download } from "lucide-react"
 import { profile } from "@/data/dashboard"
 import { HHLogo } from "@/src/components/icons/HHLogo"
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
+import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import { useState, useRef } from "react"
 import Magnetic from "@/src/components/ui/Magnetic"
 
@@ -67,27 +67,13 @@ export function DashboardHeader() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="w-full px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between max-w-7xl mx-auto gap-4 sticky top-0 z-[100]"
         >
-            {/* Left: Logo + Identity */}
-            <div className="flex items-center gap-3 shrink-0">
+            {/* Left: Logo only */}
+            <div className="shrink-0">
                 <Magnetic>
-                    <Link href="/" className="flex items-center gap-2.5 group">
+                    <Link href="/" className="group block">
                         <HHLogo size={40} className="transition-transform group-hover:rotate-6 active:scale-95" />
-                        <div className="hidden xs:block">
-                            <p className="text-[#fafafa] text-sm md:text-base font-bold leading-tight group-hover:text-indigo-400 transition-colors">{profile.name}</p>
-                            <p className="text-[#71717a] text-xs font-medium leading-tight">{profile.title}</p>
-                        </div>
                     </Link>
                 </Magnetic>
-                
-                <div className="hidden lg:flex items-center gap-2 bg-[#18181b]/80 backdrop-blur-md border border-white/5 px-3 py-1.5 rounded-full">
-                    <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    <span className="text-[#a1a1aa] text-[11px] font-bold uppercase tracking-wider">
-                        {profile.locationEmoji} {profile.location.split(",")[0]}
-                    </span>
-                </div>
             </div>
 
             {/* Center: Nav links */}

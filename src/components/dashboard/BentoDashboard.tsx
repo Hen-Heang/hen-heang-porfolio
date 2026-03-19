@@ -10,6 +10,7 @@ import { DevNotesCard } from "@/src/components/dashboard/cards/DevNotesCard"
 import { MoneyFlowCard } from "@/src/components/dashboard/cards/MoneyFlowCard"
 import { TechStackCard } from "@/src/components/dashboard/cards/TechStackCard"
 import { WorkProjectsCard } from "@/src/components/dashboard/cards/WorkProjectsCard"
+import { AchievementsCard } from "@/src/components/dashboard/cards/AchievementsCard"
 import { JourneyTimeline } from "@/src/components/dashboard/cards/JourneyTimeline"
 import { ContactCTA } from "@/src/components/dashboard/cards/ContactCTA"
 import { Footer } from "@/src/components/ui/Footer"
@@ -49,8 +50,9 @@ export function BentoDashboard() {
                     <MoneyFlowCard />
                     <TechStackCard />
 
-                    {/* Row 4: WorkProjects | JourneyTimeline */}
+                    {/* Row 4: WorkProjects | Achievements | JourneyTimeline */}
                     <WorkProjectsCard />
+                    <AchievementsCard />
                     <JourneyTimeline />
 
                     {/* Row 5: ContactCTA full width */}

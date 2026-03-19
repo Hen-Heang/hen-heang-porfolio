@@ -103,7 +103,7 @@ export const workProjects = [
 ]
 
 export const techStack = [
-    "Java", "Spring Boot", "MyBatis", "Next.js", "TypeScript", "PostgreSQL",
+    "Java", "Spring Boot", "MyBatis", "Next.js", "TypeScript", "PostgreSQL", "React", "Tailwind CSS", "Oracle", "Git", "Redis", "OpenAI", "Spring Security", "eGovFramework", "REST APIs",
 ]
 
 export const journey = [
