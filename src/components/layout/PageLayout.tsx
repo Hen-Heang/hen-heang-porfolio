@@ -1,6 +1,5 @@
 "use client"
 
-import { SidebarNav } from "@/src/components/dashboard/SidebarNav"
 import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
 import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import { Footer } from "@/src/components/ui/Footer"
@@ -16,8 +15,7 @@ interface PageLayoutProps {
 
 export function PageLayout({ children, showFooter = true, className = "" }: PageLayoutProps) {
     return (
-        <div className={`min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-[#09090b] dark:text-[#fafafa] font-sans md:pl-[70px] pb-24 md:pb-0 ${className}`}>
-            <SidebarNav />
+        <div className={`min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-[#09090b] dark:text-[#fafafa] font-sans pb-24 md:pb-0 ${className}`}>
             <MobileDock />
             <DashboardHeader />
             <motion.main 

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
-import { SidebarNav } from "@/src/components/dashboard/SidebarNav"
 import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import { HeroProfileCard } from "@/src/components/dashboard/cards/HeroProfileCard"
 import { KoriAICard } from "@/src/components/dashboard/cards/KoriAICard"
@@ -26,8 +25,7 @@ const containerVariants = {
 
 export function BentoDashboard() {
     return (
-        <div className="min-h-screen bg-[#09090b] md:pl-[70px] pb-24 md:pb-0">
-            <SidebarNav />
+        <div className="min-h-screen bg-[#09090b] pb-24 md:pb-0">
             <MobileDock />
             
             <DashboardHeader />
@@ -46,7 +44,7 @@ export function BentoDashboard() {
                     {/* Row 2 left: Stats (col-4, fills under profile) */}
                     <StatsGrid />
 
-                    {/* Row 3: DevNotes | MoneyFlow | TechStack */}
+                    {/* Row 3: DevNotes | MoneyFlow (KoriAI) | TechStack */}
                     <DevNotesCard />
                     <MoneyFlowCard />
                     <TechStackCard />

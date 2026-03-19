@@ -66,9 +66,9 @@ export const projects: Project[] = [
         title: "Money Flow - Precision Finance Engine",
         description: "A high-performance personal finance orchestrator focused on data security, intuitive financial modeling, and seamless asset tracking with a modern, high-fidelity user interface.",
         technologies: ["Next.js", "TypeScript", "Auth.js", "PostgreSQL", "Vercel"],
-        image: "/image/money-flow-preview.svg",
+        image: "/screenshots/moneyflow-screenshot.svg",
         github: "https://github.com/Hen-Heang/money-flow",
-        demo: "https://money-flow-sigma-black.vercel.app/",
+        demo: "https://money-flow.henheang.site/",
         overview: "Money Flow transforms complex financial data into actionable insights. Engineered for speed and security, it provides a unified dashboard for multi-currency tracking, expense categorization, and financial trend analysis.",
         features: [
             "Encrypted Authentication - Enterprise-grade user security and data privacy",

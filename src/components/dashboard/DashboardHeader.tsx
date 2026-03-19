@@ -2,9 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Github, Linkedin } from "lucide-react"
+import { Download } from "lucide-react"
 import { profile } from "@/data/dashboard"
 import { HHLogo } from "@/src/components/icons/HHLogo"
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
+import { useState, useRef } from "react"
+import Magnetic from "@/src/components/ui/Magnetic"
 
 function GitHubIcon() {
     return (
@@ -40,64 +43,117 @@ const navLinks = [
 
 export function DashboardHeader() {
     const pathname = usePathname()
+    const [hidden, setHidden] = useState(false)
+    const { scrollY } = useScroll()
+    const lastScrollY = useRef(0)
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const diff = latest - lastScrollY.current
+        if (latest > 50 && diff > 0) {
+            setHidden(true)
+        } else {
+            setHidden(false)
+        }
+        lastScrollY.current = latest
+    })
 
     return (
-        <header className="w-full px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between max-w-7xl mx-auto gap-4 relative z-50">
+        <motion.header 
+            variants={{
+                visible: { y: 0, opacity: 1 },
+                hidden: { y: -100, opacity: 0 }
+            }}
+            animate={hidden ? "hidden" : "visible"}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="w-full px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between max-w-7xl mx-auto gap-4 sticky top-0 z-[100]"
+        >
             {/* Left: Logo + Identity */}
             <div className="flex items-center gap-3 shrink-0">
-                <Link href="/" className="flex items-center gap-2.5">
-                    <HHLogo size={40} className="hover:rotate-6 active:scale-95" />
-                    <div className="hidden xs:block">
-                        <p className="text-[#fafafa] text-sm md:text-base font-bold leading-tight">{profile.name}</p>
-                        <p className="text-[#71717a] text-xs font-medium leading-tight">{profile.title}</p>
-                    </div>
-                </Link>
-                <span className="hidden lg:inline-flex items-center gap-1 bg-[#18181b] border border-white/5 text-[#a1a1aa] text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                    {profile.locationEmoji} {profile.location.split(",")[0]}
-                </span>
+                <Magnetic>
+                    <Link href="/" className="flex items-center gap-2.5 group">
+                        <HHLogo size={40} className="transition-transform group-hover:rotate-6 active:scale-95" />
+                        <div className="hidden xs:block">
+                            <p className="text-[#fafafa] text-sm md:text-base font-bold leading-tight group-hover:text-indigo-400 transition-colors">{profile.name}</p>
+                            <p className="text-[#71717a] text-xs font-medium leading-tight">{profile.title}</p>
+                        </div>
+                    </Link>
+                </Magnetic>
+                
+                <div className="hidden lg:flex items-center gap-2 bg-[#18181b]/80 backdrop-blur-md border border-white/5 px-3 py-1.5 rounded-full">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span className="text-[#a1a1aa] text-[11px] font-bold uppercase tracking-wider">
+                        {profile.locationEmoji} {profile.location.split(",")[0]}
+                    </span>
+                </div>
             </div>
 
-            {/* Center: Nav links (Desktop Only - Optional as Sidebar is present) */}
-            <nav className="hidden lg:flex items-center gap-1 bg-black/20 backdrop-blur-md border border-white/5 rounded-2xl px-2 py-1.5">
+            {/* Center: Nav links */}
+            <nav className="hidden lg:flex items-center gap-1 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl px-2 py-1.5 shadow-2xl">
                 {navLinks.map((link) => {
                     const isActive = pathname === link.href
                     return (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
-                                isActive
-                                    ? "bg-white/10 text-white shadow-sm"
-                                    : "text-[#71717a] hover:text-white hover:bg-white/5"
-                            }`}
-                        >
-                            {link.label}
-                        </Link>
+                        <Magnetic key={link.href}>
+                            <Link
+                                href={link.href}
+                                className={`relative px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                                    isActive ? "text-white" : "text-[#71717a] hover:text-white"
+                                }`}
+                            >
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="header-active-pill"
+                                        className="absolute inset-0 bg-white/10 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.05)]"
+                                        transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{link.label}</span>
+                            </Link>
+                        </Magnetic>
                     )
                 })}
             </nav>
 
-            {/* Right: Social + CTA (Desktop) / CV (Mobile) */}
+            {/* Right: Social + CTA */}
             <div className="flex items-center gap-2 md:gap-3 shrink-0">
-                <div className="hidden md:flex items-center gap-2">
-                    <a href={profile.socials.github} target="_blank" rel="noopener noreferrer"
-                        className="w-9 h-9 flex items-center justify-center rounded-xl text-zinc-500 hover:text-white hover:bg-white/5 transition-all">
-                        <GitHubIcon />
-                    </a>
-                    <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer"
-                        className="w-9 h-9 flex items-center justify-center rounded-xl text-zinc-500 hover:text-white hover:bg-white/5 transition-all">
-                        <LinkedInIcon />
-                    </a>
+                <div className="hidden md:flex items-center gap-1 bg-black/20 backdrop-blur-md border border-white/5 rounded-xl px-1 py-1">
+                    <Magnetic>
+                        <a href={profile.socials.github} target="_blank" rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center rounded-lg text-zinc-500 hover:text-white transition-all"
+                            title="GitHub">
+                            <GitHubIcon />
+                        </a>
+                    </Magnetic>
+                    <Magnetic>
+                        <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center rounded-lg text-zinc-500 hover:text-[#0077b5] transition-all"
+                            title="LinkedIn">
+                            <LinkedInIcon />
+                        </a>
+                    </Magnetic>
+                    <Magnetic>
+                        <a href={profile.socials.telegram} target="_blank" rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center rounded-lg text-zinc-500 hover:text-[#26A5E4] transition-all"
+                            title="Telegram">
+                            <TelegramIcon />
+                        </a>
+                    </Magnetic>
                 </div>
                 
-                <a
-                    href="/cv.pdf"
-                    download
-                    className="flex items-center gap-2 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:opacity-90 text-white text-[11px] md:text-xs font-bold uppercase tracking-widest px-4 md:px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-500/25 active:scale-95"
-                >
-                    <span className="hidden xs:inline">Download</span> CV
-                </a>
+                <Magnetic>
+                    <a
+                        href="/cv.pdf"
+                        download
+                        className="flex items-center gap-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-[#6366f1] text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all border border-indigo-500/20 active:scale-95 shadow-lg shadow-indigo-500/5"
+                        title="Download CV"
+                    >
+                        <Download size={14} className="animate-bounce" />
+                        CV
+                    </a>
+                </Magnetic>
             </div>
-        </header>
+        </motion.header>
     )
 }

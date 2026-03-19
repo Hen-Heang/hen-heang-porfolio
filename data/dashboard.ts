@@ -18,6 +18,28 @@ export const profile = {
 
 export const deployedProjects = [
     {
+        id: "money-flow",
+        title: "Money Flow",
+        subtitle: "AI-Powered Personal Finance Platform",
+        description:
+            "A full-stack personal finance tracker with real-time expense visualization, AI chatbot for spending analysis, budget alerts, and trend prediction.",
+        emoji: "💸",
+        url: "https://money-flow-sigma-black.vercel.app/",
+        github: "https://github.com/Hen-Heang/money-flow",
+        tech: ["Spring Boot", "Next.js", "TypeScript", "AI Integration"],
+        gradientFrom: "#071810",
+        gradientTo: "#0a1f12",
+        borderColor: "#14532d",
+        accentColor: "#22c55e",
+        stats: [
+            { label: "Tracking", value: "Real-time" },
+            { label: "AI Insights", value: "Smart" },
+            { label: "Availability", value: "24/7" },
+        ],
+        badges: ["LIVE", "AI-Powered"],
+        featured: true,
+    },
+    {
         id: "koriai",
         title: "KoriAI",
         subtitle: "Intelligent AI Language Ecosystem",
@@ -27,7 +49,8 @@ export const deployedProjects = [
         url: "https://koriai-frontend.vercel.app/",
         github: "https://github.com/Hen-Heang/koriai-frontend",
         tech: ["Next.js", "TypeScript", "Tailwind", "OpenAI"],
-        gradient: "from-[#0c1929] to-[#0f2744]",
+        gradientFrom: "#0c1929",
+        gradientTo: "#0f2744",
         borderColor: "#1e3a5f",
         accentColor: "#22d3ee",
         stats: [
