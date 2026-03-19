@@ -105,7 +105,7 @@ const ProfileSection = () => {
                                         <div className="w-24 h-24 rounded-full bg-gradient-to-r from-teal-500 to-indigo-500 p-1">
                                             <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full overflow-hidden">
                                                 <Image
-                                                    src="/image/HH.jpg"
+                                                    src="/image/heang_new.jpeg"
                                                     alt={`${personalInfo.fullName} - Full-Stack Developer`}
                                                     width={96}
                                                     height={96}

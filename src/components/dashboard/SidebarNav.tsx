@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Home, Code2, User, BookOpen, Mail, Download, Send } from "lucide-react"
 import { profile } from "@/data/dashboard"
@@ -39,8 +40,15 @@ export function SidebarNav() {
         <aside className="fixed left-0 top-0 bottom-0 z-50 w-[70px] flex flex-col bg-[#09090b]/80 backdrop-blur-md border-r border-white/5 hidden md:flex items-center py-8">
             {/* Logo */}
             <Link href="/" className="mb-12 group">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-all duration-300">
-                    <span className="text-white text-lg font-bold">H</span>
+                <div className="w-10 h-10 rounded-2xl overflow-hidden shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-all duration-300">
+                    <Image
+                        src="/image/heang_new.jpeg"
+                        alt={profile.name}
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover object-top"
+                        priority
+                    />
                 </div>
             </Link>
 

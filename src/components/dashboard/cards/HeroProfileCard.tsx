@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
 import { profile } from "@/data/dashboard"
 import Link from "next/link"
+import Image from "next/image"
 import { Clock, Copy, Check } from "lucide-react"
 import { Toast } from "@/src/components/ui/Toast"
 
@@ -45,8 +46,15 @@ export function HeroProfileCard() {
             <div className="space-y-5">
                 {/* Header: Avatar + Time */}
                 <div className="flex justify-between items-start">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-[#3b82f6] to-[#8b5cf6] flex items-center justify-center shadow-lg shadow-blue-500/20">
-                        <span className="text-white text-2xl md:text-3xl font-bold">{profile.koreanName}</span>
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden shadow-lg shadow-blue-500/20">
+                        <Image
+                            src="/image/heang_new.jpeg"
+                            alt={profile.name}
+                            width={80}
+                            height={80}
+                            className="w-full h-full object-cover object-top"
+                            priority
+                        />
                     </div>
                     
                     {/* Live Clock */}
