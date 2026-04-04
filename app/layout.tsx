@@ -80,7 +80,7 @@ const jsonLd = {
     name: "Hen Heang",
     url: "https://henheang.site",
     jobTitle: "Full-Stack Developer",
-    worksFor: { "@type": "Organization", name: "Webcash Inc." },
+    worksFor: { "@type": "Organization", name: "Bizplay" },
     address: { "@type": "PostalAddress", addressLocality: "Seoul", addressCountry: "KR" },
     email: "henheang15@gmail.com",
     sameAs: [

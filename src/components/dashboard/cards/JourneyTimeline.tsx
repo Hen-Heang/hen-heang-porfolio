@@ -9,13 +9,13 @@ import { Briefcase, MapPin, GraduationCap, Building2 } from "lucide-react"
 const getStepIcon = (company: string) => {
     const name = company.toLowerCase()
     if (name.includes("hrd") || name.includes("university")) return <GraduationCap size={14} />
-    if (name.includes("webcash") || name.includes("kosign")) return <Building2 size={14} />
+    if (name.includes("bizplay") || name.includes("kosign")) return <Building2 size={14} />
     return <Briefcase size={14} />
 }
 
 export function JourneyTimeline() {
     return (
-        <BentoCard className="col-span-4 md:col-span-8 lg:col-span-7 p-6 overflow-hidden">
+        <BentoCard className="col-span-4 md:col-span-8 lg:col-span-8 p-6 overflow-hidden">
             <div className="flex items-center justify-between mb-8">
                 <p className="text-[#52525b] text-[10px] font-semibold uppercase tracking-widest">
                     My Journey

@@ -1,11 +1,12 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
-import { Menu, X, Sun, Moon, Download, Mail, Home, User, Briefcase, BarChart, BookOpen } from "lucide-react"
+import { Menu, X, Sun, Moon, Download, Mail, Home, User, Briefcase, BarChart } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
 import type { NavItem } from "@/src/lib/types"
 import Magnetic from "@/src/components/ui/Magnetic"
+import Image from "next/image"
 
 interface HeaderProps {
     navItems: NavItem[]
@@ -68,25 +69,9 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
         }
     }
 
-    const handleDownloadResume = async () => {
-        try {
-            const response = await fetch("/api/download-resume")
-            if (!response.ok) {
-                throw new Error("Failed to download")
-            }
-
-            const blob = await response.blob()
-            const url = window.URL.createObjectURL(blob)
-            const link = document.createElement("a")
-            link.href = url
-            link.download = "Hen_Heang_CV.pdf"
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-            window.URL.revokeObjectURL(url)
-        } catch {
-            window.open("/Hen_Heang_Personal Application Form_KO_EN.pdf", "_blank", "noopener,noreferrer")
-        }
+    const handleResumeClick = () => {
+        setMobileMenuOpen(false)
+        router.push("/cv")
     }
 
     const getIcon = (id: string) => {
@@ -96,7 +81,6 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
             projects: <Briefcase size={16} />,
             experience: <Briefcase size={16} />,
             skills: <BarChart size={16} />,
-            blog: <BookOpen size={16} />,
             contact: <Mail size={16} />,
         }
 
@@ -119,6 +103,15 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             onClick={() => router.push("/")}
                             aria-label="Back to home"
                         >
+                            <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-indigo-500/40">
+                                <Image
+                                    src="/image/my_image_log.jpeg"
+                                    alt="Hen Heang"
+                                    width={32}
+                                    height={32}
+                                    className="object-cover w-full h-full"
+                                />
+                            </div>
                             <span className="font-semibold tracking-tight">Hen Heang</span>
                         </button>
 
@@ -157,9 +150,9 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             <motion.button
                                 whileHover={{ scale: 1.04 }}
                                 whileTap={{ scale: 0.96 }}
-                                onClick={handleDownloadResume}
+                                onClick={handleResumeClick}
                                 className="hidden md:flex items-center gap-2 px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-lg transition-colors duration-200 text-sm font-medium"
-                                aria-label="Download resume"
+                                aria-label="View CV"
                             >
                                 <Download size={15} />
                                 Resume
@@ -190,7 +183,7 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                 whileHover={{ scale: 1.04 }}
                                 whileTap={{ scale: 0.96 }}
                                 className="hidden md:flex items-center gap-2 px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-lg hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all duration-200 text-sm font-medium"
-                                onClick={() => handleNavItemClick("contact")}
+                                onClick={() => router.push("/contact")}
                                 aria-label="Contact me"
                             >
                                 <Mail size={15} />
@@ -268,17 +261,20 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                                 ))}
 
                                 <button
-                                    onClick={handleDownloadResume}
+                                    onClick={handleResumeClick}
                                     className="w-full flex items-center gap-3 rounded-lg px-4 py-3 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                                    aria-label="Download resume"
+                                    aria-label="View CV"
                                 >
                                     <Download size={16} />
-                                    Download Resume
+                                    View CV
                                 </button>
 
                                 <button
                                     className="w-full flex items-center gap-3 rounded-lg px-4 py-3 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
-                                    onClick={() => handleNavItemClick("contact")}
+                                    onClick={() => {
+                                        setMobileMenuOpen(false)
+                                        router.push("/contact")
+                                    }}
                                     aria-label="Contact me"
                                 >
                                     <Mail size={16} />

@@ -32,7 +32,7 @@ export default function AboutPage() {
     const router = useRouter()
     
     const aboutSummary = [
-        "I’m a Full-Stack Developer who builds web applications end-to-end - from frontend screens to backend APIs and databases. I’ve worked in both Cambodia and South Korea, and I’m currently based in Seoul at Webcash.",
+        "I’m a Full-Stack Developer who builds web applications end-to-end - from frontend screens to backend APIs and databases. I’ve worked in both Cambodia and South Korea, and I’m currently based in Seoul at Bizplay.",
         "In my work, I develop frontend pages with HTML/CSS and JavaScript (including jQuery), and I also build backend services with Java and MyBatis. I regularly work with SQL to design queries, connect APIs to the database, and improve performance and stability.",
         "I enjoy solving real business problems, collaborating closely with teammates, and continuously improving my skills in system design, database architecture, and scalable web development.",
     ]
@@ -111,7 +111,7 @@ export default function AboutPage() {
                                     <span>Get to know me</span>
                                 </div>
                                 <h1 className="text-5xl md:text-7xl font-black text-zinc-900 dark:text-white tracking-tight mb-8">
-                                    Engineering with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Purpose.</span>
+                                    About <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Me.</span>
                                 </h1>
                                 <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl leading-relaxed font-medium">
                                     {aboutSummary[0]}

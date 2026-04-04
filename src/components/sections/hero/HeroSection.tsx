@@ -14,8 +14,7 @@ import { HeroImage } from "./HeroImage"
 const HeroSection = () => {
     const [mounted, setMounted] = useState(false)
     const router = useRouter()
-    const reduceMotion = useReducedMotion()
-
+    useReducedMotion();
     useEffect(() => {
         setMounted(true)
     }, [])

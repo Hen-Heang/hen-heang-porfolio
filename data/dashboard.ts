@@ -2,7 +2,7 @@ export const profile = {
     name: "Hen Heang",
     koreanName: "헹",
     title: "Full-Stack Software Engineer",
-    company: "Webcash Inc.",
+    company: "Bizplay",
     location: "Seoul, South Korea",
     locationEmoji: "🇰🇷",
     email: "henheang15@gmail.com",
@@ -16,7 +16,23 @@ export const profile = {
     },
 }
 
-export const deployedProjects = [
+export interface BentoProject {
+    id: string
+    title: string
+    subtitle: string
+    description: string
+    emoji: string
+    url: string
+    github?: string
+    tech: (string | { name: string; color?: string })[]
+    gradientFrom?: string
+    gradientTo?: string
+    borderColor?: string
+    accentColor?: string
+    screenshot?: string
+}
+
+export const deployedProjects: BentoProject[] = [
     {
         id: "money-flow",
         title: "Money Flow",
@@ -27,17 +43,11 @@ export const deployedProjects = [
         url: "https://money-flow-sigma-black.vercel.app/",
         github: "https://github.com/Hen-Heang/money-flow",
         tech: ["Spring Boot", "Next.js", "TypeScript", "AI Integration"],
-        gradientFrom: "#071810",
-        gradientTo: "#0a1f12",
-        borderColor: "#14532d",
+        gradientFrom: "#09090b",
+        gradientTo: "#18181b",
+        borderColor: "#27272a",
         accentColor: "#22c55e",
-        stats: [
-            { label: "Tracking", value: "Real-time" },
-            { label: "AI Insights", value: "Smart" },
-            { label: "Availability", value: "24/7" },
-        ],
-        badges: ["LIVE", "AI-Powered"],
-        featured: true,
+        screenshot: "/screenshots/moneyflow-screenshot.svg"
     },
     {
         id: "koriai",
@@ -53,20 +63,14 @@ export const deployedProjects = [
         gradientTo: "#0f2744",
         borderColor: "#1e3a5f",
         accentColor: "#22d3ee",
-        stats: [
-            { label: "Learning modes", value: "Adaptive" },
-            { label: "Conversations", value: "Real-time" },
-            { label: "Availability", value: "24/7" },
-        ],
-        badges: ["LIVE", "AI-Engineered"],
-        featured: true,
+        screenshot: "/screenshots/koriai-screenshot.svg"
     },
     {
         id: "dev-notes",
         title: "Enterprise Learning Hub",
         subtitle: "Korea Standard Stack",
         description: "A centralized repository of mission-critical patterns for the Korean enterprise ecosystem, from eGovFramework to MyBatis optimization.",
-        terminalPrefix: ">_ enterprise-hub",
+        emoji: "📚",
         url: "https://dev-learning-notes.vercel.app/",
         github: "https://github.com/Hen-Heang/dev-learning-notes",
         tech: [
@@ -75,24 +79,11 @@ export const deployedProjects = [
             { name: "Enterprise", color: "#3b82f6" },
             { name: "SQL Ops", color: "#a855f7" },
         ],
-        gradient: "from-[#0c0a09] to-[#1a1816]",
+        gradientFrom: "#0c0a09",
+        gradientTo: "#1a1816",
         borderColor: "#292524",
         accentColor: "#84cc16",
-        badges: ["LIVE"],
-    },
-    {
-        id: "money-flow",
-        title: "Money Flow",
-        subtitle: "Precision Finance Engine",
-        description: "Secure, intuitive personal finance orchestrator focused on real-time asset tracking and high-fidelity financial modeling.",
-        url: "https://money-flow-sigma-black.vercel.app/",
-        github: "https://github.com/Hen-Heang/money-flow",
-        tech: ["Next.js", "PostgreSQL"],
-        gradient: "from-[#14171a] to-[#1c2127]",
-        borderColor: "#2a2f36",
-        accentColor: "#22c55e",
-        badges: ["LIVE"],
-        colors: ["#22c55e", "#ef4444", "#3b82f6"],
+        screenshot: "/screenshots/devnotes-screenshot.svg"
     },
 ]
 
@@ -109,5 +100,5 @@ export const techStack = [
 export const journey = [
     { year: "2023", company: "Korea Software HRD Center", location: "Intensive R&D", current: false },
     { year: "2024", company: "KOSIGN", location: "Cambodia 🇰🇭", current: false },
-    { year: "2025", company: "Webcash Inc.", location: "Seoul 🇰🇷", current: true },
+    { year: "2025", company: "Bizplay", location: "Seoul 🇰🇷", current: true },
 ]

@@ -6,7 +6,7 @@ import { profile } from "@/data/dashboard"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { Clock, Copy, Check, Sparkles, MapPin, ExternalLink, Mail } from "lucide-react"
+import { Clock, Check, Sparkles, MapPin, ExternalLink, Mail } from "lucide-react"
 import { Toast } from "@/src/components/ui/Toast"
 
 const roles = [
@@ -75,123 +75,126 @@ export function HeroProfileCard() {
     }
 
     return (
-        <BentoCard className="col-span-4 md:col-span-4 p-0 overflow-hidden flex flex-col min-h-[380px] group">
+        <BentoCard className="col-span-4 md:col-span-8 lg:col-span-8 p-0 overflow-hidden flex flex-col min-h-[380px] group border-white/10">
             {/* Header Background Pattern */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/5 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#6366f1]/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/10 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#6366f1]/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
             
-            <div className="p-6 md:p-8 space-y-6 relative z-10 flex flex-col h-full justify-between">
-                <div className="space-y-6">
-                    {/* Header: Avatar + Time */}
-                    <div className="flex justify-between items-start">
+            <div className="p-6 md:p-10 space-y-8 relative z-10 flex flex-col h-full">
+                {/* Top Row: Avatar + Time & Location */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="flex items-center gap-5">
                         <motion.div 
                             whileHover={{ scale: 1.05 }}
                             className="relative group/avatar"
                         >
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 ring-2 ring-white/10 group-hover/avatar:ring-[#6366f1]/50 bg-[#1c1c1f]">
+                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ring-4 ring-white/5 group-hover/avatar:ring-[#6366f1]/30 bg-[#1c1c1f]">
                                 <Image
                                     src="/image/heang_new.jpeg"
                                     alt={profile.name}
-                                    width={80}
-                                    height={80}
+                                    width={96}
+                                    height={96}
                                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/avatar:scale-110"
                                     priority
                                 />
                             </div>
                             {profile.available && (
-                                <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-                                    <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-[#09090b]" />
+                                <span className="absolute -bottom-1 -right-1 flex h-6 w-6">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-40" />
+                                    <span className="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-4 border-[#09090b]" />
                                 </span>
                             )}
                         </motion.div>
 
-                        <div className="flex flex-col items-end gap-2">
-                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1c1c1f]/80 backdrop-blur-md border border-white/5 shadow-sm">
-                                <Clock size={12} className="text-[#22d3ee] animate-pulse" />
-                                <span className="text-[11px] font-mono font-black text-white tracking-tight">{time}</span>
-                            </div>
-                            <div className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-[#52525b]">
-                                <MapPin size={10} className="text-teal-500" />
-                                Seoul, KR
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Identity */}
-                    <div className="space-y-3">
-                        <div className="space-y-1">
+                        <div className="space-y-1.5">
                             <div className="flex items-center gap-2">
-                                <h2 className="text-white text-2xl md:text-3xl font-black tracking-tight leading-none">
+                                <h2 className="text-white text-3xl md:text-4xl font-black tracking-tight leading-none">
                                     {profile.name}
                                 </h2>
-                                <Sparkles size={16} className="text-amber-400 opacity-50" />
+                                <Sparkles size={20} className="text-amber-400 opacity-70 animate-pulse" />
                             </div>
-
                             <div className="h-6 flex items-center">
-                                <p className="text-[#6366f1] text-xs md:text-sm font-mono font-black flex items-center">
+                                <p className="text-[#6366f1] text-sm md:text-base font-mono font-black flex items-center">
                                     {displayed}
-                                    <span className="inline-block w-1 h-3.5 bg-[#6366f1] ml-1 animate-pulse" />
+                                    <span className="inline-block w-1 h-4 bg-[#6366f1] ml-1 animate-pulse" />
                                 </p>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="flex flex-wrap items-center gap-2">
-                            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#6366f1]/10 border border-[#6366f1]/20 group-hover:bg-[#6366f1]/20 transition-colors">
-                                <Building2 size={12} className="text-[#6366f1]" />
-                                <span className="text-[10px] font-black text-[#6366f1] uppercase tracking-wider">{profile.company}</span>
-                            </div>
-                            
-                            <button
-                                onClick={copyEmail}
-                                className="group/email flex items-center gap-2 px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/10 transition-all"
-                            >
-                                <AnimatePresence mode="wait">
-                                    {copied ? (
-                                        <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                                            <Check size={11} className="text-emerald-500" />
-                                        </motion.div>
-                                    ) : (
-                                        <Mail key="mail" size={11} className="text-[#71717a] group-hover/email:text-white transition-colors" />
-                                    )}
-                                </AnimatePresence>
-                                <span className="text-[10px] font-bold text-[#71717a] group-hover/email:text-white transition-colors lowercase tracking-wide">
-                                    {profile.email.split("@")[0]}
-                                </span>
-                            </button>
+                    <div className="flex flex-row md:flex-col items-center md:items-end gap-3 self-start md:self-auto">
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-inner">
+                            <Clock size={14} className="text-[#22d3ee] animate-pulse" />
+                            <span className="text-xs font-mono font-black text-white tracking-tight">{time}</span>
                         </div>
+                        <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 bg-white/5 px-3 py-1.5 rounded-full border border-white/5">
+                            <MapPin size={12} className="text-emerald-500" />
+                            {profile.location}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Middle: Bio & More Info */}
+                <div className="flex-1 space-y-6">
+                    <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+                        {profile.bio}
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20">
+                            <Building2 size={14} className="text-[#6366f1]" />
+                            <span className="text-[11px] font-black text-[#6366f1] uppercase tracking-wider">{profile.company}</span>
+                        </div>
+                        
+                        <button
+                            onClick={copyEmail}
+                            className="group/email flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all"
+                        >
+                            <AnimatePresence mode="wait">
+                                {copied ? (
+                                    <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
+                                        <Check size={13} className="text-emerald-500" />
+                                    </motion.div>
+                                ) : (
+                                    <Mail key="mail" size={13} className="text-zinc-500 group-hover/email:text-white transition-colors" />
+                                )}
+                            </AnimatePresence>
+                            <span className="text-[11px] font-bold text-zinc-500 group-hover/email:text-white transition-colors lowercase tracking-wide">
+                                {profile.email}
+                            </span>
+                        </button>
                     </div>
 
                     {/* Tech stack mini pills */}
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                         {techStack.map((tech) => (
                             <div
                                 key={tech.name}
-                                className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#1c1c1f] border border-white/5 group-hover:border-white/10 transition-all"
+                                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-900/50 border border-white/5 hover:border-[#6366f1]/30 hover:bg-[#6366f1]/5 transition-all group/tech"
                             >
-                                <span className="text-[9px] leading-none grayscale group-hover:grayscale-0 transition-all">{tech.icon}</span>
-                                <span className="text-[9px] font-black uppercase tracking-widest text-[#71717a] group-hover:text-white transition-colors">{tech.name}</span>
+                                <span className="text-xs transition-transform group-hover/tech:scale-125">{tech.icon}</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 group-hover/tech:text-white transition-colors">{tech.name}</span>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {/* Footer Buttons */}
-                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-white/5">
+                {/* Bottom Row: CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/5">
                     <Link
                         href="/projects"
-                        className="group/btn relative flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white text-black text-xs font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
+                        className="group/btn relative flex-1 flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-white text-black text-xs font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden shadow-xl shadow-white/5"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 to-transparent -translate-x-full group-hover/btn:animate-shimmer" />
-                        Projects
-                        <ExternalLink size={12} />
+                        Explore Projects
+                        <ExternalLink size={14} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                     </Link>
                     <a
                         href={`mailto:${profile.email}`}
-                        className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1c1c1f] text-white text-xs font-black uppercase tracking-widest border border-white/10 transition-all hover:bg-[#27272a] hover:border-white/20 active:scale-[0.98]"
+                        className="flex-1 flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-zinc-900 text-white text-xs font-black uppercase tracking-widest border border-white/10 transition-all hover:bg-zinc-800 hover:border-white/20 active:scale-[0.98] shadow-xl"
                     >
-                        Contact
-                        <Mail size={12} />
+                        Get In Touch
+                        <Mail size={14} />
                     </a>
                 </div>
             </div>

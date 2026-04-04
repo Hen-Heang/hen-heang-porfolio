@@ -9,7 +9,7 @@ export function StatsGrid() {
         { value: String(deployedProjects.length), label: "Projects", accent: "#6366f1", sub: "Deployed" },
         { value: profile.yearsExperience, label: "Experience", accent: "#8b5cf6", sub: "Years+" },
         { value: "🇰🇷", label: "Seoul", accent: "#22d3ee", sub: "Location" },
-        { value: "Now", label: "Webcash", accent: "#22c55e", sub: "Company" },
+        { value: "Now", label: "Bizplay", accent: "#22c55e", sub: "Company" },
     ]
 
     return (

@@ -4,10 +4,10 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Download } from "lucide-react"
 import { profile } from "@/data/dashboard"
-import { HHLogo } from "@/src/components/icons/HHLogo"
 import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import { useState, useRef } from "react"
 import Magnetic from "@/src/components/ui/Magnetic"
+import Image from "next/image"
 
 function GitHubIcon() {
     return (
@@ -37,7 +37,6 @@ const navLinks = [
     { label: "Home", href: "/" },
     { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
-    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
 ]
 
@@ -71,7 +70,15 @@ export function DashboardHeader() {
             <div className="shrink-0">
                 <Magnetic>
                     <Link href="/" className="group block">
-                        <HHLogo size={40} className="transition-transform group-hover:rotate-6 active:scale-95" />
+                        <div className="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 group-hover:ring-indigo-500/80 transition-all active:scale-95">
+                            <Image
+                                src="/image/my_image_log.jpeg"
+                                alt="Hen Heang"
+                                width={40}
+                                height={40}
+                                className="object-cover w-full h-full"
+                            />
+                        </div>
                     </Link>
                 </Magnetic>
             </div>
@@ -129,15 +136,14 @@ export function DashboardHeader() {
                 </div>
                 
                 <Magnetic>
-                    <a
-                        href="/cv.pdf"
-                        download
+                    <Link
+                        href="/cv"
                         className="flex items-center gap-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-[#6366f1] text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all border border-indigo-500/20 active:scale-95 shadow-lg shadow-indigo-500/5"
-                        title="Download CV"
+                        title="View CV"
                     >
                         <Download size={14} className="animate-bounce" />
                         CV
-                    </a>
+                    </Link>
                 </Magnetic>
             </div>
         </motion.header>

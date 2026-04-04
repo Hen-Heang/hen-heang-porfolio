@@ -1,9 +1,8 @@
 "use client"
 
-import { Mail, MapPin, ArrowUpRight, Github, Linkedin, Send, Sparkles } from "lucide-react"
+import { ArrowUpRight, Github, Linkedin, Send, Sparkles } from "lucide-react"
 import { personalInfo } from "@/data/personal-info"
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { HHLogo } from "@/src/components/icons/HHLogo"
 
 export function Footer() {
@@ -13,7 +12,6 @@ export function Footer() {
         { name: "Home", href: "/" },
         { name: "About", href: "/about" },
         { name: "Projects", href: "/projects" },
-        { name: "Blog", href: "/blog" },
         { name: "Contact", href: "/contact" },
     ]
 

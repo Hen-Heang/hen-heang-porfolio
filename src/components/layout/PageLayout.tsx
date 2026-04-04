@@ -6,6 +6,7 @@ import { Footer } from "@/src/components/ui/Footer"
 import { ScrollToTop } from "@/src/components/ui/ScrollToTop"
 import { motion } from "framer-motion"
 import { staggerContainer, staggerItem } from "@/src/lib/utils/animations"
+import React from "react";
 
 interface PageLayoutProps {
     children: React.ReactNode

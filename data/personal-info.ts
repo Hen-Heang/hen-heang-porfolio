@@ -4,8 +4,8 @@ export const personalInfo = {
     title: "Full-Stack Software Engineer",
     description:
         "Highly motivated Full-Stack Software Engineer based in Seoul, specializing in architecting scalable enterprise web applications. With 2+ years of experience in the Korean IT sector, I excel at bridging robust backend systems (Java, Spring Boot, MyBatis) with modern, performant frontends (Next.js, TypeScript).",
-    profileImage: "/image/heang_new.jpeg",
-    myImage: "/image/heang_new.jpeg",
+    profileImage: "/image/my_image_log.jpeg",
+    myImage: "/image/my_image_log.jpeg",
     email: "henheang15@gmail.com",
     location: "Seoul, South Korea",
     socialLinks: {
@@ -13,6 +13,6 @@ export const personalInfo = {
         linkedin: "https://www.linkedin.com/in/hen-heang",
         telegram: "https://t.me/henheang",
     },
-    experience: "2+ Years",
+    experience: "2",
     ides: ["IntelliJ IDEA", "WebStorm"],
 }

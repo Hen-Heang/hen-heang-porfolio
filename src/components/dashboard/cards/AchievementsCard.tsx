@@ -19,7 +19,7 @@ export function AchievementsCard() {
     }
 
     return (
-        <BentoCard className="col-span-4 md:col-span-4 lg:col-span-3 p-6 flex flex-col group">
+        <BentoCard className="col-span-4 md:col-span-8 lg:col-span-8 p-6 flex flex-col group">
             <div className="flex items-center justify-between mb-6">
                 <p className="text-[#52525b] text-[10px] font-semibold uppercase tracking-widest">
                     Certificates & Results
