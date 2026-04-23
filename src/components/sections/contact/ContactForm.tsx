@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Button } from "@/src/components/ui/button"
 import { motion } from "framer-motion"
 import confetti from "canvas-confetti"
-import { supabase } from "@/src/lib/supabase"
+import { getSupabaseClient } from "@/src/lib/supabase"
 
 export function ContactForm() {
     const [formState, setFormState] = useState({
@@ -25,7 +25,13 @@ export function ContactForm() {
         setIsSubmitting(true);
         setError(null);
 
-        const { error: dbError } = await supabase
+        const sb = getSupabaseClient()
+        if (!sb) {
+            setError('Contact form is unavailable right now. Please email me directly.')
+            setIsSubmitting(false)
+            return
+        }
+        const { error: dbError } = await sb
             .from('portfolio_contact_messages')
             .insert({
                 name: formState.name,

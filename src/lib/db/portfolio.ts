@@ -1,9 +1,11 @@
-import { supabase } from '@/src/lib/supabase'
+import { getSupabaseClient } from '@/src/lib/supabase'
 import type { Project, SkillCategory, ExperienceItem, EducationItem } from '@/src/lib/types'
 import type { Achievement } from '@/data/achievements'
 
 export async function getProjects(): Promise<Project[]> {
-  const { data, error } = await supabase
+  const sb = getSupabaseClient()
+  if (!sb) return []
+  const { data, error } = await sb
     .from('portfolio_projects')
     .select('*')
     .order('sort_order')
@@ -27,7 +29,9 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 export async function getSkills(): Promise<SkillCategory[]> {
-  const { data: cats, error } = await supabase
+  const sb = getSupabaseClient()
+  if (!sb) return []
+  const { data: cats, error } = await sb
     .from('portfolio_skill_categories')
     .select('*, portfolio_skills(*)')
     .order('sort_order')
@@ -41,7 +45,9 @@ export async function getSkills(): Promise<SkillCategory[]> {
 }
 
 export async function getExperience(): Promise<ExperienceItem[]> {
-  const { data, error } = await supabase
+  const sb = getSupabaseClient()
+  if (!sb) return []
+  const { data, error } = await sb
     .from('portfolio_experience')
     .select('*')
     .order('sort_order')
@@ -58,7 +64,9 @@ export async function getExperience(): Promise<ExperienceItem[]> {
 }
 
 export async function getEducation(): Promise<EducationItem[]> {
-  const { data, error } = await supabase
+  const sb = getSupabaseClient()
+  if (!sb) return []
+  const { data, error } = await sb
     .from('portfolio_education')
     .select('*')
     .order('sort_order')
@@ -72,7 +80,9 @@ export async function getEducation(): Promise<EducationItem[]> {
 }
 
 export async function getAchievements(): Promise<Achievement[]> {
-  const { data, error } = await supabase
+  const sb = getSupabaseClient()
+  if (!sb) return []
+  const { data, error } = await sb
     .from('portfolio_achievements')
     .select('*')
     .order('sort_order')
@@ -88,4 +98,3 @@ export async function getAchievements(): Promise<Achievement[]> {
     link: r.link,
   }))
 }
-
