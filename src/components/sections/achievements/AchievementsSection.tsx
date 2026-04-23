@@ -8,15 +8,16 @@ import { Badge } from "@/src/components/ui/badge"
 import { Trophy, Award, GraduationCap, Calendar, Building, X, Eye, ExternalLink } from "lucide-react"
 import { groupedAchievements as staticGrouped, groupAchievementsByYearAndIssuer, type Achievement } from "@/data/achievements"
 import { getAchievements } from "@/src/lib/db/portfolio"
+import { Skeleton } from "@/src/components/ui/Skeleton"
 import Image from "next/image"
 
 export function AchievementsSection() {
-    const [groupedAchievements, setGroupedAchievements] = useState(staticGrouped)
+    const [groupedAchievements, setGroupedAchievements] = useState<ReturnType<typeof groupAchievementsByYearAndIssuer> | null>(null)
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
 
     useEffect(() => {
         getAchievements().then((data) => {
-            if (data.length) setGroupedAchievements(groupAchievementsByYearAndIssuer(data))
+            setGroupedAchievements(data.length ? groupAchievementsByYearAndIssuer(data) : staticGrouped)
         })
     }, [])
 
@@ -44,7 +45,20 @@ export function AchievementsSection() {
                     viewport={{ once: true }}
                     className="mt-12 space-y-16"
                 >
-                    {groupedAchievements.map((group, groupIndex) => (
+                    {groupedAchievements === null ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {Array.from({ length: 3 }).map((_, i) => (
+                                <div key={i} className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 space-y-4">
+                                    <Skeleton className="h-10 w-10 rounded-lg" />
+                                    <Skeleton className="h-4 w-3/4" />
+                                    <Skeleton className="h-3 w-24" />
+                                    <Skeleton className="h-3 w-full" />
+                                    <Skeleton className="h-3 w-5/6" />
+                                    <Skeleton className="aspect-video w-full rounded-xl" />
+                                </div>
+                            ))}
+                        </div>
+                    ) : groupedAchievements.map((group, groupIndex) => (
                         <motion.div
                             key={`${group.year}-${group.issuer}`}
                             initial={{ opacity: 0, y: 20 }}
@@ -159,7 +173,7 @@ export function AchievementsSection() {
                             </div>
                         </motion.div>
                     ))}
-                </motion.div>
+                    </motion.div>
             </div>
 
             {/* Modal for viewing certificate details */}

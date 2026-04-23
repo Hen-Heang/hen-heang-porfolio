@@ -7,6 +7,7 @@ import { experiences as staticExperiences } from "@/data/experience"
 import { getExperience } from "@/src/lib/db/portfolio"
 import type { ExperienceItem } from "@/src/lib/types"
 import { useState, useEffect } from "react"
+import { Skeleton } from "@/src/components/ui/Skeleton"
 import { Badge } from "@/src/components/ui/badge"
 import { Card } from "@/src/components/ui/card"
 
@@ -28,11 +29,11 @@ const item = {
 }
 
 export function ExperienceSection() {
-    const [experiences, setExperiences] = useState<ExperienceItem[]>(staticExperiences)
+    const [experiences, setExperiences] = useState<ExperienceItem[] | null>(null)
     const containerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        getExperience().then((data) => { if (data.length) setExperiences(data) })
+        getExperience().then((data) => setExperiences(data.length ? data : staticExperiences))
     }, [])
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -71,14 +72,27 @@ export function ExperienceSection() {
                     </motion.div>
 
                     <div className="relative" ref={containerRef}>
-                        {/* Animated Line - Simplified to Monochrome */}
                         <div className="absolute left-8 top-0 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800 hidden md:block" />
-                        <motion.div 
+                        <motion.div
                             style={{ height }}
-                            className="absolute left-8 top-0 w-px bg-zinc-900 dark:bg-zinc-100 hidden md:block origin-top" 
+                            className="absolute left-8 top-0 w-px bg-zinc-900 dark:bg-zinc-100 hidden md:block origin-top"
                         />
                         <div className="space-y-6">
-                            {experiences.map((experience, idx) => (
+                            {experiences === null ? (
+                                Array.from({ length: 3 }).map((_, i) => (
+                                    <div key={i} className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 space-y-3">
+                                        <Skeleton className="h-5 w-32" />
+                                        <Skeleton className="h-4 w-48" />
+                                        <Skeleton className="h-3 w-full" />
+                                        <Skeleton className="h-3 w-5/6" />
+                                        <div className="flex gap-2 pt-2">
+                                            <Skeleton className="h-5 w-16" />
+                                            <Skeleton className="h-5 w-16" />
+                                            <Skeleton className="h-5 w-20" />
+                                        </div>
+                                    </div>
+                                ))
+                            ) : experiences.map((experience, idx) => (
                                 <motion.div key={experience.company + experience.period} variants={item}>
                                     <Card className="relative overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-sm hover:shadow-md transition-shadow duration-300">
                                         <div className="p-6 md:p-8">
@@ -148,8 +162,8 @@ export function ExperienceSection() {
                                     </Card>
                                 </motion.div>
                             ))}
+                            </div>
                         </div>
-                    </div>
                 </motion.div>
             </div>
         </section>
