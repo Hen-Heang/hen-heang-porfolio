@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import { ThemeProvider } from "@/src/components/ThemeProvider"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
 const inter = localFont({
@@ -101,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                 {children}
             </ThemeProvider>
+            <Analytics />
             <SpeedInsights />
         </body>
         </html>
