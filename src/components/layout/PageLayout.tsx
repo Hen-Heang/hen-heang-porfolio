@@ -1,12 +1,12 @@
 "use client"
 
-import { SidebarNav } from "@/src/components/dashboard/SidebarNav"
 import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
 import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import { Footer } from "@/src/components/ui/Footer"
 import { ScrollToTop } from "@/src/components/ui/ScrollToTop"
 import { motion } from "framer-motion"
 import { staggerContainer, staggerItem } from "@/src/lib/utils/animations"
+import React from "react";
 
 interface PageLayoutProps {
     children: React.ReactNode
@@ -16,8 +16,7 @@ interface PageLayoutProps {
 
 export function PageLayout({ children, showFooter = true, className = "" }: PageLayoutProps) {
     return (
-        <div className={`min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-[#09090b] dark:text-[#fafafa] font-sans md:pl-[70px] pb-24 md:pb-0 ${className}`}>
-            <SidebarNav />
+        <div className={`min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-[#09090b] dark:text-[#fafafa] font-sans pb-24 md:pb-0 ${className}`}>
             <MobileDock />
             <DashboardHeader />
             <motion.main 

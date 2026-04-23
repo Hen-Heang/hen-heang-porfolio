@@ -33,7 +33,7 @@ export const cvData = {
 
   experience: [
     {
-      company: "Webcash Inc.",
+      company: "Bizplay",
       title: "Full-Stack Developer",
       location: "Seoul, South Korea",
       startDate: "October 2025",

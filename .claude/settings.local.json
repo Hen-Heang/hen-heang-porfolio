@@ -3,7 +3,8 @@
     "allow": [
       "Bash(gemini --version)",
       "Bash(npm install:*)",
-      "Bash(npm ls:*)"
+      "Bash(npm ls:*)",
+      "WebFetch(domain:money-flow.henheang.site)"
     ]
   }
 }

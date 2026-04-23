@@ -112,12 +112,12 @@ export function AchievementsSection() {
                                                 )}
 
                                                 {achievement.image && (
-                                                    <div className="relative overflow-hidden rounded-xl mb-6 aspect-video border border-zinc-100 dark:border-zinc-900">
+                                                    <div className="relative overflow-hidden rounded-xl mb-6 aspect-video border border-zinc-100 dark:border-zinc-900 bg-zinc-900">
                                                         <Image
                                                             src={achievement.image}
                                                             alt={achievement.title}
                                                             fill
-                                                            className="object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500 cursor-pointer"
+                                                            className="object-contain grayscale-[0.2] hover:grayscale-0 transition-all duration-500 cursor-pointer"
                                                             onClick={() => openModal(achievement)}
                                                         />
                                                         <div 
@@ -241,7 +241,7 @@ export function AchievementsSection() {
                                                     src={selectedAchievement.image}
                                                     alt="Achievement Detail"
                                                     fill
-                                                    className="object-contain bg-zinc-50 dark:bg-zinc-900"
+                                                    className="object-contain bg-zinc-900"
                                                 />
                                             </div>
                                         )}

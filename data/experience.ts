@@ -3,7 +3,7 @@ import type { ExperienceItem } from "@/src/lib/types"
 export const experiences: ExperienceItem[] = [
     {
         role: "Full-Stack Developer",
-        company: "Webcash Inc.",
+        company: "Bizplay",
         period: "October 2025 — Present",
         location: "Seoul, South Korea",
         summary: "Building enterprise financial web applications for government agencies and corporate clients. Developing both frontend interfaces and backend API services in Korean enterprise environment.",

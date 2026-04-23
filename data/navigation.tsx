@@ -9,5 +9,4 @@ export const navItems: NavItem[] = [
     { id: "experience", label: "Experience", icon: <Briefcase size={18} /> },
     { id: "projects", label: "Projects", icon: <Sparkles size={18} /> },
     { id: "skills", label: "Skills", icon: <BarChart size={18} /> },
-    { id: "blog", label: "Blog", icon: <BookOpen size={18} /> },
 ]

@@ -19,7 +19,6 @@ import { skills } from '../data/skills'
 import { experiences } from '../data/experience'
 import { education } from '../data/education'
 import { rawAchievements } from '../data/achievements'
-import { blogPosts } from '../src/data/blog-posts'
 
 // Uses service role key to bypass RLS for seeding — never expose this client-side
 const supabase = createClient(
@@ -125,28 +124,6 @@ async function seed() {
   )
   if (achErr) console.error('Achievements error:', achErr.message)
   else console.log(`✓ Achievements (${rawAchievements.length})`)
-
-  // Blog posts
-  const { error: blogErr } = await supabase.from('portfolio_blog_posts').upsert(
-    blogPosts.map((p, i) => ({
-      slug: p.slug,
-      title: p.title,
-      excerpt: p.excerpt,
-      content: p.content,
-      date: p.date,
-      read_time: p.readTime,
-      category: p.category,
-      tags: p.tags,
-      image: p.image,
-      author: p.author,
-      featured: p.featured,
-      published: true,
-      sort_order: i,
-    })),
-    { onConflict: 'slug' }
-  )
-  if (blogErr) console.error('Blog posts error:', blogErr.message)
-  else console.log(`✓ Blog posts (${blogPosts.length})`)
 
   console.log('\nDone!')
 }

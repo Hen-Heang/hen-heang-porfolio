@@ -5,11 +5,11 @@ import { workProjects } from "@/data/dashboard"
 
 export function WorkProjectsCard() {
     return (
-        <BentoCard className="col-span-4 md:col-span-8 lg:col-span-5 p-6 md:p-8">
+        <BentoCard className="col-span-4 md:col-span-4 lg:col-span-4 p-6 md:p-8">
             <p className="text-[#52525b] text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-6">
-                Work Projects @ KOSIGN
+                Work Projects @KSHRD & @KOSIGN
             </p>
-            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-4 md:gap-5">
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 md:gap-5">
                 {workProjects.map((project) => (
                     <div
                         key={project.id}

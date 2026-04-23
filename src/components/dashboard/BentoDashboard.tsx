@@ -2,17 +2,16 @@
 
 import { motion } from "framer-motion"
 import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
-import { SidebarNav } from "@/src/components/dashboard/SidebarNav"
 import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import { HeroProfileCard } from "@/src/components/dashboard/cards/HeroProfileCard"
-import { KoriAICard } from "@/src/components/dashboard/cards/KoriAICard"
 import { StatsGrid } from "@/src/components/dashboard/cards/StatsGrid"
-import { DevNotesCard } from "@/src/components/dashboard/cards/DevNotesCard"
-import { MoneyFlowCard } from "@/src/components/dashboard/cards/MoneyFlowCard"
 import { TechStackCard } from "@/src/components/dashboard/cards/TechStackCard"
 import { WorkProjectsCard } from "@/src/components/dashboard/cards/WorkProjectsCard"
+import { AchievementsCard } from "@/src/components/dashboard/cards/AchievementsCard"
 import { JourneyTimeline } from "@/src/components/dashboard/cards/JourneyTimeline"
 import { ContactCTA } from "@/src/components/dashboard/cards/ContactCTA"
+import { ProjectCard } from "@/src/components/dashboard/cards/ProjectCard"
+import { deployedProjects } from "@/data/dashboard"
 import { Footer } from "@/src/components/ui/Footer"
 import { ScrollToTop } from "@/src/components/ui/ScrollToTop"
 
@@ -26,8 +25,7 @@ const containerVariants = {
 
 export function BentoDashboard() {
     return (
-        <div className="min-h-screen bg-[#09090b] md:pl-[70px] pb-24 md:pb-0">
-            <SidebarNav />
+        <div className="min-h-screen bg-[#09090b] pb-24 md:pb-0">
             <MobileDock />
             
             <DashboardHeader />
@@ -39,23 +37,24 @@ export function BentoDashboard() {
                     animate="visible"
                     className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 auto-rows-auto"
                 >
-                    {/* Row 1+2: Profile (col-4) | KoriAI (col-8, row-span-2) */}
+                    {/* Top Section: Hero (8) + Stats (4) */}
                     <HeroProfileCard />
-                    <KoriAICard />
-
-                    {/* Row 2 left: Stats (col-4, fills under profile) */}
                     <StatsGrid />
 
-                    {/* Row 3: DevNotes | MoneyFlow | TechStack */}
-                    <DevNotesCard />
-                    <MoneyFlowCard />
-                    <TechStackCard />
+                    {/* Projects Section: 3 x (4) */}
+                    {deployedProjects.map((project, idx) => (
+                        <ProjectCard key={`${project.id}-${idx}`} project={project} />
+                    ))}
 
-                    {/* Row 4: WorkProjects | JourneyTimeline */}
-                    <WorkProjectsCard />
+                    {/* Middle Section: Tech (4) + Journey (8) */}
+                    <TechStackCard />
                     <JourneyTimeline />
 
-                    {/* Row 5: ContactCTA full width */}
+                    {/* Bottom Section: Work (4) + Achievements (8) */}
+                    <WorkProjectsCard />
+                    <AchievementsCard />
+
+                    {/* Footer Section: (12) */}
                     <ContactCTA />
                 </motion.div>
             </main>

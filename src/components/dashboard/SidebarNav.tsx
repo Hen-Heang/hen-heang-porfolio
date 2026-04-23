@@ -2,11 +2,11 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Home, Code2, User, BookOpen, Mail, Download, Send } from "lucide-react"
 import { profile } from "@/data/dashboard"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 
 function GitHubIcon() {
     return (
@@ -28,7 +28,6 @@ const navLinks = [
     { label: "Home",     href: "/",         icon: Home },
     { label: "Projects", href: "/projects",  icon: Code2 },
     { label: "About",    href: "/about",     icon: User },
-    { label: "Blog",     href: "/blog",      icon: BookOpen },
     { label: "Contact",  href: "/contact",   icon: Mail },
 ]
 
@@ -37,17 +36,16 @@ export function SidebarNav() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
     return (
-        <aside className="fixed left-0 top-0 bottom-0 z-50 w-[70px] flex flex-col bg-[#09090b]/80 backdrop-blur-md border-r border-white/5 hidden md:flex items-center py-8">
+        <aside className="fixed left-0 top-0 bottom-0 z-50 w-[70px] flex-col bg-[#09090b]/80 backdrop-blur-md border-r border-white/5 hidden md:flex items-center py-8">
             {/* Logo */}
-            <Link href="/" className="mb-12 group">
-                <div className="w-10 h-10 rounded-2xl overflow-hidden shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-all duration-300">
+            <Link href="/" className="mb-6 block">
+                <div className="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 hover:ring-indigo-500/80 transition-all">
                     <Image
-                        src="/image/heang_new.jpeg"
-                        alt={profile.name}
+                        src="/image/my_image_log.jpeg"
+                        alt="Hen Heang"
                         width={40}
                         height={40}
-                        className="w-full h-full object-cover object-top"
-                        priority
+                        className="object-cover w-full h-full"
                     />
                 </div>
             </Link>
@@ -121,14 +119,13 @@ export function SidebarNav() {
                     <Send size={18} />
                 </a>
                 
-                <a
-                    href="/cv.pdf"
-                    download
+                <Link
+                    href="/cv"
                     className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-500/10 text-[#6366f1] hover:bg-indigo-500/20 transition-all border border-indigo-500/20 mt-2"
-                    title="Download CV"
+                    title="View CV"
                 >
                     <Download size={18} />
-                </a>
+                </Link>
             </div>
         </aside>
     )

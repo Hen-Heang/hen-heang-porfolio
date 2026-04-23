@@ -46,12 +46,30 @@ export const groupAchievementsByYearAndIssuer = (achievements: Achievement[]): A
 export const rawAchievements: Achievement[] = [
     {
         id: "1",
-        title: "Bachelor's Degree in Computer Science",
-        issuer: "University Name",
+        title: "Advanced Achievement Award",
+        issuer: "Korea Software HRD Center",
         date: "2023",
         type: "graduation",
         description: "Graduated with honors in Computer Science with focus on web development and software engineering.",
         image: "/graduate-image.jpg",
+    },
+    {
+        id: "3",
+        title: "Bachelor of Science in Computer Science and Engineering",
+        issuer: "Royal University of Phnom Penh",
+        date: "2024",
+        type: "graduation",
+        description: "Completed Bachelor of Science in Computer Science and Engineering at Royal University of Phnom Penh. Examination: May 2024, Certificate issued: December 2024.",
+        image: "/rupp-logo.png",
+    },
+ {
+        id: "2",
+        title: "Advanced Achievement Award",
+        issuer: "Korea Software HRD Center",
+        date: "2023",
+        type: "award",
+        description: "Recognized for outstanding performance and advanced technical proficiency in software development during the intensive training program.",
+        image: "/advance-award.jpeg",
     },
     {
         id: "10",

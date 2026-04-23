@@ -1,6 +1,5 @@
 import { supabase } from '@/src/lib/supabase'
 import type { Project, SkillCategory, ExperienceItem, EducationItem } from '@/src/lib/types'
-import type { BlogPost } from '@/src/data/blog-posts'
 import type { Achievement } from '@/data/achievements'
 
 export async function getProjects(): Promise<Project[]> {
@@ -90,27 +89,3 @@ export async function getAchievements(): Promise<Achievement[]> {
   }))
 }
 
-export async function getBlogPosts(featuredOnly = false): Promise<BlogPost[]> {
-  let query = supabase
-    .from('portfolio_blog_posts')
-    .select('*')
-    .eq('published', true)
-    .order('sort_order')
-  if (featuredOnly) query = query.eq('featured', true)
-  const { data, error } = await query
-  if (error || !data?.length) return []
-  return data.map((r) => ({
-    id: r.id,
-    slug: r.slug,
-    title: r.title,
-    excerpt: r.excerpt,
-    content: r.content,
-    date: r.date,
-    readTime: r.read_time,
-    category: r.category,
-    tags: r.tags,
-    image: r.image,
-    author: r.author,
-    featured: r.featured,
-  }))
-}
