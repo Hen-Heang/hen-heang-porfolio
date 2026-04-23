@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Button } from "@/src/components/ui/button"
 import { motion } from "framer-motion"
 import confetti from "canvas-confetti"
+import { supabase } from "@/src/lib/supabase"
 
 export function ContactForm() {
     const [formState, setFormState] = useState({
@@ -12,6 +13,7 @@ export function ContactForm() {
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = e.target;
@@ -21,11 +23,24 @@ export function ContactForm() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setError(null);
 
-        // Simulate form submission
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        const { error: dbError } = await supabase
+            .from('portfolio_contact_messages')
+            .insert({
+                name: formState.name,
+                email: formState.email,
+                subject: formState.subject,
+                message: formState.message,
+            })
 
         setIsSubmitting(false);
+
+        if (dbError) {
+            setError('Something went wrong. Please try again or email me directly.')
+            return;
+        }
+
         setIsSubmitted(true);
         setFormState({
             name: "",
@@ -71,6 +86,15 @@ export function ContactForm() {
 
     return (
         <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 rounded-md bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 mb-6 border border-red-200 dark:border-red-800 text-sm"
+                >
+                    {error}
+                </motion.div>
+            )}
             {isSubmitted && (
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
