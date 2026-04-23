@@ -5,14 +5,21 @@ import { motion, useInView } from "framer-motion"
 import { Button } from "@/src/components/ui/button"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { ProjectCard } from "./ProjectCard"
-import { projects } from "@/data/projects"
+import { projects as staticProjects } from "@/data/projects"
+import { getProjects } from "@/src/lib/db/portfolio"
 import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 import {Project} from "@/src/lib/types";
 
 export function ProjectsSection() {
     const router = useRouter()
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, amount: 0.2 })
+    const [projects, setProjects] = useState<Project[]>(staticProjects)
+
+    useEffect(() => {
+        getProjects().then((data) => { if (data.length) setProjects(data) })
+    }, [])
 
     const containerVariants = {
         hidden: { opacity: 0 },

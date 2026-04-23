@@ -15,7 +15,7 @@ export interface AchievementGroup {
     achievements: Achievement[]
 }
 
-const groupAchievementsByYearAndIssuer = (achievements: Achievement[]): AchievementGroup[] => {
+export const groupAchievementsByYearAndIssuer = (achievements: Achievement[]): AchievementGroup[] => {
     const groups: { [key: string]: { [issuer: string]: Achievement[] } } = {}
 
     achievements.forEach(achievement => {

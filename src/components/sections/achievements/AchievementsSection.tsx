@@ -1,16 +1,24 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { Badge } from "@/src/components/ui/badge"
 import { Trophy, Award, GraduationCap, Calendar, Building, X, Eye, ExternalLink } from "lucide-react"
-import { groupedAchievements, type Achievement } from "@/data/achievements"
+import { groupedAchievements as staticGrouped, groupAchievementsByYearAndIssuer, type Achievement } from "@/data/achievements"
+import { getAchievements } from "@/src/lib/db/portfolio"
 import Image from "next/image"
 
 export function AchievementsSection() {
+    const [groupedAchievements, setGroupedAchievements] = useState(staticGrouped)
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
+
+    useEffect(() => {
+        getAchievements().then((data) => {
+            if (data.length) setGroupedAchievements(groupAchievementsByYearAndIssuer(data))
+        })
+    }, [])
 
     const openModal = (achievement: Achievement) => {
         setSelectedAchievement(achievement)

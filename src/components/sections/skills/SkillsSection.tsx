@@ -5,7 +5,9 @@ import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
-import { skills } from "@/data/skills"
+import { skills as staticSkills } from "@/data/skills"
+import { getSkills } from "@/src/lib/db/portfolio"
+import type { SkillCategory } from "@/src/lib/types"
 import { Badge } from "@/src/components/ui/badge"
 import { Card } from "@/src/components/ui/card"
 import { SkillItem } from "./SkillItem"
@@ -14,10 +16,14 @@ import { ScrollVelocity } from "@/src/components/ui/ScrollVelocity"
 export function SkillsSection() {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, amount: 0.2 })
-    const [activeTab, setActiveTab] = useState(skills[0].category)
+    const [skills, setSkills] = useState<SkillCategory[]>(staticSkills)
+    const [activeTab, setActiveTab] = useState(staticSkills[0].category)
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => setMounted(true), [])
+    useEffect(() => {
+        getSkills().then((data) => { if (data.length) setSkills(data) })
+    }, [])
 
     return (
         <section id="skills" className="section-base section-muted">

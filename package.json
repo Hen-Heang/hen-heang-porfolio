@@ -7,12 +7,14 @@
     "build": "next build",
     "build:alt": "set \"NEXT_TELEMETRY_DISABLED=1\" && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "npx tsx scripts/seed.ts"
   },
   "dependencies": {
     "@motionone/utils": "^10.18.0",
     "@radix-ui/react-slot": "^1.2.0",
     "@radix-ui/react-tabs": "^1.1.9",
+    "@supabase/supabase-js": "^2.104.0",
     "@vercel/speed-insights": "^2.0.0",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",

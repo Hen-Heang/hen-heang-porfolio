@@ -4,11 +4,19 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { EducationItem } from "./EducationItem"
-import { education } from "@/data/education"
+import { education as staticEducation } from "@/data/education"
+import { getEducation } from "@/src/lib/db/portfolio"
+import type { EducationItem } from "@/src/lib/types"
+import { useState, useEffect } from "react"
 
 export function EducationSection() {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, amount: 0.1 })
+    const [education, setEducation] = useState<EducationItem[]>(staticEducation)
+
+    useEffect(() => {
+        getEducation().then((data) => { if (data.length) setEducation(data) })
+    }, [])
 
     return (
         <section id="education" className="section-base section-muted">

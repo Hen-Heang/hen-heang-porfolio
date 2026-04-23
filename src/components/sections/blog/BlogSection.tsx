@@ -4,7 +4,9 @@ import { motion } from "framer-motion"
 import { BookOpen, ArrowRight, Calendar, Clock, Sparkles } from "lucide-react"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { Badge } from "@/src/components/ui/badge"
-import { getFeaturedPosts } from "@/src/data/blog-posts"
+import { getFeaturedPosts, type BlogPost } from "@/src/data/blog-posts"
+import { getBlogPosts } from "@/src/lib/db/portfolio"
+import { useState, useEffect } from "react"
 import Image from 'next/image'
 
 export function BlogSection() {
@@ -30,6 +32,12 @@ export function BlogSection() {
             },
         },
     }
+
+    const [posts, setPosts] = useState<BlogPost[]>(getFeaturedPosts().slice(0, 3))
+
+    useEffect(() => {
+        getBlogPosts(true).then((data) => { if (data.length) setPosts(data.slice(0, 3)) })
+    }, [])
 
     return (
         <section id="blog" className="section-base section-muted">
@@ -66,7 +74,7 @@ export function BlogSection() {
                         variants={containerVariants}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
                     >
-                        {getFeaturedPosts().slice(0, 3).map((post) => (
+                        {posts.map((post) => (
                             <motion.div
                                 key={post.id}
                                 variants={itemVariants}
