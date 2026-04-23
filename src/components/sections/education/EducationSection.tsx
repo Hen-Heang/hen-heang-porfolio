@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
-import { EducationItem } from "./EducationItem"
+import { EducationItem as EducationItemComponent } from "./EducationItem"
 import { education as staticEducation } from "@/data/education"
 import { getEducation } from "@/src/lib/db/portfolio"
 import type { EducationItem } from "@/src/lib/types"
@@ -35,7 +35,7 @@ export function EducationSection() {
                     className="max-w-4xl mx-auto"
                 >
                     {education.map((item, index) => (
-                        <EducationItem key={index} item={item} index={index} isLast={index === education.length - 1} />
+                        <EducationItemComponent key={index} item={item} index={index} isLast={index === education.length - 1} />
                     ))}
                 </motion.div>
             </div>
