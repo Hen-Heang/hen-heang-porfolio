@@ -89,12 +89,12 @@ export function HeroProfileCard() {
                             whileHover={{ scale: 1.05 }}
                             className="relative group/avatar"
                         >
-                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ring-4 ring-white/5 group-hover/avatar:ring-[#6366f1]/30 bg-[#1c1c1f]">
+                            <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ring-4 ring-white/5 group-hover/avatar:ring-[#6366f1]/30 bg-[#1c1c1f]">
                                 <Image
                                     src="/image/heang_new.jpeg"
                                     alt={profile.name}
-                                    width={96}
-                                    height={96}
+                                    width={144}
+                                    height={144}
                                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/avatar:scale-110"
                                     priority
                                 />
