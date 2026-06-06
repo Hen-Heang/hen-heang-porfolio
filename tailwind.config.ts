@@ -86,11 +86,20 @@ module.exports = {
 					"50%": { "box-shadow": "0 0 0 10px rgba(0, 204, 153, 0)" },
 					"100%": { "box-shadow": "0 0 0 0px rgba(0, 204, 153, 0)" },
 				},
+				"shiny-text": {
+					"0%, 90%, 100%": {
+						"background-position": "calc(-100% - var(--shimmer-width)) 0",
+					},
+					"30%, 60%": {
+						"background-position": "calc(100% + var(--shimmer-width)) 0",
+					},
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"shine-pulse": "shine-pulse 2s infinite",
+				"shiny-text": "shiny-text 8s infinite",
 			},
 		},
 	},

@@ -3,13 +3,14 @@
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
 import { deployedProjects, profile } from "@/data/dashboard"
 import { motion } from "framer-motion"
+import { NumberTicker } from "@/src/components/ui/NumberTicker"
 
 export function StatsGrid() {
     const stats = [
-        { value: String(deployedProjects.length), label: "Projects", accent: "#6366f1", sub: "Deployed" },
-        { value: profile.yearsExperience, label: "Experience", accent: "#8b5cf6", sub: "Years+" },
-        { value: "🇰🇷", label: "Seoul", accent: "#22d3ee", sub: "Location" },
-        { value: "Now", label: "Bizplay", accent: "#22c55e", sub: "Company" },
+        { num: deployedProjects.length, suffix: "",  label: "Projects",   accent: "#6366f1", sub: "Deployed" },
+        { num: 2,                       suffix: "+", label: "Experience", accent: "#8b5cf6", sub: "Years+"   },
+        { num: null, text: "🇰🇷",        suffix: "",  label: "Seoul",      accent: "#22d3ee", sub: "Location" },
+        { num: null, text: "Now",        suffix: "",  label: "Bizplay",    accent: "#22c55e", sub: "Company"  },
     ]
 
     return (
@@ -35,7 +36,10 @@ export function StatsGrid() {
                             className="text-2xl md:text-3xl font-black tracking-tighter transition-all duration-300 drop-shadow-sm"
                             style={{ color: stat.accent }}
                         >
-                            {stat.value}
+                            {stat.num !== null
+                                ? <><NumberTicker value={stat.num} delay={i * 0.1} />{stat.suffix}</>
+                                : stat.text
+                            }
                         </span>
                         
                         <div className="flex flex-col mt-2">

@@ -39,13 +39,13 @@ export function SidebarNav() {
         <aside className="fixed left-0 top-0 bottom-0 z-50 w-[70px] flex-col bg-[#09090b]/80 backdrop-blur-md border-r border-white/5 hidden md:flex items-center py-8">
             {/* Logo */}
             <Link href="/" className="mb-6 block">
-                <div className="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 hover:ring-indigo-500/80 transition-all">
+                <div className="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 hover:ring-indigo-500/80 transition-all bg-white">
                     <Image
-                        src="/image/my_image_log.jpeg"
+                        src="/image/heang_portfolio_logo.png"
                         alt="Hen Heang"
                         width={40}
                         height={40}
-                        className="object-cover w-full h-full"
+                        className="object-contain w-full h-full p-0.5"
                     />
                 </div>
             </Link>

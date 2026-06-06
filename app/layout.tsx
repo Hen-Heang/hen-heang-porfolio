@@ -47,21 +47,12 @@ export const metadata: Metadata = {
         title: "Hen Heang — Full-Stack Developer",
         description:
             "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
-        images: [
-            {
-                url: "/image/heang_new.jpeg",
-                width: 1200,
-                height: 630,
-                alt: "Hen Heang — Full-Stack Developer",
-            },
-        ],
     },
     twitter: {
         card: "summary_large_image",
         title: "Hen Heang — Full-Stack Developer",
         description:
             "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
-        images: ["/image/heang_new.jpeg"],
     },
     robots: {
         index: true,

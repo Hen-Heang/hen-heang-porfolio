@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { ExternalLink, Github, ArrowRight } from "lucide-react"
 import { projects } from "@/data/projects"
+import { NumberTicker } from "@/src/components/ui/NumberTicker"
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import Image from "next/image"
 import type { Project } from "@/src/lib/types"
@@ -19,10 +20,10 @@ const filters = [
 
 // Real stats
 const stats = [
-    { value: `${projects.length}`,  label: "Total Projects" },
-    { value: `${projects.filter(p => p.demo && p.demo !== "#").length}`, label: "Live" },
-    { value: "2+",  label: "Years Exp." },
-    { value: "Seoul 🇰🇷", label: "Location" },
+    { num: projects.length,                                              suffix: "",  label: "Total Projects" },
+    { num: projects.filter(p => p.demo && p.demo !== "#").length,       suffix: "",  label: "Live" },
+    { num: 2,                                                            suffix: "+", label: "Years Exp." },
+    { num: null, text: "Seoul 🇰🇷",                                      suffix: "",  label: "Location" },
 ]
 
 const cardVariants = {
@@ -152,7 +153,12 @@ export default function ProjectsPage() {
                 >
                     {stats.map((s, i) => (
                         <div key={i} className="bg-[#18181b] border border-[#27272a] rounded-xl px-4 py-3 flex flex-col gap-0.5">
-                            <span className="text-[#fafafa] text-xl font-bold">{s.value}</span>
+                            <span className="text-[#fafafa] text-xl font-bold">
+                                {s.num !== null
+                                    ? <><NumberTicker value={s.num} delay={i * 0.1} />{s.suffix}</>
+                                    : s.text
+                                }
+                            </span>
                             <span className="text-[#52525b] text-[10px] font-semibold uppercase tracking-wider">{s.label}</span>
                         </div>
                     ))}
