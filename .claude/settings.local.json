@@ -4,7 +4,19 @@
       "Bash(gemini --version)",
       "Bash(npm install:*)",
       "Bash(npm ls:*)",
-      "WebFetch(domain:money-flow.henheang.site)"
+      "WebFetch(domain:money-flow.henheang.site)",
+      "Bash(npx playwright *)",
+      "Bash(python3 -c \"import selenium\")",
+      "Read(//private/tmp/**)",
+      "Bash(node -e ' *)",
+      "Bash(vercel --version)",
+      "mcp__plugin_vercel_vercel__list_teams",
+      "mcp__plugin_vercel_vercel__list_projects",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://hen-heang-porfolio-3t2buibax-hen-heangs-projects.vercel.app/opengraph-image)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://henheang.site/opengraph-image)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
