@@ -13,7 +13,7 @@ import { AnimatedShinyText } from "@/src/components/ui/AnimatedShinyText"
 const roles = [
     "Full-Stack Engineer",
     "Java · Spring Boot Specialist",
-    "Next.js · TypeScript Expert",
+    "Next.js · TypeScript",
     "Backend Architect",
 ]
 

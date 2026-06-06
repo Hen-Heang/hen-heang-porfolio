@@ -70,13 +70,13 @@ export function DashboardHeader() {
             <div className="shrink-0">
                 <Magnetic>
                     <Link href="/" className="group block">
-                        <div className="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 group-hover:ring-indigo-500/80 transition-all active:scale-95 bg-white">
+                        <div className="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 group-hover:ring-indigo-500/80 transition-all active:scale-95 bg-white flex-shrink-0">
                             <Image
                                 src="/image/heang_portfolio_logo.png"
                                 alt="Hen Heang"
-                                width={40}
-                                height={40}
-                                className="object-contain w-full h-full p-0.5"
+                                width={80}
+                                height={80}
+                                className="w-full object-cover object-top scale-[1.15] origin-top"
                             />
                         </div>
                     </Link>

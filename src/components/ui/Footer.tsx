@@ -52,9 +52,9 @@ export function Footer() {
                                         <Image
                                             src="/image/heang_portfolio_logo.png"
                                             alt="Hen Heang"
-                                            width={40}
-                                            height={40}
-                                            className="object-contain w-full h-full p-0.5"
+                                            width={80}
+                                            height={80}
+                                            className="w-full object-cover object-top scale-[1.15] origin-top"
                                         />
                                     </div>
                                 <span className="text-xl font-bold tracking-tight text-white group-hover:text-indigo-400 transition-colors">

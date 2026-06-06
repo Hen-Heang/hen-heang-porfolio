@@ -103,13 +103,13 @@ export function Header({ navItems, activeSection, darkMode, toggleTheme, onNavIt
                             onClick={() => router.push("/")}
                             aria-label="Back to home"
                         >
-                            <div className="w-9 h-9 rounded-xl overflow-hidden ring-2 ring-indigo-500/50 shadow-md bg-white">
+                            <div className="w-10 h-10 rounded-xl overflow-hidden ring-2 ring-indigo-500/50 shadow-md bg-white flex-shrink-0">
                                 <Image
                                     src="/image/heang_portfolio_logo.png"
                                     alt="Hen Heang"
-                                    width={36}
-                                    height={36}
-                                    className="object-contain w-full h-full p-0.5"
+                                    width={80}
+                                    height={80}
+                                    className="w-full object-cover object-top scale-[1.15] origin-top"
                                 />
                             </div>
                             <span className="font-semibold tracking-tight">Hen Heang</span>

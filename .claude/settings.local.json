@@ -16,7 +16,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://henheang.site/opengraph-image)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Skill(run)"
     ]
   }
 }
