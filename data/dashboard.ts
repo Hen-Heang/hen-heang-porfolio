@@ -94,7 +94,8 @@ export const workProjects = [
 export const techStack = profileData.linkedinCoreSkills
 
 export const journey = [
-    { year: "2023", company: "Korea Software HRD Center", location: "Intensive R&D", current: false },
+    { year: "2020", company: "RUPP University", location: "Phnom Penh 🇰🇭", current: false },
+    { year: "2023", company: "Korea Software HRD Center", location: "Cambodia", current: false },
     { year: "2024", company: "KOSIGN", location: "Cambodia 🇰🇭", current: false },
     { year: "2025", company: "Bizplay", location: "Seoul 🇰🇷", current: true },
 ]

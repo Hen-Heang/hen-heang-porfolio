@@ -29,4 +29,17 @@ export const profileData = {
         "Spring Security", "eGovFramework", "REST APIs",
     ],
     knowsAbout: ["Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Next.js"],
+    rotatingRoles: [
+        "Full-Stack Engineer",
+        "Java · Spring Boot Specialist",
+        "Next.js · TypeScript",
+        "Backend Architect",
+    ],
+    heroTechStack: [
+        { name: "Java",       color: "#f89820", icon: "☕" },
+        { name: "Spring",     color: "#6db33f", icon: "🍃" },
+        { name: "Next.js",    color: "#ffffff", icon: "▲" },
+        { name: "TS",         color: "#3178c6", icon: "TS" },
+        { name: "PostgreSQL", color: "#336791", icon: "🐘" },
+    ],
 }

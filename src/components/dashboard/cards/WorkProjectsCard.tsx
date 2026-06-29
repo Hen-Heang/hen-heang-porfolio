@@ -2,12 +2,13 @@
 
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
 import { workProjects } from "@/data/dashboard"
+import { profileData } from "@/data/profile"
 
 export function WorkProjectsCard() {
     return (
         <BentoCard className="col-span-4 md:col-span-4 lg:col-span-4 p-6 md:p-8">
             <p className="text-[#52525b] text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-6">
-                Work Projects @KSHRD & @KOSIGN
+                Work Projects @KSHRD, @KOSIGN & @{profileData.company}
             </p>
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 md:gap-5">
                 {workProjects.map((project) => (

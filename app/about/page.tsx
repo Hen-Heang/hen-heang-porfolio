@@ -120,8 +120,8 @@ export default function AboutPage() {
 
                             {/* Profile Highlight Card */}
                             <motion.div variants={itemVariants} className="grid lg:grid-cols-12 gap-12 items-center mb-16">
-                                <div className="lg:col-span-5 relative group">
-                                    <div className="relative z-10 aspect-[4/5] rounded-[2.5rem] overflow-hidden border-8 border-white dark:border-zinc-900 shadow-2xl rotate-[-2deg] transition-transform duration-500 group-hover:rotate-0">
+                                <div className="lg:col-span-3 relative group">
+                                    <div className="relative z-10 aspect-[3/4] rounded-[2rem] overflow-hidden border-4 border-white dark:border-zinc-900 shadow-2xl rotate-[-2deg] transition-transform duration-500 group-hover:rotate-0">
                                         <Image
                                             src={personalInfo.myImage}
                                             alt={personalInfo.fullName || personalInfo.name}
@@ -147,7 +147,7 @@ export default function AboutPage() {
                                     </div>
                                 </div>
 
-                                <div className="lg:col-span-7 space-y-8">
+                                <div className="lg:col-span-9 space-y-8">
                                     <div className="space-y-4">
                                         <h2 className="text-4xl font-black text-zinc-900 dark:text-white leading-tight">
                                             {personalInfo.fullName || personalInfo.name}

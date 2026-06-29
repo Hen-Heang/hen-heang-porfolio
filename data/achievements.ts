@@ -89,6 +89,33 @@ export const rawAchievements: Achievement[] = [
         description: "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise.",
         image: "/certificate/kshrd-advance-course.webp",
     },
+    {
+        id: "12",
+        title: "Claude 101",
+        issuer: "Anthropic",
+        date: "2026",
+        type: "certificate",
+        description: "Completed Anthropic's foundational course on working with Claude, covering core concepts of prompting, context, and getting reliable results from AI models in everyday workflows.",
+        image: "/certificate/claude-101.png",
+    },
+    {
+        id: "13",
+        title: "Claude Code 101",
+        issuer: "Anthropic",
+        date: "2026",
+        type: "certificate",
+        description: "Completed Anthropic's hands-on course on Claude Code, learning to use an agentic coding assistant for real development tasks such as debugging, refactoring, and building features directly in the terminal — skills applied throughout this portfolio's development.",
+        image: "/certificate/claude-code-101.png",
+    },
+    {
+        id: "14",
+        title: "Java (Basic) Certificate",
+        issuer: "HackerRank",
+        date: "2026",
+        type: "certificate",
+        description: "Passed HackerRank's Java (Basic) skill certification test, validating core knowledge of Java syntax, OOP fundamentals, and problem-solving with the language.",
+        image: "/certificate/hackerrank-java-basic.png",
+    },
 ]
 
 export const groupedAchievements = groupAchievementsByYearAndIssuer(rawAchievements)

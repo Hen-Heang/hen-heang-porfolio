@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
 import { profile } from "@/data/dashboard"
+import { profileData } from "@/data/profile"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
@@ -10,20 +11,8 @@ import { Check, Sparkles, ExternalLink, Mail } from "lucide-react"
 import { Toast } from "@/src/components/ui/Toast"
 import { AnimatedShinyText } from "@/src/components/ui/AnimatedShinyText"
 
-const roles = [
-    "Full-Stack Engineer",
-    "Java · Spring Boot Specialist",
-    "Next.js · TypeScript",
-    "Backend Architect",
-]
-
-const techStack = [
-    { name: "Java",        color: "#f89820", icon: "☕" },
-    { name: "Spring",      color: "#6db33f", icon: "🍃" },
-    { name: "Next.js",     color: "#ffffff", icon: "▲" },
-    { name: "TS",          color: "#3178c6", icon: "TS" },
-    { name: "PostgreSQL",  color: "#336791", icon: "🐘" },
-]
+const roles = profileData.rotatingRoles
+const techStack = profileData.heroTechStack
 
 export function HeroProfileCard() {
     const [showToast, setShowToast] = useState(false)
@@ -74,7 +63,7 @@ export function HeroProfileCard() {
                         >
                             <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ring-4 ring-white/5 group-hover/avatar:ring-[#6366f1]/30 bg-[#1c1c1f]">
                                 <Image
-                                    src="/image/heang_new.jpeg"
+                                    src={profileData.profileImage}
                                     alt={profile.name}
                                     width={144}
                                     height={144}

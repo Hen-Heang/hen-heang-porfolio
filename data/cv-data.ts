@@ -92,8 +92,8 @@ export const cvData = {
     {
       school: "Korea Software HRD Center",
       degree: "Full-Stack Development Certificate",
-      startDate: "January 2023",
-      endDate: "December 2023",
+      startDate: "July 2023",
+      endDate: "April 2024",
       description: "Intensive bootcamp covering HTML, CSS, JavaScript, React, Java, and databases.",
     },
     {
