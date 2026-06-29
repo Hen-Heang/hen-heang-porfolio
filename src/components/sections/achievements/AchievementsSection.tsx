@@ -6,7 +6,7 @@ import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { Badge } from "@/src/components/ui/badge"
 import { Trophy, Award, GraduationCap, Calendar, Building, X, Eye, ExternalLink } from "lucide-react"
-import { groupedAchievements as staticGrouped, groupAchievementsByYearAndIssuer, type Achievement } from "@/data/achievements"
+import { groupedAchievements as staticGrouped, groupAchievementsByYearAndIssuer, rawAchievements as staticRaw, type Achievement } from "@/data/achievements"
 import { getAchievements } from "@/src/lib/db/portfolio"
 import { Skeleton } from "@/src/components/ui/Skeleton"
 import Image from "next/image"
@@ -17,7 +17,11 @@ export function AchievementsSection() {
 
     useEffect(() => {
         getAchievements().then((data) => {
-            setGroupedAchievements(data.length ? groupAchievementsByYearAndIssuer(data) : staticGrouped)
+            setGroupedAchievements(
+                data.length >= staticRaw.length
+                    ? groupAchievementsByYearAndIssuer(data)
+                    : staticGrouped
+            )
         })
     }, [])
 
@@ -30,15 +34,14 @@ export function AchievementsSection() {
     }
 
     return (
-        <section id="achievements" className="section-plain">
-            <div className="container mx-auto px-4">
-                <SectionHeader
-                    badge="Achievements"
-                    title="Recognition & Credentials"
-                    description="Academic milestones and professional certifications."
-                />
+        <div id="achievements">
+            <SectionHeader
+                badge="Achievements"
+                title="Recognition & Credentials"
+                description="Academic milestones and professional certifications."
+            />
 
-                <motion.div
+            <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
@@ -173,8 +176,7 @@ export function AchievementsSection() {
                             </div>
                         </motion.div>
                     ))}
-                    </motion.div>
-            </div>
+            </motion.div>
 
             {/* Modal for viewing certificate details */}
             <AnimatePresence>
@@ -266,6 +268,6 @@ export function AchievementsSection() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </section>
+        </div>
     )
 }

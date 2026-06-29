@@ -33,7 +33,9 @@ export function ExperienceSection() {
     const containerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        getExperience().then((data) => setExperiences(data.length ? data : staticExperiences))
+        getExperience().then((data) => {
+            setExperiences(data.length >= staticExperiences.length ? data : staticExperiences)
+        })
     }, [])
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -42,19 +44,16 @@ export function ExperienceSection() {
     const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
     return (
-        <section
+        <div
             id="experience"
-            className="section-plain"
             aria-label="Experience timeline"
         >
-            <div className="container mx-auto px-4">
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="max-w-6xl mx-auto"
-                >
+            <motion.div
+                variants={container}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+            >
                     <motion.div
                         variants={item}
                         className="text-center mb-16"
@@ -164,8 +163,7 @@ export function ExperienceSection() {
                             ))}
                             </div>
                         </div>
-                </motion.div>
-            </div>
-        </section>
+            </motion.div>
+        </div>
     )
 }

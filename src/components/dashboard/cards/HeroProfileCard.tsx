@@ -6,7 +6,7 @@ import { profile } from "@/data/dashboard"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { Clock, Check, Sparkles, MapPin, ExternalLink, Mail } from "lucide-react"
+import { Check, Sparkles, ExternalLink, Mail } from "lucide-react"
 import { Toast } from "@/src/components/ui/Toast"
 import { AnimatedShinyText } from "@/src/components/ui/AnimatedShinyText"
 
@@ -26,28 +26,11 @@ const techStack = [
 ]
 
 export function HeroProfileCard() {
-    const [time, setTime]         = useState("")
     const [showToast, setShowToast] = useState(false)
     const [copied, setCopied]     = useState(false)
     const [roleIndex, setRoleIndex] = useState(0)
     const [displayed, setDisplayed] = useState("")
     const [deleting, setDeleting]   = useState(false)
-
-    // Seoul clock
-    useEffect(() => {
-        const update = () => {
-            setTime(
-                new Intl.DateTimeFormat("en-US", {
-                    timeZone: "Asia/Seoul",
-                    hour: "2-digit", minute: "2-digit", second: "2-digit",
-                    hour12: false,
-                }).format(new Date())
-            )
-        }
-        update()
-        const id = setInterval(update, 1000)
-        return () => clearInterval(id)
-    }, [])
 
     // Typing animation
     useEffect(() => {
