@@ -8,11 +8,12 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { Clock, Check, Sparkles, MapPin, ExternalLink, Mail } from "lucide-react"
 import { Toast } from "@/src/components/ui/Toast"
+import { AnimatedShinyText } from "@/src/components/ui/AnimatedShinyText"
 
 const roles = [
     "Full-Stack Engineer",
     "Java · Spring Boot Specialist",
-    "Next.js · TypeScript Expert",
+    "Next.js · TypeScript",
     "Backend Architect",
 ]
 
@@ -88,12 +89,12 @@ export function HeroProfileCard() {
                             whileHover={{ scale: 1.05 }}
                             className="relative group/avatar"
                         >
-                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ring-4 ring-white/5 group-hover/avatar:ring-[#6366f1]/30 bg-[#1c1c1f]">
+                            <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ring-4 ring-white/5 group-hover/avatar:ring-[#6366f1]/30 bg-[#1c1c1f]">
                                 <Image
                                     src="/image/heang_new.jpeg"
                                     alt={profile.name}
-                                    width={96}
-                                    height={96}
+                                    width={144}
+                                    height={144}
                                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/avatar:scale-110"
                                     priority
                                 />
@@ -107,6 +108,13 @@ export function HeroProfileCard() {
                         </motion.div>
 
                         <div className="space-y-1.5">
+                            {profile.available && (
+                                <div className="inline-flex items-center rounded-full border border-[#6366f1]/25 bg-[#6366f1]/10 px-3 py-1 mb-1">
+                                    <AnimatedShinyText className="text-[10px] font-black uppercase tracking-widest text-[#6366f1]" shimmerWidth={80}>
+                                        ✦ Available for hire
+                                    </AnimatedShinyText>
+                                </div>
+                            )}
                             <div className="flex items-center gap-2">
                                 <h2 className="text-white text-3xl md:text-4xl font-black tracking-tight leading-none">
                                     {profile.name}
@@ -122,16 +130,16 @@ export function HeroProfileCard() {
                         </div>
                     </div>
 
-                    <div className="flex flex-row md:flex-col items-center md:items-end gap-3 self-start md:self-auto">
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-inner">
-                            <Clock size={14} className="text-[#22d3ee] animate-pulse" />
-                            <span className="text-xs font-mono font-black text-white tracking-tight">{time}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 bg-white/5 px-3 py-1.5 rounded-full border border-white/5">
-                            <MapPin size={12} className="text-emerald-500" />
-                            {profile.location}
-                        </div>
-                    </div>
+                    {/*<div className="flex flex-row md:flex-col items-center md:items-end gap-3 self-start md:self-auto">*/}
+                    {/*    <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-inner">*/}
+                    {/*        <Clock size={14} className="text-[#22d3ee] animate-pulse" />*/}
+                    {/*        <span className="text-xs font-mono font-black text-white tracking-tight">{time}</span>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 bg-white/5 px-3 py-1.5 rounded-full border border-white/5">*/}
+                    {/*        <MapPin size={12} className="text-emerald-500" />*/}
+                    {/*        {profile.location}*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
 
                 {/* Middle: Bio & More Info */}

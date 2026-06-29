@@ -95,7 +95,7 @@ export default function AboutPage() {
         <PageLayout>
             <div className="min-h-screen bg-[#fcfcfd] dark:bg-[#09090b]">
                 {/* Hero Header Section */}
-                <section className="relative pt-32 pb-20 overflow-hidden">
+                <section className="relative pt-20 pb-10 overflow-hidden">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-50/50 dark:from-blue-950/10 to-transparent -z-10" />
                     
                     <div className="container mx-auto px-4">
@@ -105,7 +105,7 @@ export default function AboutPage() {
                             animate="visible"
                             className="max-w-6xl mx-auto"
                         >
-                            <motion.div variants={itemVariants} className="flex flex-col items-center text-center mb-16">
+                            <motion.div variants={itemVariants} className="flex flex-col items-center text-center mb-10">
                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider mb-6 border border-blue-100 dark:border-blue-800/30">
                                     <Sparkles size={14} />
                                     <span>Get to know me</span>
@@ -119,7 +119,7 @@ export default function AboutPage() {
                             </motion.div>
 
                             {/* Profile Highlight Card */}
-                            <motion.div variants={itemVariants} className="grid lg:grid-cols-12 gap-12 items-center mb-32">
+                            <motion.div variants={itemVariants} className="grid lg:grid-cols-12 gap-12 items-center mb-16">
                                 <div className="lg:col-span-5 relative group">
                                     <div className="relative z-10 aspect-[4/5] rounded-[2.5rem] overflow-hidden border-8 border-white dark:border-zinc-900 shadow-2xl rotate-[-2deg] transition-transform duration-500 group-hover:rotate-0">
                                         <Image
@@ -193,7 +193,7 @@ export default function AboutPage() {
                             </motion.div>
 
                             {/* Core Values Grid */}
-                            <motion.div variants={itemVariants} className="mb-32">
+                            <motion.div variants={itemVariants} className="mb-16">
                                 <div className="text-center mb-16">
                                     <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white mb-4">Core Principles</h2>
                                     <p className="text-zinc-500 font-medium">The values that drive my engineering decisions every day.</p>
@@ -212,12 +212,12 @@ export default function AboutPage() {
                             </motion.div>
 
                             {/* Work Journey Section */}
-                            <motion.div variants={itemVariants} className="mb-32">
+                            <motion.div variants={itemVariants} className="mb-16">
                                 <ExperienceSection />
                             </motion.div>
 
                             {/* Education Section */}
-                            <motion.div variants={itemVariants} className="mb-32">
+                            <motion.div variants={itemVariants} className="mb-16">
                                 <div className="text-center mb-16">
                                     <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white mb-4 flex items-center justify-center gap-3">
                                         <GraduationCap className="text-blue-600" size={36} />
@@ -255,12 +255,12 @@ export default function AboutPage() {
                             </motion.div>
 
                             {/* Achievements & Certificates Section */}
-                            <motion.div variants={itemVariants} className="mb-32">
+                            <motion.div variants={itemVariants} className="mb-16">
                                 <AchievementsSection />
                             </motion.div>
 
                             {/* Skills Section */}
-                            <motion.div variants={itemVariants} className="mb-32">
+                            <motion.div variants={itemVariants} className="mb-16">
                                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                                     <div>
                                         <h2 className="text-4xl font-black text-zinc-900 dark:text-white mb-2">Technical Arsenal</h2>

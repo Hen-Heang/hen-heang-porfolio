@@ -44,20 +44,11 @@ export const metadata: Metadata = {
         siteName: `${profileData.fullName} — Portfolio`,
         title: `${profileData.fullName} — ${profileData.title}`,
         description: profileData.description,
-        images: [
-            {
-                url: profileData.profileImage,
-                width: 1200,
-                height: 630,
-                alt: `${profileData.fullName} — ${profileData.title}`,
-            },
-        ],
     },
     twitter: {
         card: "summary_large_image",
         title: `${profileData.fullName} — ${profileData.title}`,
         description: profileData.description,
-        images: [profileData.profileImage],
     },
     robots: {
         index: true,

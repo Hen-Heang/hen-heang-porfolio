@@ -44,7 +44,7 @@ export function ExperienceSection() {
     return (
         <section
             id="experience"
-            className="section-base section-plain"
+            className="section-plain"
             aria-label="Experience timeline"
         >
             <div className="container mx-auto px-4">

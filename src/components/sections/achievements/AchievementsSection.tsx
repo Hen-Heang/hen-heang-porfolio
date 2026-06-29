@@ -30,7 +30,7 @@ export function AchievementsSection() {
     }
 
     return (
-        <section id="achievements" className="section-base section-plain">
+        <section id="achievements" className="section-plain">
             <div className="container mx-auto px-4">
                 <SectionHeader
                     badge="Achievements"
