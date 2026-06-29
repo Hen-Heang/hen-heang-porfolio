@@ -1,15 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { profileData } from "@/data/profile"
 
 export const metadata: Metadata = {
     title: "About",
-    description:
-        "Learn about Hen Heang — a Full-Stack Engineer from Phnom Penh, Cambodia with 2 years of experience building web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL.",
+    description: `Learn about ${profileData.fullName} — a ${profileData.title} from Phnom Penh, Cambodia with ${profileData.yearsExperience} years of experience building web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL.`,
     openGraph: {
-        title: "About | Hen Heang",
-        description:
-            "Learn about Hen Heang — a Full-Stack Engineer from Phnom Penh, Cambodia with 2 years of experience building web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL.",
-        url: "https://hen-heang.vercel.app/about",
+        title: `About | ${profileData.fullName}`,
+        description: `Learn about ${profileData.fullName} — a ${profileData.title} from Phnom Penh, Cambodia with ${profileData.yearsExperience} years of experience building web applications with Next.js, Spring Boot, TypeScript, and PostgreSQL.`,
+        url: `${profileData.portfolioUrl}/about`,
     },
 }
 

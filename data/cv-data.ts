@@ -14,18 +14,20 @@
  *  - languages   → spoken languages
  */
 
+import { profileData } from "./profile"
+
 export const cvData = {
   personal: {
-    name: "Hen Heang",
-    title: "Full-Stack Software Engineer",
+    name: profileData.fullName,
+    title: profileData.title,
     subtitle: "Java · Spring Boot · MyBatis · JavaScript · Next.js · TypeScript",
-    photo: "/image/heang_new.jpeg",
-    location: "Seoul, South Korea",
-    phone: "+82 86-7985-72",
-    email: "henheang15@gmail.com",
-    linkedin: "https://www.linkedin.com/in/hen-heang",
-    github: "https://github.com/Hen-Heang",
-    portfolio: "https://hen-heang-porfolio.vercel.app",
+    photo: profileData.myImage,
+    location: profileData.location,
+    phone: profileData.phone,
+    email: profileData.email,
+    linkedin: profileData.socialLinks.linkedin,
+    github: profileData.socialLinks.github,
+    portfolio: profileData.portfolioUrl,
   },
 
   summary:

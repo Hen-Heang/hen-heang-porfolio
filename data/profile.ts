@@ -1,0 +1,32 @@
+export const profileData = {
+    name: "Hen Heang",
+    fullName: "Hen Heang",
+    koreanName: "헹",
+    title: "Full-Stack Software Engineer",
+    company: "Bizplay",
+    location: "Seoul, South Korea",
+    locationEmoji: "🇰🇷",
+    email: "henheang15@gmail.com",
+    available: true,
+    yearsExperience: "2+",
+    bio: "Engineering scalable enterprise solutions with Java, Spring Boot & Next.js. Architecting from Cambodia 🇰🇭 to Seoul 🇰🇷",
+    description:
+        "Highly motivated Full-Stack Software Engineer based in Seoul, specializing in architecting scalable enterprise web applications. With 2+ years of experience in the Korean IT sector, I excel at bridging robust backend systems (Java, Spring Boot, MyBatis) with modern, performant frontends (Next.js, TypeScript).",
+    profileImage: "/image/heang_new.jpeg",
+    myImage: "/image/heang_new.jpeg",
+    socialLinks: {
+        github: "https://github.com/Hen-Heang",
+        linkedin: "https://www.linkedin.com/in/hen-heang",
+        telegram: "https://t.me/henheang",
+    },
+    portfolioUrl: "https://henheang.site",
+    cvUrl: "https://henheang.site/cv",
+    phone: "+82 86-7985-72",
+    ides: ["IntelliJ IDEA", "WebStorm"],
+    linkedinCoreSkills: [
+        "Java", "Spring Boot", "MyBatis", "Next.js", "TypeScript", "PostgreSQL",
+        "React", "Tailwind CSS", "Oracle", "Git", "Redis", "OpenAI",
+        "Spring Security", "eGovFramework", "REST APIs",
+    ],
+    knowsAbout: ["Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Next.js"],
+}

@@ -1,15 +1,16 @@
 "use client"
 
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
-import { deployedProjects, profile } from "@/data/dashboard"
+import { deployedProjects } from "@/data/dashboard"
+import { profileData } from "@/data/profile"
 import { motion } from "framer-motion"
 
 export function StatsGrid() {
     const stats = [
         { value: String(deployedProjects.length), label: "Projects", accent: "#6366f1", sub: "Deployed" },
-        { value: profile.yearsExperience, label: "Experience", accent: "#8b5cf6", sub: "Years+" },
-        { value: "🇰🇷", label: "Seoul", accent: "#22d3ee", sub: "Location" },
-        { value: "Now", label: "Bizplay", accent: "#22c55e", sub: "Company" },
+        { value: profileData.yearsExperience, label: "Experience", accent: "#8b5cf6", sub: "Years+" },
+        { value: profileData.locationEmoji, label: profileData.location.split(",")[0].trim(), accent: "#22d3ee", sub: "Location" },
+        { value: "Now", label: profileData.company, accent: "#22c55e", sub: "Company" },
     ]
 
     return (

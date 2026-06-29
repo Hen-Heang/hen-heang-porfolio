@@ -4,6 +4,7 @@ import localFont from "next/font/local"
 import { ThemeProvider } from "@/src/components/ThemeProvider"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
+import { profileData } from "@/data/profile"
 import "./globals.css"
 
 const inter = localFont({
@@ -19,21 +20,18 @@ const inter = localFont({
 })
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://henheang.site"),
+    metadataBase: new URL(profileData.portfolioUrl),
     title: {
-        default: "Hen Heang — Full-Stack Developer",
-        template: "%s | Hen Heang",
+        default: `${profileData.fullName} — ${profileData.title}`,
+        template: `%s | ${profileData.fullName}`,
     },
-    description:
-        "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
-    keywords: [
-        "Hen Heang", "Full-Stack Developer", "Java Developer", "Spring Boot",
-        "MyBatis", "JavaScript", "jQuery", "SQL", "Seoul", "South Korea",
-        "Cambodia Developer", "Enterprise Web Development", "Portfolio",
-    ],
-    authors: [{ name: "Hen Heang", url: "https://henheang.site" }],
+    description: profileData.description,
+    keywords: profileData.knowsAbout.concat([
+        profileData.title, profileData.fullName, profileData.location, profileData.company, "Portfolio",
+    ]),
+    authors: [{ name: profileData.fullName, url: profileData.portfolioUrl }],
     alternates: {
-        canonical: "https://henheang.site",
+        canonical: profileData.portfolioUrl,
     },
     icons: {
         icon: "/icon",
@@ -42,26 +40,24 @@ export const metadata: Metadata = {
     openGraph: {
         type: "website",
         locale: "en_US",
-        url: "https://henheang.site",
-        siteName: "Hen Heang — Portfolio",
-        title: "Hen Heang — Full-Stack Developer",
-        description:
-            "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
+        url: profileData.portfolioUrl,
+        siteName: `${profileData.fullName} — Portfolio`,
+        title: `${profileData.fullName} — ${profileData.title}`,
+        description: profileData.description,
         images: [
             {
-                url: "/image/heang_new.jpeg",
+                url: profileData.profileImage,
                 width: 1200,
                 height: 630,
-                alt: "Hen Heang — Full-Stack Developer",
+                alt: `${profileData.fullName} — ${profileData.title}`,
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Hen Heang — Full-Stack Developer",
-        description:
-            "Full-Stack Developer based in Seoul, South Korea. Building enterprise web applications with Java, Spring Boot, MyBatis, JavaScript, and jQuery.",
-        images: ["/image/heang_new.jpeg"],
+        title: `${profileData.fullName} — ${profileData.title}`,
+        description: profileData.description,
+        images: [profileData.profileImage],
     },
     robots: {
         index: true,
@@ -78,17 +74,17 @@ export const metadata: Metadata = {
 const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Hen Heang",
-    url: "https://henheang.site",
-    jobTitle: "Full-Stack Developer",
-    worksFor: { "@type": "Organization", name: "Bizplay" },
+    name: profileData.fullName,
+    url: profileData.portfolioUrl,
+    jobTitle: profileData.title,
+    worksFor: { "@type": "Organization", name: profileData.company },
     address: { "@type": "PostalAddress", addressLocality: "Seoul", addressCountry: "KR" },
-    email: "henheang15@gmail.com",
+    email: profileData.email,
     sameAs: [
-        "https://github.com/Hen-Heang",
-        "https://linkedin.com/in/hen-heang",
+        profileData.socialLinks.github,
+        profileData.socialLinks.linkedin,
     ],
-    knowsAbout: ["Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Next.js"],
+    knowsAbout: profileData.knowsAbout,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

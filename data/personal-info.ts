@@ -1,18 +1,15 @@
+import { profileData } from "./profile"
+
 export const personalInfo = {
-    name: "Hen Heang",
-    fullName: "Hen Heang",
-    title: "Full-Stack Software Engineer",
-    description:
-        "Highly motivated Full-Stack Software Engineer based in Seoul, specializing in architecting scalable enterprise web applications. With 2+ years of experience in the Korean IT sector, I excel at bridging robust backend systems (Java, Spring Boot, MyBatis) with modern, performant frontends (Next.js, TypeScript).",
-    profileImage: "/image/my_image_log.jpeg",
-    myImage: "/image/my_image_log.jpeg",
-    email: "henheang15@gmail.com",
-    location: "Seoul, South Korea",
-    socialLinks: {
-        github: "https://github.com/Hen-Heang",
-        linkedin: "https://www.linkedin.com/in/hen-heang",
-        telegram: "https://t.me/henheang",
-    },
-    experience: "2",
-    ides: ["IntelliJ IDEA", "WebStorm"],
+    name: profileData.name,
+    fullName: profileData.fullName,
+    title: profileData.title,
+    description: profileData.description,
+    profileImage: profileData.profileImage,
+    myImage: profileData.myImage,
+    email: profileData.email,
+    location: profileData.location,
+    socialLinks: profileData.socialLinks,
+    experience: profileData.yearsExperience,
+    ides: profileData.ides,
 }

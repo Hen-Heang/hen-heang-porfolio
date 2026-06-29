@@ -1,19 +1,17 @@
+import { profileData } from "./profile"
+
 export const profile = {
-    name: "Hen Heang",
-    koreanName: "헹",
-    title: "Full-Stack Software Engineer",
-    company: "Bizplay",
-    location: "Seoul, South Korea",
-    locationEmoji: "🇰🇷",
-    email: "henheang15@gmail.com",
-    available: true,
-    yearsExperience: "2+",
-    bio: "Engineering scalable enterprise solutions with Java, Spring Boot & Next.js. Architecting from Cambodia 🇰🇭 to Seoul 🇰🇷",
-    socials: {
-        github: "https://github.com/Hen-Heang",
-        linkedin: "https://www.linkedin.com/in/hen-heang",
-        telegram: "https://t.me/henheang",
-    },
+    name: profileData.name,
+    koreanName: profileData.koreanName,
+    title: profileData.title,
+    company: profileData.company,
+    location: profileData.location,
+    locationEmoji: profileData.locationEmoji,
+    email: profileData.email,
+    available: profileData.available,
+    yearsExperience: profileData.yearsExperience,
+    bio: profileData.bio,
+    socials: profileData.socialLinks,
 }
 
 export interface BentoProject {
@@ -93,9 +91,7 @@ export const workProjects = [
     { id: "warehouse", title: "Warehouse", subtitle: "Supply Chain B2B", emoji: "📦" },
 ]
 
-export const techStack = [
-    "Java", "Spring Boot", "MyBatis", "Next.js", "TypeScript", "PostgreSQL", "React", "Tailwind CSS", "Oracle", "Git", "Redis", "OpenAI", "Spring Security", "eGovFramework", "REST APIs",
-]
+export const techStack = profileData.linkedinCoreSkills
 
 export const journey = [
     { year: "2023", company: "Korea Software HRD Center", location: "Intensive R&D", current: false },
