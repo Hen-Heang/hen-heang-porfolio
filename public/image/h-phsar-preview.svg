@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+  <defs>
+    <linearGradient id="phsar_bg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#022c22"/>
+      <stop offset="55%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#065f46"/>
+    </linearGradient>
+    <radialGradient id="phsar_glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(120 55) scale(240)">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="400" height="225" fill="url(#phsar_bg)"/>
+  <rect width="400" height="225" fill="url(#phsar_glow)"/>
+
+  <!-- Market stall mark: awning + storefront -->
+  <g transform="translate(52,58)">
+    <!-- Awning scallops -->
+    <path d="M0 26 L96 26 L96 12 L0 12 Z" fill="#10b981"/>
+    <path d="M0 26 a8 8 0 0 0 16 0 a8 8 0 0 0 16 0 a8 8 0 0 0 16 0 a8 8 0 0 0 16 0 a8 8 0 0 0 16 0 a8 8 0 0 0 16 0 L96 26 L0 26 Z" fill="#34d399"/>
+    <!-- Roof peak -->
+    <path d="M-6 12 L48 -8 L102 12 Z" fill="#059669"/>
+    <!-- Storefront -->
+    <rect x="8" y="34" width="80" height="56" rx="4" fill="#f8fafc" opacity="0.95"/>
+    <!-- Door -->
+    <rect x="20" y="52" width="24" height="38" rx="3" fill="#065f46"/>
+    <!-- Window with price tag -->
+    <rect x="52" y="52" width="26" height="20" rx="3" fill="#a7f3d0"/>
+    <path d="M56 80 h18 M56 86 h12" stroke="#065f46" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <text fill="#ffffff" x="185" y="95" font-family="system-ui" font-size="32" font-weight="bold">H-Phsar</text>
+  <text fill="#a7f3d0" x="185" y="122" font-family="system-ui" font-size="16">ផ្សារ · B2B Marketplace API</text>
+  <text fill="#6ee7b7" x="185" y="145" font-family="system-ui" font-size="10">Distributors · Retailers · Spring Boot 3</text>
+</svg>

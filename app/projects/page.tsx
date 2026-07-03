@@ -14,8 +14,7 @@ import type { Project } from "@/src/lib/types"
 const filters = [
     { label: "All",        fn: () => true },
     { label: "Live",       fn: (p: Project) => !!p.demo && p.demo !== "#" },
-    { label: "Personal",   fn: (p: Project) => !["EasyCart", "Warehouse"].some(w => p.title.includes(w)) },
-    { label: "Work",       fn: (p: Project) => ["EasyCart", "Warehouse"].some(w => p.title.includes(w)) },
+    { label: "Backend",    fn: (p: Project) => p.technologies.some(t => t.toLowerCase().includes("spring")) },
 ]
 
 // Real stats

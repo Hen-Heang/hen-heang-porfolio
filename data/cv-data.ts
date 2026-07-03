@@ -138,20 +138,36 @@ export const cvData = {
    */
   projects: [
     {
-      name: "KoriAI",
+      name: "H-Phsar",
       description:
-        "AI-powered Korean language learning platform with real-time conversational tutor, grammar analysis, and spaced-repetition vocabulary engine.",
-      technologies: ["Next.js", "TypeScript", "OpenAI API", "Tailwind CSS", "Vercel"],
+        "Cambodian B2B marketplace API connecting distributors and retailers — stores, product catalogs, carts, an order state machine, OTP verification, and real-time WebSocket notifications.",
+      technologies: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL", "WebSocket"],
+      github: "https://github.com/Hen-Heang/h-phsar-api-full",
+      live: "",
+    },
+    {
+      name: "Hengo",
+      description:
+        "AI companion for daily growth — goal tracking, daily missions, and Korean learning with an AI coach, spaced repetition, and XP progression. Next.js SPA on a Spring Boot API.",
+      technologies: ["Next.js", "TypeScript", "TanStack Query", "Tailwind CSS", "Spring Boot"],
       github: "https://github.com/Hen-Heang/koriai-frontend",
       live: "https://koriai-frontend.vercel.app/",
     },
     {
+      name: "We Commerce",
+      description:
+        "Full-stack multi-vendor marketplace — Spring Boot 3.4 / Java 21 API with database-tracked JWT revocation, and a Next.js 16 storefront with cart, checkout, and simulated ABA Pay / KHQR payments.",
+      technologies: ["Spring Boot 3", "Java 21", "PostgreSQL", "Next.js", "TanStack Query"],
+      github: "https://github.com/Hen-Heang/we-commerce-api",
+      live: "",
+    },
+    {
       name: "Money Flow",
       description:
-        "Personal finance orchestrator with encrypted authentication, dynamic dashboard, and ACID-compliant transaction engine.",
-      technologies: ["Next.js", "TypeScript", "Auth.js", "PostgreSQL", "Vercel"],
+        "Personal finance PWA with budgets, savings goals, recurring transactions, push alerts, and AI chat over your own spending — Supabase with RLS, backed up daily to Neon.",
+      technologies: ["Next.js", "TypeScript", "Supabase", "Google Gemini", "Web Push"],
       github: "https://github.com/Hen-Heang/money-flow",
-      live: "https://money-flow-sigma-black.vercel.app/",
+      live: "https://money-flow.henheang.site/",
     },
   ],
 

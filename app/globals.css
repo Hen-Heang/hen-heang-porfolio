@@ -162,26 +162,6 @@
   transform: translateX(4px);
 }
 
-/* KoriAI card glow border */
-.koriai-card {
-  position: relative;
-}
-
-.koriai-card::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(135deg, #22d3ee, #8b5cf6, #ec4899);
-  border-radius: 18px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.koriai-card:hover::before {
-  opacity: 1;
-}
-
 @layer components {
   .section-base {
     @apply py-24; /* Slightly more padding for airy feel */

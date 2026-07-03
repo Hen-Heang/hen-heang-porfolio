@@ -44,10 +44,10 @@ This site is not just a project list — each major project is a full **engineer
 
 | Project | What it is | Stack |
 |---------|-----------|-------|
-| [**KoriAI**](https://henheang.site/projects/koriai) ⭐ | Korean learning platform with an AI tutor, grammar correction, and spaced-repetition vocabulary | Next.js, TypeScript, OpenAI API |
-| [**Warehouse Master**](https://henheang.site/projects/warehouse-master) | B2B inventory system with hierarchical RBAC and concurrent stock control | Spring Boot, Spring Security + JWT, Redis |
-| [**Money Flow**](https://henheang.site/projects/money-flow) | Personal finance tracker with multi-currency support and SQL-side aggregations | Next.js, Auth.js, PostgreSQL |
-| [**Dev Notes**](https://henheang.site/projects/enterprise-learning-hub) | Documentation site for Korean enterprise patterns: eGovFramework, MyBatis, SQL tuning | Next.js, MDX |
+| [**Hengo**](https://henheang.site/projects/hengo) ⭐ | AI companion for daily growth — goals, daily missions, and Korean learning with an AI coach and spaced repetition | Next.js, TypeScript, TanStack Query, Spring Boot |
+| [**H-Phsar**](https://henheang.site/projects/h-phsar) ⭐ | Cambodian B2B marketplace API — distributor/retailer stores, order state machine, OTP auth, real-time notifications | Spring Boot 3, MyBatis, PostgreSQL, WebSocket |
+| [**Money Flow**](https://henheang.site/projects/money-flow) | Personal finance PWA with budgets, savings goals, AI chat, and push alerts — Supabase with a daily Neon backup | Next.js, Supabase, Google Gemini |
+| [**We Commerce**](https://henheang.site/projects/we-commerce) | Full-stack multi-vendor marketplace — DB-tracked JWT auth, cart/checkout with simulated ABA Pay & KHQR | Spring Boot 3, Java 21, Next.js, TanStack Query |
 
 ## 🛠️ Tech Stack
 

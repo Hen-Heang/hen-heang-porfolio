@@ -34,13 +34,13 @@ export const deployedProjects: BentoProject[] = [
     {
         id: "money-flow",
         title: "Money Flow",
-        subtitle: "AI-Powered Personal Finance Platform",
+        subtitle: "AI-Powered Personal Finance PWA",
         description:
-            "A full-stack personal finance tracker with real-time expense visualization, AI chatbot for spending analysis, budget alerts, and trend prediction.",
+            "A personal finance PWA with budgets, savings goals, recurring transactions, push alerts, and an AI chat over your own spending — backed up daily to Neon.",
         emoji: "💸",
-        url: "https://money-flow-sigma-black.vercel.app/",
+        url: "https://money-flow.henheang.site/",
         github: "https://github.com/Hen-Heang/money-flow",
-        tech: ["Spring Boot", "Next.js", "TypeScript", "AI Integration"],
+        tech: ["Next.js", "Supabase", "TypeScript", "Gemini AI"],
         gradientFrom: "#09090b",
         gradientTo: "#18181b",
         borderColor: "#27272a",
@@ -48,46 +48,25 @@ export const deployedProjects: BentoProject[] = [
         screenshot: "/screenshots/moneyflow-screenshot.svg"
     },
     {
-        id: "koriai",
-        title: "KoriAI",
-        subtitle: "Intelligent AI Language Ecosystem",
+        id: "hengo",
+        title: "Hengo",
+        subtitle: "AI Companion for Daily Growth",
         description:
-            "A high-performance AI Korean tutor utilizing advanced LLMs for real-time conversation practice, diagnostic syntax feedback, and optimized memory retention.",
-        emoji: "🇰🇷",
+            "Set goals, track to-dos, and learn workplace Korean — daily missions, an AI coach, spaced repetition, and XP progression in one app.",
+        emoji: "📈",
         url: "https://koriai-frontend.vercel.app/",
         github: "https://github.com/Hen-Heang/koriai-frontend",
-        tech: ["Next.js", "TypeScript", "Tailwind", "OpenAI"],
-        gradientFrom: "#0c1929",
-        gradientTo: "#0f2744",
-        borderColor: "#1e3a5f",
-        accentColor: "#22d3ee",
-        screenshot: "/screenshots/koriai-screenshot.svg"
-    },
-    {
-        id: "dev-notes",
-        title: "Enterprise Learning Hub",
-        subtitle: "Korea Standard Stack",
-        description: "A centralized repository of mission-critical patterns for the Korean enterprise ecosystem, from eGovFramework to MyBatis optimization.",
-        emoji: "📚",
-        url: "https://dev-learning-notes.vercel.app/",
-        github: "https://github.com/Hen-Heang/dev-learning-notes",
-        tech: [
-            { name: "Spring Boot", color: "#84cc16" },
-            { name: "MyBatis", color: "#eab308" },
-            { name: "Enterprise", color: "#3b82f6" },
-            { name: "SQL Ops", color: "#a855f7" },
-        ],
-        gradientFrom: "#0c0a09",
-        gradientTo: "#1a1816",
-        borderColor: "#292524",
-        accentColor: "#84cc16",
-        screenshot: "/screenshots/devnotes-screenshot.svg"
+        tech: ["Next.js", "TypeScript", "TanStack Query", "Spring Boot"],
+        gradientFrom: "#0f0e2a",
+        gradientTo: "#16204d",
+        borderColor: "#28306b",
+        accentColor: "#10b981",
+        screenshot: "/screenshots/hengo-screenshot.svg"
     },
 ]
 
 export const workProjects = [
     { id: "easycart", title: "EasyCart", subtitle: "E-comm Ecosystem", emoji: "🛒" },
-    { id: "warehouse", title: "Warehouse", subtitle: "Supply Chain B2B", emoji: "📦" },
 ]
 
 export const techStack = profileData.linkedinCoreSkills

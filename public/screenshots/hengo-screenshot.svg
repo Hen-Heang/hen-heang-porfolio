@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0e2a"/>
+      <stop offset="100%" stop-color="#16204d"/>
+    </linearGradient>
+    <clipPath id="rounded">
+      <rect x="0" y="0" width="800" height="500" rx="12"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)" clip-path="url(#rounded)"/>
+
+  <!-- Browser Chrome -->
+  <rect x="0" y="0" width="800" height="32" fill="#0b0a20"/>
+  <circle cx="20" cy="16" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="16" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="16" r="6" fill="#28c840"/>
+  <rect x="300" y="8" width="200" height="16" rx="4" fill="#1e293b"/>
+  <text x="400" y="20" text-anchor="middle" font-family="system-ui" font-size="9" fill="#64748b">koriai-frontend.vercel.app</text>
+
+  <!-- Nav with real logo mark -->
+  <svg x="24" y="46" width="32" height="32" viewBox="0 0 1024 1024">
+    <rect width="1024" height="1024" rx="220" fill="#1E40AF"/>
+    <path d="M386 410 V790" stroke="#ffffff" stroke-width="84" stroke-linecap="round"/>
+    <path d="M386 588 H500 V650 H590" stroke="#ffffff" stroke-width="84" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M590 790 V372" stroke="#10B981" stroke-width="84" stroke-linecap="round"/>
+    <path d="M590 220 L506 380 H674 Z" fill="#10B981" stroke="#10B981" stroke-width="36" stroke-linejoin="round"/>
+  </svg>
+  <text x="64" y="67" font-family="system-ui" font-size="14" fill="#f8fafc" font-weight="600">Hengo</text>
+  <rect x="720" y="52" width="60" height="24" rx="6" fill="#10B981"/>
+  <text x="750" y="68" text-anchor="middle" font-family="system-ui" font-size="10" fill="#052e1f" font-weight="600">Sign in</text>
+
+  <!-- Hero Section -->
+  <text x="50" y="130" font-family="system-ui" font-size="11" fill="#10B981" font-weight="500">Your AI companion for daily growth</text>
+  <text x="50" y="175" font-family="system-ui" font-size="32" fill="#f8fafc" font-weight="700">Set goals. Show up.</text>
+  <text x="50" y="215" font-family="system-ui" font-size="32" fill="#f8fafc" font-weight="700">Grow every day.</text>
+  <text x="50" y="260" font-family="system-ui" font-size="13" fill="#94a3b8">Track goals and to-dos, keep your streak alive, and learn</text>
+  <text x="50" y="280" font-family="system-ui" font-size="13" fill="#94a3b8">workplace Korean with an AI coach that remembers your mistakes.</text>
+
+  <!-- CTA Buttons -->
+  <rect x="50" y="310" width="140" height="40" rx="8" fill="#10B981"/>
+  <text x="120" y="335" text-anchor="middle" font-family="system-ui" font-size="12" fill="#052e1f" font-weight="600">Get started</text>
+  <rect x="205" y="310" width="130" height="40" rx="8" fill="none" stroke="#475569" stroke-width="1"/>
+  <text x="270" y="335" text-anchor="middle" font-family="system-ui" font-size="12" fill="#94a3b8">Open dashboard</text>
+
+  <!-- Feature Pills -->
+  <rect x="50" y="370" width="70" height="26" rx="13" fill="#1e293b"/>
+  <text x="85" y="387" text-anchor="middle" font-family="system-ui" font-size="10" fill="#94a3b8">Goals</text>
+  <rect x="130" y="370" width="90" height="26" rx="13" fill="#1e293b"/>
+  <text x="175" y="387" text-anchor="middle" font-family="system-ui" font-size="10" fill="#94a3b8">Vocab SRS</text>
+  <rect x="230" y="370" width="85" height="26" rx="13" fill="#1e293b"/>
+  <text x="272" y="387" text-anchor="middle" font-family="system-ui" font-size="10" fill="#94a3b8">AI Coach</text>
+
+  <!-- Today's Mission Card -->
+  <rect x="480" y="100" width="280" height="300" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="500" y="132" font-family="system-ui" font-size="13" fill="#f8fafc" font-weight="600">Today's Mission</text>
+  <text x="740" y="132" text-anchor="end" font-family="system-ui" font-size="11" fill="#10B981" font-weight="600">3/4</text>
+
+  <rect x="500" y="150" width="240" height="42" rx="10" fill="#0f172a"/>
+  <circle cx="520" cy="171" r="8" fill="#10B981"/>
+  <path d="M516 171 l3 3 l5 -6" stroke="#052e1f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="538" y="175" font-family="system-ui" font-size="11" fill="#94a3b8">Review 12 vocabulary cards</text>
+
+  <rect x="500" y="200" width="240" height="42" rx="10" fill="#0f172a"/>
+  <circle cx="520" cy="221" r="8" fill="#10B981"/>
+  <path d="M516 221 l3 3 l5 -6" stroke="#052e1f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="538" y="225" font-family="system-ui" font-size="11" fill="#94a3b8">Learn today's phrase</text>
+
+  <rect x="500" y="250" width="240" height="42" rx="10" fill="#0f172a"/>
+  <circle cx="520" cy="271" r="8" fill="#10B981"/>
+  <path d="M516 271 l3 3 l5 -6" stroke="#052e1f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="538" y="275" font-family="system-ui" font-size="11" fill="#94a3b8">Fix 3 past mistakes</text>
+
+  <rect x="500" y="300" width="240" height="42" rx="10" fill="#0f172a" stroke="#10B981" stroke-width="1"/>
+  <circle cx="520" cy="321" r="8" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="538" y="325" font-family="system-ui" font-size="11" fill="#f8fafc">Practice a scenario</text>
+
+  <!-- Streak footer -->
+  <text x="500" y="380" font-family="system-ui" font-size="11" fill="#f59e0b">🔥 14-day streak</text>
+  <text x="740" y="380" text-anchor="end" font-family="system-ui" font-size="11" fill="#94a3b8">Lv 7 · 2,340 XP</text>
+
+  <!-- Decorative orbs -->
+  <circle cx="700" cy="80" r="100" fill="#2563EB" opacity="0.12"/>
+  <circle cx="720" cy="420" r="80" fill="#10B981" opacity="0.1"/>
+</svg>
