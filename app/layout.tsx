@@ -86,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
                 {children}
             </ThemeProvider>
             <Analytics />

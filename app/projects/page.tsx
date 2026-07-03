@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { ExternalLink, Github, ArrowRight } from "lucide-react"
 import { projects } from "@/data/projects"
 import { NumberTicker } from "@/src/components/ui/NumberTicker"
@@ -14,8 +14,8 @@ import type { Project } from "@/src/lib/types"
 const filters = [
     { label: "All",        fn: () => true },
     { label: "Live",       fn: (p: Project) => !!p.demo && p.demo !== "#" },
-    { label: "Personal",   fn: (p: Project) => !["WeBill365", "EasyCart", "Warehouse"].some(w => p.title.includes(w)) },
-    { label: "Work",       fn: (p: Project) => ["WeBill365", "EasyCart", "Warehouse"].some(w => p.title.includes(w)) },
+    { label: "Personal",   fn: (p: Project) => !["EasyCart", "Warehouse"].some(w => p.title.includes(w)) },
+    { label: "Work",       fn: (p: Project) => ["EasyCart", "Warehouse"].some(w => p.title.includes(w)) },
 ]
 
 // Real stats
@@ -33,9 +33,7 @@ const cardVariants = {
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
-    const router = useRouter()
     const isLive = !!project.demo && project.demo !== "#"
-    const slug = project.title.toLowerCase().replace(/\s+/g, "-")
 
     return (
         <motion.div
@@ -47,9 +45,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             layout
             whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.3)" }}
             transition={{ duration: 0.2 }}
-            onClick={() => router.push(`/projects/${slug}`)}
-            className="group cursor-pointer bg-[#18181b] border border-[#27272a] hover:border-[#3f3f46] rounded-2xl overflow-hidden flex flex-col transition-colors duration-200"
+            className="group relative bg-[#18181b] border border-[#27272a] hover:border-[#3f3f46] rounded-2xl overflow-hidden flex flex-col transition-colors duration-200 focus-within:ring-2 focus-within:ring-[#6366f1]/60"
         >
+            {/* Stretched link — whole card navigates to the case study */}
+            <Link
+                href={`/projects/${project.slug}`}
+                aria-label={`Read the ${project.title} case study`}
+                className="absolute inset-0 z-20 outline-none"
+            />
             {/* Thumbnail */}
             <div className="relative aspect-video overflow-hidden bg-[#09090b]">
                 <Image
@@ -68,13 +71,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                     </div>
                 )}
                 {/* Quick action icons on hover */}
-                <div className="absolute top-3 right-3 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div className="absolute top-3 right-3 z-30 flex gap-1.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-200">
                     {project.github && (
                         <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={e => e.stopPropagation()}
+                            aria-label={`${project.title} source code on GitHub`}
                             className="w-7 h-7 rounded-lg bg-[#09090b]/80 backdrop-blur-sm border border-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-[#fafafa] transition-colors"
                         >
                             <Github size={13} />
@@ -85,7 +88,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={e => e.stopPropagation()}
+                            aria-label={`${project.title} live demo (opens in a new tab)`}
                             className="w-7 h-7 rounded-lg bg-[#09090b]/80 backdrop-blur-sm border border-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-[#fafafa] transition-colors"
                         >
                             <ExternalLink size={13} />

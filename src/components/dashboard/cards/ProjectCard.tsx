@@ -24,9 +24,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
     
     return (
         <motion.div
-            onClick={() => window.open(project.url, "_blank")}
-            className="group col-span-4 relative overflow-hidden rounded-3xl border border-white/5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 cursor-pointer bg-[#111113] hover:bg-[#141416]"
+            className="group col-span-4 relative overflow-hidden rounded-3xl border border-white/5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 bg-[#111113] hover:bg-[#141416] focus-within:ring-2 focus-within:ring-[#6366f1]/60"
         >
+            {/* Stretched link — makes the whole card a real, keyboard-accessible anchor */}
+            <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit ${project.title} (opens in a new tab)`}
+                className="absolute inset-0 z-20 outline-none"
+            />
             {/* Screenshot preview */}
             <div className="relative h-[140px] overflow-hidden shrink-0">
                 {project.screenshot ? (
@@ -50,13 +57,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 </div>
 
                 {/* Links */}
-                <div className="absolute top-3 right-3 flex items-center gap-2">
+                <div className="absolute top-3 right-3 z-30 flex items-center gap-2">
                     {project.github && (
                         <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={e => e.stopPropagation()}
+                            aria-label={`${project.title} source code on GitHub`}
                             className="p-1.5 rounded-lg bg-black/40 hover:bg-black/60 text-zinc-400 hover:text-white transition-colors backdrop-blur-sm border border-white/5"
                         >
                             <Github size={14} />

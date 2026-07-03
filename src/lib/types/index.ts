@@ -18,18 +18,32 @@ export interface SkillCategory {
     items: SkillItem[]
 }
 
+export interface ApiEndpoint {
+    method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
+    path: string
+    description: string
+}
+
 export interface Project {
+    slug: string
     title: string
     description: string
     technologies: string[]
     image: string
     github?: string
     demo?: string
+    featured?: boolean
+    businessProblem?: string
     overview?: string
     features?: string[]
     technicalDetails?: string
+    architecture?: string[]
+    architectureNote?: string
+    dataModel?: string[]
+    apiEndpoints?: ApiEndpoint[]
     challenges?: string[]
     solutions?: string[]
+    lessonsLearned?: string[]
     role?: string
     duration?: string
     teamSize?: string

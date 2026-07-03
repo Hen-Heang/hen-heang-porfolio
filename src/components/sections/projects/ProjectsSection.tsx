@@ -33,8 +33,7 @@ export function ProjectsSection() {
     }
 
     const handleViewProject = (project: Project) => {
-        const slug = project.title.toLowerCase().replace(/\s+/g, "-")
-        router.push(`/projects/${slug}`)
+        router.push(`/projects/${project.slug}`)
     }
 
     return (

@@ -57,7 +57,7 @@ export const cvData = {
       endDate: "October 2025",
       current: false,
       bullets: [
-        "Built WeBill365 — a large-scale B2B billing platform integrated with Vietnamese banking systems",
+        "Built a large-scale B2B billing platform integrated with Vietnamese banking systems",
         "Designed PostgreSQL schemas and optimised query performance for high-volume transactions",
         "Implemented Spring Security with JWT authentication for enterprise-grade security",
         "Developed REST APIs with Spring Boot and MyBatis; integrated Zalo, SMS, and Telegram delivery",
@@ -144,14 +144,6 @@ export const cvData = {
       technologies: ["Next.js", "TypeScript", "OpenAI API", "Tailwind CSS", "Vercel"],
       github: "https://github.com/Hen-Heang/koriai-frontend",
       live: "https://koriai-frontend.vercel.app/",
-    },
-    {
-      name: "WeBill365 – FinTech Billing Platform",
-      description:
-        "Large-scale B2B billing and payment collection system integrated with Vietnamese banking. Handles automated QR generation, multi-channel notifications, and real-time reconciliation.",
-      technologies: ["Spring Boot", "Java 8", "PostgreSQL", "Redis", "Next.js", "Zalo API"],
-      github: "https://github.com/Hen-Heang/webill365",
-      live: "https://webill365.vn/",
     },
     {
       name: "Money Flow",

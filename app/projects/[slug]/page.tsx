@@ -1,18 +1,15 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { projects } from "@/data/projects"
+import { profileData } from "@/data/profile"
 import { ProjectDetail } from "@/src/components/sections/projects/ProjectDetail"
 
 function getProjectBySlug(slug: string) {
-    return projects.find(
-        (p) => p.title.toLowerCase().replace(/\s+/g, "-") === slug
-    )
+    return projects.find((p) => p.slug === slug)
 }
 
 export function generateStaticParams() {
-    return projects.map((p) => ({
-        slug: p.title.toLowerCase().replace(/\s+/g, "-"),
-    }))
+    return projects.map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({
@@ -26,6 +23,12 @@ export async function generateMetadata({
     return {
         title: project.title,
         description: project.description,
+        openGraph: {
+            title: project.title,
+            description: project.description,
+            url: `${profileData.portfolioUrl}/projects/${project.slug}`,
+            type: "article",
+        },
     }
 }
 

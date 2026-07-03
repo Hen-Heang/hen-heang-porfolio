@@ -23,7 +23,7 @@ export const experiences: ExperienceItem[] = [
         location: "Phnom Penh, Cambodia",
         summary: "Developed B2B financial platforms including billing systems and e-commerce solutions. Built end-to-end features from database design to API implementation.",
         highlights: [
-            "Built B2B billing platform (WeBill365) for enterprise clients",
+            "Built a B2B billing and payment platform for enterprise clients",
             "Designed PostgreSQL database schemas and optimized query performance",
             "Implemented Spring Security with JWT authentication",
             "Developed REST APIs with Spring Boot and MyBatis",

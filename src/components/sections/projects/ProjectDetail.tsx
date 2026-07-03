@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, ExternalLink, ArrowLeft, Briefcase, Clock, Users } from "lucide-react"
+import { Github, ExternalLink, ArrowLeft, Briefcase, Clock, Users, ArrowDown, ArrowRight, Database, Lightbulb } from "lucide-react"
 import { useRouter } from "next/navigation"
 import type { Project } from "@/src/lib/types"
 import Image from "next/image"
@@ -117,6 +117,13 @@ export function ProjectDetail({ project }: { project: Project }) {
 
                     {/* Content sections */}
                     <div className="grid gap-6">
+                        {project.businessProblem && (
+                            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/[0.04] p-6 space-y-3">
+                                <h2 className="text-sm font-bold uppercase tracking-widest text-amber-500/90">The Problem</h2>
+                                <p className="text-zinc-300 leading-relaxed">{project.businessProblem}</p>
+                            </div>
+                        )}
+
                         {project.overview && (
                             <div className="rounded-2xl border border-zinc-800 bg-[#18181b] p-6 space-y-3">
                                 <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400">Overview</h2>
@@ -142,6 +149,70 @@ export function ProjectDetail({ project }: { project: Project }) {
                             <div className="rounded-2xl border border-zinc-800 bg-[#18181b] p-6 space-y-3">
                                 <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400">Technical Details</h2>
                                 <p className="text-zinc-300 leading-relaxed text-sm">{project.technicalDetails}</p>
+                            </div>
+                        )}
+
+                        {project.architecture && project.architecture.length > 0 && (
+                            <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/[0.04] p-6 space-y-4">
+                                <h2 className="text-sm font-bold uppercase tracking-widest text-indigo-400/90">Architecture</h2>
+                                <div className="flex flex-col md:flex-row md:flex-wrap items-stretch md:items-center gap-2">
+                                    {project.architecture.map((layer, i) => (
+                                        <div key={layer} className="flex flex-col md:flex-row items-center gap-2">
+                                            {i > 0 && (
+                                                <>
+                                                    <ArrowDown size={16} className="text-indigo-500/60 md:hidden" />
+                                                    <ArrowRight size={16} className="text-indigo-500/60 hidden md:block shrink-0" />
+                                                </>
+                                            )}
+                                            <span className="w-full md:w-auto text-center px-4 py-2.5 rounded-xl border border-indigo-500/30 bg-[#18181b] text-zinc-200 text-sm font-medium">
+                                                {layer}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                                {project.architectureNote && (
+                                    <p className="text-zinc-400 leading-relaxed text-sm">{project.architectureNote}</p>
+                                )}
+                            </div>
+                        )}
+
+                        {project.dataModel && project.dataModel.length > 0 && (
+                            <div className="rounded-2xl border border-zinc-800 bg-[#18181b] p-6 space-y-3">
+                                <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400">Data Model</h2>
+                                <div className="flex flex-wrap gap-2">
+                                    {project.dataModel.map((table) => (
+                                        <span
+                                            key={table}
+                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono hover:border-zinc-600 transition-colors"
+                                        >
+                                            <Database size={12} className="text-zinc-500" />
+                                            {table}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {project.apiEndpoints && project.apiEndpoints.length > 0 && (
+                            <div className="rounded-2xl border border-zinc-800 bg-[#18181b] p-6 space-y-3">
+                                <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400">Key API Endpoints</h2>
+                                <ul className="space-y-2.5">
+                                    {project.apiEndpoints.map((endpoint) => (
+                                        <li key={`${endpoint.method} ${endpoint.path}`} className="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-3 text-sm">
+                                            <span className="flex items-baseline gap-2 shrink-0">
+                                                <span className={`px-2 py-0.5 rounded-md text-[11px] font-bold font-mono ${
+                                                    endpoint.method === "GET" ? "bg-sky-500/10 text-sky-400"
+                                                    : endpoint.method === "DELETE" ? "bg-red-500/10 text-red-400"
+                                                    : "bg-green-500/10 text-green-400"
+                                                }`}>
+                                                    {endpoint.method}
+                                                </span>
+                                                <code className="font-mono text-zinc-300 text-xs">{endpoint.path}</code>
+                                            </span>
+                                            <span className="text-zinc-500 text-xs sm:text-sm">{endpoint.description}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         )}
 
@@ -175,6 +246,20 @@ export function ProjectDetail({ project }: { project: Project }) {
                                 )}
                             </div>
                         ) : null}
+
+                        {project.lessonsLearned && project.lessonsLearned.length > 0 && (
+                            <div className="rounded-2xl border border-yellow-500/20 bg-yellow-500/[0.04] p-6 space-y-3">
+                                <h2 className="text-sm font-bold uppercase tracking-widest text-yellow-500/90">Lessons Learned</h2>
+                                <ul className="space-y-2">
+                                    {project.lessonsLearned.map((lesson, i) => (
+                                        <li key={i} className="flex gap-3 text-zinc-300 text-sm">
+                                            <Lightbulb size={15} className="mt-0.5 text-yellow-500/70 shrink-0" />
+                                            {lesson}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                 </motion.div>
             </main>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
-import { ArrowRight, Mail, MapPin, Calendar, Sparkles } from "lucide-react"
+import { ArrowRight, Download, Mail, MapPin, Calendar, Sparkles } from "lucide-react"
 import { Badge } from "@/src/components/ui/badge"
 import { Button } from "@/src/components/ui/button"
 import { Card } from "@/src/components/ui/card"
@@ -64,6 +64,16 @@ const HeroSection = () => {
                             <Button
                                 size="lg"
                                 variant="outline"
+                                className="transition-all"
+                                onClick={() => mounted && router.push("/cv")}
+                            >
+                                <Download className="mr-2 h-4 w-4" />
+                                Download CV
+                            </Button>
+
+                            <Button
+                                size="lg"
+                                variant="ghost"
                                 className="transition-all"
                                 onClick={() => mounted && router.push("/about")}
                             >

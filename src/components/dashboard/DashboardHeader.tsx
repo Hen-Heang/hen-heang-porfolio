@@ -138,10 +138,10 @@ export function DashboardHeader() {
                 <Magnetic>
                     <Link
                         href="/cv"
-                        className="flex items-center gap-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-[#6366f1] text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all border border-indigo-500/20 active:scale-95 shadow-lg shadow-indigo-500/5"
+                        className="group flex items-center gap-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-[#6366f1] text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all border border-indigo-500/20 active:scale-95 shadow-lg shadow-indigo-500/5"
                         title="View CV"
                     >
-                        <Download size={14} className="animate-bounce" />
+                        <Download size={14} className="group-hover:animate-bounce" />
                         CV
                     </Link>
                 </Magnetic>

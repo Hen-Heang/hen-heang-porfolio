@@ -2,16 +2,16 @@ export const profileData = {
     name: "Hen Heang",
     fullName: "Hen Heang",
     koreanName: "헹",
-    title: "Full-Stack Software Engineer",
+    title: "Java & Spring Boot Full-Stack Developer",
     company: "Bizplay",
     location: "Seoul, South Korea",
     locationEmoji: "🇰🇷",
     email: "henheang15@gmail.com",
     available: true,
     yearsExperience: "2+",
-    bio: "Engineering scalable enterprise solutions with Java, Spring Boot & Next.js. Architecting from Cambodia 🇰🇭 to Seoul 🇰🇷",
+    bio: "Java & Spring Boot developer building enterprise web applications in Korea. Specialized in Spring Boot, MyBatis, PostgreSQL, Next.js, and TypeScript.",
     description:
-        "Highly motivated Full-Stack Software Engineer based in Seoul, specializing in architecting scalable enterprise web applications. With 2+ years of experience in the Korean IT sector, I excel at bridging robust backend systems (Java, Spring Boot, MyBatis) with modern, performant frontends (Next.js, TypeScript).",
+        "Java & Spring Boot Full-Stack Developer based in Seoul with 2+ years of experience in the Korean enterprise sector. I build backend systems with Java, Spring Boot, and MyBatis on PostgreSQL/Oracle, and modern frontends with Next.js and TypeScript.",
     profileImage: "/image/heang_new.jpeg",
     myImage: "/image/heang_new.jpeg",
     socialLinks: {
@@ -30,10 +30,15 @@ export const profileData = {
     ],
     knowsAbout: ["Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Next.js"],
     rotatingRoles: [
-        "Full-Stack Engineer",
-        "Java · Spring Boot Specialist",
+        "Java & Spring Boot Developer",
+        "Backend · MyBatis · PostgreSQL",
         "Next.js · TypeScript",
-        "Backend Architect",
+        "Full-Stack Engineer",
+    ],
+    languages: [
+        { name: "Khmer", level: "Native" },
+        { name: "English", level: "Professional" },
+        { name: "Korean", level: "Intermediate" },
     ],
     heroTechStack: [
         { name: "Java",       color: "#f89820", icon: "☕" },

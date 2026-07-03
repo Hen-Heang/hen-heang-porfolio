@@ -86,7 +86,6 @@ export const deployedProjects: BentoProject[] = [
 ]
 
 export const workProjects = [
-    { id: "webill", title: "WeBill365", subtitle: "FinTech Infrastructure", emoji: "💳" },
     { id: "easycart", title: "EasyCart", subtitle: "E-comm Ecosystem", emoji: "🛒" },
     { id: "warehouse", title: "Warehouse", subtitle: "Supply Chain B2B", emoji: "📦" },
 ]

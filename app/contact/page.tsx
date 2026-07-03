@@ -15,6 +15,7 @@ export default function ContactPage() {
             title: "Email",
             value: personalInfo.email,
             href: `mailto:${personalInfo.email}`,
+            newTab: false,
             icon: Mail,
             color: "text-blue-400",
             bg: "bg-blue-400/10",
@@ -24,6 +25,7 @@ export default function ContactPage() {
             title: "LinkedIn",
             value: "Hen Heang",
             href: personalInfo.socialLinks.linkedin,
+            newTab: true,
             icon: Linkedin,
             color: "text-blue-600",
             bg: "bg-blue-600/10",
@@ -33,6 +35,7 @@ export default function ContactPage() {
             title: "Telegram",
             value: "@henheang",
             href: personalInfo.socialLinks.telegram,
+            newTab: true,
             icon: Send,
             color: "text-sky-400",
             bg: "bg-sky-400/10",
@@ -42,6 +45,7 @@ export default function ContactPage() {
             title: "GitHub",
             value: "Hen-Heang",
             href: personalInfo.socialLinks.github,
+            newTab: true,
             icon: Github,
             color: "text-zinc-400",
             bg: "bg-zinc-400/10",
@@ -110,10 +114,10 @@ export default function ContactPage() {
                                     transition={{ duration: 0.5, delay: 0.3 + (idx * 0.1) }}
                                 >
                                     <Magnetic>
-                                        <a 
+                                        <a
                                             href={card.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            target={card.newTab ? "_blank" : undefined}
+                                            rel={card.newTab ? "noopener noreferrer" : undefined}
                                             className={`block p-6 bg-[#121214] border border-white/5 rounded-2xl hover:border-white/10 transition-all group relative overflow-hidden h-full`}
                                         >
                                             <div className={`w-10 h-10 rounded-xl ${card.bg} flex items-center justify-center ${card.color} mb-4 group-hover:scale-110 transition-transform`}>

@@ -105,7 +105,13 @@ export default async function Image() {
                         display: "flex", alignItems: "center", gap: 20,
                         fontSize: 16, fontWeight: 500,
                     }}>
-                        <span style={{ color: "#71717a", display: "flex" }}>📍 Seoul, South Korea</span>
+                        <span style={{ color: "#71717a", display: "flex", alignItems: "center", gap: 8 }}>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            Seoul, South Korea
+                        </span>
                         <div style={{
                             width: 4, height: 4, borderRadius: "50%",
                             backgroundColor: "#3f3f46",

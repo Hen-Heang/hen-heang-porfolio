@@ -11,6 +11,7 @@ export async function getProjects(): Promise<Project[]> {
     .order('sort_order')
   if (error || !data?.length) return []
   return data.map((r) => ({
+    slug: r.slug ?? r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
     title: r.title,
     description: r.description,
     technologies: r.technologies,
