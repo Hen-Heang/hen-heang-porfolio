@@ -66,9 +66,9 @@ const getColor = (skill: string) => {
 
 export function TechStackCard() {
     return (
-        <BentoCard className="col-span-4 md:col-span-4 p-6">
+        <BentoCard className="col-span-4 md:col-span-8 lg:col-span-12 p-6">
             <div className="flex items-center justify-between mb-4">
-                <p className="text-[#52525b] text-[10px] font-semibold uppercase tracking-widest">
+                <p className="text-[#a1a1aa] text-[10px] font-semibold uppercase tracking-widest">
                     Tech Stack
                 </p>
                 <div className="flex gap-1">

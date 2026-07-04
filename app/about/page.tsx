@@ -141,7 +141,7 @@ export default function AboutPage() {
                                             </div>
                                             <div>
                                                 <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Experience</p>
-                                                <p className="text-xl font-black text-zinc-900 dark:text-white">{personalInfo.experience}+ Years</p>
+                                                <p className="text-xl font-black text-zinc-900 dark:text-white">{personalInfo.experience} Years</p>
                                             </div>
                                         </div>
                                     </div>

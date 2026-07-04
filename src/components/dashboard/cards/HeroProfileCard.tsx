@@ -56,10 +56,10 @@ export function HeroProfileCard() {
             <div className="p-6 md:p-10 space-y-8 relative z-10 flex flex-col h-full">
                 {/* Top Row: Avatar + Time & Location */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div className="flex items-center gap-5">
-                        <motion.div 
+                    <div className="flex flex-col items-center text-center gap-4 sm:flex-row sm:items-center sm:text-left sm:gap-5">
+                        <motion.div
                             whileHover={{ scale: 1.05 }}
-                            className="relative group/avatar"
+                            className="relative group/avatar shrink-0"
                         >
                             <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ring-4 ring-white/5 group-hover/avatar:ring-[#6366f1]/30 bg-[#1c1c1f]">
                                 <Image
@@ -79,10 +79,10 @@ export function HeroProfileCard() {
                             )}
                         </motion.div>
 
-                        <div className="space-y-1.5">
+                        <div className="space-y-1.5 min-w-0 flex flex-col items-center sm:items-start">
                             {profile.available && (
-                                <div className="inline-flex items-center rounded-full border border-[#6366f1]/25 bg-[#6366f1]/10 px-3 py-1 mb-1">
-                                    <AnimatedShinyText className="text-[10px] font-black uppercase tracking-widest text-[#6366f1]" shimmerWidth={80}>
+                                <div className="inline-flex items-center rounded-full border border-[#6366f1]/25 bg-[#6366f1]/10 px-3 py-1 mb-1 max-w-full">
+                                    <AnimatedShinyText className="text-[10px] font-black uppercase tracking-widest text-[#6366f1] whitespace-nowrap" shimmerWidth={80}>
                                         ✦ Available for hire
                                     </AnimatedShinyText>
                                 </div>

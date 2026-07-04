@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import { ThemeProvider } from "@/src/components/ThemeProvider"
+import { RouteScrollReset } from "@/src/components/utils/RouteScrollReset"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import { profileData } from "@/data/profile"
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+                <RouteScrollReset />
                 {children}
             </ThemeProvider>
             <Analytics />

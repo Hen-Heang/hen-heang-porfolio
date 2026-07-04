@@ -86,7 +86,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     </p>
                 </div>
                 
-                <p className="text-zinc-500 text-xs leading-relaxed line-clamp-2 font-medium">
+                <p className="text-zinc-400 text-xs leading-relaxed line-clamp-2 font-medium">
                     {project.description}
                 </p>
 
