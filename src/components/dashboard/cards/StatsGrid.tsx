@@ -26,16 +26,16 @@ export function StatsGrid() {
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1, duration: 0.4 }}
                         whileHover={{ y: -5, scale: 1.02 }}
-                        className="relative bg-[#111113] rounded-3xl p-5 md:p-6 flex flex-col justify-between border border-white/5 hover:border-white/10 transition-all overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/20"
+                        className="relative bg-[#111113] rounded-3xl p-5 md:p-6 flex flex-col justify-center gap-3 border border-white/5 hover:border-white/10 transition-all overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/20"
                     >
                         {/* Subtle background glow on hover */}
-                        <div 
-                            className="absolute -right-4 -top-4 w-12 h-12 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity" 
+                        <div
+                            className="absolute -right-4 -top-4 w-12 h-12 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity"
                             style={{ backgroundColor: stat.accent }}
                         />
-                        
+
                         <span
-                            className="text-2xl md:text-3xl font-black tracking-tighter transition-all duration-300 drop-shadow-sm"
+                            className="text-3xl md:text-4xl font-black tracking-tighter transition-all duration-300 drop-shadow-sm"
                             style={{ color: stat.accent }}
                         >
                             {stat.num !== null
@@ -43,8 +43,8 @@ export function StatsGrid() {
                                 : stat.text
                             }
                         </span>
-                        
-                        <div className="flex flex-col mt-2">
+
+                        <div className="flex flex-col">
                             <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-[#fafafa] leading-none">
                                 {stat.label}
                             </span>
