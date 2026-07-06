@@ -5,7 +5,6 @@ import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
-import { skills as staticSkills } from "@/data/skills"
 import { getSkills } from "@/src/lib/db/portfolio"
 import type { SkillCategory } from "@/src/lib/types"
 import { Badge } from "@/src/components/ui/badge"
@@ -16,13 +15,16 @@ import { ScrollVelocity } from "@/src/components/ui/ScrollVelocity"
 export function SkillsSection() {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, amount: 0.2 })
-    const [skills, setSkills] = useState<SkillCategory[]>(staticSkills)
-    const [activeTab, setActiveTab] = useState(staticSkills[0].category)
+    const [skills, setSkills] = useState<SkillCategory[]>([])
+    const [activeTab, setActiveTab] = useState("")
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => setMounted(true), [])
     useEffect(() => {
-        getSkills().then((data) => { if (data.length) setSkills(data) })
+        getSkills().then((data) => {
+            setSkills(data)
+            if (data.length) setActiveTab(data[0].category)
+        })
     }, [])
 
     return (
@@ -41,7 +43,7 @@ export function SkillsSection() {
                     transition={{ duration: 0.5 }}
                     className="max-w-4xl mx-auto"
                 >
-                    {mounted && <Tabs defaultValue={skills[0].category} className="w-full" onValueChange={setActiveTab}>
+                    {mounted && skills.length > 0 && <Tabs defaultValue={skills[0].category} className="w-full" onValueChange={setActiveTab}>
                         <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-10 w-full h-auto gap-2 bg-transparent p-0">
                             {skills.map((skill) => (
                                 <TabsTrigger 

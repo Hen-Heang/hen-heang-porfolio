@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, Code2, User, BookOpen, Mail, Send } from "lucide-react"
-import { profile } from "@/data/dashboard"
+import { useDashboardProfile } from "@/src/providers/site-content-provider"
 import Magnetic from "@/src/components/ui/Magnetic"
 
 const navLinks = [
@@ -15,6 +15,7 @@ const navLinks = [
 ]
 
 export function MobileDock() {
+    const profile = useDashboardProfile()
     const pathname = usePathname()
 
     return (

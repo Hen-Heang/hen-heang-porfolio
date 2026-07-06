@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { ExternalLink, Github, ArrowRight } from "lucide-react"
-import { projects } from "@/data/projects"
+import { getProjects } from "@/src/lib/db/portfolio"
 import { NumberTicker } from "@/src/components/ui/NumberTicker"
 import { PageLayout } from "@/src/components/layout/PageLayout"
+import { Skeleton } from "@/src/components/ui/Skeleton"
 import Image from "next/image"
 import type { Project } from "@/src/lib/types"
 
@@ -15,14 +16,6 @@ const filters = [
     { label: "All",        fn: () => true },
     { label: "Live",       fn: (p: Project) => !!p.demo && p.demo !== "#" },
     { label: "Backend",    fn: (p: Project) => p.technologies.some(t => t.toLowerCase().includes("spring")) },
-]
-
-// Real stats
-const stats = [
-    { num: projects.length,                                              suffix: "",  label: "Total Projects" },
-    { num: projects.filter(p => p.demo && p.demo !== "#").length,       suffix: "",  label: "Live" },
-    { num: 2,                                                            suffix: "+", label: "Years Exp." },
-    { num: null, text: "Seoul 🇰🇷",                                      suffix: "",  label: "Location" },
 ]
 
 const cardVariants = {
@@ -126,8 +119,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export default function ProjectsPage() {
     const [activeFilter, setActiveFilter] = useState("All")
+    const [projects, setProjects] = useState<Project[] | null>(null)
 
-    const filtered = projects.filter(
+    useEffect(() => {
+        getProjects().then(setProjects)
+    }, [])
+
+    const loading = projects === null
+    const list = projects ?? []
+
+    const stats = [
+        { num: list.length,                                          suffix: "",  label: "Total Projects", text: undefined as string | undefined },
+        { num: list.filter(p => p.demo && p.demo !== "#").length,    suffix: "",  label: "Live", text: undefined as string | undefined },
+        { num: 2,                                                    suffix: "+", label: "Years Exp.", text: undefined as string | undefined },
+        { num: null, text: "Seoul 🇰🇷",                              suffix: "",  label: "Location" },
+    ]
+
+    const filtered = list.filter(
         filters.find(f => f.label === activeFilter)?.fn ?? (() => true)
     )
 
@@ -185,22 +193,37 @@ export default function ProjectsPage() {
                         >
                             {f.label}
                             <span className={`ml-1.5 text-[10px] ${activeFilter === f.label ? "text-white/70" : "text-[#3f3f46]"}`}>
-                                {projects.filter(filters.find(x => x.label === f.label)?.fn ?? (() => true)).length}
+                                {list.filter(filters.find(x => x.label === f.label)?.fn ?? (() => true)).length}
                             </span>
                         </button>
                     ))}
                 </motion.div>
 
                 {/* Grid */}
-                <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <AnimatePresence mode="popLayout">
-                        {filtered.map((project, i) => (
-                            <ProjectCard key={project.title} project={project} index={i} />
+                {loading ? (
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {Array.from({ length: 4 }).map((_, i) => (
+                            <div key={i} className="rounded-2xl overflow-hidden border border-[#27272a]">
+                                <Skeleton className="aspect-video w-full rounded-none" />
+                                <div className="p-5 space-y-3">
+                                    <Skeleton className="h-5 w-3/4" />
+                                    <Skeleton className="h-3 w-full" />
+                                    <Skeleton className="h-3 w-5/6" />
+                                </div>
+                            </div>
                         ))}
-                    </AnimatePresence>
-                </motion.div>
+                    </div>
+                ) : (
+                    <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <AnimatePresence mode="popLayout">
+                            {filtered.map((project, i) => (
+                                <ProjectCard key={project.title} project={project} index={i} />
+                            ))}
+                        </AnimatePresence>
+                    </motion.div>
+                )}
 
-                {filtered.length === 0 && (
+                {!loading && filtered.length === 0 && (
                     <div className="text-center py-20 text-[#52525b] text-sm">
                         No projects in this category.
                     </div>

@@ -1,9 +1,9 @@
 import Image from "next/image"
 import { Mail, Phone, MapPin, Linkedin, Github, Globe } from "lucide-react"
-import { cvData } from "@/data/cv-data"
+import type { CVData } from "@/data/cv-data"
 
-export function CVHeader() {
-  const { personal } = cvData
+export function CVHeader({ cv }: { cv: CVData }) {
+  const { personal } = cv
 
   return (
     <header className="mb-10 print:mb-6">

@@ -1,7 +1,7 @@
 "use client"
 
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
-import { techStack } from "@/data/dashboard"
+import { useProfile } from "@/src/providers/site-content-provider"
 import { 
     Coffee, 
     Leaf, 
@@ -65,6 +65,7 @@ const getColor = (skill: string) => {
 }
 
 export function TechStackCard() {
+    const techStack = useProfile().linkedinCoreSkills
     return (
         <BentoCard className="col-span-4 md:col-span-8 lg:col-span-12 p-6">
             <div className="flex items-center justify-between mb-4">

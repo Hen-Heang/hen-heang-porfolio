@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { 
     Mail, 
@@ -23,8 +23,9 @@ import {
     Code,
     CheckCircle
 } from "lucide-react"
-import { personalInfo } from "@/data/personal-info"
-import { skills } from "@/data/skills"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
+import { getSkills } from "@/src/lib/db/portfolio"
+import type { SkillCategory } from "@/src/lib/types"
 import { Button } from "@/src/components/ui/button"
 import { Badge } from "@/src/components/ui/badge"
 import { Card } from "@/src/components/ui/card"
@@ -32,7 +33,13 @@ import { SocialLinks } from "@/src/components/ui/SocialLinks"
 import Image from "next/image"
 
 const ProfileSection = () => {
+    const personalInfo = usePersonalInfo()
+    const [skills, setSkills] = useState<SkillCategory[]>([])
     const [isEditing, setIsEditing] = useState(false)
+
+    useEffect(() => {
+        getSkills().then(setSkills)
+    }, [])
 
     // Mock statistics data - you can replace with real data
     const stats = [

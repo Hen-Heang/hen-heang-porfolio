@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { personalInfo } from "@/data/personal-info"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
 
 interface HeroImageProps {
     useAvatar?: boolean
 }
 
 export function HeroImage({ useAvatar = false }: HeroImageProps) {
+    const personalInfo = usePersonalInfo()
     // Default to myImage for a modern, minimalist look
     const imageSrc = useAvatar ? personalInfo.profileImage : personalInfo.myImage
 

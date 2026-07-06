@@ -1,11 +1,13 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
-import { skills } from "@/data/skills"
+import { getSkills, getEducation } from "@/src/lib/db/portfolio"
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { SkillsTab } from "@/src/components/sections/about/SkillsTab"
-import { personalInfo } from "@/data/personal-info"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
+import type { SkillCategory, EducationItem } from "@/src/lib/types"
 import { Button } from "@/src/components/ui/button"
 import { Badge } from "@/src/components/ui/badge"
 import Image from "next/image"
@@ -25,11 +27,18 @@ import {
 } from "lucide-react"
 import { ExperienceSection } from "@/src/components/sections/experience/ExperienceSection"
 import { AchievementsSection } from "@/src/components/sections/achievements/AchievementsSection"
-import { education } from "@/data/education"
 import { GraduationCap } from "lucide-react"
 
 export default function AboutPage() {
     const router = useRouter()
+    const personalInfo = usePersonalInfo()
+    const [skills, setSkills] = useState<SkillCategory[]>([])
+    const [education, setEducation] = useState<EducationItem[]>([])
+
+    useEffect(() => {
+        getSkills().then(setSkills)
+        getEducation().then(setEducation)
+    }, [])
     
     const aboutSummary = [
         "I’m a Full-Stack Developer who builds web applications end-to-end - from frontend screens to backend APIs and databases. I’ve worked in both Cambodia and South Korea, and I’m currently based in Seoul at Bizplay.",
@@ -272,11 +281,13 @@ export default function AboutPage() {
                                         ))}
                                     </div>
                                 </div>
-                                <div className="p-2 rounded-[2.5rem] bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
-                                    <div className="bg-white dark:bg-zinc-900 rounded-[2.2rem] p-6 md:p-10 shadow-inner">
-                                        <SkillsTab skills={skills} />
+                                {skills.length > 0 && (
+                                    <div className="p-2 rounded-[2.5rem] bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
+                                        <div className="bg-white dark:bg-zinc-900 rounded-[2.2rem] p-6 md:p-10 shadow-inner">
+                                            <SkillsTab skills={skills} />
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </motion.div>
 
                             {/* Final CTA */}

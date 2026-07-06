@@ -1,12 +1,12 @@
 import { GraduationCap } from "lucide-react"
 import { CVSection } from "./CVSection"
-import { cvData } from "@/data/cv-data"
+import type { CVData } from "@/data/cv-data"
 
-export function CVEducation() {
+export function CVEducation({ cv }: { cv: CVData }) {
   return (
     <CVSection title="Education" icon={GraduationCap}>
       <div className="space-y-6 print:space-y-4">
-        {cvData.education.map((item, i) => (
+        {cv.education.map((item, i) => (
           <div key={i} className="group">
             <div className="flex flex-col mb-1">
               <span className="text-[11px] font-bold text-[#3182ce] uppercase tracking-wider mb-1">

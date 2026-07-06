@@ -1,15 +1,15 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
-import { projects } from "@/data/projects"
 import { profileData } from "@/data/profile"
+import { getProjectBySlug, getProjectSlugs } from "@/src/lib/db/portfolio"
 import { ProjectDetail } from "@/src/components/sections/projects/ProjectDetail"
 
-function getProjectBySlug(slug: string) {
-    return projects.find((p) => p.slug === slug)
-}
+// Re-render at most once a minute so admin edits show up without a redeploy
+export const revalidate = 60
 
-export function generateStaticParams() {
-    return projects.map((p) => ({ slug: p.slug }))
+export async function generateStaticParams() {
+    const slugs = await getProjectSlugs()
+    return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -18,7 +18,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>
 }): Promise<Metadata> {
     const { slug } = await params
-    const project = getProjectBySlug(slug)
+    const project = await getProjectBySlug(slug)
     if (!project) return {}
     return {
         title: project.title,
@@ -38,7 +38,7 @@ export default async function ProjectPage({
     params: Promise<{ slug: string }>
 }) {
     const { slug } = await params
-    const project = getProjectBySlug(slug)
+    const project = await getProjectBySlug(slug)
     if (!project) notFound()
 
     return <ProjectDetail project={project} />

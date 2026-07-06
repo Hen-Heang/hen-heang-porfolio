@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next"
-import { projects } from "@/data/projects"
 import { profileData } from "@/data/profile"
+import { getProjectSlugs } from "@/src/lib/db/portfolio"
 
 const BASE_URL = profileData.portfolioUrl
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const projectPages: MetadataRoute.Sitemap = projects.map((p) => ({
-        url: `${BASE_URL}/projects/${p.slug}`,
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const slugs = await getProjectSlugs()
+    const projectPages: MetadataRoute.Sitemap = slugs.map((slug) => ({
+        url: `${BASE_URL}/projects/${slug}`,
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.7,

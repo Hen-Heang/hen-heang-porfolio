@@ -1,12 +1,12 @@
 import { Zap } from "lucide-react"
 import { CVSection } from "./CVSection"
-import { cvData } from "@/data/cv-data"
+import type { CVData } from "@/data/cv-data"
 
-export function CVSkills() {
+export function CVSkills({ cv }: { cv: CVData }) {
   return (
     <CVSection title="Technical Expertise" icon={Zap}>
       <div className="space-y-6">
-        {cvData.skills.map((group) => (
+        {cv.skills.map((group) => (
           <div key={group.category} className="group">
             <div className="flex justify-between items-center mb-2">
               <span className="text-xs font-bold text-[#1a365d] uppercase tracking-wider group-hover:text-[#3182ce] transition-colors">

@@ -1,10 +1,18 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { experiences } from "@/data/experience"
+import { getExperience } from "@/src/lib/db/portfolio"
+import type { ExperienceItem } from "@/src/lib/types"
 import { Briefcase, MapPin, Calendar, ChevronRight } from "lucide-react"
 
 export function JourneyTimeline() {
+    const [experiences, setExperiences] = useState<ExperienceItem[]>([])
+
+    useEffect(() => {
+        getExperience().then(setExperiences)
+    }, [])
+
     return (
         <div className="space-y-12">
             {experiences.map((exp, index) => (

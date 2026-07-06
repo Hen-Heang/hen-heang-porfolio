@@ -32,6 +32,7 @@ export const entities: Record<string, EntityConfig> = {
         listFields: ["title", "duration"],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
+            { name: "slug", label: "Slug (URL path)", type: "text", required: true, placeholder: "my-project" },
             { name: "description", label: "Description", type: "textarea", required: true },
             { name: "technologies", label: "Technologies (one per line)", type: "lines" },
             { name: "image", label: "Image path", type: "text", placeholder: "/image/example.svg" },

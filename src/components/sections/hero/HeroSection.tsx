@@ -8,10 +8,11 @@ import { Button } from "@/src/components/ui/button"
 import { Card } from "@/src/components/ui/card"
 import { SocialLinks } from "@/src/components/ui/SocialLinks"
 import { useRouter } from "next/navigation"
-import { personalInfo } from "@/data/personal-info"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import { HeroImage } from "./HeroImage"
 
 const HeroSection = () => {
+    const personalInfo = usePersonalInfo()
     const [mounted, setMounted] = useState(false)
     const router = useRouter()
     useReducedMotion();

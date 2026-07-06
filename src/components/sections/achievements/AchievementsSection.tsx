@@ -6,7 +6,7 @@ import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { Badge } from "@/src/components/ui/badge"
 import { Trophy, Award, GraduationCap, Calendar, Building, X, Eye, ExternalLink } from "lucide-react"
-import { groupedAchievements as staticGrouped, groupAchievementsByYearAndIssuer, rawAchievements as staticRaw, type Achievement } from "@/data/achievements"
+import { groupAchievementsByYearAndIssuer, type Achievement } from "@/data/achievements"
 import { getAchievements } from "@/src/lib/db/portfolio"
 import { Skeleton } from "@/src/components/ui/Skeleton"
 import Image from "next/image"
@@ -17,11 +17,7 @@ export function AchievementsSection() {
 
     useEffect(() => {
         getAchievements().then((data) => {
-            setGroupedAchievements(
-                data.length >= staticRaw.length
-                    ? groupAchievementsByYearAndIssuer(data)
-                    : staticGrouped
-            )
+            setGroupedAchievements(groupAchievementsByYearAndIssuer(data))
         })
     }, [])
 

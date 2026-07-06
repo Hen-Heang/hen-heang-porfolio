@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Download } from "lucide-react"
-import { profile } from "@/data/dashboard"
+import { useDashboardProfile } from "@/src/providers/site-content-provider"
 import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import { useState, useRef } from "react"
 import Magnetic from "@/src/components/ui/Magnetic"
@@ -41,6 +41,7 @@ const navLinks = [
 ]
 
 export function DashboardHeader() {
+    const profile = useDashboardProfile()
     const pathname = usePathname()
     const [hidden, setHidden] = useState(false)
     const { scrollY } = useScroll()

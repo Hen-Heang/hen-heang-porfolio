@@ -1,11 +1,12 @@
 "use client"
 
 import { ArrowUpRight, Github, Linkedin, Send, Sparkles } from "lucide-react"
-import { personalInfo } from "@/data/personal-info"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import Link from "next/link"
 import { HHLogo } from "@/src/components/icons/HHLogo"
 
 export function Footer() {
+    const personalInfo = usePersonalInfo()
     const currentYear = new Date().getFullYear()
 
     const navLinks = [

@@ -1,5 +1,10 @@
 import type { Metadata } from "next"
 import { CVPage } from "@/src/components/cv/CVPage"
+import { getSiteContent } from "@/src/lib/db/portfolio"
+import { cvData as defaultCV, type CVData } from "@/data/cv-data"
+
+// Re-render at most once a minute so admin edits show up without a redeploy
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: "CV — Hen Heang | Full-Stack Software Engineer",
@@ -12,6 +17,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function CVRoute() {
-  return <CVPage />
+export default async function CVRoute() {
+  const cv = (await getSiteContent<CVData>("cv")) ?? defaultCV
+  return <CVPage cv={cv} />
 }

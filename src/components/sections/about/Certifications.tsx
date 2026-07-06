@@ -1,12 +1,20 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { rawAchievements } from "@/data/achievements"
+import { getAchievements } from "@/src/lib/db/portfolio"
+import type { Achievement } from "@/data/achievements"
 import { Award, ExternalLink, Calendar, GraduationCap, Medal } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent } from "@/src/components/ui/card"
 
 export function Certifications() {
+    const [rawAchievements, setRawAchievements] = useState<Achievement[]>([])
+
+    useEffect(() => {
+        getAchievements().then(setRawAchievements)
+    }, [])
+
     const getTypeIcon = (type: string) => {
         switch (type) {
             case 'graduation': return <GraduationCap size={18} className="text-blue-500" />

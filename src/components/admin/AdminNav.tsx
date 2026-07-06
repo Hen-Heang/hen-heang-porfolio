@@ -10,6 +10,7 @@ const links = [
     { href: "/admin/experience", label: "Experience" },
     { href: "/admin/education", label: "Education" },
     { href: "/admin/achievements", label: "Achievements" },
+    { href: "/admin/content", label: "Site Content" },
 ]
 
 export function AdminNav() {

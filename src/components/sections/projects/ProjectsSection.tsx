@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion"
 import { Button } from "@/src/components/ui/button"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { ProjectCard } from "./ProjectCard"
-import { projects as staticProjects } from "@/data/projects"
 import { getProjects } from "@/src/lib/db/portfolio"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
@@ -19,7 +18,7 @@ export function ProjectsSection() {
     const [projects, setProjects] = useState<Project[] | null>(null)
 
     useEffect(() => {
-        getProjects().then((data) => setProjects(data.length ? data : staticProjects))
+        getProjects().then(setProjects)
     }, [])
 
     const containerVariants = {

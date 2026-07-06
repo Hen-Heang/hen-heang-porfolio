@@ -1,12 +1,13 @@
 "use client"
 
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
-import { deployedProjects } from "@/data/dashboard"
-import { profileData } from "@/data/profile"
+import { useDashboardContent, useProfile } from "@/src/providers/site-content-provider"
 import { motion } from "framer-motion"
 import { NumberTicker } from "@/src/components/ui/NumberTicker"
 
 export function StatsGrid() {
+    const { deployedProjects } = useDashboardContent()
+    const profileData = useProfile()
     const stats = [
         { num: deployedProjects.length, suffix: "",  label: "Projects",   accent: "#6366f1", sub: "Deployed" },
         { num: parseInt(profileData.yearsExperience), suffix: "+", label: "Experience", accent: "#8b5cf6", sub: "Years+"   },

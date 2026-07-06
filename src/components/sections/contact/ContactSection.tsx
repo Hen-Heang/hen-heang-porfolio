@@ -8,9 +8,10 @@ import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { ContactForm } from "./ContactForm"
 import { useRouter } from "next/navigation"
 import { Button } from "@/src/components/ui/button"
-import { personalInfo } from "@/data/personal-info"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
 
 export function ContactSection() {
+    const personalInfo = usePersonalInfo()
     const router = useRouter()
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, amount: 0.2 })

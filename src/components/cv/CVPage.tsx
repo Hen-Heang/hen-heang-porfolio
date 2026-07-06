@@ -7,13 +7,10 @@ import { CVSkills } from "./CVSkills"
 import { CVProjects } from "./CVProjects"
 import { CVLanguages } from "./CVLanguages"
 import { CVDownloadButton } from "./CVDownloadButton"
-import { cvData } from "@/data/cv-data"
+import type { CVData } from "@/data/cv-data"
 
-/**
- * CVPage — the full CV layout.
- * The wrapping <div id="cv-content"> is the target for PDF generation.
- */
-export function CVPage() {
+// The wrapping <div id="cv-content"> is the target for PDF generation.
+export function CVPage({ cv }: { cv: CVData }) {
   return (
     <div id="cv-print-root" className="min-h-screen bg-[#f8fafc] py-12 px-4 print:bg-white print:p-0">
       {/* Toolbar (hidden when printing) */}
@@ -30,12 +27,12 @@ export function CVPage() {
         "
       >
         <div className="px-8 py-12 md:px-16 md:py-16 print:px-10 print:py-8">
-          <CVHeader />
+          <CVHeader cv={cv} />
 
           {/* Professional Summary */}
           <CVSection title="About Me" icon={User} className="mb-12 print:mb-8">
             <p className="text-[15px] text-gray-600 leading-relaxed font-medium">
-              {cvData.summary}
+              {cv.summary}
             </p>
           </CVSection>
 
@@ -43,16 +40,16 @@ export function CVPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 print:grid-cols-12 print:gap-10">
             {/* Left Column - Main Experience & Projects */}
             <div className="lg:col-span-8 print:col-span-8 space-y-12 print:space-y-8">
-              <CVExperience />
-              <CVProjects />
+              <CVExperience cv={cv} />
+              <CVProjects cv={cv} />
             </div>
 
             {/* Right Column - Skills, Education, Languages */}
             <div className="lg:col-span-4 print:col-span-4 space-y-12 print:space-y-8">
               <div className="lg:sticky lg:top-8 space-y-12 print:space-y-8">
-                <CVSkills />
-                <CVEducation />
-                <CVLanguages />
+                <CVSkills cv={cv} />
+                <CVEducation cv={cv} />
+                <CVLanguages cv={cv} />
               </div>
             </div>
           </div>

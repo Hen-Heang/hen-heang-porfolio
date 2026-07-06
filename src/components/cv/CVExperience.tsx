@@ -1,12 +1,12 @@
 import { Briefcase } from "lucide-react"
 import { CVSection } from "./CVSection"
-import { cvData } from "@/data/cv-data"
+import type { CVData } from "@/data/cv-data"
 
-export function CVExperience() {
+export function CVExperience({ cv }: { cv: CVData }) {
   return (
     <CVSection title="Professional Experience" icon={Briefcase}>
       <div className="relative border-l-2 border-[#1a365d]/10 ml-2.5 pl-6 space-y-10 print:space-y-6">
-        {cvData.experience.map((job, i) => (
+        {cv.experience.map((job, i) => (
           <div key={i} className="relative">
             {/* Timeline Dot */}
             <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-white bg-[#1a365d] shadow-sm" />

@@ -2,9 +2,10 @@
 
 import { Github, Linkedin, Send } from "lucide-react"
 import { motion } from "framer-motion"
-import { profile } from "@/data/dashboard"
+import { useDashboardProfile } from "@/src/providers/site-content-provider"
 
 export function ContactCTA() {
+    const profile = useDashboardProfile()
     return (
         <motion.div
             variants={{

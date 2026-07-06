@@ -1,12 +1,12 @@
 import { Github, ExternalLink, Rocket } from "lucide-react"
 import { CVSection } from "./CVSection"
-import { cvData } from "@/data/cv-data"
+import type { CVData } from "@/data/cv-data"
 
-export function CVProjects() {
+export function CVProjects({ cv }: { cv: CVData }) {
   return (
     <CVSection title="Selected Projects" icon={Rocket}>
       <div className="grid grid-cols-1 gap-6 print:gap-4">
-        {cvData.projects.map((project, i) => (
+        {cv.projects.map((project, i) => (
           <div key={i} className="group p-4 rounded-xl border border-gray-100 bg-gray-50/30 hover:bg-white hover:shadow-md transition-all">
             {/* Project name + links */}
             <div className="flex flex-wrap justify-between items-center gap-2 mb-2">

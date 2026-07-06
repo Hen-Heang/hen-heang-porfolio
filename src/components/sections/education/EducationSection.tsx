@@ -4,7 +4,6 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionHeader } from "@/src/components/ui/SectionHeader"
 import { EducationItem as EducationItemComponent } from "./EducationItem"
-import { education as staticEducation } from "@/data/education"
 import { getEducation } from "@/src/lib/db/portfolio"
 import type { EducationItem } from "@/src/lib/types"
 import { useState, useEffect } from "react"
@@ -16,7 +15,7 @@ export function EducationSection() {
     const [education, setEducation] = useState<EducationItem[] | null>(null)
 
     useEffect(() => {
-        getEducation().then((data) => setEducation(data.length ? data : staticEducation))
+        getEducation().then(setEducation)
     }, [])
 
     return (

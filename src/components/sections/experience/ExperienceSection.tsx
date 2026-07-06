@@ -3,7 +3,6 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Briefcase, Calendar, MapPin, Sparkles } from "lucide-react"
-import { experiences as staticExperiences } from "@/data/experience"
 import { getExperience } from "@/src/lib/db/portfolio"
 import type { ExperienceItem } from "@/src/lib/types"
 import { useState, useEffect } from "react"
@@ -33,9 +32,7 @@ export function ExperienceSection() {
     const containerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        getExperience().then((data) => {
-            setExperiences(data.length >= staticExperiences.length ? data : staticExperiences)
-        })
+        getExperience().then(setExperiences)
     }, [])
     const { scrollYProgress } = useScroll({
         target: containerRef,

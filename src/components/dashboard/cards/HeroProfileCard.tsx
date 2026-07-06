@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { BentoCard } from "@/src/components/dashboard/BentoCard"
-import { profile } from "@/data/dashboard"
-import { profileData } from "@/data/profile"
+import { useDashboardProfile, useProfile } from "@/src/providers/site-content-provider"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
@@ -11,10 +10,11 @@ import { Check, Sparkles, ExternalLink, Mail } from "lucide-react"
 import { Toast } from "@/src/components/ui/Toast"
 import { AnimatedShinyText } from "@/src/components/ui/AnimatedShinyText"
 
-const roles = profileData.rotatingRoles
-const techStack = profileData.heroTechStack
-
 export function HeroProfileCard() {
+    const profile = useDashboardProfile()
+    const profileData = useProfile()
+    const roles = profileData.rotatingRoles
+    const techStack = profileData.heroTechStack
     const [showToast, setShowToast] = useState(false)
     const [copied, setCopied]     = useState(false)
     const [roleIndex, setRoleIndex] = useState(0)

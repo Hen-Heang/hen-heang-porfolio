@@ -8,7 +8,7 @@ import { StatsGrid } from "@/src/components/dashboard/cards/StatsGrid"
 import { TechStackCard } from "@/src/components/dashboard/cards/TechStackCard"
 import { ContactCTA } from "@/src/components/dashboard/cards/ContactCTA"
 import { ProjectCard } from "@/src/components/dashboard/cards/ProjectCard"
-import { deployedProjects } from "@/data/dashboard"
+import { useDashboardContent } from "@/src/providers/site-content-provider"
 import { Footer } from "@/src/components/ui/Footer"
 import { ScrollToTop } from "@/src/components/ui/ScrollToTop"
 
@@ -21,6 +21,7 @@ const containerVariants = {
 }
 
 export function BentoDashboard() {
+    const { deployedProjects } = useDashboardContent()
     return (
         <div className="min-h-screen bg-[#09090b] pb-24 md:pb-0">
             <MobileDock />

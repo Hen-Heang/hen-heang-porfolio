@@ -1,12 +1,12 @@
 import { Languages } from "lucide-react"
 import { CVSection } from "./CVSection"
-import { cvData } from "@/data/cv-data"
+import type { CVData } from "@/data/cv-data"
 
-export function CVLanguages() {
+export function CVLanguages({ cv }: { cv: CVData }) {
   return (
     <CVSection title="Languages" icon={Languages}>
       <div className="space-y-4">
-        {cvData.languages.map((lang) => (
+        {cv.languages.map((lang) => (
           <div key={lang.name} className="group">
             <div className="flex justify-between items-center mb-1.5">
               <div className="flex flex-col">

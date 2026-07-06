@@ -2,16 +2,10 @@ import { getSupabaseClient } from '@/src/lib/supabase'
 import type { Project, SkillCategory, ExperienceItem, EducationItem } from '@/src/lib/types'
 import type { Achievement } from '@/data/achievements'
 
-export async function getProjects(): Promise<Project[]> {
-  const sb = getSupabaseClient()
-  if (!sb) return []
-  const { data, error } = await sb
-    .from('portfolio_projects')
-    .select('*')
-    .order('sort_order')
-  if (error || !data?.length) return []
-  return data.map((r) => ({
-    slug: r.slug ?? r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapProject(r: any): Project {
+  return {
+    slug: r.slug,
     title: r.title,
     description: r.description,
     technologies: r.technologies,
@@ -26,7 +20,53 @@ export async function getProjects(): Promise<Project[]> {
     role: r.role,
     duration: r.duration,
     teamSize: r.team_size,
-  }))
+  }
+}
+
+export async function getProjects(): Promise<Project[]> {
+  const sb = getSupabaseClient()
+  if (!sb) return []
+  const { data, error } = await sb
+    .from('portfolio_projects')
+    .select('*')
+    .order('sort_order')
+  if (error || !data?.length) return []
+  return data.map(mapProject)
+}
+
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const sb = getSupabaseClient()
+  if (!sb) return null
+  const { data, error } = await sb
+    .from('portfolio_projects')
+    .select('*')
+    .eq('slug', slug)
+    .maybeSingle()
+  if (error || !data) return null
+  return mapProject(data)
+}
+
+export async function getProjectSlugs(): Promise<string[]> {
+  const sb = getSupabaseClient()
+  if (!sb) return []
+  const { data, error } = await sb
+    .from('portfolio_projects')
+    .select('slug')
+    .order('sort_order')
+  if (error || !data) return []
+  return data.map((r) => r.slug)
+}
+
+export async function getSiteContent<T>(key: string): Promise<T | null> {
+  const sb = getSupabaseClient()
+  if (!sb) return null
+  const { data, error } = await sb
+    .from('portfolio_site_content')
+    .select('data')
+    .eq('key', key)
+    .maybeSingle()
+  if (error || !data) return null
+  return data.data as T
 }
 
 export async function getSkills(): Promise<SkillCategory[]> {

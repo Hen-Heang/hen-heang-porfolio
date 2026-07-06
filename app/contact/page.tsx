@@ -3,13 +3,14 @@
 import { motion } from "framer-motion"
 import { Mail, Github, Linkedin, Send, MapPin, MessageSquare, ExternalLink, ArrowRight } from "lucide-react"
 import { ContactForm } from "@/src/components/sections/contact/ContactForm"
-import { personalInfo } from "@/data/personal-info"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
 import { Footer } from "@/src/components/ui/Footer"
 import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import Magnetic from "@/src/components/ui/Magnetic"
 
 export default function ContactPage() {
+    const personalInfo = usePersonalInfo()
     const contactCards = [
         {
             title: "Email",
