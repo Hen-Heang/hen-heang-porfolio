@@ -3,7 +3,7 @@
 import { ArrowUpRight, Github, Linkedin, Send, Sparkles } from "lucide-react"
 import { personalInfo } from "@/data/personal-info"
 import Link from "next/link"
-import Image from "next/image"
+import { HHLogo } from "@/src/components/icons/HHLogo"
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -48,15 +48,7 @@ export function Footer() {
                     <div className="lg:col-span-5 space-y-8">
                         <div className="space-y-4">
                             <Link href="/" className="inline-flex items-center gap-2 group">
-                                <div className="w-10 h-10 rounded-xl overflow-hidden bg-white shrink-0 group-hover:rotate-6 transition-transform">
-                                        <Image
-                                            src="/image/heang_portfolio_logo.png"
-                                            alt="Hen Heang"
-                                            width={80}
-                                            height={80}
-                                            className="w-full object-cover object-top scale-[1.15] origin-top"
-                                        />
-                                    </div>
+                                <HHLogo size={32} className="shrink-0 group-hover:rotate-6 transition-transform" />
                                 <span className="text-xl font-bold tracking-tight text-white group-hover:text-indigo-400 transition-colors">
                                     {personalInfo.fullName}
                                 </span>

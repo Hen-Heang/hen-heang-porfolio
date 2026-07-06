@@ -7,7 +7,7 @@ import { profile } from "@/data/dashboard"
 import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import { useState, useRef } from "react"
 import Magnetic from "@/src/components/ui/Magnetic"
-import Image from "next/image"
+import { HHLogo } from "@/src/components/icons/HHLogo"
 
 function GitHubIcon() {
     return (
@@ -70,15 +70,10 @@ export function DashboardHeader() {
             <div className="shrink-0">
                 <Magnetic>
                     <Link href="/" className="group block">
-                        <div className="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-indigo-500/40 group-hover:ring-indigo-500/80 transition-all active:scale-95 bg-white flex-shrink-0">
-                            <Image
-                                src="/image/heang_portfolio_logo.png"
-                                alt="Hen Heang"
-                                width={80}
-                                height={80}
-                                className="w-full object-cover object-top scale-[1.15] origin-top"
-                            />
-                        </div>
+                        <HHLogo
+                            size={32}
+                            className="rounded-xl ring-2 ring-indigo-500/40 group-hover:ring-indigo-500/80 active:scale-95"
+                        />
                     </Link>
                 </Magnetic>
             </div>
@@ -92,7 +87,7 @@ export function DashboardHeader() {
                             <Link
                                 href={link.href}
                                 className={`relative px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
-                                    isActive ? "text-white" : "text-[#71717a] hover:text-white"
+                                    isActive ? "text-white" : "text-[#a1a1aa] hover:text-white"
                                 }`}
                             >
                                 {isActive && (

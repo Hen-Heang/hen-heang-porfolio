@@ -6,9 +6,6 @@ import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import { HeroProfileCard } from "@/src/components/dashboard/cards/HeroProfileCard"
 import { StatsGrid } from "@/src/components/dashboard/cards/StatsGrid"
 import { TechStackCard } from "@/src/components/dashboard/cards/TechStackCard"
-import { WorkProjectsCard } from "@/src/components/dashboard/cards/WorkProjectsCard"
-import { AchievementsCard } from "@/src/components/dashboard/cards/AchievementsCard"
-import { JourneyTimeline } from "@/src/components/dashboard/cards/JourneyTimeline"
 import { ContactCTA } from "@/src/components/dashboard/cards/ContactCTA"
 import { ProjectCard } from "@/src/components/dashboard/cards/ProjectCard"
 import { deployedProjects } from "@/data/dashboard"
@@ -46,13 +43,8 @@ export function BentoDashboard() {
                         <ProjectCard key={`${project.id}-${idx}`} project={project} />
                     ))}
 
-                    {/* Middle Section: Tech (4) + Journey (8) */}
+                    {/* Tech Stack: full width */}
                     <TechStackCard />
-                    <JourneyTimeline />
-
-                    {/* Bottom Section: Work (4) + Achievements (8) */}
-                    <WorkProjectsCard />
-                    <AchievementsCard />
 
                     {/* Footer Section: (12) */}
                     <ContactCTA />

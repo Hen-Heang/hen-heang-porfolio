@@ -44,7 +44,7 @@ export const profileData = {
         { name: "Java",       color: "#f89820", icon: "☕" },
         { name: "Spring",     color: "#6db33f", icon: "🍃" },
         { name: "Next.js",    color: "#ffffff", icon: "▲" },
-        { name: "TS",         color: "#3178c6", icon: "TS" },
+        { name: "TypeScript", color: "#3178c6", icon: "🔷" },
         { name: "PostgreSQL", color: "#336791", icon: "🐘" },
     ],
 }

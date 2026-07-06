@@ -16,7 +16,7 @@ export function StatsGrid() {
 
     return (
         <BentoCard className="col-span-4 md:col-span-4 p-4 md:p-6 group">
-            <div className="grid grid-cols-2 gap-3 md:gap-4 h-full">
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 md:gap-4 h-full">
                 {stats.map((stat, i) => (
                     <motion.div
                         key={i}
@@ -47,7 +47,7 @@ export function StatsGrid() {
                             <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-[#fafafa] leading-none">
                                 {stat.label}
                             </span>
-                            <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-[#52525b] mt-1">
+                            <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-[#a1a1aa] mt-1">
                                 {stat.sub}
                             </span>
                         </div>
