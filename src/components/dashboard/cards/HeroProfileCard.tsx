@@ -14,7 +14,6 @@ export function HeroProfileCard() {
     const profile = useDashboardProfile()
     const profileData = useProfile()
     const roles = profileData.rotatingRoles
-    const techStack = profileData.heroTechStack
     const [showToast, setShowToast] = useState(false)
     const [copied, setCopied]     = useState(false)
     const [roleIndex, setRoleIndex] = useState(0)
@@ -143,19 +142,6 @@ export function HeroProfileCard() {
                                 {profile.email}
                             </span>
                         </button>
-                    </div>
-
-                    {/* Tech stack mini pills */}
-                    <div className="flex flex-wrap gap-2">
-                        {techStack.map((tech) => (
-                            <div
-                                key={tech.name}
-                                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-900/50 border border-white/5 hover:border-[#6366f1]/30 hover:bg-[#6366f1]/5 transition-all group/tech"
-                            >
-                                <span className="text-xs transition-transform group-hover/tech:scale-125">{tech.icon}</span>
-                                <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 group-hover/tech:text-white transition-colors">{tech.name}</span>
-                            </div>
-                        ))}
                     </div>
                 </div>
 

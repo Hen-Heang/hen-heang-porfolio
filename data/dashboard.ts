@@ -28,6 +28,7 @@ export interface BentoProject {
     borderColor?: string
     accentColor?: string
     screenshot?: string
+    status?: "live" | "archived"
 }
 
 export const deployedProjects: BentoProject[] = [
@@ -62,6 +63,39 @@ export const deployedProjects: BentoProject[] = [
         borderColor: "#28306b",
         accentColor: "#10b981",
         screenshot: "/screenshots/hengo-screenshot.svg"
+    },
+    {
+        id: "we-commerce",
+        title: "We Commerce",
+        subtitle: "Multi-Vendor Marketplace",
+        description:
+            "A full-stack multi-vendor marketplace with cart, checkout, and simulated Cambodian payment flows (ABA Pay, KHQR) on a Spring Boot API.",
+        emoji: "🛒",
+        url: "https://we-commerce-frontend.vercel.app",
+        github: "https://github.com/Hen-Heang/we-commerce-frontend",
+        tech: ["Next.js", "TypeScript", "TanStack Query", "Spring Boot"],
+        gradientFrom: "#0a1628",
+        gradientTo: "#122544",
+        borderColor: "#1e3a5f",
+        accentColor: "#3b82f6",
+        screenshot: "/image/we-commerce-preview.svg"
+    },
+    {
+        id: "h-phsar",
+        title: "H-Phsar",
+        subtitle: "Cambodian B2B Marketplace API",
+        description:
+            "A B2B marketplace API connecting Cambodian distributors and retailers — stores, catalogs, carts, an order state machine, and real-time notifications on Spring Boot 3.",
+        emoji: "🏪",
+        url: "https://github.com/Hen-Heang/h-phsar-api-full",
+        github: "https://github.com/Hen-Heang/h-phsar-api-full",
+        tech: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL"],
+        gradientFrom: "#1a120a",
+        gradientTo: "#2a1d10",
+        borderColor: "#4a3520",
+        accentColor: "#e76f00",
+        screenshot: "/image/h-phsar-preview.svg",
+        status: "archived"
     },
 ]
 

@@ -13,3 +13,4 @@ export default async function AboutPage() {
 
     return <AboutPageClient skills={skills} education={education} experience={experience} />
 }
+

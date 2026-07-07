@@ -21,7 +21,8 @@ const techColors: Record<string, { bg: string; text: string; border: string }> =
 
 export function ProjectCard({ project }: ProjectCardProps) {
     const accent = project.accentColor || "#6366f1"
-    
+    const isArchived = project.status === "archived"
+
     return (
         <motion.div
             className="group col-span-4 relative overflow-hidden rounded-3xl border border-white/5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 bg-[#111113] hover:bg-[#141416] focus-within:ring-2 focus-within:ring-[#6366f1]/60"
@@ -31,7 +32,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Visit ${project.title} (opens in a new tab)`}
+                aria-label={isArchived ? `View ${project.title} source code (opens in a new tab)` : `Visit ${project.title} (opens in a new tab)`}
                 className="absolute inset-0 z-20 outline-none"
             />
             {/* Screenshot preview */}
@@ -52,8 +53,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 
                 {/* Status Badge */}
                 <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[9px] font-black text-white uppercase tracking-widest">Live</span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${isArchived ? "bg-zinc-500" : "bg-emerald-500 animate-pulse"}`} />
+                    <span className="text-[9px] font-black text-white uppercase tracking-widest">
+                        {isArchived ? "Archived" : "Live"}
+                    </span>
                 </div>
 
                 {/* Links */}

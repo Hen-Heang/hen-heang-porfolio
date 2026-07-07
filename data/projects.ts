@@ -151,7 +151,7 @@ export const projects: Project[] = [
         technologies: ["Spring Boot 3", "Java 21", "PostgreSQL", "Next.js", "TanStack Query", "Zustand"],
         image: "/image/we-commerce-preview.svg",
         github: "https://github.com/Hen-Heang/we-commerce-api",
-        demo: "#",
+        demo: "https://we-commerce-frontend.vercel.app",
         businessProblem: "Cambodian sellers reach buyers through Facebook posts and Telegram chats — no catalog, no cart, no order history, and payment is a screenshot of a bank transfer. We Commerce gives vendors a real storefront and buyers a real shopping flow, with the local payment methods (ABA Pay, KHQR) they already use.",
         overview: "We Commerce is a two-repo full-stack build. The backend (we-commerce-api) is a Spring Boot 3.4 / Java 21 REST API — 11 controllers and 18 JPA entities covering auth, products, categories, bookmarks, collections, purchases, delivery addresses, notifications, and file uploads. The frontend (we-commerce-frontend) is a Next.js 16 storefront with 12 routes: market browsing, product detail, saved items, collections, cart, checkout with simulated ABA Pay / KHQR / card payment sheets, and order history with a status timeline.",
         features: [

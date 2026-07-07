@@ -7,7 +7,6 @@ import { SkillsTab } from "@/src/components/sections/about/SkillsTab"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import type { SkillCategory, EducationItem, ExperienceItem } from "@/src/lib/types"
 import { Button } from "@/src/components/ui/button"
-import { Badge } from "@/src/components/ui/badge"
 import Image from "next/image"
 import {
     Mail,
@@ -40,10 +39,6 @@ export function AboutPageClient({ skills, education, experience }: AboutPageClie
     const aboutSummary = [
         "I'm a Full-Stack Developer who builds web applications end-to-end, from frontend screens to backend APIs and databases. I've worked in both Cambodia and South Korea, and I'm currently based in Seoul at Bizplay.",
         "I enjoy solving real business problems and collaborating closely with my team, while continuously growing my skills in system design, database architecture, and scalable web development.",
-    ]
-    
-    const linkedinCoreSkills = [
-        "Java", "Spring Boot", "MyBatis", "SQL", "JavaScript", "jQuery", "HTML/CSS", "REST APIs",
     ]
 
     const containerVariants = {
@@ -253,16 +248,9 @@ export function AboutPageClient({ skills, education, experience }: AboutPageClie
 
                             {/* Skills Section */}
                             <motion.div variants={itemVariants} className="mb-16">
-                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                                    <div>
-                                        <h2 className="text-4xl font-black text-zinc-900 dark:text-white mb-2">Technical Arsenal</h2>
-                                        <p className="text-zinc-600 dark:text-zinc-400 font-medium">A comprehensive list of technologies I use to build scalable products.</p>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2">
-                                        {linkedinCoreSkills.slice(0, 4).map(skill => (
-                                            <Badge key={skill} className="bg-blue-600/10 text-blue-600 border-none px-3 py-1 font-bold">{skill}</Badge>
-                                        ))}
-                                    </div>
+                                <div className="mb-12">
+                                    <h2 className="text-4xl font-black text-zinc-900 dark:text-white mb-2">Technical Arsenal</h2>
+                                    <p className="text-zinc-600 dark:text-zinc-400 font-medium">A comprehensive list of technologies I use to build scalable products.</p>
                                 </div>
                                 {skills.length > 0 && (
                                     <div className="p-2 rounded-[2.5rem] bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">

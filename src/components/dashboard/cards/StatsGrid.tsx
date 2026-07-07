@@ -9,10 +9,10 @@ export function StatsGrid() {
     const { deployedProjects } = useDashboardContent()
     const profileData = useProfile()
     const stats = [
-        { num: deployedProjects.length, suffix: "",  label: "Projects",   accent: "#6366f1", sub: "Deployed" },
-        { num: parseInt(profileData.yearsExperience), suffix: "+", label: "Experience", accent: "#8b5cf6", sub: "Years+"   },
-        { num: null, text: profileData.locationEmoji, suffix: "",  label: profileData.location.split(",")[0].trim(), accent: "#22d3ee", sub: "Location" },
-        { num: null, text: "Now",        suffix: "",  label: profileData.company, accent: "#22c55e", sub: "Company"  },
+        { num: deployedProjects.length, suffix: "",  label: "Projects",   accent: "#6366f1" },
+        { num: parseInt(profileData.yearsExperience), suffix: "+", label: "Experience", accent: "#8b5cf6" },
+        { num: null, text: profileData.locationEmoji, suffix: "",  label: profileData.location.split(",")[0].trim(), accent: "#22d3ee" },
+        { num: null, text: "Now",        suffix: "",  label: profileData.company, accent: "#22c55e" },
     ]
 
     return (
@@ -44,14 +44,9 @@ export function StatsGrid() {
                             }
                         </span>
 
-                        <div className="flex flex-col">
-                            <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-[#fafafa] leading-none">
-                                {stat.label}
-                            </span>
-                            <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-[#a1a1aa] mt-1">
-                                {stat.sub}
-                            </span>
-                        </div>
+                        <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-[#fafafa] leading-none mt-2">
+                            {stat.label}
+                        </span>
                     </motion.div>
                 ))}
             </div>

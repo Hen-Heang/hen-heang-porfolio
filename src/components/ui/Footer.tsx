@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight, Github, Linkedin, Send, Sparkles } from "lucide-react"
+import { ArrowUpRight, Github, Linkedin, Send } from "lucide-react"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import Link from "next/link"
 import { HHLogo } from "@/src/components/icons/HHLogo"
@@ -57,17 +57,6 @@ export function Footer() {
                             <p className="text-zinc-400 max-w-sm leading-relaxed text-base font-medium">
                                 Crafting scalable enterprise solutions and modern digital experiences in the heart of <span className="text-white">Seoul</span>.
                             </p>
-                        </div>
-
-                        <div className="flex flex-wrap gap-4 items-center">
-                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-emerald-400 uppercase tracking-widest">
-                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]" />
-                                Available for projects
-                            </div>
-                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-indigo-400 uppercase tracking-widest">
-                                <Sparkles size={12} />
-                                Full-Stack Specialist
-                            </div>
                         </div>
                     </div>
 
