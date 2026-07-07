@@ -124,7 +124,7 @@ export default function ContactPage() {
                                             <div className={`w-10 h-10 rounded-xl ${card.bg} flex items-center justify-center ${card.color} mb-4 group-hover:scale-110 transition-transform`}>
                                                 <card.icon size={20} />
                                             </div>
-                                            <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1">{card.title}</p>
+                                            <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1">{card.title}</p>
                                             <p className="text-sm font-medium text-zinc-200 break-all">{card.value}</p>
                                             
                                             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
-import { getProjectBySlug, getProjectSlugs } from "@/src/lib/db/portfolio"
+import { getProjectBySlug, getProjectSlugs, getAdjacentProjects } from "@/src/lib/db/portfolio"
 import { ProjectDetail } from "@/src/components/sections/projects/ProjectDetail"
 
 // Re-render at most once a minute so admin edits show up without a redeploy
@@ -41,5 +41,7 @@ export default async function ProjectPage({
     const project = await getProjectBySlug(slug)
     if (!project) notFound()
 
-    return <ProjectDetail project={project} />
+    const { next } = await getAdjacentProjects(slug)
+
+    return <ProjectDetail project={project} nextProject={next} />
 }

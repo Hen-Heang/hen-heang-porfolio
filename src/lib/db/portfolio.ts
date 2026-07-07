@@ -57,6 +57,22 @@ export async function getProjectSlugs(): Promise<string[]> {
   return data.map((r) => r.slug)
 }
 
+export async function getAdjacentProjects(slug: string): Promise<{
+  next: Pick<Project, 'slug' | 'title'> | null
+}> {
+  const sb = getSupabaseClient()
+  if (!sb) return { next: null }
+  const { data, error } = await sb
+    .from('portfolio_projects')
+    .select('slug, title')
+    .order('sort_order')
+  if (error || !data?.length) return { next: null }
+  const index = data.findIndex((r) => r.slug === slug)
+  if (index === -1) return { next: null }
+  const next = data[(index + 1) % data.length]
+  return { next: next.slug === slug ? null : next }
+}
+
 export async function getSiteContent<T>(key: string): Promise<T | null> {
   const sb = getSupabaseClient()
   if (!sb) return null

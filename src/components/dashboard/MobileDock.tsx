@@ -19,7 +19,7 @@ export function MobileDock() {
     const pathname = usePathname()
 
     return (
-        <div className="fixed bottom-6 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none">
+        <div className="fixed bottom-6 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none lg:hidden">
             <motion.nav
                 initial={{ y: 80, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

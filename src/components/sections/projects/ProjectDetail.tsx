@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Link from "next/link"
 import { Github, ExternalLink, ArrowLeft, Briefcase, Clock, Users, ArrowDown, ArrowRight, Database, Lightbulb } from "lucide-react"
 import { useRouter } from "next/navigation"
 import type { Project } from "@/src/lib/types"
@@ -9,7 +10,9 @@ import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
 import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import { Footer } from "@/src/components/ui/Footer"
 
-export function ProjectDetail({ project }: { project: Project }) {
+type AdjacentProject = Pick<Project, "slug" | "title"> | null
+
+export function ProjectDetail({ project, nextProject }: { project: Project; nextProject?: AdjacentProject }) {
     const router = useRouter()
 
     return (
@@ -23,7 +26,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     onClick={() => router.back()}
-                    className="flex items-center gap-2 text-zinc-500 hover:text-zinc-100 transition-colors mb-10 text-sm"
+                    className="flex items-center gap-2 text-zinc-400 hover:text-zinc-100 transition-colors mb-10 text-sm"
                 >
                     <ArrowLeft size={16} /> Back to Projects
                 </motion.button>
@@ -49,8 +52,8 @@ export function ProjectDetail({ project }: { project: Project }) {
                                 {project.title}
                             </h1>
                             {project.demo && project.demo !== "#" && (
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-600/90 text-white text-xs font-semibold backdrop-blur-sm">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                                <span className="live-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#09090b]/80 border border-[#22c55e]/30 text-[#22c55e] text-xs font-semibold backdrop-blur-sm">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
                                     Live
                                 </span>
                             )}
@@ -58,22 +61,22 @@ export function ProjectDetail({ project }: { project: Project }) {
                     </div>
 
                     {/* Meta row */}
-                    <div className="flex flex-wrap items-center gap-6 text-sm text-zinc-400">
+                    <div className="flex flex-wrap items-center gap-6 text-sm text-zinc-300">
                         {project.role && (
                             <span className="inline-flex items-center gap-2">
-                                <Briefcase size={15} className="text-zinc-500" />
+                                <Briefcase size={15} className="text-zinc-400" />
                                 {project.role}
                             </span>
                         )}
                         {project.duration && (
                             <span className="inline-flex items-center gap-2">
-                                <Clock size={15} className="text-zinc-500" />
+                                <Clock size={15} className="text-zinc-400" />
                                 {project.duration}
                             </span>
                         )}
                         {project.teamSize && (
                             <span className="inline-flex items-center gap-2">
-                                <Users size={15} className="text-zinc-500" />
+                                <Users size={15} className="text-zinc-400" />
                                 {project.teamSize}
                             </span>
                         )}
@@ -185,7 +188,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                                             key={table}
                                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono hover:border-zinc-600 transition-colors"
                                         >
-                                            <Database size={12} className="text-zinc-500" />
+                                            <Database size={12} className="text-zinc-400" />
                                             {table}
                                         </span>
                                     ))}
@@ -209,7 +212,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                                                 </span>
                                                 <code className="font-mono text-zinc-300 text-xs">{endpoint.path}</code>
                                             </span>
-                                            <span className="text-zinc-500 text-xs sm:text-sm">{endpoint.description}</span>
+                                            <span className="text-zinc-400 text-xs sm:text-sm">{endpoint.description}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -261,6 +264,19 @@ export function ProjectDetail({ project }: { project: Project }) {
                             </div>
                         )}
                     </div>
+
+                    {nextProject && (
+                        <Link
+                            href={`/projects/${nextProject.slug}`}
+                            className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-[#18181b] hover:border-zinc-600 p-6 transition-colors"
+                        >
+                            <div>
+                                <span className="text-xs font-bold uppercase tracking-widest text-zinc-500">Next Project</span>
+                                <p className="text-lg font-semibold text-zinc-100 mt-1">{nextProject.title}</p>
+                            </div>
+                            <ArrowRight size={20} className="text-zinc-500 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all shrink-0" />
+                        </Link>
+                    )}
                 </motion.div>
             </main>
 

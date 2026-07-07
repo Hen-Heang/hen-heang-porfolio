@@ -92,16 +92,19 @@ export function ContactForm() {
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-md bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 mb-6 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2"
+                    className="p-4 rounded-md bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 mb-6 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-1"
                 >
-                    <span className="font-medium text-sm">Thank you! Your message has been sent successfully.</span>
+                    <span className="font-medium text-sm">Thanks for reaching out!</span>
+                    <span className="text-xs text-zinc-600 dark:text-zinc-400">
+                        I&apos;ve received your message and will get back to you within 1&ndash;2 business days.
+                    </span>
                 </motion.div>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
-                        Name
+                        Name <span className="text-red-500" aria-hidden="true">*</span>
                     </label>
                     <input
                         type="text"
@@ -109,13 +112,13 @@ export function ContactForm() {
                         value={formState.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all duration-200 placeholder:text-zinc-400"
+                        className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
                         placeholder="Your name"
                     />
                 </div>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
-                        Email
+                        Email <span className="text-red-500" aria-hidden="true">*</span>
                     </label>
                     <input
                         type="email"
@@ -123,14 +126,14 @@ export function ContactForm() {
                         value={formState.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all duration-200 placeholder:text-zinc-400"
+                        className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
                         placeholder="your@email.com"
                     />
                 </div>
             </div>
             <div>
                 <label htmlFor="subject" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
-                    Subject
+                    Subject <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <input
                     type="text"
@@ -138,13 +141,13 @@ export function ContactForm() {
                     value={formState.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all duration-200 placeholder:text-zinc-400"
+                    className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
                     placeholder="Project Inquiry"
                 />
             </div>
             <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
-                    Message
+                    Message <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <textarea
                     id="message"
@@ -152,7 +155,7 @@ export function ContactForm() {
                     value={formState.message}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all duration-200 placeholder:text-zinc-400"
+                    className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
                     placeholder="Tell me about your project..."
                 />
             </div>
