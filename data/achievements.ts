@@ -116,6 +116,15 @@ export const rawAchievements: Achievement[] = [
         description: "Passed HackerRank's Java (Basic) skill certification test, validating core knowledge of Java syntax, OOP fundamentals, and problem-solving with the language.",
         image: "/certificate/hackerrank-java-basic.png",
     },
+    {
+        id: "15",
+        title: "Claude Code in Action",
+        issuer: "Anthropic",
+        date: "2026",
+        type: "certificate",
+        description: "Completed Anthropic's course on applying Claude Code to real, hands-on development workflows, building on the foundational Claude Code 101 course.",
+        link: "/certificate/claude-code-in-action.pdf",
+    },
 ]
 
 export const groupedAchievements = groupAchievementsByYearAndIssuer(rawAchievements)

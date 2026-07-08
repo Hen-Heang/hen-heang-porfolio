@@ -19,8 +19,8 @@ import { profileData } from "./profile"
 export const cvData = {
   personal: {
     name: profileData.fullName,
-    title: profileData.title,
-    subtitle: "Java · Spring Boot · MyBatis · JavaScript · Next.js · TypeScript",
+    title: "Backend Developer (Java & Spring Boot)",
+    subtitle: "Java · Spring Boot · MyBatis · REST APIs · PostgreSQL · Oracle · Next.js",
     photo: profileData.myImage,
     location: profileData.location,
     phone: profileData.phone,
@@ -31,7 +31,7 @@ export const cvData = {
   },
 
   summary:
-    "Full-Stack Software Engineer with 2+ years of experience building enterprise web applications in Korea and Cambodia. Specialise in Java/Spring Boot backends paired with modern frontends (Next.js, TypeScript). Proven track record in FinTech and B2B platforms — from database design and REST API implementation to frontend delivery. Comfortable working in Korean-language enterprise teams and delivering clean, maintainable code.",
+    "Backend Developer with 2+ years of experience designing and building REST APIs and enterprise applications with Java, Spring Boot, and MyBatis. Delivered a large-scale B2B billing platform integrated with Vietnamese banking systems, including PostgreSQL schema design, query optimisation, and Spring Security with JWT authentication. Currently develop backend services and SQL-driven business logic on Oracle for government-facing financial systems in a Korean enterprise environment. Comfortable extending work to the frontend with Next.js and TypeScript when a feature calls for it. Focused on clean architecture and maintainable code within cross-functional teams.",
 
   experience: [
     {
@@ -42,8 +42,8 @@ export const cvData = {
       endDate: "Present",
       current: true,
       bullets: [
-        "Develop frontend pages with HTML/CSS and JavaScript (jQuery) for government-facing financial systems",
-        "Build backend services and SQL queries with Java, MyBatis, and Oracle database",
+        "Develop backend services and SQL queries with Java, MyBatis, and Oracle database for government-facing financial systems",
+        "Implement supporting frontend pages with HTML/CSS and JavaScript (jQuery)",
         "Maintain and improve stability of enterprise web applications in a Korean enterprise environment",
         "Collaborate in cross-functional teams following Korean enterprise development patterns",
       ],
@@ -57,11 +57,11 @@ export const cvData = {
       endDate: "October 2025",
       current: false,
       bullets: [
-        "Built a large-scale B2B billing platform integrated with Vietnamese banking systems",
+        "Designed and developed REST APIs with Spring Boot and MyBatis for a large-scale B2B billing platform integrated with Vietnamese banking systems",
         "Designed PostgreSQL schemas and optimised query performance for high-volume transactions",
-        "Implemented Spring Security with JWT authentication for enterprise-grade security",
-        "Developed REST APIs with Spring Boot and MyBatis; integrated Zalo, SMS, and Telegram delivery",
-        "Collaborated daily with Korean development teams on architecture and code reviews",
+        "Implemented Spring Security with JWT authentication to secure enterprise-grade APIs",
+        "Integrated Zalo, SMS, and Telegram delivery channels for transactional notifications",
+        "Collaborated daily with Korean development teams on architecture design and code reviews",
       ],
       stack: ["Java 8+", "Spring Boot", "Spring Security", "PostgreSQL", "MyBatis", "Next.js", "TypeScript"],
     },
@@ -73,8 +73,8 @@ export const cvData = {
       endDate: "April 2024",
       current: false,
       bullets: [
-        "Completed intensive full-stack and mobile development bootcamp",
-        "Built Android applications using Java/Kotlin and Android SDK",
+        "Completed an intensive full-stack and mobile development bootcamp",
+        "Developed Android applications using Java/Kotlin and Android SDK",
         "Gained foundation in Korean software development practices and enterprise patterns",
       ],
       stack: ["Android", "Java", "Kotlin"],
@@ -106,29 +106,24 @@ export const cvData = {
   ],
 
   /**
-   * proficiency: 0–100 (shown as a progress bar %)
-   * Adjust freely — only edit these numbers and lists.
+   * Categorised skill lists shown on the CV. Order reflects priority for backend roles.
    */
   skills: [
     {
       category: "Backend",
       items: ["Java", "Spring Boot", "MyBatis", "Spring Security", "REST APIs", "Maven"],
-      proficiency: 85,
-    },
-    {
-      category: "Frontend",
-      items: ["JavaScript", "jQuery", "HTML5", "CSS3", "TypeScript", "React", "Next.js", "Tailwind CSS"],
-      proficiency: 80,
     },
     {
       category: "Database",
       items: ["PostgreSQL", "Oracle", "MySQL", "SQL Optimisation"],
-      proficiency: 80,
+    },
+    {
+      category: "Frontend",
+      items: ["Next.js", "React", "TypeScript", "JavaScript", "jQuery", "HTML5", "CSS3", "Tailwind CSS"],
     },
     {
       category: "Tools & DevOps",
-      items: ["Git", "GitHub", "IntelliJ IDEA", "WebStorm", "VS Code", "Vercel", "Railway"],
-      proficiency: 80,
+      items: ["Git", "GitHub", "IntelliJ IDEA", "WebStorm", "VS Code", "Vercel", "Railway", "Claude Code"],
     },
   ],
 
@@ -140,7 +135,7 @@ export const cvData = {
     {
       name: "H-Phsar",
       description:
-        "Cambodian B2B marketplace API connecting distributors and retailers — stores, product catalogs, carts, an order state machine, OTP verification, and real-time WebSocket notifications.",
+        "Backend API for a Cambodian B2B marketplace connecting distributors and retailers. Designed the data model for stores, product catalogs, and carts; implemented an order state machine, OTP-based verification, and real-time order notifications over WebSocket.",
       technologies: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL", "WebSocket"],
       github: "https://github.com/Hen-Heang/h-phsar-api-full",
       live: "",
@@ -148,7 +143,7 @@ export const cvData = {
     {
       name: "Hengo",
       description:
-        "AI companion for daily growth — goal tracking, daily missions, and Korean learning with an AI coach, spaced repetition, and XP progression. Next.js SPA on a Spring Boot API.",
+        "Spring Boot REST API behind an AI-assisted goal-tracking app, paired with a Next.js/TypeScript client. Implemented endpoints for daily missions, spaced-repetition scheduling, and XP progression, consumed via TanStack Query.",
       technologies: ["Next.js", "TypeScript", "TanStack Query", "Tailwind CSS", "Spring Boot"],
       github: "https://github.com/Hen-Heang/koriai-frontend",
       live: "https://koriai-frontend.vercel.app/",
@@ -156,7 +151,7 @@ export const cvData = {
     {
       name: "We Commerce",
       description:
-        "Full-stack multi-vendor marketplace — Spring Boot 3.4 / Java 21 API with database-tracked JWT revocation, and a Next.js 16 storefront with cart, checkout, and simulated ABA Pay / KHQR payments.",
+        "Multi-vendor marketplace API built with Spring Boot 3.4 and Java 21, with database-tracked JWT revocation for session security. Paired with a Next.js 16 storefront implementing cart, checkout, and simulated ABA Pay / KHQR payment flows.",
       technologies: ["Spring Boot 3", "Java 21", "PostgreSQL", "Next.js", "TanStack Query"],
       github: "https://github.com/Hen-Heang/we-commerce-api",
       live: "",
@@ -164,7 +159,7 @@ export const cvData = {
     {
       name: "Money Flow",
       description:
-        "Personal finance PWA with budgets, savings goals, recurring transactions, push alerts, and AI chat over your own spending — Supabase with RLS, backed up daily to Neon.",
+        "Personal finance API and PWA on Supabase Postgres with row-level security, exposing budgeting, savings-goal, and recurring-transaction logic, plus an AI chat endpoint over Google Gemini for spending insights. Backed up daily to Neon.",
       technologies: ["Next.js", "TypeScript", "Supabase", "Google Gemini", "Web Push"],
       github: "https://github.com/Hen-Heang/money-flow",
       live: "https://money-flow.henheang.site/",

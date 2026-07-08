@@ -2,16 +2,16 @@ export const profileData = {
     name: "Hen Heang",
     fullName: "Hen Heang",
     koreanName: "헹",
-    title: "Java & Spring Boot Full-Stack Developer",
+    title: "Backend Developer (Java & Spring Boot)",
     company: "Bizplay",
     location: "Seoul, South Korea",
     locationEmoji: "🇰🇷",
     email: "henheang15@gmail.com",
     available: true,
     yearsExperience: "2+",
-    bio: "Java & Spring Boot developer building enterprise web applications in Korea. Specialized in Spring Boot, MyBatis, PostgreSQL, Next.js, and TypeScript.",
+    bio: "Backend developer building REST APIs and enterprise applications in Korea with Java, Spring Boot, MyBatis, and PostgreSQL/Oracle. Also comfortable delivering frontends with Next.js and TypeScript.",
     description:
-        "Java & Spring Boot Full-Stack Developer based in Seoul with 2+ years of experience in the Korean enterprise sector. I build backend systems with Java, Spring Boot, and MyBatis on PostgreSQL/Oracle, and modern frontends with Next.js and TypeScript.",
+        "Backend Developer (Java & Spring Boot) based in Seoul with 2+ years of experience in the Korean enterprise sector. I build backend systems and REST APIs with Java, Spring Boot, and MyBatis on PostgreSQL/Oracle, and extend to frontends with Next.js and TypeScript when needed.",
     profileImage: "/image/heang_new.jpeg",
     myImage: "/image/heang_new.jpeg",
     socialLinks: {
@@ -26,14 +26,14 @@ export const profileData = {
     linkedinCoreSkills: [
         "Java", "Spring Boot", "MyBatis", "Next.js", "TypeScript", "PostgreSQL",
         "React", "Tailwind CSS", "Oracle", "Git", "Redis", "OpenAI",
-        "Spring Security", "eGovFramework", "REST APIs",
+        "Spring Security", "eGovFramework", "REST APIs", "Claude Code",
     ],
     knowsAbout: ["Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Next.js"],
     rotatingRoles: [
-        "Java & Spring Boot Developer",
-        "Backend · MyBatis · PostgreSQL",
+        "Backend Developer (Java & Spring Boot)",
+        "Backend · MyBatis · PostgreSQL / Oracle",
+        "REST APIs · Spring Security",
         "Next.js · TypeScript",
-        "Full-Stack Engineer",
     ],
     languages: [
         { name: "Khmer", level: "Native" },
