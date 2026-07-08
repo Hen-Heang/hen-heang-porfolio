@@ -123,7 +123,7 @@ export const cvData = {
     },
     {
       category: "Tools & DevOps",
-      items: ["Git", "GitHub", "IntelliJ IDEA", "WebStorm", "VS Code", "Vercel", "Railway", "Claude Code"],
+      items: ["Git", "GitHub", "IntelliJ IDEA", "WebStorm", "VS Code", "Vercel", "Railway", "Claude Code", "Postman", "Swagger"],
     },
   ],
 

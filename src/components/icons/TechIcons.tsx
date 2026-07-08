@@ -201,6 +201,28 @@ export const WebStormIcon = () => (
     </IconWrapper>
 );
 
+// Postman Icon
+export const PostmanIcon = () => (
+    <IconWrapper>
+        <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="12" fill="#FF6C37"/>
+            <path d="M17.813 8.427a5.897 5.897 0 1 0-9.632 6.79.396.396 0 0 1 .062.223v.75a.4.4 0 0 0 .4.4h1.363a.4.4 0 0 0 .4-.4v-.324a.15.15 0 0 1 .173-.148 5.9 5.9 0 0 0 7.234-7.291z" fill="#fff"/>
+            <path d="M10.606 13.44a.15.15 0 0 1-.212 0l-1.834-1.834a.15.15 0 0 1 0-.212l3.535-3.535a.15.15 0 0 1 .212 0l1.834 1.834a.15.15 0 0 1 0 .212l-3.535 3.535z" fill="#FF6C37"/>
+        </svg>
+    </IconWrapper>
+);
+
+// Swagger Icon
+export const SwaggerIcon = () => (
+    <IconWrapper>
+        <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="12" fill="#85EA2D"/>
+            <path d="M12 4.5c-3.5 0-5.2 1.9-5.2 4.4 0 1.7.9 2.9 2.5 3.5-1.3.4-1.9 1.2-1.9 2.3 0 1.5 1.2 2.4 3.1 2.4.6 0 1.2-.1 1.7-.3v-1.4c-.4.2-.9.3-1.4.3-1 0-1.6-.4-1.6-1.2 0-.9.7-1.4 2.1-1.4h.9v-1.4h-.8c-1.3 0-2-.6-2-1.7 0-1.2.9-1.9 2.4-1.9.6 0 1.1.1 1.5.3V6.6a5 5 0 0 0-1.3-.2z" fill="#1a1a1a"/>
+            <circle cx="12" cy="18.2" r="1" fill="#1a1a1a"/>
+        </svg>
+    </IconWrapper>
+);
+
 // Fallback Icon (Code icon)
 export const CodeIcon = () => (
     <IconWrapper className="text-zinc-400">
@@ -232,4 +254,6 @@ export const TechIcons: Record<string, React.FC> = {
     "GitHub": GitHubIcon,
     "IntelliJ IDEA": IntellijIcon,
     "WebStorm": WebStormIcon,
+    "Postman": PostmanIcon,
+    "Swagger": SwaggerIcon,
 };

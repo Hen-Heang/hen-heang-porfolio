@@ -6,8 +6,8 @@ export const size = { width: 32, height: 32 }
 export const contentType = "image/png"
 
 export default function Icon() {
-    const imgBuffer = readFileSync(join(process.cwd(), "public/image/heang_portfolio_logo.png"))
-    const logo = `data:image/png;base64,${imgBuffer.toString("base64")}`
+    const imgBuffer = readFileSync(join(process.cwd(), "public/image/hh-logo-mark.svg"))
+    const logo = `data:image/svg+xml;base64,${imgBuffer.toString("base64")}`
 
     return new ImageResponse(
         (

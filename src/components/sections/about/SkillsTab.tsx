@@ -22,6 +22,8 @@ import {
     MySqlIcon,
     GitIcon,
     TailwindIcon,
+    PostmanIcon,
+    SwaggerIcon,
 } from "@/src/components/icons/TechIcons"
 
 interface SkillsTabProps {
@@ -50,7 +52,9 @@ const getIconForSkill = (skillName: string) => {
     if (skillNameLower === "mybatis") return <MyBatisIcon />
     if (skillNameLower === "mysql") return <MySqlIcon />
     if (skillNameLower === "tailwind css") return <TailwindIcon />
-    
+    if (skillNameLower === "postman") return <PostmanIcon />
+    if (skillNameLower === "swagger") return <SwaggerIcon />
+
     // Partial matches
     if (skillNameLower.includes("spring")) return <SpringIcon />
     if (skillNameLower.includes("sql")) return <PostgreSQLIcon /> // SQL fallback to Postgres style
