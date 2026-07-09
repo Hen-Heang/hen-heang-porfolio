@@ -1,0 +1,64 @@
+"use client"
+
+import { useState } from "react"
+import { ChevronDown } from "lucide-react"
+import type { Prompt } from "@/src/lib/types/ai-engineering"
+import { CopyButton } from "@/src/components/ai-engineering/CopyButton"
+import { Tag } from "@/src/components/ai-engineering/Tag"
+import { promptCategoryLabels } from "@/data/ai-engineering/prompts"
+
+export function PromptCard({ prompt }: { prompt: Prompt }) {
+    const [open, setOpen] = useState(false)
+
+    return (
+        <div className="rounded-2xl border border-[#27272a] bg-[#18181b] p-5">
+            <div className="mb-2 flex items-start justify-between gap-3">
+                <div>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#6366f1]">
+                        {promptCategoryLabels[prompt.category]}
+                    </span>
+                    <h3 className="mt-1 text-sm font-semibold text-[#fafafa]">{prompt.title}</h3>
+                </div>
+            </div>
+
+            <p className="mb-3 text-xs leading-relaxed text-[#71717a]">{prompt.description}</p>
+
+            <div className="mb-3 rounded-lg border border-[#27272a] bg-[#0c0c0e] p-3">
+                <p className="mb-2 whitespace-pre-wrap font-mono text-[12px] leading-relaxed text-[#d4d4d8]">{prompt.prompt}</p>
+                <CopyButton text={prompt.prompt} />
+            </div>
+
+            <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                className="flex w-full items-center justify-between text-xs font-medium text-[#a1a1aa] hover:text-[#fafafa] transition-colors"
+            >
+                Expected output &amp; best practices
+                <ChevronDown size={14} className={`transition-transform ${open ? "rotate-180" : ""}`} />
+            </button>
+
+            {open && (
+                <div className="mt-3 space-y-3 border-t border-[#27272a] pt-3">
+                    <div>
+                        <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">Expected output</p>
+                        <p className="text-xs leading-relaxed text-[#a1a1aa]">{prompt.expectedOutput}</p>
+                    </div>
+                    <div>
+                        <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">Best practices</p>
+                        <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-[#a1a1aa]">
+                            {prompt.bestPractices.map((bp, i) => (
+                                <li key={i}>{bp}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            )}
+
+            <div className="mt-3 flex flex-wrap gap-1.5">
+                {prompt.tags.map((tag) => (
+                    <Tag key={tag} label={tag} />
+                ))}
+            </div>
+        </div>
+    )
+}

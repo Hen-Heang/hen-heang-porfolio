@@ -37,6 +37,7 @@ const navLinks = [
     { label: "Home", href: "/" },
     { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
+    { label: "Engineering Lab", href: "/lab", matchPrefixes: ["/lab", "/ai-engineering"] },
     { label: "Contact", href: "/contact" },
 ]
 
@@ -82,7 +83,8 @@ export function DashboardHeader() {
             {/* Center: Nav links */}
             <nav className="hidden lg:flex items-center gap-1 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl px-2 py-1.5 shadow-2xl">
                 {navLinks.map((link) => {
-                    const isActive = pathname === link.href
+                    const prefixes = link.matchPrefixes ?? [link.href]
+                    const isActive = link.href === "/" ? pathname === "/" : prefixes.some((p) => pathname.startsWith(p))
                     return (
                         <Magnetic key={link.href}>
                             <Link

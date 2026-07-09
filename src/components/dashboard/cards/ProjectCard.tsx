@@ -20,7 +20,6 @@ const techColors: Record<string, { bg: string; text: string; border: string }> =
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-    const accent = project.accentColor || "#6366f1"
     const isArchived = project.status === "archived"
 
     return (
@@ -77,19 +76,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
             {/* Content */}
             <div className="p-5 flex flex-col gap-3 relative z-10 flex-1">
-                <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                        <span className="text-xl">{project.emoji}</span>
-                        <h3 className="text-white text-base font-black tracking-tight leading-tight group-hover:text-[#6366f1] transition-colors">
-                            {project.title}
-                        </h3>
-                    </div>
-                    <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: accent }}>
-                        {project.subtitle}
-                    </p>
+                <div className="flex items-center gap-2">
+                    <span className="text-xl">{project.emoji}</span>
+                    <h3 className="text-white text-base font-black tracking-tight leading-tight group-hover:text-[#6366f1] transition-colors">
+                        {project.title}
+                    </h3>
                 </div>
-                
-                <p className="text-zinc-400 text-xs leading-relaxed line-clamp-2 font-medium">
+
+                <p className="text-zinc-400 text-xs leading-relaxed line-clamp-1 font-medium">
                     {project.description}
                 </p>
 

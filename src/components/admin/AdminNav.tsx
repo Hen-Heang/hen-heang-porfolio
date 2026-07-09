@@ -10,6 +10,10 @@ const links = [
     { href: "/admin/experience", label: "Experience" },
     { href: "/admin/education", label: "Education" },
     { href: "/admin/achievements", label: "Achievements" },
+    { href: "/admin/ai_categories", label: "AI: Categories" },
+    { href: "/admin/ai_articles", label: "AI: Articles" },
+    { href: "/admin/ai_prompts", label: "AI: Prompts" },
+    { href: "/admin/ai_snippets", label: "AI: Snippets" },
     { href: "/admin/content", label: "Site Content" },
 ]
 

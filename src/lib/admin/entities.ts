@@ -2,7 +2,7 @@
 // All configs are plain serializable objects so server pages can pass them
 // straight into the client editor component.
 
-export type FieldType = "text" | "textarea" | "lines" | "number" | "select"
+export type FieldType = "text" | "textarea" | "lines" | "number" | "select" | "boolean" | "json"
 
 export interface FieldConfig {
     name: string
@@ -115,6 +115,94 @@ export const entities: Record<string, EntityConfig> = {
             { name: "description", label: "Description", type: "textarea" },
             { name: "image", label: "Image path", type: "text", placeholder: "/certificate/example.png" },
             { name: "link", label: "Link", type: "text" },
+            { name: "sort_order", label: "Sort order", type: "number" },
+        ],
+    },
+    ai_categories: {
+        table: "portfolio_ai_categories",
+        title: "AI Engineering — Categories",
+        listFields: ["title", "slug"],
+        fields: [
+            { name: "title", label: "Title", type: "text", required: true },
+            { name: "slug", label: "Slug (URL-safe, unique)", type: "text", required: true, placeholder: "ai-workflows" },
+            { name: "emoji", label: "Emoji", type: "text", required: true, placeholder: "🤖" },
+            {
+                name: "icon",
+                label: "Icon",
+                type: "select",
+                required: true,
+                options: ["Workflow", "MessageSquareCode", "ServerCog", "Network", "FileCode2", "NotebookPen", "FlaskConical", "Compass"],
+            },
+            { name: "description", label: "Description", type: "textarea", required: true },
+            { name: "sort_order", label: "Sort order", type: "number" },
+        ],
+    },
+    ai_articles: {
+        table: "portfolio_ai_articles",
+        title: "AI Engineering — Articles",
+        listFields: ["title", "category_slug", "difficulty"],
+        fields: [
+            { name: "title", label: "Title", type: "text", required: true },
+            { name: "slug", label: "Slug (URL path)", type: "text", required: true, placeholder: "my-article" },
+            { name: "description", label: "Description", type: "textarea", required: true },
+            {
+                name: "category_slug",
+                label: "Category",
+                type: "select",
+                required: true,
+                optionsFrom: { table: "portfolio_ai_categories", value: "slug", label: "title" },
+            },
+            { name: "tags", label: "Tags (one per line)", type: "lines" },
+            { name: "technologies", label: "Technologies (one per line)", type: "lines" },
+            { name: "published_at", label: "Published date", type: "text", required: true, placeholder: "2026-07-01" },
+            { name: "updated_at", label: "Updated date (optional)", type: "text", placeholder: "2026-07-05" },
+            { name: "reading_time", label: "Reading time (minutes)", type: "number", required: true },
+            { name: "difficulty", label: "Difficulty", type: "select", options: ["beginner", "intermediate", "advanced"], required: true },
+            { name: "author", label: "Author", type: "text", required: true },
+            { name: "featured", label: "Featured", type: "boolean" },
+            { name: "cover_emoji", label: "Cover emoji", type: "text", required: true, placeholder: "📝" },
+            {
+                name: "body",
+                label: "Body (JSON array of content blocks — paragraph, heading, code, list, callout, quote, table, timeline)",
+                type: "json",
+                required: true,
+            },
+            { name: "sort_order", label: "Sort order", type: "number" },
+        ],
+    },
+    ai_prompts: {
+        table: "portfolio_ai_prompts",
+        title: "AI Engineering — Prompts",
+        listFields: ["title", "category"],
+        fields: [
+            { name: "title", label: "Title", type: "text", required: true },
+            { name: "prompt_id", label: "Prompt ID (unique slug)", type: "text", required: true, placeholder: "explain-exact-line" },
+            {
+                name: "category",
+                label: "Category",
+                type: "select",
+                required: true,
+                options: ["backend", "api-design", "database", "code-review", "bug-fixing", "refactoring", "system-design", "learning"],
+            },
+            { name: "description", label: "Description", type: "textarea", required: true },
+            { name: "prompt", label: "Prompt text", type: "textarea", required: true },
+            { name: "expected_output", label: "Expected output", type: "textarea", required: true },
+            { name: "best_practices", label: "Best practices (one per line)", type: "lines" },
+            { name: "tags", label: "Tags (one per line)", type: "lines" },
+            { name: "sort_order", label: "Sort order", type: "number" },
+        ],
+    },
+    ai_snippets: {
+        table: "portfolio_ai_snippets",
+        title: "AI Engineering — Snippets",
+        listFields: ["title", "language"],
+        fields: [
+            { name: "title", label: "Title", type: "text", required: true },
+            { name: "snippet_id", label: "Snippet ID (unique slug)", type: "text", required: true, placeholder: "mybatis-dynamic-where" },
+            { name: "language", label: "Language", type: "text", required: true, placeholder: "java" },
+            { name: "code", label: "Code", type: "textarea", required: true },
+            { name: "tags", label: "Tags (one per line)", type: "lines" },
+            { name: "explanation", label: "Explanation", type: "textarea", required: true },
             { name: "sort_order", label: "Sort order", type: "number" },
         ],
     },

@@ -9,20 +9,24 @@ type Row = Record<string, unknown> & { id: string }
 type SelectOptions = Record<string, { value: string; label: string }[]>
 
 function emptyForm(fields: FieldConfig[]): Record<string, string> {
-    return Object.fromEntries(fields.map((f) => [f.name, ""]))
+    return Object.fromEntries(
+        fields.map((f) => [f.name, f.type === "boolean" ? "false" : f.type === "json" ? "[]" : ""])
+    )
 }
 
 function rowToForm(row: Row, fields: FieldConfig[]): Record<string, string> {
     return Object.fromEntries(
         fields.map((f) => {
             const v = row[f.name]
-            if (v === null || v === undefined) return [f.name, ""]
+            if (v === null || v === undefined) return [f.name, f.type === "boolean" ? "false" : ""]
             if (f.type === "lines") return [f.name, (v as string[]).join("\n")]
+            if (f.type === "json") return [f.name, JSON.stringify(v, null, 2)]
             return [f.name, String(v)]
         })
     )
 }
 
+/** Throws a plain Error with a field-specific message on invalid JSON, caught by the caller. */
 function formToPayload(form: Record<string, string>, fields: FieldConfig[]) {
     const payload: Record<string, unknown> = {}
     for (const f of fields) {
@@ -31,6 +35,14 @@ function formToPayload(form: Record<string, string>, fields: FieldConfig[]) {
             payload[f.name] = raw ? raw.split("\n").map((s) => s.trim()).filter(Boolean) : []
         } else if (f.type === "number") {
             payload[f.name] = raw === "" ? null : Number(raw)
+        } else if (f.type === "boolean") {
+            payload[f.name] = raw === "true"
+        } else if (f.type === "json") {
+            try {
+                payload[f.name] = raw === "" ? [] : JSON.parse(raw)
+            } catch {
+                throw new Error(`"${f.label}" is not valid JSON`)
+            }
         } else {
             payload[f.name] = raw === "" ? null : raw
         }
@@ -85,10 +97,18 @@ export function EntityEditor({ config }: { config: EntityConfig }) {
 
     async function handleSave(e: React.FormEvent) {
         e.preventDefault()
-        setSaving(true)
         setError(null)
+
+        let payload: Record<string, unknown>
+        try {
+            payload = formToPayload(form, config.fields)
+        } catch (parseError) {
+            setError(parseError instanceof Error ? parseError.message : "Invalid form data")
+            return
+        }
+
+        setSaving(true)
         const supabase = createClient()
-        const payload = formToPayload(form, config.fields)
 
         const { error: saveError } =
             editing === "new"
@@ -164,7 +184,10 @@ export function EntityEditor({ config }: { config: EntityConfig }) {
 
                     <div className="grid md:grid-cols-2 gap-4">
                         {config.fields.map((f) => (
-                            <div key={f.name} className={f.type === "textarea" || f.type === "lines" ? "md:col-span-2" : ""}>
+                            <div
+                                key={f.name}
+                                className={f.type === "textarea" || f.type === "lines" || f.type === "json" ? "md:col-span-2" : ""}
+                            >
                                 <label htmlFor={`${config.table}-${f.name}`} className="block text-[#a1a1aa] text-xs font-medium mb-1.5">
                                     {f.label}
                                     {f.required && <span className="text-[#6366f1] ml-0.5">*</span>}
@@ -179,6 +202,28 @@ export function EntityEditor({ config }: { config: EntityConfig }) {
                                         className="w-full bg-[#09090b] border border-[#27272a] rounded-xl px-3.5 py-2.5 text-sm text-[#fafafa] placeholder-[#3f3f46] outline-none focus:border-[#6366f1] transition-colors resize-y"
                                         placeholder={f.placeholder}
                                     />
+                                ) : f.type === "json" ? (
+                                    <textarea
+                                        id={`${config.table}-${f.name}`}
+                                        rows={16}
+                                        required={f.required}
+                                        value={form[f.name] ?? ""}
+                                        onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
+                                        className="w-full bg-[#09090b] border border-[#27272a] rounded-xl px-3.5 py-2.5 text-xs font-mono text-[#fafafa] placeholder-[#3f3f46] outline-none focus:border-[#6366f1] transition-colors resize-y"
+                                        placeholder={f.placeholder}
+                                        spellCheck={false}
+                                    />
+                                ) : f.type === "boolean" ? (
+                                    <label className="flex items-center gap-2 pt-1">
+                                        <input
+                                            id={`${config.table}-${f.name}`}
+                                            type="checkbox"
+                                            checked={form[f.name] === "true"}
+                                            onChange={(e) => setForm({ ...form, [f.name]: e.target.checked ? "true" : "false" })}
+                                            className="h-4 w-4 rounded border-[#27272a] bg-[#09090b] accent-[#6366f1]"
+                                        />
+                                        <span className="text-xs text-[#71717a]">{form[f.name] === "true" ? "Yes" : "No"}</span>
+                                    </label>
                                 ) : f.type === "select" ? (
                                     <select
                                         id={`${config.table}-${f.name}`}

@@ -3,15 +3,16 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Code2, User, BookOpen, Mail, Send } from "lucide-react"
+import { Home, Code2, User, Terminal, Mail, Send } from "lucide-react"
 import { useDashboardProfile } from "@/src/providers/site-content-provider"
 import Magnetic from "@/src/components/ui/Magnetic"
 
 const navLinks = [
-    { label: "Home",     href: "/",        icon: Home     },
-    { label: "Projects", href: "/projects", icon: Code2    },
-    { label: "About",    href: "/about",    icon: User     },
-    { label: "Contact",  href: "/contact",  icon: Mail     },
+    { label: "Home",            href: "/",         icon: Home,     matchPrefixes: ["/"] },
+    { label: "Projects",        href: "/projects",  icon: Code2,    matchPrefixes: ["/projects"] },
+    { label: "About",           href: "/about",     icon: User,     matchPrefixes: ["/about"] },
+    { label: "Engineering Lab", href: "/lab",       icon: Terminal, matchPrefixes: ["/lab", "/ai-engineering"] },
+    { label: "Contact",         href: "/contact",   icon: Mail,     matchPrefixes: ["/contact"] },
 ]
 
 export function MobileDock() {
@@ -26,8 +27,8 @@ export function MobileDock() {
                 transition={{ type: "spring", damping: 20, stiffness: 100 }}
                 className="pointer-events-auto flex items-center gap-1 p-2 bg-black/60 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
             >
-                {navLinks.map(({ label, href, icon: Icon }) => {
-                    const isActive = pathname === href
+                {navLinks.map(({ label, href, icon: Icon, matchPrefixes }) => {
+                    const isActive = href === "/" ? pathname === "/" : matchPrefixes.some((p) => pathname.startsWith(p))
                     return (
                         <Magnetic key={href}>
                             <Link
