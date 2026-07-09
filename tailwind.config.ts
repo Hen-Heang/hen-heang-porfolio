@@ -22,6 +22,7 @@ module.exports = {
 			},
 			fontFamily: {
 				sans: ["Inter", "sans-serif"],
+				mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
 			},
 			colors: {
 				navy: {

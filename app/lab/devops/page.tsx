@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
 import { roadmap } from "@/data/lab/devops/roadmap"
-import { PageLayout } from "@/src/components/layout/PageLayout"
 import { DevOpsLabHubClient } from "@/src/components/lab/devops/DevOpsLabHubClient"
 
 export const metadata: Metadata = {
@@ -26,9 +25,5 @@ export const metadata: Metadata = {
 }
 
 export default function DevOpsLabPage() {
-    return (
-        <PageLayout showFooter={false}>
-            <DevOpsLabHubClient topics={roadmap} />
-        </PageLayout>
-    )
+    return <DevOpsLabHubClient topics={roadmap} />
 }

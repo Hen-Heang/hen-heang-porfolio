@@ -21,6 +21,16 @@ const inter = localFont({
     fallback: ["system-ui", "-apple-system", "sans-serif"],
 })
 
+const jetbrainsMono = localFont({
+    src: [
+        { path: "../public/fonts/JetBrainsMono-Regular.woff2", weight: "400", style: "normal" },
+        { path: "../public/fonts/JetBrainsMono-Medium.woff2", weight: "500", style: "normal" },
+    ],
+    variable: "--font-mono",
+    display: "swap",
+    fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+})
+
 export const metadata: Metadata = {
     metadataBase: new URL(profileData.portfolioUrl),
     title: {
@@ -83,7 +93,7 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body className={`${inter.className} ${jetbrainsMono.variable}`}>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

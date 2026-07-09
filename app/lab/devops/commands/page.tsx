@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
 import { commandCategories } from "@/data/lab/devops/commands"
-import { PageLayout } from "@/src/components/layout/PageLayout"
 import { CommandsPageClient } from "@/src/components/lab/devops/CommandsPageClient"
 
 export const metadata: Metadata = {
@@ -11,9 +10,5 @@ export const metadata: Metadata = {
 }
 
 export default function CommandsPage() {
-    return (
-        <PageLayout showFooter={false}>
-            <CommandsPageClient categories={commandCategories} />
-        </PageLayout>
-    )
+    return <CommandsPageClient categories={commandCategories} />
 }
