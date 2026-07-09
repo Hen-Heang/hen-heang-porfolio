@@ -18,6 +18,7 @@ export const profileData = {
         github: "https://github.com/Hen-Heang",
         linkedin: "https://www.linkedin.com/in/hen-heang",
         telegram: "https://t.me/henheang",
+        x: "https://x.com/hen_heang54960",
     },
     portfolioUrl: "https://henheang.site",
     cvUrl: "https://henheang.site/cv",

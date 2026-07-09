@@ -21,6 +21,9 @@ import type { SystemStatusEntry } from "@/data/lab/overview"
 import { Tag } from "@/src/components/ai-engineering/Tag"
 import { StatusIndicator } from "@/src/components/lab/ui/StatusIndicator"
 import { MetricCard } from "@/src/components/lab/ui/MetricCard"
+import { TechCard } from "@/src/components/lab/ui/TechCard"
+import { Terminal as TerminalPanel } from "@/src/components/lab/ui/Terminal"
+import { ArchitectureDiagramCompact, stepsFromLabels } from "@/src/components/lab/ui/ArchitectureDiagram"
 
 export interface LabMetric {
     label: string
@@ -61,6 +64,19 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 export function LabDashboardClient({ items, metrics, featured, systemStatus, currentFocus, philosophy }: LabDashboardClientProps) {
     const [query, setQuery] = useState("")
 
+    const coreStack = useMemo(() => {
+        const seen = new Set<string>()
+        const stack: { name: string; category: string }[] = []
+        for (const entry of systemStatus) {
+            for (const tech of entry.tech.split("·").map((t) => t.trim())) {
+                if (seen.has(tech)) continue
+                seen.add(tech)
+                stack.push({ name: tech, category: entry.area })
+            }
+        }
+        return stack
+    }, [systemStatus])
+
     const results = useMemo(() => {
         const q = query.trim().toLowerCase()
         if (!q) return []
@@ -84,7 +100,7 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                 className="mb-10"
             >
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-[#27272a] bg-[#18181b] px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-[#a1a1aa]">
-                    <Terminal size={11} className="text-[#6366f1]" />
+                    <Terminal size={11} aria-hidden="true" className="text-[#6366f1]" />
                     ~/lab — engineering workspace
                 </span>
                 <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-[#fafafa]">Engineering Lab</h1>
@@ -108,21 +124,35 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                         className="inline-flex items-center gap-2 rounded-xl bg-[#6366f1] px-4 py-2 text-sm font-semibold text-white hover:bg-[#5558e6] transition-colors"
                     >
                         Explore DevOps Lab
-                        <ArrowRight size={14} />
+                        <ArrowRight size={14} aria-hidden="true" />
                     </Link>
                     <Link
                         href="/ai-engineering"
                         className="inline-flex items-center gap-2 rounded-xl border border-[#27272a] bg-[#18181b] px-4 py-2 text-sm font-semibold text-[#fafafa] hover:border-[#3f3f46] transition-colors"
                     >
                         AI Engineering
-                        <Sparkles size={14} className="text-[#6366f1]" />
+                        <Sparkles size={14} aria-hidden="true" className="text-[#6366f1]" />
                     </Link>
+                </div>
+
+                <div className="mt-6 max-w-lg">
+                    <TerminalPanel
+                        title="~/lab — whoami"
+                        lines={[
+                            { type: "command", text: "whoami" },
+                            { type: "output", text: "Hen Heang — backend-leaning full-stack engineer" },
+                            { type: "command", text: "cat focus.txt" },
+                            { type: "output", text: currentFocus.join(", ") },
+                            { type: "command", text: "status" },
+                            { type: "success", text: "● online — always building" },
+                        ]}
+                    />
                 </div>
             </motion.section>
 
             {/* Search */}
             <div className="relative mb-10 max-w-xl">
-                <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#52525b]" />
+                <Search size={16} aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 text-[#52525b]" />
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
@@ -156,7 +186,7 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                             >
                                                 {item.source} · {item.type}
                                             </span>
-                                            <ArrowRight size={13} className="shrink-0 text-[#3f3f46] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all" />
+                                            <ArrowRight size={13} aria-hidden="true" className="shrink-0 text-[#3f3f46] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all" />
                                         </div>
                                         <h3 className="text-sm font-semibold text-[#fafafa] group-hover:text-white">{item.title}</h3>
                                         <p className="text-xs leading-relaxed text-[#71717a] line-clamp-2">{item.description}</p>
@@ -192,7 +222,7 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                 {/* Philosophy card fills the grid */}
                                 <div className="rounded-2xl border border-[#27272a] bg-gradient-to-br from-[#18181b] to-[#131316] p-4">
                                     <div className="mb-2 flex items-center gap-2">
-                                        <Quote size={13} className="text-[#6366f1]" />
+                                        <Quote size={13} aria-hidden="true" className="text-[#6366f1]" />
                                         <p className="font-mono text-[10px] uppercase tracking-wider text-[#52525b]">Engineering philosophy</p>
                                     </div>
                                     <p className="text-xs leading-relaxed text-[#a1a1aa]">{philosophy}</p>
@@ -210,6 +240,16 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                             </div>
                         </section>
 
+                        {/* Core stack */}
+                        <section className="mb-12">
+                            <SectionTitle>Core stack</SectionTitle>
+                            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
+                                {coreStack.map((tech) => (
+                                    <TechCard key={tech.name} name={tech.name} category={tech.category} />
+                                ))}
+                            </div>
+                        </section>
+
                         {/* Featured engineering work */}
                         <section className="mb-12">
                             <div className="mb-4 flex items-center justify-between">
@@ -219,7 +259,7 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                     className="flex items-center gap-1 font-mono text-[11px] text-[#71717a] hover:text-[#fafafa] transition-colors"
                                 >
                                     all projects
-                                    <ArrowUpRight size={12} />
+                                    <ArrowUpRight size={12} aria-hidden="true" />
                                 </Link>
                             </div>
                             <div className="grid gap-3 md:grid-cols-2">
@@ -231,19 +271,10 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                     >
                                         <div className="mb-2 flex items-start justify-between gap-3">
                                             <h3 className="text-sm font-semibold text-[#fafafa] group-hover:text-white">{work.title}</h3>
-                                            <ArrowUpRight size={14} className="shrink-0 text-[#3f3f46] group-hover:text-[#6366f1] transition-colors" />
+                                            <ArrowUpRight size={14} aria-hidden="true" className="shrink-0 text-[#3f3f46] group-hover:text-[#6366f1] transition-colors" />
                                         </div>
                                         <p className="mb-3 text-xs leading-relaxed text-[#71717a] line-clamp-2">{work.description}</p>
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {work.architecture.slice(0, 4).map((layer) => (
-                                                <span
-                                                    key={layer}
-                                                    className="rounded-md border border-[#27272a] bg-[#09090b] px-2 py-0.5 font-mono text-[10px] text-[#a1a1aa]"
-                                                >
-                                                    {layer}
-                                                </span>
-                                            ))}
-                                        </div>
+                                        <ArchitectureDiagramCompact steps={stepsFromLabels(work.architecture.slice(0, 4))} />
                                     </Link>
                                 ))}
                             </div>
@@ -259,7 +290,7 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                         href={link.href}
                                         className="group flex items-center gap-2.5 rounded-xl border border-[#27272a] bg-[#18181b] px-3.5 py-3 hover:border-[#3f3f46] transition-colors"
                                     >
-                                        <link.icon size={15} className={link.group === "AI Engineering" ? "text-[#6366f1]" : "text-[#22c55e]"} />
+                                        <link.icon size={15} aria-hidden="true" className={link.group === "AI Engineering" ? "text-[#6366f1]" : "text-[#22c55e]"} />
                                         <span className="min-w-0">
                                             <span className="block truncate text-xs font-medium text-[#fafafa]">{link.label}</span>
                                             <span className="block font-mono text-[9px] uppercase tracking-wider text-[#52525b]">{link.group}</span>

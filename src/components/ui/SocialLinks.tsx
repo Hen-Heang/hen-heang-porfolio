@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Github from '@/src/components/icons/github';
 import LinkIn from '@/src/components/icons/linkIn';
 import Telegram from '@/src/components/icons/telegram';
+import X from '@/src/components/icons/x';
 import { usePersonalInfo } from "@/src/providers/site-content-provider";
 
 export function SocialLinks() {
@@ -23,6 +24,11 @@ export function SocialLinks() {
             href: personalInfo.socialLinks.telegram,
             icon: Telegram,
             label: "Telegram"
+        },
+        {
+            href: personalInfo.socialLinks.x,
+            icon: X,
+            label: "X"
         }
     ];
 

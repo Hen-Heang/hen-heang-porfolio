@@ -10,6 +10,11 @@ const LINKABLE: Record<string, string> = {
     labs: "Labs",
     commands: "Commands",
     infrastructure: "Infrastructure",
+    systems: "System Design",
+    api: "API Design",
+    database: "Database",
+    performance: "Performance",
+    experiments: "Experiments",
 }
 
 /** Segments that exist in the URL but have no index page */
@@ -45,7 +50,7 @@ export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMen
                     aria-expanded={menuOpen}
                     className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272a] text-[#a1a1aa] hover:text-[#fafafa] hover:border-[#3f3f46] transition-colors lg:hidden"
                 >
-                    {menuOpen ? <X size={16} /> : <Menu size={16} />}
+                    {menuOpen ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
                 </button>
 
                 <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-1.5 font-mono text-xs text-[#71717a]">
@@ -69,7 +74,7 @@ export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMen
 
             <div className="flex shrink-0 items-center gap-4">
                 <span className="hidden items-center gap-1.5 font-mono text-[11px] text-[#71717a] sm:flex">
-                    <span className="relative flex h-2 w-2">
+                    <span className="relative flex h-2 w-2" aria-hidden="true">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-60" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
                     </span>

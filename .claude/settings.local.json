@@ -18,7 +18,9 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Skill(run)",
-      "Skill(claude-in-chrome)"
+      "Skill(claude-in-chrome)",
+      "Bash(sed -n '1,16p' app/about/page.tsx)",
+      "Bash(mv /tmp/page_resolved.tsx app/about/page.tsx)"
     ]
   }
 }

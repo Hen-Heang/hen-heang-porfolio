@@ -4,6 +4,7 @@ import { ArrowUpRight, Github, Linkedin, Send } from "lucide-react"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import Link from "next/link"
 import { HHLogo } from "@/src/components/icons/HHLogo"
+import X from "@/src/components/icons/x"
 
 export function Footer() {
     const personalInfo = usePersonalInfo()
@@ -29,11 +30,17 @@ export function Footer() {
             label: "LinkedIn",
             hoverColor: "hover:text-[#0A66C2]"
         },
-        { 
-            href: personalInfo.socialLinks.telegram, 
-            icon: Send, 
+        {
+            href: personalInfo.socialLinks.telegram,
+            icon: Send,
             label: "Telegram",
             hoverColor: "hover:text-[#26A5E4]"
+        },
+        {
+            href: personalInfo.socialLinks.x,
+            icon: X,
+            label: "X",
+            hoverColor: "hover:text-white"
         },
     ]
 
