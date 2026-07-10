@@ -4,6 +4,7 @@ import localFont from "next/font/local"
 import { ThemeProvider } from "@/src/components/ThemeProvider"
 import { SiteContentProvider } from "@/src/providers/site-content-provider"
 import { RouteScrollReset } from "@/src/components/utils/RouteScrollReset"
+import { AssistantWidget } from "@/src/components/assistant"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import { profileData } from "@/data/profile"
@@ -102,6 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <SiteContentProvider>
                     <RouteScrollReset />
                     {children}
+                    <AssistantWidget />
                 </SiteContentProvider>
             </ThemeProvider>
             <Analytics />
