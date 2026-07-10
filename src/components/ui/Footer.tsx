@@ -130,6 +130,13 @@ export function Footer() {
                         <p>© {currentYear} {personalInfo.fullName}</p>
                         <span className="hidden md:block w-1 h-1 bg-zinc-800 rounded-full" />
                         <p className="hidden md:block">Handcrafted with Passion</p>
+                        <span className="hidden md:block w-1 h-1 bg-zinc-800 rounded-full" />
+                        <Link
+                            href="/admin"
+                            className="text-zinc-700 hover:text-white transition-colors duration-200"
+                        >
+                            Admin
+                        </Link>
                     </div>
                     
                     <div className="flex items-center gap-4 text-[11px] font-bold text-zinc-600 uppercase tracking-widest">

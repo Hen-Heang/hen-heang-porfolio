@@ -74,7 +74,7 @@ export function DashboardHeader() {
                     <Link href="/" className="group block">
                         <HHLogo
                             size={32}
-                            className="rounded-xl ring-2 ring-indigo-500/40 group-hover:ring-indigo-500/80 active:scale-95"
+                            className="rounded-xl ring-2 ring-white/15 group-hover:ring-white/40 active:scale-95"
                         />
                     </Link>
                 </Magnetic>

@@ -12,12 +12,16 @@ export function ContactCTA() {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
             }}
-            className="col-span-4 md:col-span-8 lg:col-span-12 relative overflow-hidden rounded-[16px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6"
+            className="col-span-4 md:col-span-8 lg:col-span-12 relative overflow-hidden rounded-[16px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 border border-indigo-500/30"
             style={{
-                background: "linear-gradient(135deg, #4f46e5, #7c3aed, #a855f7)",
+                background: "linear-gradient(135deg, #18181b 0%, #1e1b4b 45%, #312e81 100%)",
             }}
-        >
-            {/* Decorative orbs */}
+        >   
+            {/* Soft indigo glow + decorative orbs */}
+            <div
+                className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full"
+                style={{ background: "radial-gradient(circle, rgba(99,102,241,0.35) 0%, rgba(99,102,241,0) 70%)" }}
+            />
             <div className="pointer-events-none absolute -top-12 -left-12 w-40 h-40 rounded-full bg-white/5" />
             <div className="pointer-events-none absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-white/5" />
 
@@ -59,7 +63,7 @@ export function ContactCTA() {
                 </a>
                 <a
                     href={`mailto:${profile.email}`}
-                    className="flex items-center gap-2 bg-white hover:bg-white/90 text-[#6366f1] font-bold text-sm px-6 py-2.5 rounded-xl transition-all ml-2"
+                    className="flex items-center gap-2 bg-white hover:bg-white/90 text-[#4f46e5] font-bold text-sm px-6 py-2.5 rounded-xl transition-all ml-2"
                 >
                     Say Hello →
                 </a>

@@ -82,11 +82,11 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
             {/* Brand */}
             <div className="flex items-center gap-3 border-b border-[#27272a] px-5 py-4">
                 <Link href="/" onClick={onNavigate} aria-label="Back to portfolio home">
-                    <HHLogo size={28} className="rounded-lg ring-1 ring-indigo-500/40 hover:ring-indigo-500/80 transition-all" />
+                    <HHLogo size={28} className="rounded-lg ring-1 ring-white/15 hover:ring-white/40 transition-all" />
                 </Link>
                 <div className="min-w-0">
-                    <p className="truncate text-sm font-bold text-[#fafafa]">Engineering Lab</p>
-                    <p className="truncate font-mono text-[10px] text-[#52525b]">~/henheang/lab</p>
+                    <p className="truncate text-base font-bold text-[#fafafa]">Engineering Lab</p>
+                    <p className="truncate font-mono text-[11px] text-[#52525b]">~/henheang/lab</p>
                 </div>
             </div>
 

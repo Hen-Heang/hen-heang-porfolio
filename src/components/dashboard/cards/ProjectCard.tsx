@@ -10,13 +10,17 @@ interface ProjectCardProps {
 }
 
 const techColors: Record<string, { bg: string; text: string; border: string }> = {
-    "Next.js":    { bg: "#ffffff12", text: "#e4e4e7", border: "#ffffff30" },
-    "TypeScript": { bg: "#3178c615", text: "#60a5fa", border: "#3178c640" },
-    "Tailwind":   { bg: "#06b6d415", text: "#22d3ee", border: "#06b6d440" },
-    "OpenAI":     { bg: "#10a37f15", text: "#34d399", border: "#10a37f40" },
-    "Spring Boot":{ bg: "#6db33f15", text: "#86efac", border: "#6db33f40" },
-    "PostgreSQL": { bg: "#33679115", text: "#93c5fd", border: "#33679140" },
-    "React":      { bg: "#61dafb15", text: "#67e8f9", border: "#61dafb40" },
+    "Next.js":       { bg: "#ffffff12", text: "#e4e4e7", border: "#ffffff30" },
+    "TypeScript":    { bg: "#3178c615", text: "#60a5fa", border: "#3178c640" },
+    "Tailwind":      { bg: "#06b6d415", text: "#22d3ee", border: "#06b6d440" },
+    "OpenAI":        { bg: "#10a37f15", text: "#34d399", border: "#10a37f40" },
+    "Spring Boot":   { bg: "#6db33f15", text: "#86efac", border: "#6db33f40" },
+    "Spring Boot 3": { bg: "#6db33f15", text: "#86efac", border: "#6db33f40" },
+    "Java 17":       { bg: "#f8981d15", text: "#fdba74", border: "#f8981d40" },
+    "MyBatis":       { bg: "#dc262615", text: "#fca5a5", border: "#dc262640" },
+    "PostgreSQL":    { bg: "#33679115", text: "#93c5fd", border: "#33679140" },
+    "TanStack Query":{ bg: "#ef444415", text: "#fda4af", border: "#ef444440" },
+    "React":         { bg: "#61dafb15", text: "#67e8f9", border: "#61dafb40" },
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
@@ -83,7 +87,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     </h3>
                 </div>
 
-                <p className="text-zinc-400 text-xs leading-relaxed line-clamp-1 font-medium">
+                <p className="text-zinc-400 text-xs leading-relaxed line-clamp-2 font-medium">
                     {project.description}
                 </p>
 

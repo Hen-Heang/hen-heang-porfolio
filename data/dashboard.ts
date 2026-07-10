@@ -31,49 +31,19 @@ export interface BentoProject {
     status?: "live" | "archived"
 }
 
+// Backend-focused selection: the three Spring Boot projects, ordered by
+// how much backend work each one shows off. Exactly fills one grid row.
 export const deployedProjects: BentoProject[] = [
-    {
-        id: "money-flow",
-        title: "Money Flow",
-        subtitle: "AI-Powered Personal Finance PWA",
-        description:
-            "A personal finance PWA with budgets, savings goals, recurring transactions, push alerts, and an AI chat over your own spending — backed up daily to Neon.",
-        emoji: "💸",
-        url: "https://money-flow.henheang.site/",
-        github: "https://github.com/Hen-Heang/money-flow",
-        tech: ["Next.js", "Supabase", "TypeScript", "Gemini AI"],
-        gradientFrom: "#09090b",
-        gradientTo: "#18181b",
-        borderColor: "#27272a",
-        accentColor: "#22c55e",
-        screenshot: "/screenshots/moneyflow-screenshot.svg"
-    },
-    {
-        id: "hengo",
-        title: "Hengo",
-        subtitle: "AI Companion for Daily Growth",
-        description:
-            "Set goals, track to-dos, and learn workplace Korean — daily missions, an AI coach, spaced repetition, and XP progression in one app.",
-        emoji: "📈",
-        url: "https://koriai-frontend.vercel.app/",
-        github: "https://github.com/Hen-Heang/koriai-frontend",
-        tech: ["Next.js", "TypeScript", "TanStack Query", "Spring Boot"],
-        gradientFrom: "#0f0e2a",
-        gradientTo: "#16204d",
-        borderColor: "#28306b",
-        accentColor: "#10b981",
-        screenshot: "/screenshots/hengo-screenshot.svg"
-    },
     {
         id: "we-commerce",
         title: "We Commerce",
         subtitle: "Multi-Vendor Marketplace",
         description:
-            "A full-stack multi-vendor marketplace with cart, checkout, and simulated Cambodian payment flows (ABA Pay, KHQR) on a Spring Boot API.",
+            "A multi-vendor marketplace on a Spring Boot REST API — cart, checkout, and simulated Cambodian payment flows (ABA Pay, KHQR) behind a Next.js storefront.",
         emoji: "🛒",
         url: "https://we-commerce-frontend.vercel.app",
         github: "https://github.com/Hen-Heang/we-commerce-frontend",
-        tech: ["Next.js", "TypeScript", "TanStack Query", "Spring Boot"],
+        tech: ["Spring Boot", "Next.js", "TypeScript", "TanStack Query"],
         gradientFrom: "#0a1628",
         gradientTo: "#122544",
         borderColor: "#1e3a5f",
@@ -89,13 +59,29 @@ export const deployedProjects: BentoProject[] = [
         emoji: "🏪",
         url: "https://github.com/Hen-Heang/h-phsar-api-full",
         github: "https://github.com/Hen-Heang/h-phsar-api-full",
-        tech: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL"],
+        tech: ["Spring Boot 3", "Java 17", "PostgreSQL", "MyBatis"],
         gradientFrom: "#1a120a",
         gradientTo: "#2a1d10",
         borderColor: "#4a3520",
         accentColor: "#e76f00",
         screenshot: "/image/h-phsar-preview.svg",
         status: "archived"
+    },
+    {
+        id: "hengo",
+        title: "Hengo",
+        subtitle: "AI Companion for Daily Growth",
+        description:
+            "Set goals, track to-dos, and learn workplace Korean — daily missions, an AI coach, spaced repetition, and XP progression on a Spring Boot API.",
+        emoji: "📈",
+        url: "https://koriai-frontend.vercel.app/",
+        github: "https://github.com/Hen-Heang/koriai-frontend",
+        tech: ["Spring Boot", "Next.js", "TypeScript", "TanStack Query"],
+        gradientFrom: "#0f0e2a",
+        gradientTo: "#16204d",
+        borderColor: "#28306b",
+        accentColor: "#10b981",
+        screenshot: "/screenshots/hengo-screenshot.svg"
     },
 ]
 
