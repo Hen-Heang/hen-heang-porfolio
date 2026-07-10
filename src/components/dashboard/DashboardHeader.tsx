@@ -66,7 +66,7 @@ export function DashboardHeader() {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="w-full px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between max-w-7xl mx-auto gap-4 sticky top-0 z-[100]"
+            className="w-full px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between max-w-7xl mx-auto gap-4 sticky top-0 z-[100] max-lg:bg-black/60 max-lg:backdrop-blur-xl max-lg:border-b max-lg:border-white/5"
         >
             {/* Left: Logo only */}
             <div className="shrink-0">
