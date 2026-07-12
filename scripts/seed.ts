@@ -32,6 +32,7 @@ async function seed() {
   // Projects
   const { error: projErr } = await supabase.from('portfolio_projects').upsert(
     projects.map((p, i) => ({
+      slug: p.slug,
       title: p.title,
       description: p.description,
       technologies: p.technologies,

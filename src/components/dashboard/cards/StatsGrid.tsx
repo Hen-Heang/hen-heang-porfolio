@@ -17,16 +17,13 @@ export function StatsGrid() {
 
     return (
         <BentoCard className="col-span-4 md:col-span-4 p-4 md:p-6 group">
-            <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 md:gap-4 h-full">
+            <div className="grid grid-cols-2 gap-3 md:gap-4 h-full">
                 {stats.map((stat, i) => (
                     <motion.div
                         key={i}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1, duration: 0.4 }}
                         whileHover={{ y: -5, scale: 1.02 }}
-                        className="relative bg-[#111113] rounded-3xl p-5 md:p-6 flex flex-col justify-center gap-3 border border-white/5 hover:border-white/10 transition-all overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/20"
+                        className="relative bg-[#111113] rounded-3xl p-5 md:p-6 flex flex-col justify-center gap-3 border border-white/5 hover:border-white/10 transition-all overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/20 animate-in fade-in zoom-in-90 fill-mode-both motion-reduce:animate-none"
+                        style={{ animationDelay: `${i * 100}ms`, animationDuration: "400ms" }}
                     >
                         {/* Subtle background glow on hover */}
                         <div

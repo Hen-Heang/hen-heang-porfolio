@@ -43,20 +43,18 @@ export function BentoCard({
         <motion.div
             ref={cardRef}
             onMouseMove={handleMouseMove}
-            variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-            }}
             whileHover={hover ? { y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.25)" } : undefined}
             transition={{ duration: 0.2 }}
             className={`
                 bento-card relative overflow-hidden
                 border rounded-[20px] md:rounded-[24px]
                 transition-colors duration-200 group
+                animate-in fade-in slide-in-from-bottom-4 fill-mode-both
+                motion-reduce:animate-none
                 ${gradient ? `bg-gradient-to-br ${gradient}` : "bg-[#111113] hover:bg-[#141416]"}
                 ${className}
             `}
-            style={{ borderColor: "rgba(39, 39, 42, 0.8)", ...style }}
+            style={{ borderColor: "rgba(39, 39, 42, 0.8)", animationDuration: "500ms", ...style }}
         >
             {/* Spotlight Layer */}
             {showSpotlight && (

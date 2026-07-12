@@ -74,13 +74,10 @@ export function TechStackCard() {
                 {techStack.map((skill) => (
                     <div
                         key={skill}
-                        aria-label={skill}
-                        className={`group/tech relative w-10 h-10 flex items-center justify-center bg-[#27272a]/40 hover:bg-[#3f3f46]/40 border border-[#3f3f46]/30 text-[#a1a1aa] rounded-lg transition-all duration-300 cursor-default hover:shadow-[0_0_20px_rgba(255,255,255,0.03)] ${getColor(skill)}`}
+                        className={`group/tech flex items-center gap-2 px-3 py-2 bg-[#27272a]/40 hover:bg-[#3f3f46]/40 border border-[#3f3f46]/30 text-[#a1a1aa] rounded-lg transition-all duration-300 cursor-default hover:shadow-[0_0_20px_rgba(255,255,255,0.03)] ${getColor(skill)}`}
                     >
                         {getIcon(skill)}
-                        <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-zinc-800 text-white text-[10px] rounded opacity-0 group-hover/tech:!opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-white/5 z-10">
-                            {skill}
-                        </span>
+                        <span className="text-xs font-medium whitespace-nowrap">{skill}</span>
                     </div>
                 ))}
             </div>

@@ -16,7 +16,7 @@ const AssistantPanel = dynamic(() => import("./AssistantPanel"), {
     loading: () => (
         <div
             aria-hidden
-            className="fixed z-[60] inset-x-3 bottom-3 sm:inset-x-auto sm:right-6 sm:bottom-24 sm:w-[400px] h-[min(620px,calc(100dvh-5rem))] rounded-3xl bg-[#0b0f1a]/90 backdrop-blur-2xl border border-white/10 shadow-2xl animate-pulse"
+            className="fixed z-[110] inset-x-3 bottom-3 sm:inset-x-auto sm:right-6 sm:bottom-24 sm:w-[400px] h-[min(620px,calc(100dvh-5rem))] rounded-3xl bg-[#0b0f1a]/90 backdrop-blur-2xl border border-white/10 shadow-2xl animate-pulse"
         />
     ),
 })
@@ -58,7 +58,7 @@ export function AssistantWidget() {
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.94 }}
-                className="fixed z-[70] bottom-4 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:bottom-6 sm:right-6 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-900/50 border border-white/20 backdrop-blur focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300 max-sm:data-[open=true]:hidden"
+                className="fixed z-[70] bottom-24 right-3 lg:bottom-6 lg:right-6 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-900/50 border border-white/20 backdrop-blur focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300 max-sm:data-[open=true]:hidden"
                 data-open={open}
             >
                 <AnimatePresence mode="wait" initial={false}>

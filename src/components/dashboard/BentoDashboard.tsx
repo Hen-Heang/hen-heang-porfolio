@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { MotionConfig } from "framer-motion"
 import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
 import { MobileDock } from "@/src/components/dashboard/MobileDock"
 import { HeroProfileCard } from "@/src/components/dashboard/cards/HeroProfileCard"
@@ -12,29 +12,21 @@ import { useDashboardContent } from "@/src/providers/site-content-provider"
 import { Footer } from "@/src/components/ui/Footer"
 import { ScrollToTop } from "@/src/components/ui/ScrollToTop"
 
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-    },
-}
-
 export function BentoDashboard() {
     const { deployedProjects } = useDashboardContent()
     return (
+        <MotionConfig reducedMotion="user">
         <div className="min-h-screen bg-[#09090b] pb-24 md:pb-0">
             <MobileDock />
-            
+
             <DashboardHeader />
 
             <main className="px-4 xs:px-6 md:px-8 lg:px-10 pb-12 max-w-7xl mx-auto pt-4 md:pt-12">
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 auto-rows-auto"
-                >
+                {/* Entrance animations are CSS-driven (tailwindcss-animate) so
+                    content never depends on the JS animation loop to become
+                    visible — a stalled/throttled tab used to leave the whole
+                    grid stuck at opacity 0. */}
+                <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 auto-rows-auto">
                     {/* Top Section: Hero (8) + Stats (4) */}
                     <HeroProfileCard />
                     <StatsGrid />
@@ -49,11 +41,12 @@ export function BentoDashboard() {
 
                     {/* Footer Section: (12) */}
                     <ContactCTA />
-                </motion.div>
+                </div>
             </main>
 
             <Footer />
             <ScrollToTop />
         </div>
+        </MotionConfig>
     )
 }

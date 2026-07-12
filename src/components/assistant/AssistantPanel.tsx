@@ -101,7 +101,7 @@ export default function AssistantPanel({ onClose }: AssistantPanelProps) {
             role="dialog"
             aria-modal="false"
             aria-label="AI portfolio assistant"
-            className="fixed z-[60] inset-x-3 bottom-3 sm:inset-x-auto sm:right-6 sm:bottom-24 sm:w-[400px] flex flex-col h-[min(620px,calc(100dvh-5rem))] rounded-3xl overflow-hidden bg-[#0b0f1a]/90 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-indigo-950/40"
+            className="fixed z-[110] inset-x-3 bottom-3 sm:inset-x-auto sm:right-6 sm:bottom-24 sm:w-[400px] flex flex-col h-[min(620px,calc(100dvh-5rem))] rounded-3xl overflow-hidden bg-[#0b0f1a]/90 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-indigo-950/40"
         >
             {/* Header */}
             <header className="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-white/[0.03]">

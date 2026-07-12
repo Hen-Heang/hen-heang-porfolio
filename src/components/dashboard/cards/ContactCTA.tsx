@@ -1,20 +1,16 @@
 "use client"
 
 import { Github, Linkedin, Send } from "lucide-react"
-import { motion } from "framer-motion"
 import { useDashboardProfile } from "@/src/providers/site-content-provider"
 
 export function ContactCTA() {
     const profile = useDashboardProfile()
     return (
-        <motion.div
-            variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-            }}
-            className="col-span-4 md:col-span-8 lg:col-span-12 relative overflow-hidden rounded-[16px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 border border-indigo-500/30"
+        <div
+            className="col-span-4 md:col-span-8 lg:col-span-12 relative overflow-hidden rounded-[16px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 border border-indigo-500/30 animate-in fade-in slide-in-from-bottom-4 fill-mode-both motion-reduce:animate-none"
             style={{
                 background: "linear-gradient(135deg, #18181b 0%, #1e1b4b 45%, #312e81 100%)",
+                animationDuration: "500ms",
             }}
         >   
             {/* Soft indigo glow + decorative orbs */}
@@ -31,7 +27,13 @@ export function ContactCTA() {
                     Ready to build something amazing together?
                 </h2>
                 <p className="text-white/70 text-sm">
-                    {profile.email} • Currently in {profile.location}
+                    <a
+                        href={`mailto:${profile.email}`}
+                        className="underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white/70 transition-colors"
+                    >
+                        {profile.email}
+                    </a>
+                    {" "}• Currently in {profile.location}
                 </p>
             </div>
 
@@ -41,6 +43,7 @@ export function ContactCTA() {
                     href={profile.socials.github}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="GitHub profile (opens in a new tab)"
                     className="w-10 h-10 rounded-xl backdrop-blur-sm bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-colors"
                 >
                     <Github size={17} />
@@ -49,6 +52,7 @@ export function ContactCTA() {
                     href={profile.socials.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="LinkedIn profile (opens in a new tab)"
                     className="w-10 h-10 rounded-xl backdrop-blur-sm bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-colors"
                 >
                     <Linkedin size={17} />
@@ -57,6 +61,7 @@ export function ContactCTA() {
                     href={profile.socials.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Telegram (opens in a new tab)"
                     className="w-10 h-10 rounded-xl backdrop-blur-sm bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-colors"
                 >
                     <Send size={17} />
@@ -68,6 +73,6 @@ export function ContactCTA() {
                     Say Hello →
                 </a>
             </div>
-        </motion.div>
+        </div>
     )
 }
