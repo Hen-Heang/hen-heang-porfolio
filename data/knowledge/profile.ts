@@ -9,7 +9,7 @@ export const profileKnowledge: KnowledgeSection[] = [
     {
         id: "profile-overview",
         category: "profile",
-        title: "Who is Hen Heang",
+        title: "Who is Heang Heang",
         keywords: [
             "hen", "heang", "who", "about", "introduction", "summary", "background",
             "developer", "backend", "bio", "overview", "himself", "career",

@@ -3,10 +3,10 @@
 import { useCallback, useEffect, useState } from "react"
 import { Loader2, Save } from "lucide-react"
 import { createClient } from "@/src/lib/supabase/client"
+import { SiteContentSchemas, type SiteContentKey } from "@/src/lib/schemas/content"
 
-const KEYS = [
+const KEYS: { key: SiteContentKey; label: string; hint: string }[] = [
     { key: "profile", label: "Profile & Personal Info", hint: "Name, title, bio, socials, hero roles — used across the whole site" },
-    { key: "dashboard", label: "Home Dashboard", hint: "Bento cards: deployed projects, work projects, journey" },
     { key: "cv", label: "CV / Resume", hint: "Everything on the /cv page" },
 ]
 
@@ -32,7 +32,7 @@ export function SiteContentEditor() {
         void load()
     }, [load])
 
-    async function handleSave(key: string) {
+    async function handleSave(key: SiteContentKey) {
         let parsed: unknown
         try {
             parsed = JSON.parse(values[key] ?? "")
@@ -40,6 +40,16 @@ export function SiteContentEditor() {
             setStatus((s) => ({ ...s, [key]: { ok: false, msg: `Invalid JSON: ${(e as Error).message}` } }))
             return
         }
+
+        const validation = SiteContentSchemas[key].safeParse(parsed)
+        if (!validation.success) {
+            const issues = validation.error.issues
+                .map((issue) => `${key}${issue.path.length ? "." + issue.path.join(".") : ""}: ${issue.message}`)
+                .join("; ")
+            setStatus((s) => ({ ...s, [key]: { ok: false, msg: issues } }))
+            return
+        }
+
         setSaving(key)
         setStatus((s) => ({ ...s, [key]: undefined }))
         const { error } = await createClient()

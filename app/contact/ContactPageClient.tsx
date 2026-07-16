@@ -1,0 +1,94 @@
+"use client"
+
+import { Mail, Github, Linkedin, Send, MapPin, MessageSquare, ExternalLink } from "lucide-react"
+import { ContactForm } from "@/src/components/sections/contact/ContactForm"
+import { usePersonalInfo } from "@/src/providers/site-content-provider"
+import { SiteHeader } from "@/src/components/layout/SiteHeader"
+import { Footer } from "@/src/components/ui/Footer"
+import { Container } from "@/src/components/system/Container"
+import { Eyebrow } from "@/src/components/system/Eyebrow"
+import { StatusBadge } from "@/src/components/system/StatusBadge"
+
+export function ContactPageClient() {
+    const personalInfo = usePersonalInfo()
+    const contactCards = [
+        { title: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}`, newTab: false, icon: Mail },
+        { title: "LinkedIn", value: "Hen Heang", href: personalInfo.socialLinks.linkedin, newTab: true, icon: Linkedin },
+        { title: "Telegram", value: "@henheang", href: personalInfo.socialLinks.telegram, newTab: true, icon: Send },
+        { title: "GitHub", value: "Hen-Heang", href: personalInfo.socialLinks.github, newTab: true, icon: Github },
+    ]
+
+    return (
+        <div className="min-h-screen bg-background text-fg">
+            <SiteHeader />
+
+            <main className="py-section pt-12 md:pt-16">
+                <Container>
+                    <div className="mb-16 max-w-2xl">
+                        <Eyebrow className="mb-4">
+                            <MessageSquare size={12} className="mr-1 inline" aria-hidden /> Contact
+                        </Eyebrow>
+                        <h1 className="text-display-sm text-fg">Let&apos;s build something together.</h1>
+                        <p className="mt-4 text-lg leading-relaxed text-fg-secondary">
+                            Whether you have a specific project in mind or just want to explore
+                            potential collaborations, I&apos;m always open to new opportunities.
+                        </p>
+                    </div>
+
+                    <div className="grid gap-8 lg:grid-cols-12">
+                        <div className="rounded-xl border border-border bg-surface p-8 lg:col-span-7 md:p-10">
+                            <h2 className="mb-8 text-lg font-semibold text-fg">Drop me a line</h2>
+                            <ContactForm />
+                        </div>
+
+                        <div className="space-y-6 lg:col-span-5">
+                            <div className="grid gap-4 sm:grid-cols-2">
+                                {contactCards.map((card) => (
+                                    <a
+                                        key={card.title}
+                                        href={card.href}
+                                        target={card.newTab ? "_blank" : undefined}
+                                        rel={card.newTab ? "noopener noreferrer" : undefined}
+                                        className="group relative block rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-strong"
+                                    >
+                                        <card.icon size={18} className="text-brand" aria-hidden />
+                                        <p className="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
+                                            {card.title}
+                                        </p>
+                                        <p className="mt-1 break-all text-sm font-medium text-fg">{card.value}</p>
+                                        <ExternalLink
+                                            size={13}
+                                            className="absolute right-4 top-4 text-fg-muted opacity-0 transition-opacity group-hover:opacity-100"
+                                            aria-hidden
+                                        />
+                                    </a>
+                                ))}
+                            </div>
+
+                            <div className="rounded-xl border border-border bg-surface p-6">
+                                <MapPin size={18} className="text-success" aria-hidden />
+                                <h3 className="mt-4 text-base font-semibold text-fg">Location</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-fg-secondary">
+                                    Currently based in Seoul, South Korea. Open to remote opportunities
+                                    worldwide.
+                                </p>
+                                <div className="mt-4">
+                                    <StatusBadge status="live" pulse>Ready for work</StatusBadge>
+                                </div>
+                            </div>
+
+                            <div className="rounded-xl border border-border bg-surface p-6">
+                                <h4 className="text-sm font-semibold text-fg">Working Hours</h4>
+                                <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+                                    Typically responding within 24 hours. Mon–Fri, 9:00 AM–6:00 PM (KST).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </Container>
+            </main>
+
+            <Footer />
+        </div>
+    )
+}

@@ -29,23 +29,23 @@ export function CategoryCard({ category, count }: { category: AICategory; count:
     return (
         <Link
             href={`/ai-engineering?category=${category.slug}`}
-            className="group relative flex flex-col gap-3 rounded-2xl border border-[#27272a] bg-[#18181b] p-5 transition-all hover:border-[#3f3f46] hover:-translate-y-0.5"
+            className="group relative flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5 transition-all hover:border-border-strong hover:-translate-y-0.5"
         >
             <div className="flex items-center justify-between">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#6366f1]/10 text-xl">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand/10 text-xl">
                     <span aria-hidden>{category.emoji}</span>
                 </div>
-                <Icon size={16} className="text-[#3f3f46] group-hover:text-[#6366f1] transition-colors" />
+                <Icon size={16} className="text-border-strong group-hover:text-brand transition-colors" />
             </div>
             <div>
-                <h3 className="mb-1 text-sm font-semibold text-[#fafafa]">{category.title}</h3>
-                <p className="text-xs leading-relaxed text-[#71717a] line-clamp-2">{category.description}</p>
+                <h3 className="mb-1 text-sm font-semibold text-fg">{category.title}</h3>
+                <p className="text-xs leading-relaxed text-fg-muted line-clamp-2">{category.description}</p>
             </div>
             <div className="mt-auto flex items-center justify-between pt-2">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
                     {count} {count === 1 ? "article" : "articles"}
                 </span>
-                <ArrowRight size={13} className="text-[#3f3f46] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all" />
+                <ArrowRight size={13} className="text-border-strong group-hover:text-brand group-hover:translate-x-1 transition-all" />
             </div>
         </Link>
     )

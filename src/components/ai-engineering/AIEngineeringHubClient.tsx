@@ -74,12 +74,12 @@ export function AIEngineeringHubClient({
 
     return (
         <div className="px-4 md:px-8 py-10 max-w-6xl mx-auto">
-            <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-[#71717a]">
-                <Link href="/lab" className="hover:text-[#fafafa] transition-colors">
+            <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-fg-muted">
+                <Link href="/lab" className="hover:text-fg transition-colors">
                     Engineering Lab
                 </Link>
                 <span>/</span>
-                <span className="text-[#a1a1aa]">AI Engineering</span>
+                <span className="text-fg-secondary">AI Engineering</span>
             </nav>
 
             {/* Hero */}
@@ -87,25 +87,25 @@ export function AIEngineeringHubClient({
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="relative mb-14 overflow-hidden rounded-3xl border border-[#27272a] bg-[#18181b] px-6 py-14 md:px-12 md:py-20 text-center"
+                className="relative mb-14 overflow-hidden rounded-3xl border border-border bg-surface px-6 py-14 md:px-12 md:py-20 text-center"
             >
                 <div className="pointer-events-none absolute inset-0 opacity-40">
-                    <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-[#6366f1]/20 blur-[100px]" />
-                    <div className="absolute -bottom-24 right-1/4 h-64 w-64 rounded-full bg-[#22c55e]/10 blur-[100px]" />
+                    <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-brand/20 blur-[100px]" />
+                    <div className="absolute -bottom-24 right-1/4 h-64 w-64 rounded-full bg-success/10 blur-[100px]" />
                 </div>
 
-                <span className="relative inline-flex items-center gap-1.5 rounded-full border border-[#27272a] bg-[#09090b] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#a1a1aa]">
-                    <Sparkles size={11} className="text-[#6366f1]" />
+                <span className="relative inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-fg-secondary">
+                    <Sparkles size={11} className="text-brand" />
                     Engineering Knowledge Hub
                 </span>
 
-                <h1 className="relative mt-5 text-3xl md:text-5xl font-bold tracking-tight text-[#fafafa]">
+                <h1 className="relative mt-5 text-3xl md:text-5xl font-bold tracking-tight text-fg">
                     AI Engineering
                 </h1>
-                <p className="relative mt-3 text-sm md:text-base text-[#a1a1aa]">
+                <p className="relative mt-3 text-sm md:text-base text-fg-secondary">
                     Building modern backend systems with AI-assisted engineering.
                 </p>
-                <p className="relative mx-auto mt-4 max-w-2xl text-xs md:text-sm leading-relaxed text-[#71717a]">
+                <p className="relative mx-auto mt-4 max-w-2xl text-xs md:text-sm leading-relaxed text-fg-muted">
                     AI accelerates development, but engineers remain responsible for architecture, quality, security,
                     and business logic. Here&apos;s how I use Claude Code, ChatGPT, and Copilot as a collaborator —
                     not a replacement — while building with Java, Spring Boot, MyBatis, and PostgreSQL.
@@ -118,10 +118,10 @@ export function AIEngineeringHubClient({
                         { label: "Snippets", value: snippetCount },
                     ].map((s) => (
                         <div key={s.label} className="text-center">
-                            <p className="text-xl font-bold text-[#fafafa]">
+                            <p className="text-xl font-bold text-fg">
                                 <NumberTicker value={s.value} />
                             </p>
-                            <p className="text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">{s.label}</p>
+                            <p className="text-[10px] font-semibold uppercase tracking-wider text-fg-muted">{s.label}</p>
                         </div>
                     ))}
                 </div>
@@ -136,37 +136,37 @@ export function AIEngineeringHubClient({
             >
                 <Link
                     href="/ai-engineering/prompts"
-                    className="group flex items-center justify-between rounded-2xl border border-[#27272a] bg-[#18181b] px-5 py-4 hover:border-[#3f3f46] transition-colors"
+                    className="group flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4 hover:border-border-strong transition-colors"
                 >
                     <div className="flex items-center gap-3">
-                        <MessageSquareCode size={18} className="text-[#6366f1]" />
+                        <MessageSquareCode size={18} className="text-brand" />
                         <div>
-                            <p className="text-sm font-semibold text-[#fafafa]">Prompt Library</p>
-                            <p className="text-xs text-[#71717a]">Copy-ready prompts for real backend work</p>
+                            <p className="text-sm font-semibold text-fg">Prompt Library</p>
+                            <p className="text-xs text-fg-muted">Copy-ready prompts for real backend work</p>
                         </div>
                     </div>
                 </Link>
                 <Link
                     href="/ai-engineering/snippets"
-                    className="group flex items-center justify-between rounded-2xl border border-[#27272a] bg-[#18181b] px-5 py-4 hover:border-[#3f3f46] transition-colors"
+                    className="group flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4 hover:border-border-strong transition-colors"
                 >
                     <div className="flex items-center gap-3">
-                        <FileCode2 size={18} className="text-[#6366f1]" />
+                        <FileCode2 size={18} className="text-brand" />
                         <div>
-                            <p className="text-sm font-semibold text-[#fafafa]">Code Snippets</p>
-                            <p className="text-xs text-[#71717a]">MyBatis, idempotency, Thymeleaf patterns</p>
+                            <p className="text-sm font-semibold text-fg">Code Snippets</p>
+                            <p className="text-xs text-fg-muted">MyBatis, idempotency, Thymeleaf patterns</p>
                         </div>
                     </div>
                 </Link>
                 <Link
                     href="/lab/devops"
-                    className="group flex items-center justify-between rounded-2xl border border-[#27272a] bg-[#18181b] px-5 py-4 hover:border-[#3f3f46] transition-colors"
+                    className="group flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4 hover:border-border-strong transition-colors"
                 >
                     <div className="flex items-center gap-3">
-                        <Terminal size={18} className="text-[#22c55e]" />
+                        <Terminal size={18} className="text-success" />
                         <div>
-                            <p className="text-sm font-semibold text-[#fafafa]">DevOps Basics</p>
-                            <p className="text-xs text-[#71717a]">Docker, CI/CD, and deployment for backend devs</p>
+                            <p className="text-sm font-semibold text-fg">DevOps Basics</p>
+                            <p className="text-xs text-fg-muted">Docker, CI/CD, and deployment for backend devs</p>
                         </div>
                     </div>
                 </Link>
@@ -174,7 +174,7 @@ export function AIEngineeringHubClient({
 
             {/* Categories */}
             <section className="mb-12">
-                <h2 className="mb-4 text-lg font-bold text-[#fafafa]">Browse by category</h2>
+                <h2 className="mb-4 text-lg font-bold text-fg">Browse by category</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {categories.map((cat) => (
                         <CategoryCard
@@ -189,7 +189,7 @@ export function AIEngineeringHubClient({
             {/* Featured */}
             {!hasActiveFilters && featured.length > 0 && (
                 <section className="mb-12">
-                    <h2 className="mb-4 text-lg font-bold text-[#fafafa]">Featured</h2>
+                    <h2 className="mb-4 text-lg font-bold text-fg">Featured</h2>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {featured.map((article) => (
                             <ArticleCard key={article.slug} article={article} category={categoryBySlug.get(article.category)} />
@@ -201,11 +201,11 @@ export function AIEngineeringHubClient({
             {/* Search + filters */}
             <section>
                 <div className="mb-5 flex items-center justify-between gap-3">
-                    <h2 className="text-lg font-bold text-[#fafafa]">All articles</h2>
+                    <h2 className="text-lg font-bold text-fg">All articles</h2>
                     {hasActiveFilters && (
                         <button
                             onClick={clearFilters}
-                            className="flex items-center gap-1 text-xs font-medium text-[#71717a] hover:text-[#fafafa] transition-colors"
+                            className="flex items-center gap-1 text-xs font-medium text-fg-muted hover:text-fg transition-colors"
                         >
                             <X size={12} /> Clear filters
                         </button>
@@ -213,13 +213,13 @@ export function AIEngineeringHubClient({
                 </div>
 
                 <div className="relative mb-4">
-                    <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#52525b]" />
+                    <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-fg-muted" />
                     <input
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Search by title, tag, or technology..."
                         aria-label="Search articles"
-                        className="w-full rounded-xl border border-[#27272a] bg-[#18181b] py-2.5 pl-10 pr-4 text-sm text-[#fafafa] placeholder:text-[#52525b] outline-none focus:border-[#6366f1] transition-colors"
+                        className="w-full rounded-xl border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-fg placeholder:text-fg-muted outline-none focus:border-brand transition-colors"
                     />
                 </div>
 
@@ -232,7 +232,7 @@ export function AIEngineeringHubClient({
                             onClick={() => setActiveDifficulty(activeDifficulty === d ? null : d)}
                         />
                     ))}
-                    <span className="mx-1 w-px bg-[#27272a]" />
+                    <span className="mx-1 w-px bg-surface-elevated" />
                     {allTechnologies.map((tech) => (
                         <Tag key={tech} label={tech} active={activeTech === tech} onClick={() => setActiveTech(activeTech === tech ? null : tech)} />
                     ))}
@@ -245,14 +245,14 @@ export function AIEngineeringHubClient({
                 </div>
 
                 {activeCategory && (
-                    <div className="mb-5 flex items-center gap-2 text-xs text-[#71717a]">
+                    <div className="mb-5 flex items-center gap-2 text-xs text-fg-muted">
                         Filtered by category:
                         <Tag label={categories.find((c) => c.slug === activeCategory)?.title || activeCategory} active onClick={() => setCategory(null)} />
                     </div>
                 )}
 
                 {filtered.length === 0 ? (
-                    <div className="py-16 text-center text-sm text-[#52525b]">No articles match your filters yet.</div>
+                    <div className="py-16 text-center text-sm text-fg-muted">No articles match your filters yet.</div>
                 ) : (
                     <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <AnimatePresence mode="popLayout">
@@ -276,12 +276,12 @@ export function AIEngineeringHubClient({
             {/* Back to the unified hub */}
             <Link
                 href="/lab"
-                className="group mt-14 flex items-center justify-between rounded-2xl border border-[#27272a] bg-[#18181b] px-5 py-4 hover:border-[#3f3f46] transition-colors"
+                className="group mt-14 flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4 hover:border-border-strong transition-colors"
             >
-                <span className="text-sm font-medium text-[#a1a1aa] group-hover:text-[#fafafa]">
+                <span className="text-sm font-medium text-fg-secondary group-hover:text-fg">
                     Search across AI Engineering and DevOps Basics together in Engineering Lab
                 </span>
-                <ArrowRight size={13} className="text-[#3f3f46] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all shrink-0 ml-3" />
+                <ArrowRight size={13} className="text-border-strong group-hover:text-brand group-hover:translate-x-1 transition-all shrink-0 ml-3" />
             </Link>
         </div>
     )

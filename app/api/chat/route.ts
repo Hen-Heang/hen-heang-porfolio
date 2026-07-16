@@ -3,8 +3,11 @@ import { convertToModelMessages, streamText } from "ai"
 
 import { buildContext } from "@/src/lib/ai/retrieval"
 import { buildSystemPrompt } from "@/src/lib/ai/system-prompt"
-import { checkRateLimit, clientKeyFromRequest } from "@/src/lib/ai/rate-limit"
+import { createRateLimiter } from "@/src/lib/rate-limit/factory"
+import { clientKeyFromRequest } from "@/src/lib/rate-limit/client-key"
 import { validateChatBody } from "@/src/lib/ai/validation"
+
+const chatLimiter = createRateLimiter("chat", 60_000, 10)
 
 export const maxDuration = 30
 
@@ -16,10 +19,10 @@ const jsonError = (message: string, status: number, headers?: HeadersInit) =>
 
 export async function POST(req: Request) {
     if (!process.env.OPENAI_API_KEY) {
-        return jsonError("The assistant isn't configured yet — please email Hen directly instead.", 503)
+        return jsonError("The assistant isn't configured yet — please email Heang directly instead.", 503)
     }
 
-    const rate = checkRateLimit(clientKeyFromRequest(req))
+    const rate = await chatLimiter.check(clientKeyFromRequest(req))
     if (!rate.allowed) {
         return jsonError("You're sending messages a bit fast — please wait a moment and try again.", 429, {
             "Retry-After": String(rate.retryAfterSeconds ?? 60),

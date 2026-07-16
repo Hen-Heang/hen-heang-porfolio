@@ -57,7 +57,7 @@ const aiToolsSection: KnowledgeSection = {
         "copilot", "assistant", "machine learning",
     ],
     content: [
-        "Hen works with AI as an engineering collaborator, not just a code generator:",
+        "Heang works with AI as an engineering collaborator, not just a code generator:",
         "- **Claude Code** and **Gemini** for AI-assisted development workflows — prompt patterns, code review, and debugging.",
         "- Built LLM features into real products: the Money Flow finance app ships an AI chat over personal spending data powered by **Google Gemini** through the Vercel AI SDK, and Hengo has an AI coach for Korean learning with four modes (free chat, message analysis, phrasing generation, spaced-repetition review).",
         "- This portfolio itself includes an AI assistant built with the **OpenAI Responses API** and the Vercel AI SDK.",

@@ -25,14 +25,14 @@ const TYPE_ICON: Record<ArchNodeType, React.ComponentType<{ size?: number; class
 
 const TYPE_COLOR: Record<ArchNodeType, string> = {
     client: "text-[#22d3ee]",
-    app: "text-[#6366f1]",
-    api: "text-[#6366f1]",
-    service: "text-[#a1a1aa]",
-    database: "text-[#22c55e]",
+    app: "text-brand",
+    api: "text-brand",
+    service: "text-fg-secondary",
+    database: "text-success",
     cache: "text-[#f59e0b]",
     queue: "text-[#f59e0b]",
-    external: "text-[#71717a]",
-    default: "text-[#71717a]",
+    external: "text-fg-muted",
+    default: "text-fg-muted",
 }
 
 function normalizeStep(step: ArchStep): ArchNode[] {
@@ -48,18 +48,18 @@ function NodeCard({ node }: { node: ArchNode }) {
     const type = node.type ?? "default"
     const Icon = TYPE_ICON[type]
     return (
-        <div className="flex min-w-[128px] flex-1 flex-col items-center gap-1 rounded-xl border border-[#27272a] bg-[#0c0c0e] px-3 py-3 text-center md:flex-none">
+        <div className="flex min-w-[128px] flex-1 flex-col items-center gap-1 rounded-xl border border-border bg-[#0c0c0e] px-3 py-3 text-center md:flex-none">
             <Icon size={14} aria-hidden="true" className={TYPE_COLOR[type]} />
-            <span className="text-sm font-semibold text-[#fafafa]">{node.label}</span>
-            {node.sublabel && <span className="text-[10px] text-[#71717a]">{node.sublabel}</span>}
+            <span className="text-sm font-semibold text-fg">{node.label}</span>
+            {node.sublabel && <span className="text-[10px] text-fg-muted">{node.sublabel}</span>}
         </div>
     )
 }
 
 export function ArchitectureDiagram({ title, steps }: { title?: string; steps: ArchStep[] }) {
     return (
-        <div className="my-6 rounded-2xl border border-[#27272a] bg-[#18181b] p-5">
-            {title && <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-[#52525b]">{title}</p>}
+        <div className="my-6 rounded-2xl border border-border bg-surface p-5">
+            {title && <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-fg-muted">{title}</p>}
             <div className="flex flex-col items-stretch gap-1 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-2">
                 {steps.map((step, i) => {
                     const nodes = normalizeStep(step)
@@ -72,8 +72,8 @@ export function ArchitectureDiagram({ title, steps }: { title?: string; steps: A
                             </div>
                             {i < steps.length - 1 && (
                                 <>
-                                    <ArrowDown size={16} aria-hidden="true" className="shrink-0 text-[#3f3f46] md:hidden" />
-                                    <ArrowRight size={16} aria-hidden="true" className="hidden shrink-0 text-[#3f3f46] md:block" />
+                                    <ArrowDown size={16} aria-hidden="true" className="shrink-0 text-border-strong md:hidden" />
+                                    <ArrowRight size={16} aria-hidden="true" className="hidden shrink-0 text-border-strong md:block" />
                                 </>
                             )}
                         </div>
@@ -96,13 +96,13 @@ export function ArchitectureDiagramCompact({ steps }: { steps: ArchStep[] }) {
                             {nodes.map((node, ni) => (
                                 <span
                                     key={ni}
-                                    className="rounded-md border border-[#27272a] bg-[#09090b] px-2 py-0.5 font-mono text-[10px] text-[#a1a1aa]"
+                                    className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[10px] text-fg-secondary"
                                 >
                                     {node.label}
                                 </span>
                             ))}
                         </div>
-                        {i < steps.length - 1 && <ArrowRight size={10} aria-hidden="true" className="shrink-0 text-[#3f3f46]" />}
+                        {i < steps.length - 1 && <ArrowRight size={10} aria-hidden="true" className="shrink-0 text-border-strong" />}
                     </div>
                 )
             })}

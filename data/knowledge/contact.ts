@@ -6,7 +6,7 @@ export const contactKnowledge: KnowledgeSection[] = [
     {
         id: "contact-channels",
         category: "contact",
-        title: "How to contact Hen",
+        title: "How to contact Heang",
         keywords: [
             "contact", "email", "reach", "hire", "hiring", "message", "connect",
             "github", "linkedin", "telegram", "twitter", "x", "social", "cv",
@@ -22,7 +22,7 @@ export const contactKnowledge: KnowledgeSection[] = [
             `- CV (view and download): ${profileData.cvUrl}`,
             `- Contact page: https://henheang.site/contact`,
             "",
-            `Hen is based in ${profileData.location} and is ${profileData.available ? "open to new opportunities" : "not currently looking"}. Email and LinkedIn are the best channels for recruiters.`,
+            `Heang is based in ${profileData.location} and is ${profileData.available ? "open to new opportunities" : "not currently looking"}. Email and LinkedIn are the best channels for recruiters.`,
         ].join("\n"),
     },
 ]

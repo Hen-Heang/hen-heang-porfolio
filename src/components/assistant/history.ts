@@ -13,7 +13,9 @@ import type { UIMessage } from "ai"
  * initializer without SSR/hydration concerns.
  */
 const STORAGE_KEY = "hh-assistant-history-v1"
-const MAX_STORED_MESSAGES = 30
+// Keep this aligned with the API's MAX_MESSAGES limit so restored history can
+// always be submitted without immediately failing server-side validation.
+const MAX_STORED_MESSAGES = 20
 
 export function messageText(message: UIMessage): string {
     return message.parts

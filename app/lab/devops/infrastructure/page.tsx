@@ -13,8 +13,8 @@ export default function InfrastructurePage() {
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
             <div className="mb-8">
-                <h1 className="mb-1 text-3xl font-bold text-[#fafafa]">Backend Infrastructure</h1>
-                <p className="text-sm text-[#71717a]">
+                <h1 className="mb-1 text-3xl font-bold text-fg">Backend Infrastructure</h1>
+                <p className="text-sm text-fg-muted">
                     The pieces that sit around your application in production — what each one does, and why a backend developer should care.
                 </p>
             </div>

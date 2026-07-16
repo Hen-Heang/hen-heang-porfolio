@@ -1,12 +1,7 @@
-"use client"
-
-import { DashboardHeader } from "@/src/components/dashboard/DashboardHeader"
-import { MobileDock } from "@/src/components/dashboard/MobileDock"
+import React from "react"
+import { SiteHeader } from "@/src/components/layout/SiteHeader"
 import { Footer } from "@/src/components/ui/Footer"
 import { ScrollToTop } from "@/src/components/ui/ScrollToTop"
-import { motion } from "framer-motion"
-import { staggerContainer, staggerItem } from "@/src/lib/utils/animations"
-import React from "react";
 
 interface PageLayoutProps {
     children: React.ReactNode
@@ -14,24 +9,22 @@ interface PageLayoutProps {
     className?: string
 }
 
+/**
+ * Site-wide page shell (server component). Content is rendered server-side;
+ * the only client island in the shell is the sticky SiteHeader.
+ */
 export function PageLayout({ children, showFooter = true, className = "" }: PageLayoutProps) {
     return (
-        <div className={`min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-[#09090b] dark:text-[#fafafa] font-sans pb-24 md:pb-0 ${className}`}>
-            <MobileDock />
-            <DashboardHeader />
-            <motion.main 
-                variants={staggerContainer}
-                initial="hidden"
-                animate="visible"
-                className="pt-4 md:pt-8"
+        <div className={`min-h-screen bg-background font-sans text-fg ${className}`}>
+            <a
+                href="#main"
+                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-lg focus:border focus:border-border focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:text-fg"
             >
-                {children}
-            </motion.main>
-            {showFooter && (
-                <motion.div variants={staggerItem}>
-                    <Footer />
-                </motion.div>
-            )}
+                Skip to content
+            </a>
+            <SiteHeader />
+            <main id="main">{children}</main>
+            {showFooter && <Footer />}
             <ScrollToTop />
         </div>
     )

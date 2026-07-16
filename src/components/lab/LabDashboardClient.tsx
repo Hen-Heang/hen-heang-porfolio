@@ -48,6 +48,7 @@ interface LabDashboardClientProps {
 }
 
 const browseLinks = [
+    { href: "/lab/backend", icon: BookOpen, label: "Roadmap & Curriculum", group: "Backend Engineering" },
     { href: "/ai-engineering", icon: Sparkles, label: "AI Articles", group: "AI Engineering" },
     { href: "/ai-engineering/prompts", icon: MessageSquareCode, label: "Prompt Library", group: "AI Engineering" },
     { href: "/ai-engineering/snippets", icon: FileCode2, label: "Code Snippets", group: "AI Engineering" },
@@ -58,7 +59,7 @@ const browseLinks = [
 ]
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-    return <h2 className="mb-4 font-mono text-sm font-semibold uppercase tracking-wider text-[#52525b]">{children}</h2>
+    return <h2 className="mb-4 font-mono text-sm font-semibold uppercase tracking-wider text-fg-muted">{children}</h2>
 }
 
 export function LabDashboardClient({ items, metrics, featured, systemStatus, currentFocus, philosophy }: LabDashboardClientProps) {
@@ -99,20 +100,20 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                 transition={{ duration: 0.35 }}
                 className="mb-10"
             >
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#27272a] bg-[#18181b] px-3 py-1 font-mono text-xs uppercase tracking-wider text-[#a1a1aa]">
-                    <Terminal size={11} aria-hidden="true" className="text-[#6366f1]" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs uppercase tracking-wider text-fg-secondary">
+                    <Terminal size={11} aria-hidden="true" className="text-brand" />
                     ~/lab — engineering workspace
                 </span>
-                <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight text-[#fafafa]">Engineering Lab</h1>
-                <p className="mt-2 max-w-2xl text-base md:text-lg leading-relaxed text-[#a1a1aa]">
+                <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight text-fg">Engineering Lab</h1>
+                <p className="mt-2 max-w-2xl text-base md:text-lg leading-relaxed text-fg-secondary">
                     Exploring backend systems, architecture, AI engineering, and modern software development practices —
                     how I design, build, test, and operate software.
                 </p>
 
                 <div className="mt-4 flex flex-wrap items-center gap-1.5">
-                    <span className="mr-1 font-mono text-xs uppercase tracking-wider text-[#52525b]">Current focus</span>
+                    <span className="mr-1 font-mono text-xs uppercase tracking-wider text-fg-muted">Current focus</span>
                     {currentFocus.map((f) => (
-                        <span key={f} className="rounded-md border border-[#27272a] bg-[#18181b] px-2 py-0.5 font-mono text-xs text-[#a1a1aa]">
+                        <span key={f} className="rounded-md border border-border bg-surface px-2 py-0.5 font-mono text-xs text-fg-secondary">
                             {f}
                         </span>
                     ))}
@@ -120,18 +121,18 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
 
                 <div className="mt-6 flex flex-wrap gap-3">
                     <Link
-                        href="/lab/devops"
-                        className="inline-flex items-center gap-2 rounded-xl bg-[#6366f1] px-4 py-2 text-sm font-semibold text-white hover:bg-[#5558e6] transition-colors"
+                        href="/lab/backend"
+                        className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand transition-colors"
                     >
-                        Explore DevOps Lab
+                        Explore Backend Engineering
                         <ArrowRight size={14} aria-hidden="true" />
                     </Link>
                     <Link
                         href="/ai-engineering"
-                        className="inline-flex items-center gap-2 rounded-xl border border-[#27272a] bg-[#18181b] px-4 py-2 text-sm font-semibold text-[#fafafa] hover:border-[#3f3f46] transition-colors"
+                        className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-2 text-sm font-semibold text-fg hover:border-border-strong transition-colors"
                     >
                         AI Engineering
-                        <Sparkles size={14} aria-hidden="true" className="text-[#6366f1]" />
+                        <Sparkles size={14} aria-hidden="true" className="text-brand" />
                     </Link>
                 </div>
 
@@ -152,44 +153,44 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
 
             {/* Search */}
             <div className="relative mb-10 max-w-xl">
-                <Search size={16} aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 text-[#52525b]" />
+                <Search size={16} aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 text-fg-muted" />
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search everything — Docker, JWT, MyBatis, CI/CD..."
                     aria-label="Search Engineering Lab"
-                    className="w-full rounded-2xl border border-[#27272a] bg-[#18181b] py-3 pl-11 pr-4 text-sm text-[#fafafa] placeholder:text-[#52525b] outline-none focus:border-[#6366f1] transition-colors"
+                    className="w-full rounded-2xl border border-border bg-surface py-3 pl-11 pr-4 text-sm text-fg placeholder:text-fg-muted outline-none focus:border-brand transition-colors"
                 />
             </div>
 
             <AnimatePresence mode="wait">
                 {query.trim() ? (
                     <motion.section key="results" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mb-14">
-                        <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-wider text-[#52525b]">
+                        <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-wider text-fg-muted">
                             {results.length} result{results.length === 1 ? "" : "s"}
                         </p>
                         {results.length === 0 ? (
-                            <div className="py-16 text-center text-sm text-[#52525b]">Nothing matches yet — try a different term.</div>
+                            <div className="py-16 text-center text-sm text-fg-muted">Nothing matches yet — try a different term.</div>
                         ) : (
                             <div className="grid sm:grid-cols-2 gap-3">
                                 {results.map((item, i) => (
                                     <Link
                                         key={`${item.href}-${item.title}-${i}`}
                                         href={item.href}
-                                        className="group flex flex-col gap-2 rounded-2xl border border-[#27272a] bg-[#18181b] p-4 hover:border-[#3f3f46] transition-colors"
+                                        className="group flex flex-col gap-2 rounded-2xl border border-border bg-surface p-4 hover:border-border-strong transition-colors"
                                     >
                                         <div className="flex items-center justify-between gap-2">
                                             <span
                                                 className={`font-mono text-[11px] font-semibold uppercase tracking-wider ${
-                                                    item.source === "AI Engineering" ? "text-[#6366f1]" : "text-[#22c55e]"
+                                                    item.source === "AI Engineering" ? "text-brand" : "text-success"
                                                 }`}
                                             >
                                                 {item.source} · {item.type}
                                             </span>
-                                            <ArrowRight size={13} aria-hidden="true" className="shrink-0 text-[#3f3f46] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all" />
+                                            <ArrowRight size={13} aria-hidden="true" className="shrink-0 text-border-strong group-hover:text-brand group-hover:translate-x-1 transition-all" />
                                         </div>
-                                        <h3 className="text-base font-semibold text-[#fafafa] group-hover:text-white">{item.title}</h3>
-                                        <p className="text-sm leading-relaxed text-[#71717a] line-clamp-2">{item.description}</p>
+                                        <h3 className="text-base font-semibold text-fg group-hover:text-white">{item.title}</h3>
+                                        <p className="text-sm leading-relaxed text-fg-muted line-clamp-2">{item.description}</p>
                                         {item.tags.length > 0 && (
                                             <div className="flex flex-wrap gap-1.5">
                                                 {item.tags.slice(0, 3).map((t) => (
@@ -209,23 +210,23 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                             <SectionTitle>System status</SectionTitle>
                             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                 {systemStatus.map((entry) => (
-                                    <div key={entry.area} className="rounded-2xl border border-[#27272a] bg-[#18181b] p-4">
+                                    <div key={entry.area} className="rounded-2xl border border-border bg-surface p-4">
                                         <div className="mb-2 flex items-center justify-between gap-2">
-                                            <p className="text-base font-semibold text-[#fafafa]">{entry.area}</p>
+                                            <p className="text-base font-semibold text-fg">{entry.area}</p>
                                             <StatusIndicator status={entry.status} />
                                         </div>
-                                        <p className="mb-2 font-mono text-xs text-[#6366f1]">{entry.tech}</p>
-                                        <p className="text-sm leading-relaxed text-[#71717a]">{entry.detail}</p>
+                                        <p className="mb-2 font-mono text-xs text-brand">{entry.tech}</p>
+                                        <p className="text-sm leading-relaxed text-fg-muted">{entry.detail}</p>
                                     </div>
                                 ))}
 
                                 {/* Philosophy card fills the grid */}
-                                <div className="rounded-2xl border border-[#27272a] bg-gradient-to-br from-[#18181b] to-[#131316] p-4">
+                                <div className="rounded-2xl border border-border bg-gradient-to-br from-surface to-[#131316] p-4">
                                     <div className="mb-2 flex items-center gap-2">
-                                        <Quote size={13} aria-hidden="true" className="text-[#6366f1]" />
-                                        <p className="font-mono text-xs uppercase tracking-wider text-[#52525b]">Engineering philosophy</p>
+                                        <Quote size={13} aria-hidden="true" className="text-brand" />
+                                        <p className="font-mono text-xs uppercase tracking-wider text-fg-muted">Engineering philosophy</p>
                                     </div>
-                                    <p className="text-sm leading-relaxed text-[#a1a1aa]">{philosophy}</p>
+                                    <p className="text-sm leading-relaxed text-fg-secondary">{philosophy}</p>
                                 </div>
                             </div>
                         </section>
@@ -256,7 +257,7 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                 <SectionTitle>Featured engineering work</SectionTitle>
                                 <Link
                                     href="/projects"
-                                    className="flex items-center gap-1 font-mono text-xs text-[#71717a] hover:text-[#fafafa] transition-colors"
+                                    className="flex items-center gap-1 font-mono text-xs text-fg-muted hover:text-fg transition-colors"
                                 >
                                     all projects
                                     <ArrowUpRight size={12} aria-hidden="true" />
@@ -267,13 +268,13 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                     <Link
                                         key={work.slug}
                                         href={`/projects/${work.slug}`}
-                                        className="group rounded-2xl border border-[#27272a] bg-[#18181b] p-5 hover:border-[#3f3f46] transition-colors"
+                                        className="group rounded-2xl border border-border bg-surface p-5 hover:border-border-strong transition-colors"
                                     >
                                         <div className="mb-2 flex items-start justify-between gap-3">
-                                            <h3 className="text-base font-semibold text-[#fafafa] group-hover:text-white">{work.title}</h3>
-                                            <ArrowUpRight size={14} aria-hidden="true" className="shrink-0 text-[#3f3f46] group-hover:text-[#6366f1] transition-colors" />
+                                            <h3 className="text-base font-semibold text-fg group-hover:text-white">{work.title}</h3>
+                                            <ArrowUpRight size={14} aria-hidden="true" className="shrink-0 text-border-strong group-hover:text-brand transition-colors" />
                                         </div>
-                                        <p className="mb-3 text-sm leading-relaxed text-[#71717a] line-clamp-2">{work.description}</p>
+                                        <p className="mb-3 text-sm leading-relaxed text-fg-muted line-clamp-2">{work.description}</p>
                                         <ArchitectureDiagramCompact steps={stepsFromLabels(work.architecture.slice(0, 4))} />
                                     </Link>
                                 ))}
@@ -288,12 +289,12 @@ export function LabDashboardClient({ items, metrics, featured, systemStatus, cur
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className="group flex items-center gap-2.5 rounded-xl border border-[#27272a] bg-[#18181b] px-3.5 py-3 hover:border-[#3f3f46] transition-colors"
+                                        className="group flex items-center gap-2.5 rounded-xl border border-border bg-surface px-3.5 py-3 hover:border-border-strong transition-colors"
                                     >
-                                        <link.icon size={15} aria-hidden="true" className={link.group === "AI Engineering" ? "text-[#6366f1]" : "text-[#22c55e]"} />
+                                        <link.icon size={15} aria-hidden="true" className={link.group === "AI Engineering" ? "text-brand" : "text-success"} />
                                         <span className="min-w-0">
-                                            <span className="block truncate text-sm font-medium text-[#fafafa]">{link.label}</span>
-                                            <span className="block font-mono text-[10px] uppercase tracking-wider text-[#52525b]">{link.group}</span>
+                                            <span className="block truncate text-sm font-medium text-fg">{link.label}</span>
+                                            <span className="block font-mono text-[10px] uppercase tracking-wider text-fg-muted">{link.group}</span>
                                         </span>
                                     </Link>
                                 ))}

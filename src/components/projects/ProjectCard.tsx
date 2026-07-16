@@ -1,0 +1,88 @@
+import React from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { Github } from "lucide-react"
+import { StatusBadge } from "@/src/components/system/StatusBadge"
+import { cn, interactiveCard } from "@/src/lib/utils/utils"
+import type { Project } from "@/src/lib/types"
+
+/**
+ * Card for the projects index. Exactly one link covers the whole card
+ * (case study); GitHub/live are separate, always-visible anchors placed
+ * outside the stretched-link overlay so there is no nested-link conflict
+ * and no hover-only affordance.
+ */
+export function ProjectCard({ project, index }: { project: Project; index: number }) {
+    const isLive = Boolean(project.demo && project.demo !== "#")
+
+    return (
+        <div className={cn("group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface", interactiveCard)}>
+            <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-background">
+                <Image
+                    src={project.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                />
+            </div>
+
+            <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs text-fg-muted">{String(index).padStart(2, "0")}</span>
+                    {isLive ? (
+                        <StatusBadge status="live">Live</StatusBadge>
+                    ) : (
+                        <StatusBadge status="archived">Source</StatusBadge>
+                    )}
+                </div>
+
+                <h3 className="mt-3 text-lg font-semibold tracking-tight text-fg">
+                    <Link href={`/projects/${project.slug}`} className="static-link">
+                        <span className="absolute inset-0" aria-hidden="true" />
+                        {project.title}
+                    </Link>
+                </h3>
+
+                <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-fg-secondary">
+                    {project.description}
+                </p>
+
+                <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`${project.title} technologies`}>
+                    {project.technologies.slice(0, 3).map((tech) => (
+                        <li
+                            key={tech}
+                            className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-fg-muted"
+                        >
+                            {tech}
+                        </li>
+                    ))}
+                </ul>
+
+                {project.github && (
+                    <div className="relative z-10 mt-4 flex items-center gap-4 border-t border-border pt-4">
+                        <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                        >
+                            <Github size={14} aria-hidden />
+                            GitHub
+                        </a>
+                        {isLive && (
+                            <a
+                                href={project.demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                            >
+                                Live site
+                            </a>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}

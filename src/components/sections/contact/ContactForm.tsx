@@ -1,7 +1,8 @@
+"use client"
+
 import React, { useState } from "react"
+import { CheckCircle2 } from "lucide-react"
 import { Button } from "@/src/components/ui/button"
-import { motion } from "framer-motion"
-import confetti from "canvas-confetti"
 import { submitContactForm } from "@/app/contact/actions"
 
 export function ContactForm() {
@@ -10,100 +11,86 @@ export function ContactForm() {
         email: "",
         subject: "",
         message: "",
+        website: "", // honeypot — real users never see or fill this in
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [formRenderedAt] = useState(() => Date.now())
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { id, value } = e.target;
-        setFormState((prev) => ({ ...prev, [id]: value }));
-    };
+        const { id, value } = e.target
+        setFormState((prev) => ({ ...prev, [id]: value }))
+    }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setError(null);
+        e.preventDefault()
+        setIsSubmitting(true)
+        setError(null)
 
-        const result = await submitContactForm(formState)
+        const result = await submitContactForm({
+            ...formState,
+            honeypot: formState.website,
+            formRenderedAt,
+        })
 
-        setIsSubmitting(false);
+        setIsSubmitting(false)
 
         if (!result.success) {
-            setError(result.error ?? 'Something went wrong. Please try again or email me directly.')
-            return;
+            setError(result.error ?? "Something went wrong. Please try again or email me directly.")
+            return
         }
 
-        setIsSubmitted(true);
+        setIsSubmitted(true)
         setFormState({
             name: "",
             email: "",
             subject: "",
             message: "",
-        });
-        
-        // Trigger Confetti
-        const duration = 5 * 1000;
-        const animationEnd = Date.now() + duration;
-        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+            website: "",
+        })
 
-        const randomInRange = (min: number, max: number) => {
-          return Math.random() * (max - min) + min;
-        }
-
-        const interval: any = setInterval(function() {
-          const timeLeft = animationEnd - Date.now();
-
-          if (timeLeft <= 0) {
-            return clearInterval(interval);
-          }
-
-          const particleCount = 50 * (timeLeft / duration);
-          confetti({
-            ...defaults,
-            particleCount,
-            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
-          });
-          confetti({
-            ...defaults,
-            particleCount,
-            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
-          });
-        }, 250);
-
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-            setIsSubmitted(false);
-        }, 5000);
-    };
+        setTimeout(() => setIsSubmitted(false), 5000)
+    }
 
     return (
         <form className="space-y-6" onSubmit={handleSubmit}>
-            {error && (
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-md bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 mb-6 border border-red-200 dark:border-red-800 text-sm"
-                >
-                    {error}
-                </motion.div>
-            )}
-            {isSubmitted && (
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-md bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 mb-6 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-1"
-                >
-                    <span className="font-medium text-sm">Thanks for reaching out!</span>
-                    <span className="text-xs text-zinc-600 dark:text-zinc-400">
-                        I&apos;ve received your message and will get back to you within 1&ndash;2 business days.
-                    </span>
-                </motion.div>
-            )}
+            {/* Honeypot — invisible and untabbable to real users; bots that fill every field trip it */}
+            <div className="absolute -left-[9999px]" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    value={formState.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                />
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div aria-live="polite" role="status">
+                {error && (
+                    <div className="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-600 dark:text-red-400">
+                        {error}
+                    </div>
+                )}
+                {isSubmitted && (
+                    <div className="mb-6 flex items-start gap-3 rounded-lg border border-success/30 bg-success/10 p-4">
+                        <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-success" aria-hidden />
+                        <div>
+                            <p className="text-sm font-medium text-fg">Thanks for reaching out!</p>
+                            <p className="mt-1 text-xs text-fg-muted">
+                                I&apos;ve received your message and will get back to you within 1&ndash;2 business days.
+                            </p>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium text-fg">
                         Name <span className="text-red-500" aria-hidden="true">*</span>
                     </label>
                     <input
@@ -112,12 +99,12 @@ export function ContactForm() {
                         value={formState.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
+                        className="w-full rounded-lg border border-border bg-background px-4 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                         placeholder="Your name"
                     />
                 </div>
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-fg">
                         Email <span className="text-red-500" aria-hidden="true">*</span>
                     </label>
                     <input
@@ -126,13 +113,13 @@ export function ContactForm() {
                         value={formState.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
+                        className="w-full rounded-lg border border-border bg-background px-4 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                         placeholder="your@email.com"
                     />
                 </div>
             </div>
             <div>
-                <label htmlFor="subject" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
+                <label htmlFor="subject" className="mb-2 block text-sm font-medium text-fg">
                     Subject <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <input
@@ -141,12 +128,12 @@ export function ContactForm() {
                     value={formState.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     placeholder="Project Inquiry"
                 />
             </div>
             <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-zinc-900 dark:text-zinc-100">
+                <label htmlFor="message" className="mb-2 block text-sm font-medium text-fg">
                     Message <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <textarea
@@ -155,26 +142,16 @@ export function ContactForm() {
                     value={formState.message}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all duration-200 placeholder:text-zinc-400"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     placeholder="Tell me about your project..."
                 />
             </div>
             <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-0 transition-all duration-300 hover:shadow-md disabled:opacity-70"
+                className="w-full bg-brand text-brand-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
             >
-                {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                        <svg className="animate-spin h-4 w-4 text-white dark:text-zinc-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Sending...
-                    </span>
-                ) : (
-                    "Send Message"
-                )}
+                {isSubmitting ? "Sending…" : "Send Message"}
             </Button>
         </form>
     )

@@ -11,7 +11,7 @@ import remarkGfm from "remark-gfm"
  */
 export function MarkdownContent({ text }: { text: string }) {
     return (
-        <div className="text-sm leading-relaxed text-slate-200 space-y-2 break-words">
+        <div className="text-sm leading-relaxed text-fg-secondary space-y-2 break-words">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -21,7 +21,7 @@ export function MarkdownContent({ text }: { text: string }) {
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-indigo-300 underline underline-offset-2 decoration-indigo-300/40 hover:text-indigo-200 hover:decoration-indigo-200"
+                            className="text-brand underline underline-offset-2 decoration-brand/40 hover:decoration-brand"
                         >
                             {children}
                         </a>
@@ -29,12 +29,12 @@ export function MarkdownContent({ text }: { text: string }) {
                     ul: ({ children }) => <ul className="list-disc pl-5 space-y-1">{children}</ul>,
                     ol: ({ children }) => <ol className="list-decimal pl-5 space-y-1">{children}</ol>,
                     li: ({ children }) => <li>{children}</li>,
-                    strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
-                    h1: ({ children }) => <h3 className="text-sm font-semibold text-white mt-1">{children}</h3>,
-                    h2: ({ children }) => <h3 className="text-sm font-semibold text-white mt-1">{children}</h3>,
-                    h3: ({ children }) => <h4 className="text-sm font-semibold text-white mt-1">{children}</h4>,
+                    strong: ({ children }) => <strong className="font-semibold text-fg">{children}</strong>,
+                    h1: ({ children }) => <h3 className="text-sm font-semibold text-fg mt-1">{children}</h3>,
+                    h2: ({ children }) => <h3 className="text-sm font-semibold text-fg mt-1">{children}</h3>,
+                    h3: ({ children }) => <h4 className="text-sm font-semibold text-fg mt-1">{children}</h4>,
                     blockquote: ({ children }) => (
-                        <blockquote className="border-l-2 border-indigo-400/40 pl-3 text-slate-300">{children}</blockquote>
+                        <blockquote className="border-l-2 border-brand/40 pl-3 text-fg-secondary">{children}</blockquote>
                     ),
                     code: ({ className, children }) => {
                         const isBlock = /language-/.test(className ?? "") || String(children).includes("\n")
@@ -44,19 +44,19 @@ export function MarkdownContent({ text }: { text: string }) {
                             )
                         }
                         return (
-                            <code className="font-mono text-xs px-1 py-0.5 rounded bg-white/10 text-indigo-200">
+                            <code className="font-mono text-xs px-1 py-0.5 rounded bg-surface-hover text-brand">
                                 {children}
                             </code>
                         )
                     },
                     pre: ({ children }) => (
-                        <pre className="p-3 rounded-lg bg-black/40 border border-white/10 overflow-x-auto">
+                        <pre className="p-3 rounded-lg bg-background/60 border border-border overflow-x-auto">
                             {children}
                         </pre>
                     ),
                     table: ({ children }) => (
                         <div className="overflow-x-auto">
-                            <table className="text-xs border-collapse [&_th]:border [&_th]:border-white/10 [&_th]:px-2 [&_th]:py-1 [&_td]:border [&_td]:border-white/10 [&_td]:px-2 [&_td]:py-1">
+                            <table className="text-xs border-collapse [&_th]:border [&_th]:border-border [&_th]:px-2 [&_th]:py-1 [&_td]:border [&_td]:border-border [&_td]:px-2 [&_td]:py-1">
                                 {children}
                             </table>
                         </div>

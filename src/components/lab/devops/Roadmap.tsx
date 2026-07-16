@@ -66,18 +66,18 @@ export function Roadmap({ topics }: { topics: RoadmapTopic[] }) {
                             onClick={() => setActiveTab(tab)}
                             className={`flex flex-col gap-1.5 rounded-xl border px-4 py-2.5 text-left transition-colors ${
                                 activeTab === tab
-                                    ? "border-[#6366f1] bg-[#6366f1]/10"
-                                    : "border-[#27272a] bg-[#18181b] hover:border-[#3f3f46]"
+                                    ? "border-brand bg-brand/10"
+                                    : "border-border bg-surface hover:border-border-strong"
                             }`}
                         >
-                            <span className={`text-xs font-semibold capitalize ${activeTab === tab ? "text-[#fafafa]" : "text-[#a1a1aa]"}`}>
+                            <span className={`text-xs font-semibold capitalize ${activeTab === tab ? "text-fg" : "text-fg-secondary"}`}>
                                 {tab}
                             </span>
                             <div className="flex items-center gap-2">
-                                <div className="h-1.5 w-20 overflow-hidden rounded-full bg-[#27272a]">
-                                    <div className="h-full rounded-full bg-[#6366f1] transition-all" style={{ width: `${pct}%` }} />
+                                <div className="h-1.5 w-20 overflow-hidden rounded-full bg-surface-elevated">
+                                    <div className="h-full rounded-full bg-brand transition-all" style={{ width: `${pct}%` }} />
                                 </div>
-                                <span className="text-[10px] text-[#52525b]">
+                                <span className="text-[10px] text-fg-muted">
                                     {p.completed}/{p.total}
                                 </span>
                             </div>
@@ -93,7 +93,7 @@ export function Roadmap({ topics }: { topics: RoadmapTopic[] }) {
                         const content = (
                             <>
                                 <div className="mb-2 flex items-start justify-between gap-2">
-                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#6366f1]">{topic.category}</span>
+                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">{topic.category}</span>
                                     <button
                                         type="button"
                                         onClick={(e) => {
@@ -103,23 +103,23 @@ export function Roadmap({ topics }: { topics: RoadmapTopic[] }) {
                                         aria-label={isDone ? `Mark ${topic.title} as not learned` : `Mark ${topic.title} as learned`}
                                         aria-pressed={isDone}
                                         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                                            isDone ? "border-emerald-500 bg-emerald-500/20 text-emerald-500" : "border-[#3f3f46] text-transparent hover:border-[#52525b]"
+                                            isDone ? "border-emerald-500 bg-emerald-500/20 text-emerald-500" : "border-border-strong text-transparent hover:border-fg-muted"
                                         }`}
                                     >
                                         <Check size={12} strokeWidth={3} />
                                     </button>
                                 </div>
-                                <h3 className="mb-1.5 text-sm font-semibold text-[#fafafa]">{topic.title}</h3>
-                                <p className="mb-3 flex-1 text-xs leading-relaxed text-[#71717a] line-clamp-2">{topic.description}</p>
-                                <div className="flex items-center justify-between border-t border-[#27272a] pt-3">
-                                    <span className="flex items-center gap-1 text-[10px] font-medium text-[#52525b]">
+                                <h3 className="mb-1.5 text-sm font-semibold text-fg">{topic.title}</h3>
+                                <p className="mb-3 flex-1 text-xs leading-relaxed text-fg-muted line-clamp-2">{topic.description}</p>
+                                <div className="flex items-center justify-between border-t border-border pt-3">
+                                    <span className="flex items-center gap-1 text-[10px] font-medium text-fg-muted">
                                         <Clock size={11} />
                                         {topic.estimatedTime}
                                     </span>
                                     {topic.hasCard ? (
-                                        <ArrowRight size={13} className="text-[#3f3f46] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all" />
+                                        <ArrowRight size={13} className="text-border-strong group-hover:text-brand group-hover:translate-x-1 transition-all" />
                                     ) : (
-                                        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">Planned</span>
+                                        <span className="text-[10px] font-semibold uppercase tracking-wider text-fg-muted">Planned</span>
                                     )}
                                 </div>
                             </>
@@ -137,12 +137,12 @@ export function Roadmap({ topics }: { topics: RoadmapTopic[] }) {
                                 {topic.hasCard ? (
                                     <Link
                                         href={`/lab/devops/topics/${topic.slug}`}
-                                        className="group flex h-full flex-col rounded-2xl border border-[#27272a] bg-[#18181b] p-4 transition-all hover:border-[#3f3f46] hover:-translate-y-0.5"
+                                        className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-4 transition-all hover:border-border-strong hover:-translate-y-0.5"
                                     >
                                         {content}
                                     </Link>
                                 ) : (
-                                    <div className="flex h-full flex-col rounded-2xl border border-dashed border-[#27272a] bg-[#18181b]/50 p-4 opacity-70">
+                                    <div className="flex h-full flex-col rounded-2xl border border-dashed border-border bg-surface/50 p-4 opacity-70">
                                         {content}
                                     </div>
                                 )}

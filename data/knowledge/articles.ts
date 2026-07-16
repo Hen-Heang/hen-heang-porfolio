@@ -2,7 +2,7 @@ import { performanceTechniques } from "@/data/lab/performance"
 import type { KnowledgeSection } from "./types"
 
 /**
- * The Engineering Lab (https://henheang.site/lab) is where Hen documents
+ * The Engineering Lab (https://henheang.site/lab) is where Heang documents
  * engineering write-ups: system design walkthroughs, performance techniques,
  * and a DevOps learning roadmap. Derived from data/lab/*.
  */
@@ -17,7 +17,7 @@ export const articlesKnowledge: KnowledgeSection[] = [
             "diagrams", "learning", "notes",
         ],
         content: [
-            "Hen publishes engineering write-ups on his portfolio's **Engineering Lab** (https://henheang.site/lab):",
+            "Heang publishes engineering write-ups on his portfolio's **Engineering Lab** (https://henheang.site/lab):",
             "",
             "- **Systems** — architecture walkthroughs of each portfolio project, with diagrams, challenges, solutions, and lessons learned.",
             "- **Performance** — techniques applied in real projects: caching, optimistic UI, background jobs, data access, and reliability.",

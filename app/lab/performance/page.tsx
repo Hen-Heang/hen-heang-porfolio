@@ -19,11 +19,11 @@ export const metadata: Metadata = {
 const CATEGORY_ORDER: PerformanceEntry["category"][] = ["Caching", "Optimistic UI", "Background Jobs", "Data Access", "Reliability"]
 
 const CATEGORY_COLOR: Record<PerformanceEntry["category"], string> = {
-    Caching: "text-[#6366f1]",
+    Caching: "text-brand",
     "Optimistic UI": "text-[#22d3ee]",
     "Background Jobs": "text-[#f59e0b]",
-    "Data Access": "text-[#22c55e]",
-    Reliability: "text-[#22c55e]",
+    "Data Access": "text-success",
+    Reliability: "text-success",
 }
 
 export default function PerformanceLabPage() {
@@ -34,12 +34,12 @@ export default function PerformanceLabPage() {
 
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#27272a] bg-[#18181b] px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-[#a1a1aa]">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-fg-secondary">
                 <Gauge size={11} aria-hidden="true" className="text-[#f59e0b]" />
                 ~/lab/performance
             </span>
-            <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-[#fafafa]">Performance Lab</h1>
-            <p className="mt-2 max-w-2xl text-sm md:text-base leading-relaxed text-[#a1a1aa]">
+            <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-fg">Performance Lab</h1>
+            <p className="mt-2 max-w-2xl text-sm md:text-base leading-relaxed text-fg-secondary">
                 Caching, optimistic UI, background jobs, and data-access decisions that keep these apps fast and
                 reliable — pulled straight from what shipped, not synthetic benchmarks.
             </p>
@@ -54,12 +54,12 @@ export default function PerformanceLabPage() {
                             {group.entries.map((entry, i) => (
                                 <div
                                     key={i}
-                                    className="flex flex-col gap-2 rounded-2xl border border-[#27272a] bg-[#18181b] p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+                                    className="flex flex-col gap-2 rounded-2xl border border-border bg-surface p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
                                 >
                                     <p className="text-sm leading-relaxed text-[#d4d4d8]">{entry.text}</p>
                                     <Link
                                         href={`/projects/${entry.slug}`}
-                                        className="flex shrink-0 items-center gap-1 font-mono text-[11px] text-[#71717a] hover:text-[#fafafa] transition-colors"
+                                        className="flex shrink-0 items-center gap-1 font-mono text-[11px] text-fg-muted hover:text-fg transition-colors"
                                     >
                                         {entry.project.split(" — ")[0]}
                                         <ArrowUpRight size={12} aria-hidden="true" />

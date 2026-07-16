@@ -118,7 +118,7 @@ async function seed() {
       type: a.type,
       description: a.description ?? null,
       image: a.image ?? null,
-      link: (a as any).link ?? null,
+      link: a.link ?? null,
       sort_order: i,
     })),
     { onConflict: 'title,issuer' }

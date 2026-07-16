@@ -1,94 +1,46 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState } from "react"
-import { getSiteContent } from "@/src/lib/db/portfolio"
-import { profileData as defaultProfile } from "@/data/profile"
-import {
-    deployedProjects as defaultDeployed,
-    workProjects as defaultWork,
-    journey as defaultJourney,
-    type BentoProject,
-} from "@/data/dashboard"
-import { cvData as defaultCV } from "@/data/cv-data"
+import { createContext, useContext } from "react"
+import type { z } from "zod"
+import type { ProfileContentSchema, CvContentSchema } from "@/src/lib/schemas/content"
 
-export type ProfileContent = typeof defaultProfile
-export type CVContent = typeof defaultCV
-export interface DashboardContent {
-    deployedProjects: BentoProject[]
-    workProjects: typeof defaultWork
-    journey: typeof defaultJourney
-}
+export type ProfileContent = z.infer<typeof ProfileContentSchema>
+export type CVContent = z.infer<typeof CvContentSchema>
 
-interface SiteContent {
+export interface SiteContent {
     profile: ProfileContent
-    dashboard: DashboardContent
     cv: CVContent
 }
 
-const defaults: SiteContent = {
-    profile: defaultProfile,
-    dashboard: {
-        deployedProjects: defaultDeployed,
-        workProjects: defaultWork,
-        journey: defaultJourney,
-    },
-    cv: defaultCV,
+const SiteContentContext = createContext<SiteContent | null>(null)
+
+/**
+ * Content is resolved server-side (see `app/layout.tsx`, which calls the
+ * fallback-aware `getSiteContent` repository functions) and handed down as
+ * `initialContent` — no client fetch, no static-then-Supabase flash.
+ */
+export function SiteContentProvider({
+    initialContent,
+    children,
+}: {
+    initialContent: SiteContent
+    children: React.ReactNode
+}) {
+    return <SiteContentContext.Provider value={initialContent}>{children}</SiteContentContext.Provider>
 }
 
-const SiteContentContext = createContext<SiteContent>(defaults)
-
-export function SiteContentProvider({ children }: { children: React.ReactNode }) {
-    const [content, setContent] = useState<SiteContent>(defaults)
-
-    useEffect(() => {
-        Promise.all([
-            getSiteContent<ProfileContent>("profile"),
-            getSiteContent<DashboardContent>("dashboard"),
-            getSiteContent<CVContent>("cv"),
-        ]).then(([profile, dashboard, cv]) => {
-            setContent({
-                profile: profile ?? defaults.profile,
-                dashboard: dashboard ?? defaults.dashboard,
-                cv: cv ?? defaults.cv,
-            })
-        })
-    }, [])
-
-    return (
-        <SiteContentContext.Provider value={content}>
-            {children}
-        </SiteContentContext.Provider>
-    )
+function useSiteContent(): SiteContent {
+    const ctx = useContext(SiteContentContext)
+    if (!ctx) throw new Error("useSiteContent must be used within a SiteContentProvider")
+    return ctx
 }
 
 export function useProfile(): ProfileContent {
-    return useContext(SiteContentContext).profile
-}
-
-export function useDashboardContent(): DashboardContent {
-    return useContext(SiteContentContext).dashboard
+    return useSiteContent().profile
 }
 
 export function useCVData(): CVContent {
-    return useContext(SiteContentContext).cv
-}
-
-// Same shape data/dashboard.ts `profile` derived from the profile
-export function useDashboardProfile() {
-    const p = useProfile()
-    return {
-        name: p.name,
-        koreanName: p.koreanName,
-        title: p.title,
-        company: p.company,
-        location: p.location,
-        locationEmoji: p.locationEmoji,
-        email: p.email,
-        available: p.available,
-        yearsExperience: p.yearsExperience,
-        bio: p.bio,
-        socials: p.socialLinks,
-    }
+    return useSiteContent().cv
 }
 
 // Same shape data/personal-info.ts derived from the profile

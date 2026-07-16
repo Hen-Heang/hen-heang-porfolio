@@ -1,12 +1,8 @@
-"use client"
+import { redirect } from "next/navigation"
 
-import { PageLayout } from "@/src/components/layout/PageLayout"
-import ProfileSection from "@/src/components/sections/profile/ProfileSection"
-
+// The former /profile route showed a fake social-media mockup with
+// fabricated stats. It has no real content of its own — About covers the
+// same personal/professional identity with real data.
 export default function ProfilePage() {
-    return (
-        <PageLayout>
-            <ProfileSection />
-        </PageLayout>
-    )
+    redirect("/about")
 }

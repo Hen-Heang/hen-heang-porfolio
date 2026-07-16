@@ -43,11 +43,11 @@ export default async function DevOpsTopicPage({
             <header className="mb-8">
                 <div className="mb-3 flex flex-wrap items-center gap-2">
                     <DifficultyBadge difficulty={topic.difficulty} />
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#22c55e]">{topic.category}</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-success">{topic.category}</span>
                 </div>
-                <h1 className="mb-3 text-2xl md:text-4xl font-bold leading-tight tracking-tight text-[#fafafa]">{topic.title}</h1>
-                <p className="mb-4 text-sm md:text-base leading-relaxed text-[#a1a1aa]">{topic.description}</p>
-                <span className="flex items-center gap-1 text-xs text-[#71717a]">
+                <h1 className="mb-3 text-2xl md:text-4xl font-bold leading-tight tracking-tight text-fg">{topic.title}</h1>
+                <p className="mb-4 text-sm md:text-base leading-relaxed text-fg-secondary">{topic.description}</p>
+                <span className="flex items-center gap-1 text-xs text-fg-muted">
                     <Clock size={12} />
                     {topic.estimatedTime}
                 </span>

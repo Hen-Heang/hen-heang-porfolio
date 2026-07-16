@@ -47,6 +47,8 @@ export interface Project {
     role?: string
     duration?: string
     teamSize?: string
+    /** ISO timestamp of last DB update; absent for statically-sourced projects. */
+    updatedAt?: string
 }
 
 export interface EducationItem {

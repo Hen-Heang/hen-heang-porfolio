@@ -29,7 +29,7 @@ export interface KnowledgeSection {
     keywords: string[]
     /**
      * Always include this section regardless of the question.
-     * Reserved for identity-critical facts (who Hen is, how to reach him).
+     * Reserved for identity-critical facts (who Heang is, how to reach him).
      */
     core?: boolean
     /** Markdown content — the only text the model may answer from */

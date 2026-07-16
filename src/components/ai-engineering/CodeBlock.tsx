@@ -6,9 +6,9 @@ import { CopyButton } from "@/src/components/ai-engineering/CopyButton"
 
 export function CodeBlock({ code, language, filename }: { code: string; language: string; filename?: string }) {
     return (
-        <div className="my-6 overflow-hidden rounded-xl border border-[#27272a] bg-[#0c0c0e]">
-            <div className="flex items-center justify-between border-b border-[#27272a] bg-[#18181b] px-4 py-2">
-                <span className="text-[11px] font-medium text-[#71717a]">{filename || language}</span>
+        <div className="my-6 overflow-hidden rounded-xl border border-border bg-[#0c0c0e]">
+            <div className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
+                <span className="text-[11px] font-medium text-fg-muted">{filename || language}</span>
                 <CopyButton text={code} />
             </div>
             <SyntaxHighlighter

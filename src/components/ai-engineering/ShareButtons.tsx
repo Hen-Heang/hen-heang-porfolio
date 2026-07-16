@@ -39,7 +39,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
                     rel="noopener noreferrer"
                     aria-label={label}
                     title={label}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272a] text-[#71717a] hover:text-[#fafafa] hover:border-[#3f3f46] transition-colors"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-fg-muted hover:text-fg hover:border-border-strong transition-colors"
                 >
                     <Icon size={14} />
                 </a>
@@ -49,7 +49,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
                 onClick={copyLink}
                 aria-label="Copy link"
                 title="Copy link"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272a] text-[#71717a] hover:text-[#fafafa] hover:border-[#3f3f46] transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-fg-muted hover:text-fg hover:border-border-strong transition-colors"
             >
                 <Link2 size={14} className={copied ? "text-emerald-500" : ""} />
             </button>

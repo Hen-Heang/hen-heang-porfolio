@@ -8,7 +8,11 @@ import { AssistantWidget } from "@/src/components/assistant"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import { profileData } from "@/data/profile"
+import { getSiteContent } from "@/src/lib/db/portfolio"
 import "./globals.css"
+
+// Re-render at most once a minute so admin edits show up without a redeploy.
+export const revalidate = 60
 
 const inter = localFont({
     src: [
@@ -91,16 +95,21 @@ const jsonLd = {
     knowsAbout: profileData.knowsAbout,
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+    const [profile, cv] = await Promise.all([
+        getSiteContent("profile"),
+        getSiteContent("cv"),
+    ])
+
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className} ${jetbrainsMono.variable}`}>
+        <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-                <SiteContentProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <SiteContentProvider initialContent={{ profile, cv }}>
                     <RouteScrollReset />
                     {children}
                     <AssistantWidget />

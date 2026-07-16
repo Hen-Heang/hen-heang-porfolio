@@ -21,80 +21,94 @@
 }
 
 @layer base {
+  /* ---------------------------------------------------------------------
+     Semantic design tokens (HSL channel triplets so Tailwind can apply
+     alpha: `hsl(var(--surface) / <alpha-value>)`).
+
+     Naming note: the single brand accent is `--brand`, NOT `--accent` —
+     shadcn's `--accent` is a neutral hover token consumed by the button
+     ghost/outline variants across the admin UI, and must stay neutral.
+     --------------------------------------------------------------------- */
   :root {
-    /* Bento Dashboard Design Tokens */
-    --bg-primary: #09090b;
-    --bg-card: #18181b;
-    --bg-card-hover: #1f1f23;
-    --bg-elevated: #27272a;
-    --border-default: #27272a;
-    --border-hover: #3f3f46;
-    --text-primary: #fafafa;
-    --text-secondary: #a1a1aa;
-    --text-muted: #71717a;
-    --text-subtle: #52525b;
-    --accent-primary: #6366f1;
-    --accent-secondary: #8b5cf6;
-    --accent-cyan: #22d3ee;
-    --accent-lime: #84cc16;
-    --accent-green: #22c55e;
-    --font-sans: 'Inter', system-ui, sans-serif;
+    --background: 0 0% 100%;
+    --surface: 240 5% 98%;
+    --surface-hover: 240 5% 95%;
+    --surface-elevated: 240 5% 96%;
+    --border: 240 6% 90%;
+    --border-strong: 240 5% 83%;
+    --fg: 240 10% 4%;
+    --fg-secondary: 240 5% 32%;
+    --fg-muted: 240 4% 45%;
+    --brand: 175 84% 32%; /* #0d9488 — teal, darkened for AA on white */
+    --brand-foreground: 0 0% 100%;
+    --success: 152 60% 30%;
+
+    --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 12px;
     --radius-xl: 16px;
     --radius-2xl: 20px;
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%; /* Black focus ring for clean aesthetic */
 
-    /* Accent color: A refined, darker teal/slate */
-    --primary: 240 10% 3.9%;
+    /* shadcn tokens (kept for admin + ui primitives), repointed to the palette */
+    --foreground: var(--fg);
+    --input: var(--border);
+    --ring: var(--brand);
+
+    --primary: 240 10% 4%;
     --primary-foreground: 0 0% 98%;
-    
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
+    --muted: 240 5% 96%;
+    --muted-foreground: var(--fg-muted);
+    --accent: 240 5% 96%;
+    --accent-foreground: 240 6% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: var(--fg);
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: var(--fg);
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    
-    /* Slightly sharper corners for minimalist look */
-    --radius: 0.35rem;
+
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --background: 240 6% 4%;
+    --surface: 240 5% 7%;
+    --surface-hover: 240 4% 9%;
+    --surface-elevated: 240 4% 10%;
+    --border: 240 4% 15%;
+    --border-strong: 240 4% 25%;
+    --fg: 0 0% 98%;
+    --fg-secondary: 240 5% 65%;
+    --fg-muted: 240 4% 46%;
+    --brand: 172 66% 50%; /* #2dd4bf family, lightened for AA on near-black */
+    --brand-foreground: 240 6% 6%;
+    --success: 152 55% 52%;
+
+    --foreground: var(--fg);
+    --input: var(--border);
+    --ring: var(--brand);
 
     --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    
-    --secondary: 240 3.7% 15.9%;
+    --primary-foreground: 240 6% 10%;
+
+    --secondary: 240 4% 15%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+    --muted: 240 4% 15%;
+    --muted-foreground: var(--fg-secondary);
+    --accent: 240 4% 15%;
     --accent-foreground: 0 0% 98%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --card: 240 5% 7%;
+    --card-foreground: var(--fg);
+    --popover: 240 6% 4%;
+    --popover-foreground: var(--fg);
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -136,58 +150,21 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-fg antialiased;
     font-family: var(--font-sans);
   }
 
-  /* Bento dashboard scrollbar */
-  .bento-scroll::-webkit-scrollbar { width: 4px; }
-  .bento-scroll::-webkit-scrollbar-track { background: transparent; }
-  .bento-scroll::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
-}
-
-/* Bento animations */
-@keyframes live-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.live-badge span:first-child {
-  animation: live-pulse 2s ease-in-out infinite;
-}
-
-.bento-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.arrow-link {
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-
-.project-card:hover .arrow-link {
-  transform: translateX(4px);
-}
-
-@layer components {
-  .section-base {
-    @apply py-24; /* Slightly more padding for airy feel */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
   }
-
-  .section-muted {
-    @apply bg-zinc-50 dark:bg-zinc-900/50;
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
-
-  .section-plain {
-    @apply bg-transparent;
-  }
-
-  /* Flat, clean cards instead of glassmorphism */
-  .surface-card {
-    @apply bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm transition-shadow hover:shadow-md;
-  }
-
-  .surface-soft {
-    @apply bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800;
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border-strong));
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
 }

@@ -6,6 +6,8 @@ import { Menu, X } from "lucide-react"
 
 /** Segments that have their own index page and can be linked in the breadcrumb */
 const LINKABLE: Record<string, string> = {
+    backend: "Backend Engineering",
+    roadmap: "Roadmap",
     devops: "DevOps",
     labs: "Labs",
     commands: "Commands",
@@ -41,31 +43,31 @@ export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMen
     })
 
     return (
-        <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-3 border-b border-[#27272a] bg-[#09090b]/80 px-4 backdrop-blur-md md:px-6">
+        <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-md md:px-6">
             <div className="flex min-w-0 items-center gap-3">
                 <button
                     type="button"
                     onClick={onMenuToggle}
                     aria-label={menuOpen ? "Close lab menu" : "Open lab menu"}
                     aria-expanded={menuOpen}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272a] text-[#a1a1aa] hover:text-[#fafafa] hover:border-[#3f3f46] transition-colors lg:hidden"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-fg-secondary hover:text-fg hover:border-border-strong transition-colors lg:hidden"
                 >
                     {menuOpen ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
                 </button>
 
-                <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-1.5 font-mono text-sm lg:text-xs text-[#71717a]">
-                    <Link href="/lab" className="shrink-0 hover:text-[#fafafa] transition-colors">
+                <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-1.5 font-mono text-sm lg:text-xs text-fg-muted">
+                    <Link href="/lab" className="shrink-0 hover:text-fg transition-colors">
                         lab
                     </Link>
                     {crumbs.map((crumb, i) => (
                         <span key={i} className="flex min-w-0 items-center gap-1.5">
-                            <span className="text-[#3f3f46]">/</span>
+                            <span className="text-border-strong">/</span>
                             {crumb.href && i < crumbs.length - 1 ? (
-                                <Link href={crumb.href} className="shrink-0 hover:text-[#fafafa] transition-colors">
+                                <Link href={crumb.href} className="shrink-0 hover:text-fg transition-colors">
                                     {crumb.label.toLowerCase()}
                                 </Link>
                             ) : (
-                                <span className="truncate text-[#a1a1aa]">{crumb.label.toLowerCase()}</span>
+                                <span className="truncate text-fg-secondary">{crumb.label.toLowerCase()}</span>
                             )}
                         </span>
                     ))}
@@ -73,16 +75,16 @@ export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMen
             </div>
 
             <div className="flex shrink-0 items-center gap-4">
-                <span className="hidden items-center gap-1.5 font-mono text-xs lg:text-[11px] text-[#71717a] sm:flex">
+                <span className="hidden items-center gap-1.5 font-mono text-xs lg:text-[11px] text-fg-muted sm:flex">
                     <span className="relative flex h-2 w-2" aria-hidden="true">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-60" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
                     </span>
                     always building
                 </span>
                 <Link
                     href="/"
-                    className="rounded-lg border border-[#27272a] px-2.5 py-1 font-mono text-xs lg:text-[11px] text-[#a1a1aa] hover:border-[#3f3f46] hover:text-[#fafafa] transition-colors"
+                    className="rounded-lg border border-border px-2.5 py-1 font-mono text-xs lg:text-[11px] text-fg-secondary hover:border-border-strong hover:text-fg transition-colors"
                 >
                     exit lab
                 </Link>

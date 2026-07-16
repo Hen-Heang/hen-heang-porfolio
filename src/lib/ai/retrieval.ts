@@ -62,7 +62,7 @@ export const keywordRetriever: Retriever = {
             .map((entry) => entry.section)
 
         // Greetings / vague questions match nothing — fall back to the
-        // overview sections so the model can still introduce Hen.
+        // overview sections so the model can still introduce Heang.
         const selected = relevant.length > 0
             ? relevant
             : sections.filter((s) => s.id === "projects-catalog" || s.id === "skills-current-focus")

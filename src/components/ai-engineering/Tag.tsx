@@ -8,8 +8,8 @@ export function Tag({ label, active, onClick, className }: { label: string; acti
             className={cn(
                 "inline-flex items-center rounded-md px-2 py-1 text-[10px] font-medium transition-colors",
                 active
-                    ? "bg-[#6366f1] text-white"
-                    : "bg-[#27272a] text-[#a1a1aa] hover:text-[#fafafa]",
+                    ? "bg-brand text-white"
+                    : "bg-surface-elevated text-fg-secondary hover:text-fg",
                 onClick && "cursor-pointer",
                 className
             )}

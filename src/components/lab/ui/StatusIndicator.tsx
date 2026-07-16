@@ -1,8 +1,8 @@
 export type StatusLevel = "production" | "active" | "learning" | "experimenting"
 
 const STATUS_CONFIG: Record<StatusLevel, { label: string; dot: string; text: string }> = {
-    production: { label: "Production", dot: "bg-[#22c55e]", text: "text-[#22c55e]" },
-    active: { label: "Active", dot: "bg-[#6366f1]", text: "text-[#6366f1]" },
+    production: { label: "Production", dot: "bg-success", text: "text-success" },
+    active: { label: "Active", dot: "bg-brand", text: "text-brand" },
     learning: { label: "Learning", dot: "bg-[#f59e0b]", text: "text-[#f59e0b]" },
     experimenting: { label: "Experimenting", dot: "bg-[#22d3ee]", text: "text-[#22d3ee]" },
 }

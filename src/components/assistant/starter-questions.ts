@@ -6,11 +6,9 @@ export interface StarterQuestion {
 }
 
 export const starterQuestions: StarterQuestion[] = [
-    { label: "Tell me about Hen", prompt: "Tell me about Hen." },
-    { label: "Backend experience", prompt: "What backend technologies does Hen use?" },
-    { label: "Spring Boot projects", prompt: "Which of Hen's projects use Spring Boot?" },
-    { label: "AI Engineering", prompt: "What AI engineering work has Hen done?" },
-    { label: "Latest projects", prompt: "What are Hen's latest projects?" },
-    { label: "Download CV", prompt: "How can I view or download Hen's CV?" },
-    { label: "Contact", prompt: "How can I contact Hen?" },
+    { label: "Backend systems", prompt: "What backend systems has Heang built?" },
+    { label: "Spring Boot experience", prompt: "What is Heang's Spring Boot experience?" },
+    { label: "Strongest project", prompt: "Show me his strongest project." },
+    { label: "Tech stack", prompt: "What technologies does he use?" },
+    { label: "Contact", prompt: "How can I contact him?" },
 ]

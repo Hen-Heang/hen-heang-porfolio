@@ -27,8 +27,11 @@ export default async function EngineeringLabPage() {
     const metrics: LabMetric[] = [
         { label: "Projects built", value: projects.length },
         { label: "Technologies", value: techCount, suffix: "+" },
-        { label: "Articles & Snippets", value: stats.aiArticles + stats.aiPrompts + stats.aiSnippets },
-        { label: "DevOps topics & labs", value: stats.devopsTopics + stats.devopsLabs },
+        { label: "Backend topics", value: stats.backendPublished, suffix: " published" },
+        {
+            label: "Lab resources",
+            value: stats.aiArticles + stats.aiPrompts + stats.aiSnippets + stats.devopsTopics + stats.devopsLabs + stats.backendPublished + stats.backendPlanned,
+        },
     ]
 
     const featured = projects

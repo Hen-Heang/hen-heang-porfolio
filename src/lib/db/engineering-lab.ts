@@ -4,6 +4,7 @@ import { labs } from "@/data/lab/devops/labs"
 import { commandCategories } from "@/data/lab/devops/commands"
 import { infraTerms } from "@/data/lab/devops/infrastructure"
 import type { EngineeringLabSearchItem } from "@/src/lib/types/engineering-lab"
+import { getBackendSummaries } from "@/src/lib/backend/catalog"
 
 export interface EngineeringLabStats {
     aiArticles: number
@@ -12,10 +13,13 @@ export interface EngineeringLabStats {
     devopsTopics: number
     devopsLabs: number
     devopsCommands: number
+    backendPublished: number
+    backendPlanned: number
 }
 
 export async function getEngineeringLabIndex(): Promise<{ items: EngineeringLabSearchItem[]; stats: EngineeringLabStats }> {
     const [articles, prompts, snippets] = await Promise.all([getAIArticles(), getAIPrompts(), getAISnippets()])
+    const backendSummaries = getBackendSummaries()
 
     const items: EngineeringLabSearchItem[] = [
         ...articles.map((a) => ({
@@ -41,6 +45,14 @@ export async function getEngineeringLabIndex(): Promise<{ items: EngineeringLabS
             source: "AI Engineering" as const,
             type: "Snippet",
             tags: s.tags,
+        })),
+        ...backendSummaries.map((item) => ({
+            title: item.title,
+            description: item.description,
+            href: item.status === "published" ? `/lab/backend/${item.slug}` : "/lab/backend/roadmap",
+            source: "Backend Engineering" as const,
+            type: item.status === "planned" ? `Planned ${item.type}` : item.type,
+            tags: [item.category, item.difficulty, ...item.technologies],
         })),
         ...roadmap
             .filter((t) => t.hasCard)
@@ -87,6 +99,8 @@ export async function getEngineeringLabIndex(): Promise<{ items: EngineeringLabS
         devopsTopics: roadmap.filter((t) => t.hasCard).length,
         devopsLabs: labs.length,
         devopsCommands: commandCategories.reduce((sum, c) => sum + c.commands.length, 0),
+        backendPublished: backendSummaries.filter((item) => item.status === "published").length,
+        backendPlanned: backendSummaries.filter((item) => item.status === "planned").length,
     }
 
     return { items, stats }

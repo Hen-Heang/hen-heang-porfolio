@@ -1,5 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
+import tailwindcssTypography from "@tailwindcss/typography";
+
+const config: Config = {
 	darkMode: ["class"],
 	content: [
 		"./pages/**/*.{ts,tsx}",
@@ -21,13 +24,42 @@ module.exports = {
 				"xs": "480px",
 			},
 			fontFamily: {
-				sans: ["Inter", "sans-serif"],
+				sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
 				mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+			},
+			fontSize: {
+				display: ["clamp(3rem, 8vw, 6.5rem)", { lineHeight: "0.98", letterSpacing: "-0.055em", fontWeight: "600" }],
+				"display-sm": ["clamp(2rem, 5vw, 4rem)", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "600" }],
+			},
+			maxWidth: {
+				content: "80rem", // 1280px page width
+				reading: "46rem", // ~736px prose width
+			},
+			spacing: {
+				section: "clamp(4.5rem, 12vw, 11.25rem)", // 72px mobile → 180px desktop
 			},
 			colors: {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
-				border: "hsl(var(--border))",
+				surface: {
+					DEFAULT: "hsl(var(--surface) / <alpha-value>)",
+					hover: "hsl(var(--surface-hover) / <alpha-value>)",
+					elevated: "hsl(var(--surface-elevated) / <alpha-value>)",
+				},
+				fg: {
+					DEFAULT: "hsl(var(--fg) / <alpha-value>)",
+					secondary: "hsl(var(--fg-secondary) / <alpha-value>)",
+					muted: "hsl(var(--fg-muted) / <alpha-value>)",
+				},
+				brand: {
+					DEFAULT: "hsl(var(--brand) / <alpha-value>)",
+					foreground: "hsl(var(--brand-foreground) / <alpha-value>)",
+				},
+				success: "hsl(var(--success) / <alpha-value>)",
+				border: {
+					DEFAULT: "hsl(var(--border))",
+					strong: "hsl(var(--border-strong) / <alpha-value>)",
+				},
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
 				primary: {
@@ -66,34 +98,21 @@ module.exports = {
 			},
 			keyframes: {
 				"accordion-down": {
-					from: { height: 0 },
+					from: { height: "0" },
 					to: { height: "var(--radix-accordion-content-height)" },
 				},
 				"accordion-up": {
 					from: { height: "var(--radix-accordion-content-height)" },
-					to: { height: 0 },
-				},
-				"shine-pulse": {
-					"0%": { "box-shadow": "0 0 0 0px rgba(0, 204, 153, 0.2)" },
-					"50%": { "box-shadow": "0 0 0 10px rgba(0, 204, 153, 0)" },
-					"100%": { "box-shadow": "0 0 0 0px rgba(0, 204, 153, 0)" },
-				},
-				"shiny-text": {
-					"0%, 90%, 100%": {
-						"background-position": "calc(-100% - var(--shimmer-width)) 0",
-					},
-					"30%, 60%": {
-						"background-position": "calc(100% + var(--shimmer-width)) 0",
-					},
+					to: { height: "0" },
 				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
-				"shine-pulse": "shine-pulse 2s infinite",
-				"shiny-text": "shiny-text 8s infinite",
 			},
 		},
 	},
-	plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+	plugins: [tailwindcssAnimate, tailwindcssTypography],
 };
+
+export default config;

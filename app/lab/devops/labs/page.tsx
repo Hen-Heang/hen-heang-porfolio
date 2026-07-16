@@ -13,8 +13,8 @@ export default function LabsPage() {
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
             <div className="mb-8">
-                <h1 className="mb-1 text-3xl font-bold text-[#fafafa]">Hands-on Labs</h1>
-                <p className="text-sm text-[#71717a]">
+                <h1 className="mb-1 text-3xl font-bold text-fg">Hands-on Labs</h1>
+                <p className="text-sm text-fg-muted">
                     Practical walkthroughs — architecture, commands, expected result, and what actually went wrong the first time.
                 </p>
             </div>

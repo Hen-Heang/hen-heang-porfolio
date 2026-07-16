@@ -17,9 +17,9 @@ export function LabShell({ children }: { children: React.ReactNode }) {
     }, [pathname])
 
     return (
-        <div className="min-h-screen bg-[#09090b] text-[#fafafa] font-sans">
+        <div className="min-h-screen bg-background text-fg font-sans">
             {/* Desktop sidebar */}
-            <aside className="fixed inset-y-0 left-0 z-50 hidden w-60 border-r border-[#27272a] lg:block">
+            <aside className="fixed inset-y-0 left-0 z-50 hidden w-60 border-r border-border lg:block">
                 <LabSidebar />
             </aside>
 
@@ -41,7 +41,7 @@ export function LabShell({ children }: { children: React.ReactNode }) {
                             animate={{ x: 0 }}
                             exit={{ x: -260 }}
                             transition={{ type: "tween", duration: 0.22, ease: "easeOut" }}
-                            className="fixed inset-y-0 left-0 z-50 w-60 border-r border-[#27272a] lg:hidden"
+                            className="fixed inset-y-0 left-0 z-50 w-60 border-r border-border lg:hidden"
                         >
                             <LabSidebar onNavigate={() => setMenuOpen(false)} />
                         </motion.aside>

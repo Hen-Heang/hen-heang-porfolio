@@ -42,9 +42,9 @@ export default async function LabPage({
                 <div className="mb-3">
                     <DifficultyBadge difficulty={lab.difficulty} />
                 </div>
-                <h1 className="mb-3 text-2xl md:text-4xl font-bold leading-tight tracking-tight text-[#fafafa]">{lab.title}</h1>
-                <p className="mb-4 text-sm md:text-base leading-relaxed text-[#a1a1aa]">{lab.description}</p>
-                <span className="flex items-center gap-1 text-xs text-[#71717a]">
+                <h1 className="mb-3 text-2xl md:text-4xl font-bold leading-tight tracking-tight text-fg">{lab.title}</h1>
+                <p className="mb-4 text-sm md:text-base leading-relaxed text-fg-secondary">{lab.description}</p>
+                <span className="flex items-center gap-1 text-xs text-fg-muted">
                     <Clock size={12} />
                     {lab.estimatedTime}
                 </span>

@@ -11,19 +11,19 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="rounded-2xl border border-[#27272a] bg-[#18181b] p-5">
+        <div className="rounded-2xl border border-border bg-surface p-5">
             <div className="mb-2 flex items-start justify-between gap-3">
                 <div>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#6366f1]">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                         {promptCategoryLabels[prompt.category]}
                     </span>
-                    <h3 className="mt-1 text-sm font-semibold text-[#fafafa]">{prompt.title}</h3>
+                    <h3 className="mt-1 text-sm font-semibold text-fg">{prompt.title}</h3>
                 </div>
             </div>
 
-            <p className="mb-3 text-xs leading-relaxed text-[#71717a]">{prompt.description}</p>
+            <p className="mb-3 text-xs leading-relaxed text-fg-muted">{prompt.description}</p>
 
-            <div className="mb-3 rounded-lg border border-[#27272a] bg-[#0c0c0e] p-3">
+            <div className="mb-3 rounded-lg border border-border bg-[#0c0c0e] p-3">
                 <p className="mb-2 whitespace-pre-wrap font-mono text-[12px] leading-relaxed text-[#d4d4d8]">{prompt.prompt}</p>
                 <CopyButton text={prompt.prompt} />
             </div>
@@ -31,21 +31,21 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
             <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                className="flex w-full items-center justify-between text-xs font-medium text-[#a1a1aa] hover:text-[#fafafa] transition-colors"
+                className="flex w-full items-center justify-between text-xs font-medium text-fg-secondary hover:text-fg transition-colors"
             >
                 Expected output &amp; best practices
                 <ChevronDown size={14} className={`transition-transform ${open ? "rotate-180" : ""}`} />
             </button>
 
             {open && (
-                <div className="mt-3 space-y-3 border-t border-[#27272a] pt-3">
+                <div className="mt-3 space-y-3 border-t border-border pt-3">
                     <div>
-                        <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">Expected output</p>
-                        <p className="text-xs leading-relaxed text-[#a1a1aa]">{prompt.expectedOutput}</p>
+                        <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-fg-muted">Expected output</p>
+                        <p className="text-xs leading-relaxed text-fg-secondary">{prompt.expectedOutput}</p>
                     </div>
                     <div>
-                        <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">Best practices</p>
-                        <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-[#a1a1aa]">
+                        <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-fg-muted">Best practices</p>
+                        <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-fg-secondary">
                             {prompt.bestPractices.map((bp, i) => (
                                 <li key={i}>{bp}</li>
                             ))}

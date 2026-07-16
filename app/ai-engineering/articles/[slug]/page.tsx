@@ -87,52 +87,51 @@ export default async function ArticlePage({
 
     return (
         <PageLayout showFooter={false}>
-            {/* eslint-disable-next-line react/no-danger */}
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
             <div className="px-4 md:px-8 py-10 max-w-6xl mx-auto">
-                <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-[#71717a]">
-                    <Link href="/lab" className="hover:text-[#fafafa] transition-colors">
+                <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-fg-muted">
+                    <Link href="/lab" className="hover:text-fg transition-colors">
                         Engineering Lab
                     </Link>
                     <span>/</span>
-                    <Link href="/ai-engineering" className="hover:text-[#fafafa] transition-colors">
+                    <Link href="/ai-engineering" className="hover:text-fg transition-colors">
                         AI Engineering
                     </Link>
                     <span>/</span>
                     {category && (
-                        <Link href={`/ai-engineering?category=${category.slug}`} className="hover:text-[#fafafa] transition-colors">
+                        <Link href={`/ai-engineering?category=${category.slug}`} className="hover:text-fg transition-colors">
                             {category.title}
                         </Link>
                     )}
                     <span>/</span>
-                    <span className="text-[#a1a1aa]">{article.title}</span>
+                    <span className="text-fg-secondary">{article.title}</span>
                 </nav>
 
                 <div className="grid lg:grid-cols-[1fr_220px] gap-10">
                     <article>
                         <header className="mb-8">
                             <div className="mb-4 flex items-center gap-3">
-                                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#27272a] text-xl">
+                                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface-elevated text-xl">
                                     <span aria-hidden>{article.coverEmoji}</span>
                                 </span>
                                 <div className="flex flex-wrap items-center gap-2">
                                     <DifficultyBadge difficulty={article.difficulty} />
                                     {category && (
-                                        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#6366f1]">
+                                        <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                                             {category.title}
                                         </span>
                                     )}
                                 </div>
                             </div>
 
-                            <h1 className="mb-3 text-2xl md:text-4xl font-bold leading-tight tracking-tight text-[#fafafa]">
+                            <h1 className="mb-3 text-2xl md:text-4xl font-bold leading-tight tracking-tight text-fg">
                                 {article.title}
                             </h1>
-                            <p className="mb-5 text-sm md:text-base leading-relaxed text-[#a1a1aa]">{article.description}</p>
+                            <p className="mb-5 text-sm md:text-base leading-relaxed text-fg-secondary">{article.description}</p>
 
-                            <div className="flex flex-wrap items-center gap-4 text-xs text-[#71717a]">
-                                <span className="font-medium text-[#a1a1aa]">{article.author}</span>
+                            <div className="flex flex-wrap items-center gap-4 text-xs text-fg-muted">
+                                <span className="font-medium text-fg-secondary">{article.author}</span>
                                 <span className="flex items-center gap-1">
                                     <Calendar size={12} />
                                     {new Date(article.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
@@ -154,16 +153,16 @@ export default async function ArticlePage({
                         <ArticleBody blocks={article.body} />
 
                         {/* Prev / Next */}
-                        <div className="mt-14 grid sm:grid-cols-2 gap-3 border-t border-[#27272a] pt-8">
+                        <div className="mt-14 grid sm:grid-cols-2 gap-3 border-t border-border pt-8">
                             {prevArticle ? (
                                 <Link
                                     href={`/ai-engineering/articles/${prevArticle.slug}`}
-                                    className="group rounded-xl border border-[#27272a] p-4 hover:border-[#3f3f46] transition-colors"
+                                    className="group rounded-xl border border-border p-4 hover:border-border-strong transition-colors"
                                 >
-                                    <span className="mb-1 flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">
+                                    <span className="mb-1 flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
                                         <ArrowLeft size={11} /> Previous
                                     </span>
-                                    <p className="text-sm font-medium text-[#fafafa] group-hover:text-white line-clamp-1">{prevArticle.title}</p>
+                                    <p className="text-sm font-medium text-fg group-hover:text-white line-clamp-1">{prevArticle.title}</p>
                                 </Link>
                             ) : (
                                 <span />
@@ -171,12 +170,12 @@ export default async function ArticlePage({
                             {nextArticle ? (
                                 <Link
                                     href={`/ai-engineering/articles/${nextArticle.slug}`}
-                                    className="group rounded-xl border border-[#27272a] p-4 text-right hover:border-[#3f3f46] transition-colors"
+                                    className="group rounded-xl border border-border p-4 text-right hover:border-border-strong transition-colors"
                                 >
-                                    <span className="mb-1 flex items-center justify-end gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#52525b]">
+                                    <span className="mb-1 flex items-center justify-end gap-1 text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
                                         Next <ArrowRight size={11} />
                                     </span>
-                                    <p className="text-sm font-medium text-[#fafafa] group-hover:text-white line-clamp-1">{nextArticle.title}</p>
+                                    <p className="text-sm font-medium text-fg group-hover:text-white line-clamp-1">{nextArticle.title}</p>
                                 </Link>
                             ) : (
                                 <span />
@@ -186,7 +185,7 @@ export default async function ArticlePage({
                         {/* Related */}
                         {related.length > 0 && (
                             <div className="mt-14">
-                                <h2 className="mb-4 text-lg font-bold text-[#fafafa]">Related articles</h2>
+                                <h2 className="mb-4 text-lg font-bold text-fg">Related articles</h2>
                                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                     {related.map((a) => (
                                         <ArticleCard key={a.slug} article={a} category={categoryBySlug.get(a.category)} />

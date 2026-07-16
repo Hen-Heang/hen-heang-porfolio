@@ -92,14 +92,32 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-The contact form needs Supabase credentials in `.env.local` (everything else works without them):
+### Environment variables
+
+Copy `.env.example` to `.env.local` and fill in what you need — see that file for the full list. None are required to run the site:
+
+- **Supabase** (`NEXT_PUBLIC_SUPABASE_URL`/`_ANON_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`) — optional. Profile/dashboard/CV/projects/skills/experience/education/achievements are all served from Supabase when configured, and automatically fall back to the typed data in `data/*.ts` when it's absent or a query fails — the public site never renders empty because of a Supabase outage. The contact form specifically needs the service-role key to accept submissions.
+- **`OPENAI_API_KEY`** / `OPENAI_MODEL` — optional. Without it the AI assistant returns a graceful "not configured" message.
+- **`UPSTASH_REDIS_REST_URL`** / `_TOKEN` — optional. Rate limiting (AI chat + contact form) uses Upstash Redis when configured, which is required for correctness across Vercel's multiple serverless instances; without it, both fall back to an in-memory limiter that's fine for local dev only.
+
+### Content workflow
+
+Public content (profile, dashboard, CV, projects, skills, experience, education, achievements, contact messages) is editable at `/admin` by the owner account (gated by Supabase RLS + an email check). Admin-entered JSON is validated against the same Zod schemas (`src/lib/schemas/content.ts`) the public site uses before it's saved, so malformed content can't reach — or break — the live pages. Editing the static files in `data/*.ts` changes only the fallback shown when Supabase is unavailable.
+
+### Testing
 
 ```bash
-NEXT_PUBLIC_SUPABASE_URL=your-project-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_URL=your-project-url
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+npm run typecheck   # TypeScript
+npm run lint        # ESLint
+npm run test        # Vitest unit tests
+npm run test:watch  # Vitest in watch mode
 ```
+
+CI (`.github/workflows/ci.yml`) runs lint, typecheck, test, and build on every push/PR to `master`.
+
+### Theme
+
+Dark and light themes are both fully supported (`next-themes`), defaulting to dark. Toggle from the header (desktop) or the mobile dock.
 
 ## ☁️ Deployment
 
@@ -122,3 +140,11 @@ git push
 <div align="center">
 Open to Java / Spring Boot / Full-Stack opportunities · Based in Seoul 🇰🇷
 </div>
+
+<!--
+Note: the GitHub repository is currently named `hen-heang-porfolio` (typo).
+Recommended rename: `hen-heang-portfolio`. Renaming on GitHub automatically
+sets up a redirect from the old name, but any hardcoded references to
+`hen-heang-porfolio` in CI badges, deployment configs, or external links
+should be updated afterward.
+-->

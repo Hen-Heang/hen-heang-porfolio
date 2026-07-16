@@ -30,20 +30,20 @@ export function PromptsPageClient({ prompts }: { prompts: Prompt[] }) {
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mb-8">
-                <h1 className="mb-1 text-3xl font-bold text-[#fafafa]">Prompt Library</h1>
-                <p className="text-sm text-[#71717a]">
+                <h1 className="mb-1 text-3xl font-bold text-fg">Prompt Library</h1>
+                <p className="text-sm text-fg-muted">
                     Prompts I actually reach for — each one has a copy button, expected output, and the best practice behind it.
                 </p>
             </motion.div>
 
             <div className="relative mb-4">
-                <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#52525b]" />
+                <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-fg-muted" />
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search prompts..."
                     aria-label="Search prompts"
-                    className="w-full rounded-xl border border-[#27272a] bg-[#18181b] py-2.5 pl-10 pr-4 text-sm text-[#fafafa] placeholder:text-[#52525b] outline-none focus:border-[#6366f1] transition-colors"
+                    className="w-full rounded-xl border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-fg placeholder:text-fg-muted outline-none focus:border-brand transition-colors"
                 />
             </div>
 
@@ -55,7 +55,7 @@ export function PromptsPageClient({ prompts }: { prompts: Prompt[] }) {
             </div>
 
             {filtered.length === 0 ? (
-                <div className="py-16 text-center text-sm text-[#52525b]">No prompts match your search.</div>
+                <div className="py-16 text-center text-sm text-fg-muted">No prompts match your search.</div>
             ) : (
                 <div className="grid md:grid-cols-2 gap-4">
                     {filtered.map((prompt) => (

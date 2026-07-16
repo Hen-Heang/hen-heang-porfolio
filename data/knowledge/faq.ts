@@ -17,7 +17,7 @@ export const faqKnowledge: KnowledgeSection[] = [
         ],
         content: [
             "**Q: Backend or full-stack?**",
-            "A: Hen is a backend developer first (Java, Spring Boot, MyBatis, PostgreSQL/Oracle) who also ships production frontends with Next.js and TypeScript. His current role at Bizplay spans both.",
+            "A: Heang is a backend developer first (Java, Spring Boot, MyBatis, PostgreSQL/Oracle) who also ships production frontends with Next.js and TypeScript. His current role at Bizplay spans both.",
             "",
             "**Q: Where is he based and can he work in Korea?**",
             "A: He lives and works in Seoul, South Korea, employed at Bizplay in the Korean enterprise sector.",
