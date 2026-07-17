@@ -40,31 +40,26 @@ const navGroups: LabNavGroup[] = [
         items: [{ label: "Overview", href: "/lab", icon: LayoutDashboard }],
     },
     {
-        title: "Backend Engineering",
+        title: "Learning paths",
         items: [
-            { label: "Roadmap & Library", href: "/lab/backend", icon: Braces, matchPrefixes: ["/lab/backend/"] },
+            { label: "Backend Path", href: "/lab/backend", icon: Braces, matchPrefixes: ["/lab/backend/"] },
+            { label: "DevOps Path", href: "/lab/devops", icon: Terminal, matchPrefixes: ["/lab/devops/topics"] },
+            { label: "AI Engineering", href: "/ai-engineering", icon: Sparkles, matchPrefixes: ["/ai-engineering/articles"] },
         ],
     },
     {
-        title: "AI Engineering",
+        title: "Practice",
         items: [
-            { label: "Articles", href: "/ai-engineering", icon: Sparkles, matchPrefixes: ["/ai-engineering/articles"] },
+            { label: "Hands-on Labs", href: "/lab/devops/labs", icon: FlaskConical, matchPrefixes: ["/lab/devops/labs"] },
             { label: "Prompt Library", href: "/ai-engineering/prompts", icon: MessageSquareCode },
             { label: "Code Snippets", href: "/ai-engineering/snippets", icon: FileCode2 },
         ],
     },
     {
-        title: "DevOps",
+        title: "Reference",
         items: [
-            { label: "Roadmap & Topics", href: "/lab/devops", icon: Terminal, matchPrefixes: ["/lab/devops/topics"] },
-            { label: "Hands-on Labs", href: "/lab/devops/labs", icon: FlaskConical, matchPrefixes: ["/lab/devops/labs"] },
             { label: "Commands", href: "/lab/devops/commands", icon: ScrollText },
             { label: "Infrastructure", href: "/lab/devops/infrastructure", icon: BookOpen },
-        ],
-    },
-    {
-        title: "Engineering",
-        items: [
             { label: "System Design", href: "/lab/systems", icon: Network },
             { label: "API Design", href: "/lab/api", icon: Braces },
             { label: "Database", href: "/lab/database", icon: Database },
@@ -88,11 +83,11 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
             {/* Brand */}
             <div className="flex items-center gap-3 border-b border-border px-5 py-4">
                 <Link href="/" onClick={onNavigate} aria-label="Back to portfolio home">
-                    <HHLogo size={28} className="rounded-lg ring-1 ring-white/15 hover:ring-white/40 transition-all" />
+                    <HHLogo size={28} className="rounded-lg ring-1 ring-border hover:ring-border-strong transition-all" />
                 </Link>
                 <div className="min-w-0">
-                    <p className="truncate text-base font-bold text-fg">Engineering Lab</p>
-                    <p className="truncate font-mono text-xs lg:text-[11px] text-fg-muted">~/henheang/lab</p>
+                    <p className="truncate text-lg font-bold text-fg">Engineering Lab</p>
+                    <p className="truncate font-mono text-sm lg:text-xs text-fg-muted">~/henheang/lab</p>
                 </div>
             </div>
 
@@ -101,7 +96,7 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
                 {navGroups.map((group, gi) => (
                     <div key={group.title ?? gi} className={gi > 0 ? "mt-6" : ""}>
                         {group.title && (
-                            <p className="mb-1.5 px-2 font-mono text-[11px] lg:text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
+                            <p className="mb-1.5 px-2 font-mono text-xs lg:text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
                                 {group.title}
                             </p>
                         )}
@@ -113,13 +108,13 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
                                         <li key={item.label}>
                                             <span
                                                 aria-disabled="true"
-                                                className="flex cursor-default items-center justify-between rounded-lg px-2 py-1.5 text-sm lg:text-[13px] text-border-strong"
+                                                className="flex cursor-default items-center justify-between rounded-lg px-2 py-1.5 text-base lg:text-sm text-border-strong"
                                             >
                                                 <span className="flex items-center gap-2.5">
                                                     <item.icon size={15} aria-hidden="true" />
                                                     {item.label}
                                                 </span>
-                                                <span className="rounded border border-border px-1 py-px font-mono text-[10px] lg:text-[9px] uppercase tracking-wider text-fg-muted">
+                                                <span className="rounded border border-border px-1 py-px font-mono text-[11px] lg:text-[10px] uppercase tracking-wider text-fg-muted">
                                                     soon
                                                 </span>
                                             </span>
@@ -132,10 +127,10 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
                                             href={item.href!}
                                             onClick={onNavigate}
                                             aria-current={active ? "page" : undefined}
-                                            className={`flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm lg:text-[13px] transition-colors ${
+                                            className={`flex min-h-11 items-center gap-2.5 rounded-lg border-l-2 px-2 py-1.5 text-base transition-colors lg:min-h-0 lg:text-sm ${
                                                 active
-                                                    ? "bg-surface font-medium text-fg shadow-[inset_2px_0_0_0_#6366f1]"
-                                                    : "text-fg-secondary hover:bg-surface/60 hover:text-fg"
+                                                    ? "border-brand bg-surface font-medium text-fg"
+                                                    : "border-transparent text-fg-secondary hover:bg-surface/60 hover:text-fg"
                                             }`}
                                         >
                                             <item.icon size={15} aria-hidden="true" className={active ? "text-brand" : "text-fg-muted"} />
@@ -155,7 +150,7 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
                     href={profileData.socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm lg:text-[13px] text-fg-secondary hover:bg-surface/60 hover:text-fg transition-colors"
+                    className="flex min-h-11 items-center gap-2.5 rounded-lg px-2 py-1.5 text-base text-fg-secondary transition-colors hover:bg-surface/60 hover:text-fg lg:min-h-0 lg:text-sm"
                 >
                     <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true" focusable="false">
                         <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
@@ -165,7 +160,7 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
                 <Link
                     href="/"
                     onClick={onNavigate}
-                    className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm lg:text-[13px] text-fg-secondary hover:bg-surface/60 hover:text-fg transition-colors"
+                    className="flex min-h-11 items-center gap-2.5 rounded-lg px-2 py-1.5 text-base text-fg-secondary transition-colors hover:bg-surface/60 hover:text-fg lg:min-h-0 lg:text-sm"
                 >
                     <ArrowLeft size={15} aria-hidden="true" />
                     Back to Portfolio

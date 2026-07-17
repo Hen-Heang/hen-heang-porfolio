@@ -102,6 +102,10 @@ export function getBackendSummaries(): BackendItemSummary[] {
     return backendItems.map(toBackendSummary)
 }
 
+export function getBackendRoadmapLevelCount(): number {
+    return backendRoadmap.length
+}
+
 export function resolveBackendItems(ids: string[]): BackendKnowledgeItem[] {
     return ids.map(getBackendItemById).filter((item): item is BackendKnowledgeItem => Boolean(item))
 }

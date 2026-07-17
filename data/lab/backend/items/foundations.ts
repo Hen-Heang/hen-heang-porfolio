@@ -124,9 +124,9 @@ final class TaskController {
     }
 }
 
-public enum VoucherStatus { ISSUED, REDEEMED, EXPIRED, CANCELLED }
+enum VoucherStatus { ISSUED, REDEEMED, EXPIRED, CANCELLED }
 
-public sealed interface RedemptionResult
+sealed interface RedemptionResult
         permits RedemptionResult.Accepted, RedemptionResult.Rejected {
     record Accepted(long redemptionId) implements RedemptionResult {}
     record Rejected(String reasonCode) implements RedemptionResult {}

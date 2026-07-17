@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url"
-import { defineConfig } from "vitest/config"
+import { configDefaults, defineConfig } from "vitest/config"
 import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig({
@@ -15,5 +15,6 @@ export default defineConfig({
     test: {
         environment: "node",
         globals: false,
+        exclude: [...configDefaults.exclude, "e2e/**"],
     },
 })

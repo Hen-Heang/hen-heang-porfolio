@@ -60,7 +60,7 @@ export const rawAchievements: Achievement[] = [
         date: "2024",
         type: "graduation",
         description: "Completed Bachelor of Science in Computer Science and Engineering at Royal University of Phnom Penh. Examination: May 2024, Certificate issued: December 2024.",
-        image: "/rupp-logo.png",
+        image: "/rupp-certificate-redacted.png",
     },
  {
         id: "2",
@@ -123,7 +123,26 @@ export const rawAchievements: Achievement[] = [
         date: "2026",
         type: "certificate",
         description: "Completed Anthropic's course on applying Claude Code to real, hands-on development workflows, building on the foundational Claude Code 101 course.",
+        image: "/certificate/claude-code-in-action.png",
         link: "/certificate/claude-code-in-action.pdf",
+    },
+    {
+        id: "16",
+        title: "Mindfulness for Wellbeing — Certificate of Completion",
+        issuer: "KOSIGN",
+        date: "2024",
+        type: "certificate",
+        description: "Completed the one-day Mindfulness for Wellbeing personal development program delivered by VIPASSA on October 12, 2024, in Phnom Penh, Cambodia. The certificate was presented jointly with KOSIGN.",
+        image: "/development-soft skill certification.png",
+    },
+    {
+        id: "17",
+        title: "Word, Excel, PowerPoint & Internet Certificate",
+        issuer: "Addbook Computer Centre",
+        date: "2021",
+        type: "certificate",
+        description: "Completed Addbook Computer Centre's practical computer course covering Microsoft Word, Excel, PowerPoint, and internet fundamentals from September to December 2021.",
+        image: "/basic-computer-certificate-redacted.png",
     },
 ]
 

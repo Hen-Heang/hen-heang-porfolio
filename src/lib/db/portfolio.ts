@@ -21,6 +21,7 @@ import { rawAchievements as staticAchievements } from '@/data/achievements'
 import { profileData as staticProfile } from '@/data/profile'
 import { cvData as staticCv } from '@/data/cv-data'
 import { deployedProjects as staticDeployedProjects, workProjects as staticWorkProjects, journey as staticJourney } from '@/data/dashboard'
+import { filterPublishedEducation } from '@/src/lib/utils/education'
 
 const staticSiteContent = {
   profile: staticProfile,
@@ -73,6 +74,7 @@ function mapProject(r: any): unknown {
     featured: s?.featured,
     businessProblem: s?.businessProblem,
     overview: r.overview ?? undefined,
+    process: s?.process,
     features: r.features ?? undefined,
     technicalDetails: r.technical_details ?? undefined,
     architecture: s?.architecture,
@@ -82,6 +84,7 @@ function mapProject(r: any): unknown {
     challenges: r.challenges ?? undefined,
     solutions: r.solutions ?? undefined,
     lessonsLearned: s?.lessonsLearned,
+    screenshots: s?.screenshots,
     role: r.role ?? undefined,
     duration: r.duration ?? undefined,
     teamSize: r.team_size ?? undefined,
@@ -211,7 +214,7 @@ export const getExperience = cache(async (): Promise<ExperienceItem[]> => {
 const EducationListSchema = z.array(EducationItemSchema)
 
 export const getEducation = cache(async (): Promise<EducationItem[]> => {
-  return withFallback(
+  const items = await withFallback(
     async () => {
       const sb = getSupabaseClient()
       if (!sb) return null
@@ -228,6 +231,8 @@ export const getEducation = cache(async (): Promise<EducationItem[]> => {
     staticEducation,
     'education',
   )
+
+  return filterPublishedEducation(items)
 })
 
 const AchievementListSchema = z.array(AchievementSchema)

@@ -24,6 +24,11 @@ export interface ApiEndpoint {
     description: string
 }
 
+export interface ProcessStep {
+    phase: string
+    detail: string
+}
+
 export interface Project {
     slug: string
     title: string
@@ -35,6 +40,7 @@ export interface Project {
     featured?: boolean
     businessProblem?: string
     overview?: string
+    process?: ProcessStep[]
     features?: string[]
     technicalDetails?: string
     architecture?: string[]
@@ -44,6 +50,7 @@ export interface Project {
     challenges?: string[]
     solutions?: string[]
     lessonsLearned?: string[]
+    screenshots?: string[]
     role?: string
     duration?: string
     teamSize?: string

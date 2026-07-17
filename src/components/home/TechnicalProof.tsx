@@ -7,18 +7,27 @@ import type { ProfileContentParsed } from "@/src/lib/schemas/content"
 export function TechnicalProof({ projects, profile }: { projects: Project[]; profile: ProfileContentParsed }) {
     const liveCount = projects.filter((p) => p.demo && p.demo !== "#").length
     const endpointCount = projects.reduce((sum, p) => sum + (p.apiEndpoints?.length ?? 0), 0)
+    const modelCount = projects.reduce((sum, p) => sum + (p.dataModel?.length ?? 0), 0)
+    const architectureCount = projects.filter((p) => p.architecture?.length).length
+    const javaSpringCount = projects.filter((project) =>
+        project.technologies.some((technology) => /java|spring boot/i.test(technology))
+    ).length
 
     const stats: { label: string; value: string }[] = [
-        { label: "Projects shipped", value: String(projects.length) },
-        { label: "Live deployments", value: String(liveCount) },
+        { label: "Java / Spring systems", value: String(javaSpringCount) },
         { label: "Documented API endpoints", value: String(endpointCount) },
-        { label: "Years of experience", value: profile.yearsExperience },
-        { label: "Countries worked in", value: "2" },
-        { label: "Languages spoken", value: String(profile.languages?.length ?? 0) },
+        { label: "Modeled entities & tables", value: String(modelCount) },
+        { label: "Architecture maps", value: String(architectureCount) },
+        { label: "Live deployments", value: String(liveCount) },
+        { label: "Years in enterprise teams", value: profile.yearsExperience },
     ]
 
     return (
-        <Section eyebrow="Technical Proof" title="What the numbers are, plainly">
+        <Section
+            eyebrow="Backend Proof"
+            title="The evidence is in the systems"
+            description="Counts are derived from the case studies in this portfolio—not generic skill percentages."
+        >
             <dl className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
                 {stats.map((stat) => (
                     <div key={stat.label}>

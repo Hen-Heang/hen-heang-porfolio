@@ -30,8 +30,8 @@ export function PromptsPageClient({ prompts }: { prompts: Prompt[] }) {
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mb-8">
-                <h1 className="mb-1 text-3xl font-bold text-fg">Prompt Library</h1>
-                <p className="text-sm text-fg-muted">
+                <h1 className="mb-1 text-3xl md:text-4xl font-bold tracking-tight text-fg">Prompt Library</h1>
+                <p className="max-w-2xl text-sm md:text-base leading-relaxed text-fg-secondary">
                     Prompts I actually reach for — each one has a copy button, expected output, and the best practice behind it.
                 </p>
             </motion.div>

@@ -54,7 +54,7 @@ export function BackendProgressButton({ itemId }: { itemId: string }) {
                 else next.add(itemId)
                 writeProgress(next)
             }}
-            className={`inline-flex min-h-10 items-center gap-2 rounded-xl border px-3 py-2 text-sm font-semibold transition-colors ${
+            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3 py-2 text-base font-semibold transition-colors ${
                 complete
                     ? "border-success/40 bg-success/10 text-success"
                     : "border-border bg-surface text-fg-secondary hover:border-border-strong hover:text-fg"

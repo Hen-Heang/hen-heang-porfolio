@@ -1,8 +1,10 @@
 import React from "react"
-import { Github } from "lucide-react"
-import { ArchitecturePreview } from "@/src/components/system/ArchitecturePreview"
+import { ExternalLink, Github } from "lucide-react"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { TextLink } from "@/src/components/system/TextLink"
+import { ProjectPreviewPanel } from "@/src/components/system/ProjectPreviewPanel"
+import { getProjectPreview } from "@/src/lib/utils/project-preview"
+import { cn } from "@/src/lib/utils/utils"
 import type { Project } from "@/src/lib/types"
 
 interface ProjectFeatureProps {
@@ -13,15 +15,20 @@ interface ProjectFeatureProps {
 
 /**
  * Large editorial project panel for the homepage's Selected Work section:
- * numbered, problem → solution narrative, real stack and architecture.
+ * numbered, problem → solution narrative, real stack, and a technical
+ * preview. Falls back through architecture/api/database/workflow/image data
+ * (see `getProjectPreview`) and drops to a single full-width column when a
+ * project has none of it, rather than leaving an empty second column.
  */
 export function ProjectFeature({ index, project, reverse = false }: ProjectFeatureProps) {
     const isLive = Boolean(project.demo && project.demo !== "#")
     const shortTitle = project.title.split("—")[0].trim()
+    const preview = getProjectPreview(project)
+    const hasPreview = preview.kind !== "none"
 
     return (
-        <article className="group grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-            <div className={reverse ? "lg:order-2" : undefined}>
+        <article className={`group grid items-start gap-10 ${hasPreview ? "lg:grid-cols-2 lg:gap-16" : ""}`}>
+            <div className={cn(reverse && hasPreview ? "lg:order-2" : undefined, !hasPreview && "max-w-3xl")}>
                 <div className="flex items-center gap-4">
                     <span className="font-mono text-sm text-fg-muted" aria-hidden>
                         {String(index).padStart(2, "0")}
@@ -78,9 +85,11 @@ export function ProjectFeature({ index, project, reverse = false }: ProjectFeatu
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                            aria-label={`View ${shortTitle} on GitHub (opens in a new tab)`}
                         >
                             <Github size={15} aria-hidden />
                             GitHub
+                            <ExternalLink size={12} aria-hidden />
                         </a>
                     )}
                     {isLive && (
@@ -88,23 +97,24 @@ export function ProjectFeature({ index, project, reverse = false }: ProjectFeatu
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                            aria-label={`Open ${shortTitle} live site (opens in a new tab)`}
                         >
                             Live site
+                            <ExternalLink size={12} aria-hidden />
                         </a>
                     )}
                 </div>
             </div>
 
-            <div className={reverse ? "lg:order-1" : undefined}>
-                {project.architecture?.length ? (
-                    <ArchitecturePreview
-                        layers={project.architecture}
-                        note={project.architectureNote}
+            {hasPreview && (
+                <div className={reverse ? "lg:order-1" : undefined}>
+                    <ProjectPreviewPanel
+                        preview={preview}
                         className="transition-all duration-300 group-hover:border-brand/30 group-hover:shadow-lg group-hover:shadow-black/5"
                     />
-                ) : null}
-            </div>
+                </div>
+            )}
         </article>
     )
 }

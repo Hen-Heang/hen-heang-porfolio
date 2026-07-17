@@ -1,9 +1,15 @@
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
 import { projects } from "@/data/projects"
-import { systemStatus, currentFocus, engineeringPhilosophy } from "@/data/lab/overview"
+import { currentFocus } from "@/data/lab/overview"
+import { roadmap as devopsRoadmap } from "@/data/lab/devops/roadmap"
 import { getEngineeringLabIndex } from "@/src/lib/db/engineering-lab"
-import { LabDashboardClient, type LabMetric } from "@/src/components/lab/LabDashboardClient"
+import { getBackendSummaries } from "@/src/lib/backend/catalog"
+import { LabHero } from "@/src/components/lab/home/LabHero"
+import { LabCategoryNav } from "@/src/components/lab/home/LabCategoryNav"
+import { LabFeaturedWork } from "@/src/components/lab/home/LabFeaturedWork"
+import { LabSearchClient } from "@/src/components/lab/home/LabSearchClient"
+import { LabLearningDashboard } from "@/src/components/lab/home/LabLearningDashboard"
 
 export const revalidate = 60
 
@@ -21,18 +27,8 @@ export const metadata: Metadata = {
 }
 
 export default async function EngineeringLabPage() {
-    const { items, stats } = await getEngineeringLabIndex()
-
-    const techCount = new Set(projects.flatMap((p) => p.technologies)).size
-    const metrics: LabMetric[] = [
-        { label: "Projects built", value: projects.length },
-        { label: "Technologies", value: techCount, suffix: "+" },
-        { label: "Backend topics", value: stats.backendPublished, suffix: " published" },
-        {
-            label: "Lab resources",
-            value: stats.aiArticles + stats.aiPrompts + stats.aiSnippets + stats.devopsTopics + stats.devopsLabs + stats.backendPublished + stats.backendPlanned,
-        },
-    ]
+    const { items } = await getEngineeringLabIndex()
+    const backendItems = getBackendSummaries()
 
     const featured = projects
         .filter((p) => p.featured)
@@ -44,13 +40,13 @@ export default async function EngineeringLabPage() {
         }))
 
     return (
-        <LabDashboardClient
-            items={items}
-            metrics={metrics}
-            featured={featured}
-            systemStatus={systemStatus}
-            currentFocus={currentFocus}
-            philosophy={engineeringPhilosophy}
-        />
+        <div className="px-4 md:px-8 py-8 max-w-6xl mx-auto">
+            <LabHero currentFocus={currentFocus} />
+            <LabLearningDashboard backendItems={backendItems} devopsTopics={devopsRoadmap} />
+            <LabSearchClient items={items}>
+                <LabCategoryNav />
+                <LabFeaturedWork featured={featured} />
+            </LabSearchClient>
+        </div>
     )
 }

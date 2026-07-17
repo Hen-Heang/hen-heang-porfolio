@@ -4,7 +4,7 @@ import { Callout } from "@/src/components/ai-engineering/Callout"
 
 export function ArticleBody({ blocks }: { blocks: ContentBlock[] }) {
     return (
-        <div className="max-w-none text-[#d4d4d8]">
+        <div className="max-w-none">
             {blocks.map((block, i) => {
                 switch (block.type) {
                     case "paragraph":
@@ -51,7 +51,7 @@ export function ArticleBody({ blocks }: { blocks: ContentBlock[] }) {
                         return (
                             <blockquote
                                 key={i}
-                                className="my-6 border-l-2 border-brand pl-4 text-[15px] italic leading-[1.8] text-[#d4d4d8]"
+                                className="my-6 border-l-2 border-brand pl-4 text-[15px] italic leading-[1.8] text-fg-secondary"
                             >
                                 &ldquo;{block.text}&rdquo;
                                 {block.cite && <footer className="mt-2 text-xs not-italic text-fg-muted">— {block.cite}</footer>}

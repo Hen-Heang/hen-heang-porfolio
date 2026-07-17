@@ -162,7 +162,7 @@ export default async function ArticlePage({
                                     <span className="mb-1 flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
                                         <ArrowLeft size={11} /> Previous
                                     </span>
-                                    <p className="text-sm font-medium text-fg group-hover:text-white line-clamp-1">{prevArticle.title}</p>
+                                    <p className="text-sm font-medium text-fg group-hover:text-fg line-clamp-1">{prevArticle.title}</p>
                                 </Link>
                             ) : (
                                 <span />
@@ -175,7 +175,7 @@ export default async function ArticlePage({
                                     <span className="mb-1 flex items-center justify-end gap-1 text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
                                         Next <ArrowRight size={11} />
                                     </span>
-                                    <p className="text-sm font-medium text-fg group-hover:text-white line-clamp-1">{nextArticle.title}</p>
+                                    <p className="text-sm font-medium text-fg group-hover:text-fg line-clamp-1">{nextArticle.title}</p>
                                 </Link>
                             ) : (
                                 <span />

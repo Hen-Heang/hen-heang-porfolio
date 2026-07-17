@@ -21,10 +21,10 @@ export function ArticleCard({ article, category }: { article: Article; category?
                 {category && (
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">{category.title}</span>
                 )}
-                <h3 className="mt-1 mb-1.5 text-sm font-semibold leading-snug text-fg group-hover:text-white">
+                <h3 className="mt-1 mb-1.5 text-sm font-semibold leading-snug text-fg">
                     {article.title}
                 </h3>
-                <p className="text-xs leading-relaxed text-fg-muted line-clamp-2">{article.description}</p>
+                <p className="text-xs leading-relaxed text-fg-secondary line-clamp-2">{article.description}</p>
             </div>
 
             <div className="flex flex-wrap gap-1.5">

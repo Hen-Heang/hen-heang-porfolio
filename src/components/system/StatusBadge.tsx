@@ -6,7 +6,7 @@ type Status = "live" | "active" | "wip" | "archived"
 const dotColor: Record<Status, string> = {
     live: "bg-success",
     active: "bg-success",
-    wip: "bg-amber-500",
+    wip: "bg-warning",
     archived: "bg-fg-muted",
 }
 

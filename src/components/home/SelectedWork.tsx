@@ -5,11 +5,16 @@ import { Reveal } from "@/src/components/system/Reveal"
 import { TextLink } from "@/src/components/system/TextLink"
 import type { Project } from "@/src/lib/types"
 
-/** Up to three featured projects as large alternating editorial panels. */
+/** Two backend-first projects keep the homepage positioning clear; the index holds the full catalog. */
 export function SelectedWork({ projects }: { projects: Project[] }) {
+    const backend = projects.filter((project) =>
+        project.technologies.some((technology) => /java|spring boot/i.test(technology))
+    )
     const featured = projects.filter((p) => p.featured)
-    const rest = projects.filter((p) => !p.featured)
-    const selected = [...featured, ...rest].slice(0, 3)
+    const ordered = [...backend.filter((p) => p.featured), ...backend, ...featured, ...projects]
+    const selected = ordered.filter((project, index) =>
+        ordered.findIndex((candidate) => candidate.slug === project.slug) === index
+    ).slice(0, 2)
 
     if (selected.length === 0) return null
 
@@ -17,10 +22,10 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
         <Section
             id="work"
             eyebrow="Selected Work"
-            title="Systems built end to end"
-            description="Each project is a full engineering case study — business problem, architecture, data model, and the trade-offs behind them."
+            title="Backend systems, explained end to end"
+            description="Not just screenshots: each case study opens the API contract, architecture, data model, security decisions, and trade-offs behind the product."
         >
-            <div className="flex flex-col gap-20 md:gap-28">
+            <div className="flex flex-col gap-16 md:gap-20">
                 {selected.map((project, i) => (
                     <Reveal key={project.slug}>
                         <ProjectFeature index={i + 1} project={project} reverse={i % 2 === 1} />

@@ -186,7 +186,7 @@ export const backendRoadmap = [
         interviewQuestions: ["What belongs in a service unit test versus a Testcontainers integration test?"],
         handsOnLabs: ["Add service, MockMvc security, MyBatis/PostgreSQL, rollback, idempotency, and concurrency tests"],
         productionConsiderations: ["Keep tests deterministic, parallel-safe, credential-free, and representative of the database dialect used in production"],
-        relatedItemIds: ["backend-testing-strategy", "backend-spring-boot-task-api-lab"],
+        relatedItemIds: ["backend-testing-strategy", "backend-spring-boot-task-api-lab", "backend-interview-questions"],
         references: [s.springTesting, s.junit, s.testcontainers],
     },
     {

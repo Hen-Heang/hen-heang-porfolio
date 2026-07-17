@@ -86,6 +86,8 @@ export function EntityEditor({ config }: { config: EntityConfig }) {
     }, [config])
 
     useEffect(() => {
+        // Remote data is intentionally loaded when this client-only editor mounts.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         void load()
     }, [load])
 

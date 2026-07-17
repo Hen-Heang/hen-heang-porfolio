@@ -10,6 +10,11 @@ export const ApiEndpointSchema = z.object({
     description: z.string(),
 })
 
+export const ProcessStepSchema = z.object({
+    phase: z.string().min(1),
+    detail: z.string(),
+})
+
 export const SocialLinksSchema = z.object({
     github: z.string().url(),
     linkedin: z.string().url(),
@@ -32,6 +37,7 @@ export const ProjectSchema = z.object({
     featured: z.boolean().optional(),
     businessProblem: z.string().optional(),
     overview: z.string().optional(),
+    process: z.array(ProcessStepSchema).optional(),
     features: z.array(z.string()).optional(),
     technicalDetails: z.string().optional(),
     architecture: z.array(z.string()).optional(),
@@ -41,6 +47,7 @@ export const ProjectSchema = z.object({
     challenges: z.array(z.string()).optional(),
     solutions: z.array(z.string()).optional(),
     lessonsLearned: z.array(z.string()).optional(),
+    screenshots: z.array(z.string()).optional(),
     role: z.string().optional(),
     duration: z.string().optional(),
     teamSize: z.string().optional(),

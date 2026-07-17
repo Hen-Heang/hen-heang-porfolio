@@ -1,16 +1,28 @@
 "use client"
 
-import { Github, Linkedin, Send } from "lucide-react"
+import {
+    BriefcaseBusiness,
+    FileText,
+    FlaskConical,
+    Github,
+    Linkedin,
+    Mail,
+    MessageCircle,
+    Route,
+    Send,
+    UserRound,
+} from "lucide-react"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import Link from "next/link"
 import X from "@/src/components/icons/x"
 
 const navLinks = [
-    { name: "Work", href: "/projects" },
-    { name: "About", href: "/about" },
-    { name: "Lab", href: "/lab" },
-    { name: "CV", href: "/cv" },
-    { name: "Contact", href: "/contact" },
+    { name: "Work", href: "/projects", icon: BriefcaseBusiness },
+    { name: "Lab", href: "/lab", icon: FlaskConical },
+    { name: "Journey", href: "/journey", icon: Route },
+    { name: "About", href: "/about", icon: UserRound },
+    { name: "CV", href: "/cv", icon: FileText },
+    { name: "Contact", href: "/contact", icon: MessageCircle },
 ]
 
 export function Footer() {
@@ -50,8 +62,9 @@ export function Footer() {
                                 <li key={link.name}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-fg-secondary transition-colors hover:text-fg"
+                                        className="inline-flex items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-fg"
                                     >
+                                        <link.icon size={15} aria-hidden />
                                         {link.name}
                                     </Link>
                                 </li>
@@ -80,8 +93,9 @@ export function Footer() {
                             <li>
                                 <a
                                     href={`mailto:${personalInfo.email}`}
-                                    className="text-sm text-fg-secondary transition-colors hover:text-fg"
+                                    className="inline-flex items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-fg"
                                 >
+                                    <Mail size={15} aria-hidden />
                                     {personalInfo.email}
                                 </a>
                             </li>

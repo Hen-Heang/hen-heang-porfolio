@@ -1,7 +1,7 @@
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { Hero } from "@/src/components/home/Hero"
 import { SelectedWork } from "@/src/components/home/SelectedWork"
-import { Capabilities } from "@/src/components/home/Capabilities"
+import { CurrentProgress } from "@/src/components/home/CurrentProgress"
 import { ExperienceStory } from "@/src/components/home/ExperienceStory"
 import { LabDirectory } from "@/src/components/home/LabDirectory"
 import { TechnicalProof } from "@/src/components/home/TechnicalProof"
@@ -25,7 +25,7 @@ export default async function HomePage() {
         <PageLayout>
             <Hero profile={profile} projects={projects} />
             <SelectedWork projects={projects} />
-            <Capabilities />
+            <CurrentProgress />
             <ExperienceStory experience={experience} education={education} />
             <LabDirectory articles={articles} />
             <TechnicalProof projects={projects} profile={profile} />

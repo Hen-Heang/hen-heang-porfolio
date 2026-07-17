@@ -39,7 +39,7 @@ export const backendSources = {
     oauthBcp: source("RFC 9700 — Best Current Practice for OAuth 2.0 Security", "IETF", "standard", "https://www.rfc-editor.org/rfc/rfc9700"),
     owaspAsvs: source("Application Security Verification Standard 5.0", "OWASP", "standard", "https://owasp.org/www-project-application-security-verification-standard/"),
     springTesting: source("Testing Spring Boot Applications", "Spring", "official-docs", "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html"),
-    junit: source("JUnit 5 User Guide", "JUnit", "official-docs", "https://junit.org/junit5/docs/current/user-guide/"),
+    junit: source("JUnit 5.14.1 Documentation", "JUnit", "official-docs", "https://docs.junit.org/5.14.1/overview.html"),
     testcontainers: source("Testcontainers for Java — JUnit 5 Quickstart", "Testcontainers", "official-docs", "https://java.testcontainers.org/quickstart/junit_5_quickstart/"),
     docker: source("Docker Build Best Practices", "Docker", "official-docs", "https://docs.docker.com/build/building/best-practices/"),
     githubActions: source("Secure Use Reference for GitHub Actions", "GitHub", "official-docs", "https://docs.github.com/en/actions/reference/security/secure-use"),

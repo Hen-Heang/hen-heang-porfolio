@@ -31,8 +31,8 @@ export function CommandsPageClient({ categories }: { categories: CommandCategory
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mb-8">
-                <h1 className="mb-1 text-3xl font-bold text-fg">Command Reference</h1>
-                <p className="text-sm text-fg-muted">Searchable Git, Docker, Linux, Maven, and PostgreSQL commands with copy buttons.</p>
+                <h1 className="mb-1 text-3xl md:text-4xl font-bold tracking-tight text-fg">Command Reference</h1>
+                <p className="max-w-2xl text-base md:text-lg leading-relaxed text-fg-secondary">Searchable Git, Docker, Linux, Maven, and PostgreSQL commands with copy buttons.</p>
             </motion.div>
 
             <div className="relative mb-4">
@@ -42,7 +42,7 @@ export function CommandsPageClient({ categories }: { categories: CommandCategory
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search commands..."
                     aria-label="Search commands"
-                    className="w-full rounded-xl border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-fg placeholder:text-fg-muted outline-none focus:border-brand transition-colors"
+                    className="w-full rounded-xl border border-border bg-surface py-2.5 pl-10 pr-4 text-base text-fg placeholder:text-fg-muted outline-none focus:border-brand transition-colors"
                 />
             </div>
 
@@ -54,12 +54,12 @@ export function CommandsPageClient({ categories }: { categories: CommandCategory
             </div>
 
             {filtered.length === 0 ? (
-                <div className="py-16 text-center text-sm text-fg-muted">No commands match your search.</div>
+                <div className="py-16 text-center text-base text-fg-muted">No commands match your search.</div>
             ) : (
                 <div className="space-y-8">
                     {filtered.map((c) => (
                         <section key={c.category}>
-                            <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">{c.category}</h2>
+                            <h2 className="mb-3 text-base font-bold uppercase tracking-wider text-brand">{c.category}</h2>
                             <div className="grid md:grid-cols-2 gap-3">
                                 {c.commands.map((cmd) => (
                                     <CommandCard key={cmd.name} entry={cmd} />

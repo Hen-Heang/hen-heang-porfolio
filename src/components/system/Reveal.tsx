@@ -10,8 +10,8 @@ interface RevealProps {
 }
 
 /**
- * Fades content up as it enters the viewport. Children stay server-rendered
- * (RSC composition); with reduced motion the wrapper is inert.
+ * Gently moves content into place as it enters the viewport. Content remains
+ * fully visible before animation so it is never lost when observers or JS fail.
  */
 export function Reveal({ delay = 0, className, children }: RevealProps) {
     const reduceMotion = useReducedMotion()
@@ -23,10 +23,10 @@ export function Reveal({ delay = 0, className, children }: RevealProps) {
     return (
         <motion.div
             className={className}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-64px" }}
-            transition={{ duration: 0.45, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+            initial={{ y: 14 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true, margin: "-32px" }}
+            transition={{ duration: 0.35, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
             {children}
         </motion.div>

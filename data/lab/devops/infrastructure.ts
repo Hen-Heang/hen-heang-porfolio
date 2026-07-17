@@ -41,7 +41,7 @@ export const infraTerms: InfraTerm[] = [
         term: "Redis",
         category: "Performance",
         definition: "An in-memory key-value store commonly used for caching, session storage, and simple queues.",
-        whyItMattersForBackend: "It's the most common answer to \"where do I cache this\" in a Java/Spring Boot stack — sub-millisecond reads for data that doesn't need a full relational query.",
+        whyItMattersForBackend: "Redis can provide low-latency reads for suitable non-authoritative data, but actual latency depends on network, payload, command, topology, and load; measure the deployed path instead of promising a fixed number.",
     },
     {
         term: "CDN",

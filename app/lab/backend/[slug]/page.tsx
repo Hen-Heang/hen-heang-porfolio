@@ -9,6 +9,8 @@ interface BackendDetailPageProps {
     params: Promise<{ slug: string }>
 }
 
+export const dynamicParams = false
+
 export function generateStaticParams() {
     return getPublishedBackendItems().map((item) => ({ slug: item.slug }))
 }
@@ -44,7 +46,7 @@ export default async function BackendDetailPage({ params }: BackendDetailPagePro
     }
 
     return (
-        <main>
+        <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
             <BackendDetail
                 item={item}
@@ -52,6 +54,6 @@ export default async function BackendDetailPage({ params }: BackendDetailPagePro
                 related={getRelatedBackendItems(item)}
                 adjacent={getBackendAdjacentItems(item.id)}
             />
-        </main>
+        </>
     )
 }

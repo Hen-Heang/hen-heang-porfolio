@@ -1,12 +1,18 @@
 import React from "react"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Github } from "lucide-react"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { TechnicalPanel, type TechnicalTab } from "@/src/components/system/TechnicalPanel"
 import type { Project } from "@/src/lib/types"
 import type { ProfileContentParsed } from "@/src/lib/schemas/content"
+
+const backendSignature = [
+    { label: "Runtime", value: "Java · Spring Boot" },
+    { label: "Data layer", value: "MyBatis · PostgreSQL" },
+    { label: "System focus", value: "APIs · auth · transactions" },
+] as const
 
 /**
  * Builds the hero's technical views from real project data. The API response
@@ -91,10 +97,10 @@ export function Hero({ profile, projects }: { profile: ProfileContentParsed; pro
         <section className="pb-section pt-16 md:pt-24">
             <Container>
                 <Eyebrow className="mb-6">
-                    Backend Engineer · {profile.location}
+                    Backend Developer · Java &amp; Spring Boot · {profile.location}
                 </Eyebrow>
-                <h1 className="max-w-4xl text-balance text-display text-fg">
-                    I build reliable systems for real business problems.
+                <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-fg sm:text-5xl lg:text-7xl">
+                    I build the systems <span className="text-brand">behind the screen.</span>
                 </h1>
 
                 <div className="mt-12 grid items-start gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-16">
@@ -106,9 +112,9 @@ export function Hero({ profile, projects }: { profile: ProfileContentParsed; pro
                         <div className="mt-8 flex flex-wrap items-center gap-3">
                             <Link
                                 href="/projects"
-                                className="inline-flex h-11 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
+                                className="inline-flex h-11 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover"
                             >
-                                Explore my work
+                                Inspect backend work
                                 <ArrowRight size={15} aria-hidden />
                             </Link>
                             <a
@@ -117,16 +123,30 @@ export function Hero({ profile, projects }: { profile: ProfileContentParsed; pro
                                 rel="noopener noreferrer"
                                 className="inline-flex h-11 items-center rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
                             >
+                                <Github size={16} aria-hidden />
                                 View GitHub
                             </a>
                         </div>
 
+                        <dl className="mt-10 grid w-full gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+                            {backendSignature.map((item) => (
+                                <div key={item.label} className="bg-surface px-4 py-4">
+                                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-fg-muted">
+                                        {item.label}
+                                    </dt>
+                                    <dd className="mt-1.5 text-sm font-medium leading-snug text-fg">
+                                        {item.value}
+                                    </dd>
+                                </div>
+                            ))}
+                        </dl>
+
                         <div className="mt-10 flex flex-wrap gap-2.5">
                             <StatusBadge status="live" pulse>
-                                {profile.available ? "Open to opportunities" : "Currently engaged"}
+                                {profile.available ? "Open to backend roles" : "Currently engaged"}
                             </StatusBadge>
-                            <StatusBadge status="archived">Working in {profile.location.split(",")[0]}</StatusBadge>
-                            <StatusBadge status="archived">{profile.yearsExperience} years experience</StatusBadge>
+                            <StatusBadge status="archived">Based in {profile.location.split(",")[0]}</StatusBadge>
+                            <StatusBadge status="archived">{profile.yearsExperience} years in enterprise teams</StatusBadge>
                         </div>
                     </div>
 

@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Github } from "lucide-react"
+import { ArrowRight, ExternalLink, Github } from "lucide-react"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { cn, interactiveCard } from "@/src/lib/utils/utils"
 import type { Project } from "@/src/lib/types"
@@ -44,15 +44,22 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                     </Link>
                 </h3>
 
-                <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-fg-secondary">
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-fg-secondary">
                     {project.description}
                 </p>
+
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand transition-colors group-hover:text-brand-hover">
+                    View case study
+                    <ArrowRight size={14} aria-hidden className="transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
+                </span>
+
+                <div className="flex-1" />
 
                 <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`${project.title} technologies`}>
                     {project.technologies.slice(0, 3).map((tech) => (
                         <li
                             key={tech}
-                            className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-fg-muted"
+                            className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-fg-secondary"
                         >
                             {tech}
                         </li>
@@ -66,6 +73,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                            aria-label={`View ${project.title} on GitHub (opens in a new tab)`}
                         >
                             <Github size={14} aria-hidden />
                             GitHub
@@ -75,9 +83,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                                 href={project.demo}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                                className="inline-flex items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                                aria-label={`Open ${project.title} live site (opens in a new tab)`}
                             >
                                 Live site
+                                <ExternalLink size={12} aria-hidden />
                             </a>
                         )}
                     </div>

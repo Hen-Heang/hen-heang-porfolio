@@ -8,3 +8,16 @@ export interface EngineeringLabSearchItem {
     type: string
     tags: string[]
 }
+
+export interface LabMetric {
+    label: string
+    value: number
+    suffix?: string
+}
+
+export interface FeaturedWork {
+    slug: string
+    title: string
+    description: string
+    architecture: string[]
+}

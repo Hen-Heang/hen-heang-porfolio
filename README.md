@@ -2,9 +2,9 @@
 
 # Hen Heang — Developer Portfolio
 
-**Java & Spring Boot Full-Stack Developer · Seoul, South Korea 🇰🇷**
+**Backend Developer · Java & Spring Boot · Seoul, South Korea 🇰🇷**
 
-Building enterprise web applications with Java, Spring Boot, MyBatis, and PostgreSQL on the backend, and Next.js + TypeScript on the frontend.
+Building the systems behind the screen: REST APIs, transaction flows, security boundaries, and data models with Java, Spring Boot, MyBatis, and PostgreSQL/Oracle.
 
 [**🌐 Live Site**](https://henheang.site) · [**📄 CV**](https://henheang.site/cv) · [**💼 LinkedIn**](https://www.linkedin.com/in/hen-heang) · [**💬 Telegram**](https://t.me/henheang)
 
@@ -21,7 +21,7 @@ Building enterprise web applications with Java, Spring Boot, MyBatis, and Postgr
 
 ## 👋 About Me
 
-I'm a full-stack developer with 2+ years of experience in the Korean enterprise sector — currently at **Bizplay** in Seoul, previously at **KOSIGN**, where I built B2B FinTech platforms (billing, payments, inventory). My day-to-day stack is Java, Spring Boot, MyBatis, and PostgreSQL/Oracle on the backend, with Next.js and TypeScript on the frontend.
+I'm a backend developer with 2+ years of experience in the Korean enterprise sector — currently at **Bizplay** in Seoul, previously at **KOSIGN**, where I built B2B FinTech platforms for billing, payments, and inventory. My day-to-day stack is Java, Spring Boot, MyBatis, and PostgreSQL/Oracle; I extend API contracts into Next.js and TypeScript clients when a product needs it.
 
 - 🌏 Cambodia → Korea: trained at the Korea Software HRD Center, now working in Korean-language enterprise teams
 - 🗣️ Khmer (native) · English (professional) · Korean (intermediate)
@@ -36,6 +36,7 @@ This site is not just a project list — each major project is a full **engineer
 - **Database design** — core tables and data models
 - **API showcase** — real endpoint examples with methods and descriptions
 - **Challenges & solutions** and **lessons learned** for each build
+- **Backend Engineering Lab** — a validated 13-level Java/Spring curriculum with 14 published deep dives and 26 planned topics
 - Interactive CV page with print-perfect **PDF download**
 - Dark/light theme, per-page SEO metadata, dynamic Open Graph images, sitemap and robots
 - Contact form backed by Supabase (server actions, no exposed write API)
@@ -44,10 +45,10 @@ This site is not just a project list — each major project is a full **engineer
 
 | Project | What it is | Stack |
 |---------|-----------|-------|
-| [**Hengo**](https://henheang.site/projects/hengo) ⭐ | AI companion for daily growth — goals, daily missions, and Korean learning with an AI coach and spaced repetition | Next.js, TypeScript, TanStack Query, Spring Boot |
 | [**H-Phsar**](https://henheang.site/projects/h-phsar) ⭐ | Cambodian B2B marketplace API — distributor/retailer stores, order state machine, OTP auth, real-time notifications | Spring Boot 3, MyBatis, PostgreSQL, WebSocket |
-| [**Money Flow**](https://henheang.site/projects/money-flow) | Personal finance PWA with budgets, savings goals, AI chat, and push alerts — Supabase with a daily Neon backup | Next.js, Supabase, Google Gemini |
+| [**AuthHub**](https://henheang.site/projects/authhub) | Reusable authentication service with JWT revocation, MFA, RBAC, audit logging, rate limiting, and PostgreSQL-backed security state | Spring Boot 3.5, Java 17, Spring Security, Flyway |
 | [**We Commerce**](https://henheang.site/projects/we-commerce) | Full-stack multi-vendor marketplace — DB-tracked JWT auth, cart/checkout with simulated ABA Pay & KHQR | Spring Boot 3, Java 21, Next.js, TanStack Query |
+| [**Hengo**](https://henheang.site/projects/hengo) ⭐ | AI companion for daily growth — goals, daily missions, and Korean learning with an AI coach and spaced repetition | Next.js, TypeScript, TanStack Query, Spring Boot |
 
 ## 🛠️ Tech Stack
 
@@ -63,12 +64,14 @@ This site is not just a project list — each major project is a full **engineer
 │   ├── projects/         # Project list + [slug] case-study pages
 │   ├── contact/          # Contact form (Supabase server actions)
 │   ├── cv/               # Interactive CV with PDF download
+│   ├── lab/backend/      # Backend hub, roadmap, and published [slug] pages
 │   ├── sitemap.ts        # Generated sitemap
 │   └── opengraph-image.tsx
 ├── data/                 # Single source of truth for all content
 │   ├── profile.ts        # Personal info, links, languages
 │   ├── projects.ts       # Project case studies (architecture, APIs, ERD)
 │   ├── experience.ts     # Work history
+│   ├── lab/backend/      # Static validated catalog, roadmap, sources, and articles
 │   └── cv-data.ts        # CV content
 ├── src/
 │   ├── components/       # UI components (sections, dashboard, cv, ui)
@@ -76,7 +79,17 @@ This site is not just a project list — each major project is a full **engineer
 └── public/               # Images, project previews, CV PDF
 ```
 
-All content lives in `data/` — updating the portfolio means editing typed data files, not JSX.
+Most content lives in `data/` — updating the portfolio means editing typed data files, not JSX. Backend Engineering content in `data/lab/backend/**` is parsed with Zod at module load/build time, so malformed metadata, content blocks, roadmap levels, or source records fail validation before deployment.
+
+### Backend Engineering Lab
+
+- [`/lab/backend`](https://henheang.site/lab/backend) is the searchable curriculum and content library.
+- [`/lab/backend/roadmap`](https://henheang.site/lab/backend/roadmap) shows all 13 levels, including future topics.
+- Published topics generate static detail routes; planned topics retain useful roadmap/search metadata but deliberately do not generate empty pages.
+- Progress is stored only in the visitor's browser under `localStorage`; it is not an account or server record.
+- The entire backend catalog is static and works without Supabase or production credentials.
+
+See [`data/lab/backend/README.md`](data/lab/backend/README.md) for the content-authoring and promotion workflow.
 
 ## 🏁 Getting Started
 
@@ -111,9 +124,10 @@ npm run typecheck   # TypeScript
 npm run lint        # ESLint
 npm run test        # Vitest unit tests
 npm run test:watch  # Vitest in watch mode
+npm run test:e2e    # Playwright E2E tests (starts/reuses the local Next.js server)
 ```
 
-CI (`.github/workflows/ci.yml`) runs lint, typecheck, test, and build on every push/PR to `master`.
+Install the local E2E browser once with `npx playwright install chromium`. Linux/CI environments can use `npx playwright install --with-deps chromium`. CI (`.github/workflows/ci.yml`) runs lint, typecheck, test, and build first, then runs Playwright in a separate dependent job on every push/PR to `master`.
 
 ### Theme
 
@@ -138,7 +152,7 @@ git push
 ---
 
 <div align="center">
-Open to Java / Spring Boot / Full-Stack opportunities · Based in Seoul 🇰🇷
+Open to Java / Spring Boot backend opportunities · Based in Seoul 🇰🇷
 </div>
 
 <!--

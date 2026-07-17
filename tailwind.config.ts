@@ -36,7 +36,7 @@ const config: Config = {
 				reading: "46rem", // ~736px prose width
 			},
 			spacing: {
-				section: "clamp(4.5rem, 12vw, 11.25rem)", // 72px mobile → 180px desktop
+				section: "clamp(4rem, 8vw, 8rem)", // 64px mobile → 128px desktop
 			},
 			colors: {
 				background: "hsl(var(--background))",
@@ -45,6 +45,10 @@ const config: Config = {
 					DEFAULT: "hsl(var(--surface) / <alpha-value>)",
 					hover: "hsl(var(--surface-hover) / <alpha-value>)",
 					elevated: "hsl(var(--surface-elevated) / <alpha-value>)",
+					code: {
+						DEFAULT: "hsl(var(--surface-code) / <alpha-value>)",
+						foreground: "hsl(var(--surface-code-foreground) / <alpha-value>)",
+					},
 				},
 				fg: {
 					DEFAULT: "hsl(var(--fg) / <alpha-value>)",
@@ -53,9 +57,14 @@ const config: Config = {
 				},
 				brand: {
 					DEFAULT: "hsl(var(--brand) / <alpha-value>)",
+					hover: "hsl(var(--brand-hover) / <alpha-value>)",
+					active: "hsl(var(--brand-active) / <alpha-value>)",
+					dark: "hsl(var(--brand-dark) / <alpha-value>)",
 					foreground: "hsl(var(--brand-foreground) / <alpha-value>)",
 				},
 				success: "hsl(var(--success) / <alpha-value>)",
+				warning: "hsl(var(--warning) / <alpha-value>)",
+				error: "hsl(var(--error) / <alpha-value>)",
 				border: {
 					DEFAULT: "hsl(var(--border))",
 					strong: "hsl(var(--border-strong) / <alpha-value>)",

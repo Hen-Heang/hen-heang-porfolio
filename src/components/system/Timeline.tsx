@@ -1,5 +1,14 @@
 import React from "react"
+import Image from "next/image"
+import { Award, GraduationCap, Medal } from "lucide-react"
 import { cn } from "@/src/lib/utils/utils"
+
+export interface TimelineCredential {
+    title: string
+    type: "certificate" | "graduation" | "award"
+    /** Image rendered directly beneath the matching school/company entry. */
+    image?: string
+}
 
 export interface TimelineEntry {
     period: string
@@ -9,8 +18,18 @@ export interface TimelineEntry {
     description: string
     highlights?: string[]
     stack?: string[]
-    kind?: "education" | "work" | "direction"
+    /** Certifications/awards earned during this role or program. */
+    credentials?: TimelineCredential[]
+    /** Preview rendered directly for a standalone `kind: "certificate"` entry. */
+    image?: string
+    kind?: "education" | "work" | "direction" | "certificate"
 }
+
+const credentialIcon = {
+    certificate: Award,
+    graduation: GraduationCap,
+    award: Medal,
+} as const
 
 /**
  * Editorial timeline: split period/content columns on desktop, simple
@@ -32,7 +51,7 @@ export function Timeline({ items, className }: { items: TimelineEntry[]; classNa
                         <span
                             className={cn(
                                 "absolute -left-[5.5px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-background",
-                                item.kind === "direction" ? "bg-brand" : "bg-border-strong",
+                                item.kind === "direction" || item.kind === "certificate" ? "bg-brand" : "bg-border-strong",
                             )}
                             aria-hidden
                         />
@@ -65,6 +84,61 @@ export function Timeline({ items, className }: { items: TimelineEntry[]; classNa
                                     </li>
                                 ))}
                             </ul>
+                        )}
+                        {item.credentials && item.credentials.length > 0 && (
+                            <ul
+                                className="mt-5 grid max-w-2xl gap-3 sm:grid-cols-2"
+                                aria-label={`Certifications and awards from ${item.org}`}
+                            >
+                                {item.credentials.map((c) => {
+                                    const Icon = credentialIcon[c.type]
+                                    return (
+                                        <li
+                                            key={`${c.type}-${c.title}-${c.image ?? "no-image"}`}
+                                            className="overflow-hidden rounded-xl border border-border bg-background"
+                                        >
+                                            {c.image && (
+                                                <div className="relative aspect-[16/10] border-b border-border bg-surface">
+                                                    <Image
+                                                        src={c.image}
+                                                        alt={`${c.title} from ${item.org}`}
+                                                        fill
+                                                        sizes="(max-width: 640px) 100vw, 320px"
+                                                        className="object-contain p-3"
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="flex items-start gap-3 p-3.5">
+                                                <span
+                                                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand"
+                                                    aria-hidden
+                                                >
+                                                    <Icon size={15} />
+                                                </span>
+                                                <span>
+                                                    <span className="block text-sm font-medium leading-snug text-fg">
+                                                        {c.title}
+                                                    </span>
+                                                    <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.14em] text-fg-muted">
+                                                        {c.type}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        )}
+                        {item.kind === "certificate" && item.image && (
+                            <div className="relative mt-5 aspect-[16/10] max-w-lg overflow-hidden rounded-xl border border-border bg-background">
+                                <Image
+                                    src={item.image}
+                                    alt={`${item.title} from ${item.org}`}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 512px"
+                                    className="object-contain p-3"
+                                />
+                            </div>
                         )}
                     </div>
                 </li>

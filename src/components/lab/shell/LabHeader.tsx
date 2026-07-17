@@ -31,7 +31,15 @@ function slugToTitle(slug: string): string {
         .join(" ")
 }
 
-export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMenuToggle: () => void }) {
+export function LabHeader({
+    menuOpen,
+    onMenuToggle,
+    menuButtonRef,
+}: {
+    menuOpen: boolean
+    onMenuToggle: () => void
+    menuButtonRef?: React.RefObject<HTMLButtonElement | null>
+}) {
     const pathname = usePathname()
     const segments = pathname.split("/").filter(Boolean).slice(1) // drop leading "lab"
 
@@ -46,16 +54,17 @@ export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMen
         <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-md md:px-6">
             <div className="flex min-w-0 items-center gap-3">
                 <button
+                    ref={menuButtonRef}
                     type="button"
                     onClick={onMenuToggle}
                     aria-label={menuOpen ? "Close lab menu" : "Open lab menu"}
                     aria-expanded={menuOpen}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-fg-secondary hover:text-fg hover:border-border-strong transition-colors lg:hidden"
+                    className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-fg-secondary transition-colors hover:border-border-strong hover:text-fg lg:hidden"
                 >
                     {menuOpen ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
                 </button>
 
-                <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-1.5 font-mono text-sm lg:text-xs text-fg-muted">
+                <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-1.5 font-mono text-base lg:text-sm text-fg-muted">
                     <Link href="/lab" className="shrink-0 hover:text-fg transition-colors">
                         lab
                     </Link>
@@ -75,7 +84,7 @@ export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMen
             </div>
 
             <div className="flex shrink-0 items-center gap-4">
-                <span className="hidden items-center gap-1.5 font-mono text-xs lg:text-[11px] text-fg-muted sm:flex">
+                <span className="hidden items-center gap-1.5 font-mono text-sm lg:text-xs text-fg-muted sm:flex">
                     <span className="relative flex h-2 w-2" aria-hidden="true">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
@@ -84,7 +93,7 @@ export function LabHeader({ menuOpen, onMenuToggle }: { menuOpen: boolean; onMen
                 </span>
                 <Link
                     href="/"
-                    className="rounded-lg border border-border px-2.5 py-1 font-mono text-xs lg:text-[11px] text-fg-secondary hover:border-border-strong hover:text-fg transition-colors"
+                    className="rounded-lg border border-border px-2.5 py-1 font-mono text-sm lg:text-xs text-fg-secondary hover:border-border-strong hover:text-fg transition-colors"
                 >
                     exit lab
                 </Link>

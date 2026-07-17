@@ -30,18 +30,5 @@ export const experiences: ExperienceItem[] = [
             "Collaborated with Korean development teams on enterprise projects"
         ],
         stack: ["Java 8+", "Spring Boot", "Spring Security", "PostgreSQL", "MyBatis", "Next.js", "TypeScript"]
-    },
-    {
-        role: "Android Developer",
-        company: "Korea Software HRD Center",
-        period: "July 2023 — April 2024",
-        location: "Cambodia",
-        summary: "Developed Android applications during training program at Korea Software HRD Center bootcamp.",
-        highlights: [
-            "Built Android applications using Java/Kotlin",
-            "Learned Korean software development practices",
-            "Completed intensive full-stack development bootcamp"
-        ],
-        stack: ["Android", "Java", "Kotlin"]
     }
 ]

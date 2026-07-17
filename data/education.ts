@@ -3,14 +3,6 @@ import type { EducationItem } from "@/src/lib/types"
 
 export const education: EducationItem[] = [
     {
-        period: "2020",
-        title: "Basic Computer ",
-        institution: "Addbook Computer Centre",
-        description: "Basic computer skills training, including Microsoft Office and internet usage.",
-    },
-
-
-    {
         period: "2021",
         title: "Basic C++ Programming",
         institution: " ANT Technology Training Center",
@@ -26,9 +18,9 @@ export const education: EducationItem[] = [
 
     {
         period: "2023-2024",
-        title: "Mobile Application Development",
+        title: "Mobile Application Development Training",
         institution: "Korea Software HRD Center",
-        description: "Training in mobile application development using Java and Android Studio.",
+        description: "Hands-on training in Android application development using Java, Kotlin, and Android Studio.",
     },
 
     {

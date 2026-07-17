@@ -22,33 +22,33 @@ export function BackendCard({ item, complete = false }: { item: BackendItemSumma
     const body = (
         <>
             <div className="flex items-start justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider">
+                <div className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider">
                     <span className="text-brand">Level {item.level}</span>
                     <span className="text-fg-muted">{categoryLabels[item.category]}</span>
                     <span className="rounded-full border border-border px-2 py-0.5 text-fg-muted">{item.type}</span>
                 </div>
                 {item.status === "planned" ? (
-                    <span className="inline-flex items-center gap-1 rounded-full border border-border px-2 py-0.5 font-mono text-[10px] uppercase text-fg-muted">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-border px-2 py-0.5 font-mono text-[11px] uppercase text-fg-muted">
                         <LockKeyhole size={10} aria-hidden="true" /> planned
                     </span>
                 ) : complete ? (
-                    <span className="inline-flex items-center gap-1 rounded-full border border-success/40 bg-success/10 px-2 py-0.5 font-mono text-[10px] uppercase text-success">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-success/40 bg-success/10 px-2 py-0.5 font-mono text-[11px] uppercase text-success">
                         <Check size={10} aria-hidden="true" /> complete
                     </span>
                 ) : (
                     <ArrowRight size={15} aria-hidden="true" className="text-fg-muted transition-transform group-hover:translate-x-1 group-hover:text-brand" />
                 )}
             </div>
-            <h3 className="mt-3 text-lg font-semibold text-fg transition-colors group-hover:text-white">{item.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-fg-muted">{item.description}</p>
+            <h3 className="mt-3 text-xl font-semibold text-fg">{item.title}</h3>
+            <p className="mt-2 text-base leading-relaxed text-fg-secondary">{item.description}</p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
                 {item.technologies.slice(0, 4).map((technology) => (
-                    <span key={technology} className="rounded-md bg-background px-2 py-1 font-mono text-[10px] text-fg-secondary">
+                    <span key={technology} className="rounded-md bg-background px-2 py-1 font-mono text-[11px] text-fg-secondary">
                         {technology}
                     </span>
                 ))}
                 {item.estimatedMinutes && (
-                    <span className="ml-auto inline-flex items-center gap-1 text-xs text-fg-muted">
+                    <span className="ml-auto inline-flex items-center gap-1 text-sm text-fg-muted">
                         <Clock3 size={11} aria-hidden="true" /> {item.estimatedMinutes} min
                     </span>
                 )}

@@ -6,12 +6,12 @@ import { getSiteContent } from "@/src/lib/db/portfolio"
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: "CV — Hen Heang | Full-Stack Software Engineer",
+  title: "CV — Hen Heang | Backend Developer",
   description:
-    "Professional CV of Hen Heang — Full-Stack Software Engineer specialising in Java, Spring Boot, and Next.js. Based in Seoul, South Korea.",
+    "Professional CV of Hen Heang — Backend Developer specialising in Java, Spring Boot, MyBatis, and PostgreSQL/Oracle. Based in Seoul, South Korea.",
   openGraph: {
     title: "CV — Hen Heang",
-    description: "Full-Stack Software Engineer · Java · Spring Boot · Next.js",
+    description: "Backend Developer · Java · Spring Boot · PostgreSQL",
     type: "profile",
   },
 }

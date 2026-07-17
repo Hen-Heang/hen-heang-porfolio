@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
-import { getBackendSummaries } from "@/src/lib/backend/catalog"
+import { getBackendRoadmapLevelCount, getBackendSummaries } from "@/src/lib/backend/catalog"
 import { BackendHubClient } from "@/src/components/lab/backend/BackendHubClient"
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 
 export default function BackendEngineeringPage() {
     return (
-        <main className="mx-auto max-w-6xl px-4 py-8 md:px-8 md:py-10">
-            <BackendHubClient items={getBackendSummaries()} />
-        </main>
+        <div className="mx-auto max-w-6xl px-4 py-8 md:px-8 md:py-10">
+            <BackendHubClient items={getBackendSummaries()} roadmapLevelCount={getBackendRoadmapLevelCount()} />
+        </div>
     )
 }

@@ -3,22 +3,25 @@ import { Section } from "@/src/components/system/Section"
 import { Timeline } from "@/src/components/system/Timeline"
 import { buildCareerTimeline } from "@/src/lib/utils/timeline"
 import type { EducationItem, ExperienceItem } from "@/src/lib/types"
+import type { Achievement } from "@/data/achievements"
 
 export function AboutTimeline({
     experience,
     education,
+    achievements = [],
 }: {
     experience: ExperienceItem[]
     education: EducationItem[]
+    achievements?: Achievement[]
 }) {
-    const items = buildCareerTimeline(experience, education)
+    const items = buildCareerTimeline(experience, education, achievements)
 
     return (
         <Section
             id="experience"
-            eyebrow="Experience"
-            title="Cambodia to Korea"
-            description="University in Phnom Penh, a Korean-language development bootcamp, then two enterprise teams in the Korean tech sector."
+            eyebrow="Career Timeline"
+            title="Experience, education & milestones"
+            description="One chronological journey through schools, training programs, companies, awards, and certifications—from Cambodia to Korea. Credentials appear under the institution that awarded them."
             className="bg-surface"
         >
             <Timeline items={items} />

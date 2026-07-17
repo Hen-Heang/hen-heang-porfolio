@@ -1,10 +1,16 @@
+"use client"
+
 import React from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import { SectionHeading } from "@/src/components/system/SectionHeading"
 import { ProjectFilterBar, type ProjectFilter } from "@/src/components/projects/ProjectFilterBar"
 import { ProjectCard } from "@/src/components/projects/ProjectCard"
+import { ProjectFeature } from "@/src/components/system/ProjectFeature"
 import type { Project } from "@/src/lib/types"
+
+const MAX_FEATURED = 2
 
 function isBackend(project: Project): boolean {
     return project.technologies.some((t) => /spring|java|mybatis/i.test(t))
@@ -32,6 +38,7 @@ function matchesFilter(project: Project, filter: ProjectFilter): boolean {
 }
 
 export function ProjectsIndex({ projects, filter }: { projects: Project[]; filter: ProjectFilter }) {
+    const reduceMotion = useReducedMotion()
     const counts: Record<ProjectFilter, number> = {
         all: projects.length,
         backend: projects.filter(isBackend).length,
@@ -40,12 +47,22 @@ export function ProjectsIndex({ projects, filter }: { projects: Project[]; filte
     }
 
     const filtered = projects.filter((p) => matchesFilter(p, filter))
+    // Strongest projects (real `featured` flag, in curated data order) get a
+    // large editorial treatment; everything else — including any unfeatured
+    // remainder of the current filter — fills the grid below. A project
+    // never appears in both, and both respect the active filter.
+    const featured = filtered.filter((p) => p.featured).slice(0, MAX_FEATURED)
+    const remaining = filtered.filter((p) => !featured.some((f) => f.slug === p.slug))
 
     return (
         <div className="py-section pt-16 md:pt-20">
             <Container>
                 <Eyebrow className="mb-4">Projects</Eyebrow>
-                <SectionHeading as="h1" size="display">
+                <SectionHeading
+                    as="h1"
+                    size="lg"
+                    className="max-w-3xl text-3xl font-semibold leading-[1.08] tracking-[-0.035em] sm:text-4xl lg:text-5xl"
+                >
                     Everything I&apos;ve built
                 </SectionHeading>
                 <p className="mt-4 max-w-2xl text-lg leading-relaxed text-fg-secondary">
@@ -62,11 +79,41 @@ export function ProjectsIndex({ projects, filter }: { projects: Project[]; filte
                         No projects in this category yet.
                     </p>
                 ) : (
-                    <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {filtered.map((project, i) => (
-                            <ProjectCard key={project.slug} project={project} index={i + 1} />
-                        ))}
-                    </div>
+                    <>
+                        {featured.length > 0 && (
+                            <section className="mt-16 flex flex-col gap-16 md:gap-20">
+                                {featured.map((project, i) => (
+                                    <ProjectFeature key={project.slug} index={i + 1} project={project} reverse={i % 2 === 1} />
+                                ))}
+                            </section>
+                        )}
+
+                        {remaining.length > 0 && (
+                            <div className={featured.length > 0 ? "mt-20" : "mt-10"}>
+                                {featured.length > 0 && (
+                                    <h2 className="mb-6 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-fg-muted">
+                                        All projects
+                                    </h2>
+                                )}
+                                <motion.div layout className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
+                                    <AnimatePresence initial={false} mode="popLayout">
+                                        {remaining.map((project, i) => (
+                                            <motion.div
+                                                layout
+                                                key={project.slug}
+                                                initial={reduceMotion ? false : { y: 8 }}
+                                                animate={{ y: 0 }}
+                                                exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98 }}
+                                                transition={{ duration: 0.2 }}
+                                            >
+                                                <ProjectCard project={project} index={i + 1} />
+                                            </motion.div>
+                                        ))}
+                                    </AnimatePresence>
+                                </motion.div>
+                            </div>
+                        )}
+                    </>
                 )}
             </Container>
         </div>

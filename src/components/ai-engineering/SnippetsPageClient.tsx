@@ -23,8 +23,8 @@ export function SnippetsPageClient({ snippets, allTags }: { snippets: Snippet[];
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mb-8">
-                <h1 className="mb-1 text-3xl font-bold text-fg">Code Snippets</h1>
-                <p className="text-sm text-fg-muted">
+                <h1 className="mb-1 text-3xl md:text-4xl font-bold tracking-tight text-fg">Code Snippets</h1>
+                <p className="max-w-2xl text-sm md:text-base leading-relaxed text-fg-secondary">
                     Reusable patterns I keep pasting into new projects — MyBatis dynamic SQL, idempotency, Thymeleaf fragments.
                 </p>
             </motion.div>

@@ -61,6 +61,7 @@ export function ContactPageClient() {
                                             className="absolute right-4 top-4 text-fg-muted opacity-0 transition-opacity group-hover:opacity-100"
                                             aria-hidden
                                         />
+                                        {card.newTab && <span className="sr-only"> (opens in a new tab)</span>}
                                     </a>
                                 ))}
                             </div>

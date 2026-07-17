@@ -10,7 +10,7 @@ export function ContactCTASection() {
                     <div className="max-w-2xl">
                         <h2 className="text-display-sm text-fg">Have a system to build?</h2>
                         <p className="mt-4 max-w-lg text-lg leading-relaxed text-fg-secondary">
-                            I&apos;m available for backend, full-stack, and engineering collaboration.
+                            I&apos;m available for Java and Spring Boot backend roles, API work, and product teams that value dependable systems.
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-3">

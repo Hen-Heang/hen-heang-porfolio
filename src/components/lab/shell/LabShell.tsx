@@ -1,20 +1,26 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useRef, useState } from "react"
 import { usePathname } from "next/navigation"
-import { AnimatePresence, motion } from "framer-motion"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { X } from "lucide-react"
 import { LabSidebar } from "./LabSidebar"
 import { LabHeader } from "./LabHeader"
 import { ScrollToTop } from "@/src/components/ui/ScrollToTop"
 
 export function LabShell({ children }: { children: React.ReactNode }) {
     const [menuOpen, setMenuOpen] = useState(false)
+    const menuButtonRef = useRef<HTMLButtonElement>(null)
     const pathname = usePathname()
+    const [renderedPathname, setRenderedPathname] = useState(pathname)
 
-    // Close the mobile drawer whenever the route changes
-    useEffect(() => {
+    // Close when the route changes (a nav link was followed). Adjusting
+    // state during render (rather than in an effect) avoids an extra paint
+    // with the drawer still open after navigation.
+    if (pathname !== renderedPathname) {
+        setRenderedPathname(pathname)
         setMenuOpen(false)
-    }, [pathname])
+    }
 
     return (
         <div className="min-h-screen bg-background text-fg font-sans">
@@ -24,34 +30,32 @@ export function LabShell({ children }: { children: React.ReactNode }) {
             </aside>
 
             {/* Mobile drawer */}
-            <AnimatePresence>
-                {menuOpen && (
-                    <>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            onClick={() => setMenuOpen(false)}
-                            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
-                            aria-hidden="true"
-                        />
-                        <motion.aside
-                            initial={{ x: -260 }}
-                            animate={{ x: 0 }}
-                            exit={{ x: -260 }}
-                            transition={{ type: "tween", duration: 0.22, ease: "easeOut" }}
-                            className="fixed inset-y-0 left-0 z-50 w-60 border-r border-border lg:hidden"
+            <DialogPrimitive.Root open={menuOpen} onOpenChange={setMenuOpen}>
+                <DialogPrimitive.Portal>
+                    <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm lg:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 motion-reduce:animate-none" />
+                    <DialogPrimitive.Content
+                        className="fixed inset-y-0 left-0 z-50 w-60 border-r border-border bg-background lg:hidden data-[state=open]:animate-in data-[state=open]:slide-in-from-left data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left motion-reduce:animate-none"
+                        aria-describedby={undefined}
+                        onCloseAutoFocus={(event) => {
+                            event.preventDefault()
+                            menuButtonRef.current?.focus()
+                        }}
+                    >
+                        <DialogPrimitive.Title className="sr-only">Engineering Lab navigation</DialogPrimitive.Title>
+                        <DialogPrimitive.Close
+                            aria-label="Close lab menu"
+                            className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-background text-fg-secondary transition-colors hover:border-border-strong hover:text-fg"
                         >
-                            <LabSidebar onNavigate={() => setMenuOpen(false)} />
-                        </motion.aside>
-                    </>
-                )}
-            </AnimatePresence>
+                            <X size={16} aria-hidden="true" />
+                        </DialogPrimitive.Close>
+                        <LabSidebar onNavigate={() => setMenuOpen(false)} />
+                    </DialogPrimitive.Content>
+                </DialogPrimitive.Portal>
+            </DialogPrimitive.Root>
 
             {/* Content */}
             <div className="lg:pl-60">
-                <LabHeader menuOpen={menuOpen} onMenuToggle={() => setMenuOpen((v) => !v)} />
+                <LabHeader menuOpen={menuOpen} onMenuToggle={() => setMenuOpen((v) => !v)} menuButtonRef={menuButtonRef} />
                 <main>{children}</main>
             </div>
 

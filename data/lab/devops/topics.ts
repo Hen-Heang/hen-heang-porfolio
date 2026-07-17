@@ -147,16 +147,17 @@ export const learningCards: LearningCard[] = [
         howBackendDevsUseIt:
             "A workflow triggered on push to main: checkout code, set up the JDK, run mvn test, and only on success build and push a Docker image tagged with the commit SHA — the tag makes every deployed image traceable back to an exact commit.",
         commonMistakes: [
-            "Not caching dependencies (Maven's ~/.m2, npm's node_modules), so every run re-downloads the entire dependency tree and CI takes minutes longer than it needs to.",
+            "Not caching dependency-manager downloads (Maven's ~/.m2 or npm's global cache), so every run re-downloads the dependency tree. Do not cache node_modules across incompatible installs.",
             "One giant workflow file instead of separate workflows for PR checks vs. deploy — a typo in the deploy logic then blocks every PR's test run too.",
             "Using repository secrets for a value that changes per environment (staging vs. production) instead of GitHub Environments, which scope secrets and require approval gates per environment.",
             "No branch protection rule requiring the workflow to pass before merge — the pipeline exists but nothing enforces it.",
+            "Using mutable action tags without a review process — production workflows should pin third-party actions to full commit SHAs and keep a version comment for maintainability.",
         ],
         exampleCommands: [
             {
                 description: "Minimal workflow: test on every push",
                 command:
-                    "name: CI\non: [push]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-java@v4\n        with:\n          java-version: '21'\n          distribution: 'temurin'\n      - run: mvn test",
+                    "name: CI\non: [push]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0\n      - uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0\n        with:\n          java-version: '21'\n          distribution: 'temurin'\n      - run: mvn test",
             },
         ],
         resources: [{ label: "GitHub Actions workflow syntax", url: "https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions" }],

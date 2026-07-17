@@ -30,7 +30,9 @@ RUN mvn package -DskipTests
 
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+RUN addgroup -S app && adduser -S app -G app
+COPY --from=build --chown=app:app /app/target/*.jar app.jar
+USER app
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]`,
             },
@@ -52,7 +54,8 @@ ENTRYPOINT ["java", "-jar", "app.jar"]`,
         lessonsLearned: [
             "COPY pom.xml first, then run dependency:go-offline, before copying src/ — Docker caches layers, so dependency resolution only re-runs when pom.xml actually changes, not on every source edit.",
             "-DskipTests in the Dockerfile is deliberate: tests should run in CI before the image is even built, not slow down every local image build.",
-            "eclipse-temurin:21-jre-alpine (JRE only, Alpine base) instead of the full JDK image is most of the size reduction — you don't need a compiler in production.",
+            "The runtime creates and switches to an unprivileged app user; a container intended for production should not run the JVM as root.",
+            "eclipse-temurin:21-jre-alpine is readable but mutable. Resolve and pin a reviewed digest for controlled production builds, then use automation to propose digest updates.",
         ],
     },
     {
@@ -211,8 +214,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -230,12 +233,12 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/login-action@v3
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
         with:
           username: \${{ secrets.DOCKERHUB_USERNAME }}
           password: \${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5.4.0
         with:
           push: true
           tags: myorg/myapp:\${{ github.sha }}`,
@@ -250,6 +253,7 @@ jobs:
         lessonsLearned: [
             "cache: 'maven' on setup-java cuts test-workflow time noticeably by reusing the dependency cache between runs instead of re-downloading the whole tree.",
             "Tagging images by commit SHA (not just latest) means any deployed image can be traced back to the exact commit — essential when you need to know exactly what's running in production.",
+            "Pin third-party actions to reviewed full commit SHAs and retain a version comment for readability; use dependency automation to propose reviewed updates.",
             "Splitting test and deploy into separate workflow files keeps PR feedback fast — a broken deploy step can't accidentally block or slow down the test run every contributor waits on.",
         ],
     },

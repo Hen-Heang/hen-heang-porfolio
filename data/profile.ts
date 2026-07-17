@@ -9,7 +9,7 @@ export const profileData = {
     email: "henheang15@gmail.com",
     available: true,
     yearsExperience: "2+",
-    bio: "Backend developer building REST APIs and enterprise applications in Korea with Java, Spring Boot, MyBatis, and PostgreSQL/Oracle. Also comfortable delivering frontends with Next.js and TypeScript.",
+    bio: "Backend developer in Seoul turning business rules into dependable Java services. I design REST APIs, transaction flows, and data models with Spring Boot, MyBatis, and PostgreSQL/Oracle — then carry the contract through to Next.js clients when a product needs it.",
     description:
         "Backend Developer (Java & Spring Boot) based in Seoul with 2+ years of experience in the Korean enterprise sector. I build backend systems and REST APIs with Java, Spring Boot, and MyBatis on PostgreSQL/Oracle, and extend to frontends with Next.js and TypeScript when needed.",
     profileImage: "/image/heang_new.jpeg",

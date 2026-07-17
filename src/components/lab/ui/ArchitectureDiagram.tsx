@@ -24,13 +24,13 @@ const TYPE_ICON: Record<ArchNodeType, React.ComponentType<{ size?: number; class
 }
 
 const TYPE_COLOR: Record<ArchNodeType, string> = {
-    client: "text-[#22d3ee]",
+    client: "text-sky-600 dark:text-sky-400",
     app: "text-brand",
     api: "text-brand",
     service: "text-fg-secondary",
     database: "text-success",
-    cache: "text-[#f59e0b]",
-    queue: "text-[#f59e0b]",
+    cache: "text-warning",
+    queue: "text-warning",
     external: "text-fg-muted",
     default: "text-fg-muted",
 }
@@ -48,10 +48,10 @@ function NodeCard({ node }: { node: ArchNode }) {
     const type = node.type ?? "default"
     const Icon = TYPE_ICON[type]
     return (
-        <div className="flex min-w-[128px] flex-1 flex-col items-center gap-1 rounded-xl border border-border bg-[#0c0c0e] px-3 py-3 text-center md:flex-none">
+        <div className="flex min-w-[128px] flex-1 flex-col items-center gap-1 rounded-xl border border-border bg-surface-code px-3 py-3 text-center md:flex-none">
             <Icon size={14} aria-hidden="true" className={TYPE_COLOR[type]} />
-            <span className="text-sm font-semibold text-fg">{node.label}</span>
-            {node.sublabel && <span className="text-[10px] text-fg-muted">{node.sublabel}</span>}
+            <span className="text-base font-semibold text-surface-code-foreground">{node.label}</span>
+            {node.sublabel && <span className="text-[11px] text-surface-code-foreground/60">{node.sublabel}</span>}
         </div>
     )
 }
@@ -59,7 +59,7 @@ function NodeCard({ node }: { node: ArchNode }) {
 export function ArchitectureDiagram({ title, steps }: { title?: string; steps: ArchStep[] }) {
     return (
         <div className="my-6 rounded-2xl border border-border bg-surface p-5">
-            {title && <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-fg-muted">{title}</p>}
+            {title && <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-fg-muted">{title}</p>}
             <div className="flex flex-col items-stretch gap-1 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-2">
                 {steps.map((step, i) => {
                     const nodes = normalizeStep(step)
@@ -96,7 +96,7 @@ export function ArchitectureDiagramCompact({ steps }: { steps: ArchStep[] }) {
                             {nodes.map((node, ni) => (
                                 <span
                                     key={ni}
-                                    className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[10px] text-fg-secondary"
+                                    className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-fg-secondary"
                                 >
                                     {node.label}
                                 </span>

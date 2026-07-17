@@ -99,10 +99,10 @@ export function AIEngineeringHubClient({
                     Engineering Knowledge Hub
                 </span>
 
-                <h1 className="relative mt-5 text-3xl md:text-5xl font-bold tracking-tight text-fg">
+                <h1 className="relative mt-5 text-4xl md:text-5xl font-bold tracking-tight text-fg">
                     AI Engineering
                 </h1>
-                <p className="relative mt-3 text-sm md:text-base text-fg-secondary">
+                <p className="relative mt-3 text-base md:text-lg leading-relaxed text-fg-secondary">
                     Building modern backend systems with AI-assisted engineering.
                 </p>
                 <p className="relative mx-auto mt-4 max-w-2xl text-xs md:text-sm leading-relaxed text-fg-muted">

@@ -22,12 +22,12 @@ export const metadata: Metadata = {
 export default function SystemDesignPage() {
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-fg-secondary">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-fg-secondary">
                 <Network size={11} aria-hidden="true" className="text-brand" />
                 ~/lab/systems
             </span>
             <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-fg">System Design</h1>
-            <p className="mt-2 max-w-2xl text-sm md:text-base leading-relaxed text-fg-secondary">
+            <p className="mt-2 max-w-2xl text-base md:text-lg leading-relaxed text-fg-secondary">
                 How four production systems are structured — from request to database — and the trade-offs behind each
                 architectural decision.
             </p>
@@ -37,12 +37,12 @@ export default function SystemDesignPage() {
                     <section key={system.slug} className="rounded-2xl border border-border bg-surface p-5 md:p-6">
                         <div className="flex flex-wrap items-start justify-between gap-3">
                             <div>
-                                <h2 className="text-lg font-semibold text-fg">{system.title}</h2>
-                                <p className="mt-1 max-w-2xl text-sm leading-relaxed text-fg-muted">{system.description}</p>
+                                <h2 className="text-xl font-semibold text-fg">{system.title}</h2>
+                                <p className="mt-1 max-w-2xl text-base leading-relaxed text-fg-muted">{system.description}</p>
                             </div>
                             <Link
                                 href={`/projects/${system.slug}`}
-                                className="flex shrink-0 items-center gap-1 rounded-lg border border-border px-2.5 py-1 font-mono text-[11px] text-fg-secondary hover:border-border-strong hover:text-fg transition-colors"
+                                className="flex shrink-0 items-center gap-1 rounded-lg border border-border px-2.5 py-1 font-mono text-xs text-fg-secondary hover:border-border-strong hover:text-fg transition-colors"
                             >
                                 case study
                                 <ArrowUpRight size={12} aria-hidden="true" />
@@ -63,13 +63,13 @@ export default function SystemDesignPage() {
                             <div className="mt-2 grid gap-4 md:grid-cols-2">
                                 {system.challenges.length > 0 && (
                                     <div>
-                                        <p className="mb-2 flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
-                                            <TriangleAlert size={12} aria-hidden="true" className="text-[#f59e0b]" />
+                                        <p className="mb-2 flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
+                                            <TriangleAlert size={12} aria-hidden="true" className="text-warning" />
                                             Challenges
                                         </p>
                                         <ul className="space-y-2">
                                             {system.challenges.map((c, i) => (
-                                                <li key={i} className="text-xs leading-relaxed text-fg-secondary">
+                                                <li key={i} className="text-sm leading-relaxed text-fg-secondary">
                                                     {c}
                                                 </li>
                                             ))}
@@ -78,13 +78,13 @@ export default function SystemDesignPage() {
                                 )}
                                 {system.solutions.length > 0 && (
                                     <div>
-                                        <p className="mb-2 flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
+                                        <p className="mb-2 flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
                                             <CircleCheck size={12} aria-hidden="true" className="text-success" />
                                             Solutions
                                         </p>
                                         <ul className="space-y-2">
                                             {system.solutions.map((s, i) => (
-                                                <li key={i} className="text-xs leading-relaxed text-fg-secondary">
+                                                <li key={i} className="text-sm leading-relaxed text-fg-secondary">
                                                     {s}
                                                 </li>
                                             ))}
@@ -96,13 +96,13 @@ export default function SystemDesignPage() {
 
                         {system.lessonsLearned.length > 0 && (
                             <div className="mt-5 border-t border-border pt-4">
-                                <p className="mb-2 flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
+                                <p className="mb-2 flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
                                     <Lightbulb size={12} aria-hidden="true" className="text-brand" />
                                     Lessons learned
                                 </p>
                                 <ul className="space-y-1.5">
                                     {system.lessonsLearned.map((l, i) => (
-                                        <li key={i} className="text-xs leading-relaxed text-fg-secondary">
+                                        <li key={i} className="text-sm leading-relaxed text-fg-secondary">
                                             {l}
                                         </li>
                                     ))}

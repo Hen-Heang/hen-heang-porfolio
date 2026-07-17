@@ -23,8 +23,8 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
 
             <p className="mb-3 text-xs leading-relaxed text-fg-muted">{prompt.description}</p>
 
-            <div className="mb-3 rounded-lg border border-border bg-[#0c0c0e] p-3">
-                <p className="mb-2 whitespace-pre-wrap font-mono text-[12px] leading-relaxed text-[#d4d4d8]">{prompt.prompt}</p>
+            <div className="mb-3 rounded-lg border border-border bg-surface-code p-3">
+                <p className="mb-2 whitespace-pre-wrap font-mono text-[12px] leading-relaxed text-surface-code-foreground">{prompt.prompt}</p>
                 <CopyButton text={prompt.prompt} />
             </div>
 

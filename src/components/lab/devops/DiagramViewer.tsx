@@ -4,13 +4,13 @@ import type { Diagram } from "@/src/lib/types/devops-lab"
 export function DiagramViewer({ diagram }: { diagram: Diagram }) {
     return (
         <div className="my-6 rounded-2xl border border-border bg-surface p-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-fg-muted">{diagram.title}</p>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-fg-muted">{diagram.title}</p>
             <div className="flex flex-col items-stretch gap-1 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-2">
                 {diagram.nodes.map((node, i) => (
                     <div key={i} className="flex flex-col items-center gap-1 md:flex-row md:gap-2">
-                        <div className="flex min-w-[120px] flex-1 flex-col items-center gap-0.5 rounded-xl border border-border bg-[#0c0c0e] px-3 py-3 text-center md:flex-none">
-                            <span className="text-sm font-semibold text-fg">{node.label}</span>
-                            {node.sublabel && <span className="text-[10px] text-fg-muted">{node.sublabel}</span>}
+                        <div className="flex min-w-[120px] flex-1 flex-col items-center gap-0.5 rounded-xl border border-border bg-surface-code px-3 py-3 text-center md:flex-none">
+                            <span className="text-base font-semibold text-surface-code-foreground">{node.label}</span>
+                            {node.sublabel && <span className="text-[11px] text-surface-code-foreground/60">{node.sublabel}</span>}
                         </div>
                         {i < diagram.nodes.length - 1 && (
                             <>

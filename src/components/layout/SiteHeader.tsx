@@ -1,21 +1,32 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
-import { Command, Menu } from "lucide-react"
+import { motion } from "framer-motion"
+import {
+    BriefcaseBusiness,
+    Command,
+    FileText,
+    FlaskConical,
+    Menu,
+    MessageCircle,
+    Route,
+    UserRound,
+} from "lucide-react"
 import { ThemeToggle } from "@/src/components/system/ThemeToggle"
 import { MobileMenu } from "@/src/components/layout/MobileMenu"
 
 const CommandMenu = dynamic(() => import("@/src/components/system/CommandMenu"), { ssr: false })
 
 export const NAV_LINKS = [
-    { label: "Work", href: "/projects", match: ["/projects"] },
-    { label: "Experience", href: "/about#experience", match: [] as string[] },
-    { label: "Lab", href: "/lab", match: ["/lab", "/ai-engineering"] },
-    { label: "About", href: "/about", match: ["/about"] },
-    { label: "CV", href: "/cv", match: ["/cv"] },
+    { label: "Work", href: "/projects", match: ["/projects"], icon: BriefcaseBusiness },
+    { label: "Lab", href: "/lab", match: ["/lab", "/ai-engineering"], icon: FlaskConical },
+    { label: "Journey", href: "/journey", match: ["/journey"], icon: Route },
+    { label: "About", href: "/about", match: ["/about"], icon: UserRound },
+    { label: "CV", href: "/cv", match: ["/cv"], icon: FileText },
 ]
 
 function isActive(pathname: string, match: string[]): boolean {
@@ -30,6 +41,7 @@ export function SiteHeader() {
     const pathname = usePathname()
     const [scrolled, setScrolled] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
+    const menuButtonRef = useRef<HTMLButtonElement>(null)
     const [commandOpen, setCommandOpen] = useState(false)
     // Only mount the lazy command-menu chunk once it has been requested.
     const [commandRequested, setCommandRequested] = useState(false)
@@ -69,27 +81,45 @@ export function SiteHeader() {
             <div className="mx-auto flex h-16 max-w-content items-center justify-between px-6">
                 <Link
                     href="/"
-                    className="font-mono text-lg font-semibold tracking-tight text-fg transition-colors hover:text-brand"
+                    className="flex items-center gap-2 transition-opacity hover:opacity-80"
                     aria-label="Hen Heang — home"
                 >
-                    HH<span className="text-brand">.</span>
+                    <Image
+                        src="/image/heang_new.png"
+                        alt="Hen Heang"
+                        width={48}
+                        height={48}
+                        priority
+                        className="h-12 w-12 rounded-full object-cover ring-1 ring-border"
+                    />
+                    <span className="hidden text-sm font-semibold tracking-tight text-fg sm:inline">Hen Heang</span>
                 </Link>
 
-                <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+                <nav
+                    aria-label="Main"
+                    className="hidden items-center gap-0.5 rounded-full border border-border/60 bg-surface/60 p-1 md:flex"
+                >
                     {NAV_LINKS.map((link) => {
                         const active = isActive(pathname, link.match)
+                        const Icon = link.icon
                         return (
                             <Link
                                 key={link.label}
                                 href={link.href}
                                 aria-current={active ? "page" : undefined}
-                                className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                                    active
-                                        ? "bg-surface-hover text-fg"
-                                        : "text-fg-secondary hover:bg-surface-hover hover:text-fg"
+                                className={`relative flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                                    active ? "text-fg" : "text-fg-secondary hover:text-fg"
                                 }`}
                             >
-                                {link.label}
+                                {active && (
+                                    <motion.span
+                                        layoutId="nav-active-pill"
+                                        className="absolute inset-0 rounded-full bg-surface-hover shadow-sm ring-1 ring-border"
+                                        transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                                    />
+                                )}
+                                <Icon className="relative z-10 h-3.5 w-3.5" aria-hidden />
+                                <span className="relative z-10">{link.label}</span>
                             </Link>
                         )
                     })}
@@ -99,20 +129,23 @@ export function SiteHeader() {
                     <button
                         type="button"
                         onClick={openCommandMenu}
-                        aria-label="Open command menu"
-                        className="hidden h-9 items-center gap-2 rounded-lg border border-border px-2.5 font-mono text-xs text-fg-muted transition-colors hover:border-border-strong hover:text-fg md:flex"
+                        aria-label="Open command menu, keyboard shortcut Command or Control K"
+                        aria-keyshortcuts="Meta+K Control+K"
+                        className="hidden h-9 items-center gap-1.5 rounded-lg border border-border px-2.5 font-mono text-xs text-fg-muted transition-colors hover:border-border-strong hover:text-fg md:flex"
                     >
                         <Command size={13} aria-hidden />
-                        <span>K</span>
+                        <span aria-hidden>⌘K</span>
                     </button>
                     <ThemeToggle />
                     <Link
                         href="/contact"
-                        className="ml-1 hidden h-9 items-center rounded-lg bg-brand px-4 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 md:flex"
+                        className="ml-1 hidden h-9 items-center gap-2 rounded-lg bg-brand px-4 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover md:flex"
                     >
+                        <MessageCircle size={15} aria-hidden />
                         Let&apos;s talk
                     </Link>
                     <button
+                        ref={menuButtonRef}
                         type="button"
                         onClick={() => setMenuOpen(true)}
                         aria-label="Open navigation menu"
@@ -125,7 +158,7 @@ export function SiteHeader() {
                 </div>
             </div>
 
-            <MobileMenu open={menuOpen} onOpenChange={setMenuOpen} onOpenCommandMenu={openCommandMenu} />
+            <MobileMenu open={menuOpen} onOpenChange={setMenuOpen} onOpenCommandMenu={openCommandMenu} triggerRef={menuButtonRef} />
             {commandRequested && <CommandMenu open={commandOpen} onOpenChange={setCommandOpen} />}
         </header>
     )

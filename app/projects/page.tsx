@@ -3,6 +3,7 @@ import { getProjects } from "@/src/lib/db/portfolio"
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { ProjectsIndex } from "@/src/components/projects/ProjectsIndex"
 import type { ProjectFilter } from "@/src/components/projects/ProjectFilterBar"
+import { ContactCTASection } from "@/src/components/home/ContactCTASection"
 import { profileData } from "@/data/profile"
 
 const title = "Projects"
@@ -39,6 +40,7 @@ export default async function ProjectsPage({
     return (
         <PageLayout showFooter={false}>
             <ProjectsIndex projects={projects} filter={filter} />
+            <ContactCTASection />
         </PageLayout>
     )
 }

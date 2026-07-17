@@ -1,5 +1,6 @@
 import { Languages } from "lucide-react"
 import { CVSection } from "./CVSection"
+import { getLanguageFlag } from "@/src/lib/utils/language-flags"
 import type { CVData } from "@/data/cv-data"
 
 export function CVLanguages({ cv }: { cv: CVData }) {
@@ -9,13 +10,18 @@ export function CVLanguages({ cv }: { cv: CVData }) {
         {cv.languages.map((lang) => (
           <div key={lang.name} className="group">
             <div className="flex justify-between items-center mb-1.5">
-              <div className="flex flex-col">
-                <span className="text-[13px] font-bold text-gray-800">
-                  {lang.name}
+              <div className="flex items-center gap-2.5">
+                <span className="text-lg leading-none" aria-hidden>
+                  {getLanguageFlag(lang.name)}
                 </span>
-                <span className="text-[10px] text-gray-400 font-medium uppercase tracking-tighter">
-                  {lang.level}
-                </span>
+                <div className="flex flex-col">
+                  <span className="text-[13px] font-bold text-gray-800">
+                    {lang.name}
+                  </span>
+                  <span className="text-[10px] text-gray-400 font-medium uppercase tracking-tighter">
+                    {lang.level}
+                  </span>
+                </div>
               </div>
               <span className="text-[10px] font-bold text-[#1a365d]">
                 {lang.proficiency}%

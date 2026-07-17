@@ -4,8 +4,8 @@ import { profileData } from "@/data/profile"
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { AboutIntro } from "@/src/components/about/AboutIntro"
 import { Philosophy } from "@/src/components/about/Philosophy"
+import { AboutCurrentWork } from "@/src/components/about/AboutCurrentWork"
 import { AboutTimeline } from "@/src/components/about/AboutTimeline"
-import { AchievementsGrid } from "@/src/components/about/AchievementsGrid"
 import { SkillsOverview } from "@/src/components/about/SkillsOverview"
 import { ContactCTASection } from "@/src/components/home/ContactCTASection"
 
@@ -41,8 +41,8 @@ export default async function AboutPage() {
         <PageLayout>
             <AboutIntro profile={profile} />
             <Philosophy />
-            <AboutTimeline experience={experience} education={education} />
-            <AchievementsGrid achievements={achievements} />
+            <AboutCurrentWork />
+            <AboutTimeline experience={experience} education={education} achievements={achievements} />
             <SkillsOverview skills={skills} />
             <ContactCTASection />
         </PageLayout>

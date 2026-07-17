@@ -65,20 +65,6 @@ export const cvData = {
       ],
       stack: ["Java 8+", "Spring Boot", "Spring Security", "PostgreSQL", "MyBatis", "Next.js", "TypeScript"],
     },
-    {
-      company: "Korea Software HRD Center",
-      title: "Android Developer (Training)",
-      location: "Cambodia",
-      startDate: "July 2023",
-      endDate: "April 2024",
-      current: false,
-      bullets: [
-        "Completed an intensive full-stack and mobile development bootcamp",
-        "Developed Android applications using Java/Kotlin and Android SDK",
-        "Gained foundation in Korean software development practices and enterprise patterns",
-      ],
-      stack: ["Android", "Java", "Kotlin"],
-    },
   ],
 
   education: [
@@ -91,10 +77,10 @@ export const cvData = {
     },
     {
       school: "Korea Software HRD Center",
-      degree: "Full-Stack Development Certificate",
+      degree: "Full-Stack & Mobile Development Training",
       startDate: "July 2023",
       endDate: "April 2024",
-      description: "Intensive bootcamp covering HTML, CSS, JavaScript, React, Java, and databases.",
+      description: "Intensive training in full-stack development and Android application development using Java and Kotlin.",
     },
     {
       school: "ANT Technology Training Center",

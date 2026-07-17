@@ -30,8 +30,8 @@ interface CommandAction {
  */
 const NAV_COMMAND_META: Record<string, { icon: CommandAction["icon"]; keywords: string; label: string }> = {
     Work: { icon: Briefcase, keywords: "projects portfolio case study", label: "Go to Work" },
-    Experience: { icon: Route, keywords: "timeline career kosign bizplay", label: "Go to Experience" },
     Lab: { icon: FlaskConical, keywords: "lab backend java spring boot roadmap devops systems database", label: "Open Engineering Lab" },
+    Journey: { icon: Route, keywords: "now progress learning milestones active projects", label: "View Current Journey" },
     CV: { icon: FileText, keywords: "resume curriculum vitae download pdf", label: "Open CV" },
 }
 
@@ -47,6 +47,24 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
     const [query, setQuery] = useState("")
     const [activeIndex, setActiveIndex] = useState(0)
     const listRef = useRef<HTMLUListElement>(null)
+
+    // The menu can be opened from several places (desktop button, mobile
+    // button, or the global Cmd/Ctrl+K shortcut fired from anywhere), so
+    // there's no single fixed trigger to focus on close. Instead, capture
+    // whatever had focus right before opening — adjusted during render (the
+    // sanctioned way to derive state from a prop change) so it runs before
+    // any focus-moving effects (ours or Radix's) — and restore it on close.
+    const [previousFocus, setPreviousFocus] = useState<HTMLElement | null>(null)
+    // Seeded to `false` (not `open`) because this component mounts lazily,
+    // already `open`, the first time it's requested — the initial render
+    // must still be treated as an open transition so focus gets captured.
+    const [wasOpen, setWasOpen] = useState(false)
+    if (open !== wasOpen) {
+        setWasOpen(open)
+        if (open && document.activeElement instanceof HTMLElement) {
+            setPreviousFocus(document.activeElement)
+        }
+    }
 
     const actions = useMemo<CommandAction[]>(() => {
         const go = (href: string) => () => {
@@ -133,6 +151,11 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                 <DialogPrimitive.Content
                     className="fixed left-1/2 top-24 z-[151] w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-surface shadow-2xl data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 motion-reduce:animate-none"
                     aria-describedby={undefined}
+                    aria-keyshortcuts="Meta+K Control+K"
+                    onCloseAutoFocus={(event) => {
+                        event.preventDefault()
+                        previousFocus?.focus()
+                    }}
                 >
                     <DialogPrimitive.Title className="sr-only">Command menu</DialogPrimitive.Title>
                     <div className="flex items-center gap-3 border-b border-border px-4">

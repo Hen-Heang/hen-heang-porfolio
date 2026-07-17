@@ -56,7 +56,7 @@ export const backendProductionNarratives = [
 @Import(SecurityConfig.class)
 class TaskControllerTest {
     @Autowired MockMvc mvc;
-    @MockBean TaskService taskService;
+    @MockitoBean TaskService taskService;
 
     @Test
     @WithMockUser(username = "42", roles = "USER")

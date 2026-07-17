@@ -1,7 +1,7 @@
 import React from "react"
 import { Code, Target, Users, Zap } from "lucide-react"
 import { Section } from "@/src/components/system/Section"
-import { cn, interactiveCard } from "@/src/lib/utils/utils"
+import { MagicCard } from "@/src/components/ui/magic-card"
 
 const values = [
     {
@@ -31,14 +31,18 @@ export function Philosophy() {
         <Section eyebrow="Philosophy" title="How I work">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {values.map((value) => (
-                    <div
+                    <MagicCard
                         key={value.title}
-                        className={cn("rounded-xl border border-border bg-surface p-6", interactiveCard)}
+                        gradientSize={240}
+                        gradientColor="hsl(var(--brand) / 0.10)"
+                        gradientFrom="hsl(var(--brand))"
+                        gradientTo="hsl(var(--brand-hover))"
+                        className="h-full rounded-xl p-6 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 motion-reduce:hover:translate-y-0"
                     >
                         <value.icon size={22} className="text-brand" aria-hidden />
                         <h3 className="mt-4 text-base font-semibold text-fg">{value.title}</h3>
                         <p className="mt-2 text-sm leading-relaxed text-fg-secondary">{value.description}</p>
-                    </div>
+                    </MagicCard>
                 ))}
             </div>
         </Section>

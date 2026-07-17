@@ -4,10 +4,10 @@ import { profileData } from "@/data/profile"
 
 export const metadata: Metadata = {
     title: "Contact",
-    description: `Get in touch with ${profileData.fullName} — open to full-stack engineering opportunities, collaborations, and freelance projects.`,
+    description: `Get in touch with ${profileData.fullName} — open to Java and Spring Boot backend opportunities, API work, and engineering collaborations.`,
     openGraph: {
         title: `Contact | ${profileData.fullName}`,
-        description: `Get in touch with ${profileData.fullName} — open to full-stack engineering opportunities, collaborations, and freelance projects.`,
+        description: `Get in touch with ${profileData.fullName} — open to Java and Spring Boot backend opportunities, API work, and engineering collaborations.`,
         url: `${profileData.portfolioUrl}/contact`,
     },
 }

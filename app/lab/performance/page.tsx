@@ -20,8 +20,8 @@ const CATEGORY_ORDER: PerformanceEntry["category"][] = ["Caching", "Optimistic U
 
 const CATEGORY_COLOR: Record<PerformanceEntry["category"], string> = {
     Caching: "text-brand",
-    "Optimistic UI": "text-[#22d3ee]",
-    "Background Jobs": "text-[#f59e0b]",
+    "Optimistic UI": "text-sky-600 dark:text-sky-400",
+    "Background Jobs": "text-warning",
     "Data Access": "text-success",
     Reliability: "text-success",
 }
@@ -34,12 +34,12 @@ export default function PerformanceLabPage() {
 
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-fg-secondary">
-                <Gauge size={11} aria-hidden="true" className="text-[#f59e0b]" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-fg-secondary">
+                <Gauge size={11} aria-hidden="true" className="text-warning" />
                 ~/lab/performance
             </span>
             <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-fg">Performance Lab</h1>
-            <p className="mt-2 max-w-2xl text-sm md:text-base leading-relaxed text-fg-secondary">
+            <p className="mt-2 max-w-2xl text-base md:text-lg leading-relaxed text-fg-secondary">
                 Caching, optimistic UI, background jobs, and data-access decisions that keep these apps fast and
                 reliable — pulled straight from what shipped, not synthetic benchmarks.
             </p>
@@ -47,7 +47,7 @@ export default function PerformanceLabPage() {
             <div className="mt-10 space-y-8">
                 {groups.map((group) => (
                     <section key={group.category}>
-                        <p className={`mb-3 font-mono text-xs font-semibold uppercase tracking-wider ${CATEGORY_COLOR[group.category]}`}>
+                        <p className={`mb-3 font-mono text-sm font-semibold uppercase tracking-wider ${CATEGORY_COLOR[group.category]}`}>
                             {group.category}
                         </p>
                         <div className="space-y-2.5">
@@ -56,10 +56,10 @@ export default function PerformanceLabPage() {
                                     key={i}
                                     className="flex flex-col gap-2 rounded-2xl border border-border bg-surface p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
                                 >
-                                    <p className="text-sm leading-relaxed text-[#d4d4d8]">{entry.text}</p>
+                                    <p className="text-base leading-relaxed text-fg-secondary">{entry.text}</p>
                                     <Link
                                         href={`/projects/${entry.slug}`}
-                                        className="flex shrink-0 items-center gap-1 font-mono text-[11px] text-fg-muted hover:text-fg transition-colors"
+                                        className="flex shrink-0 items-center gap-1 font-mono text-xs text-fg-muted hover:text-fg transition-colors"
                                     >
                                         {entry.project.split(" — ")[0]}
                                         <ArrowUpRight size={12} aria-hidden="true" />

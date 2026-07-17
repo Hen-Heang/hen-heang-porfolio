@@ -5,7 +5,9 @@ import { ArrowLeft, ArrowRight, Briefcase, Clock, Database, Github, Lightbulb, U
 import { Container } from "@/src/components/system/Container"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { ArchitecturePreview } from "@/src/components/system/ArchitecturePreview"
+import { ProcessTimeline } from "@/src/components/system/ProcessTimeline"
 import { CaseStudyTOC, type TocItem } from "@/src/components/projects/CaseStudyTOC"
+import { ScreenshotGallery } from "@/src/components/projects/ScreenshotGallery"
 import type { Project } from "@/src/lib/types"
 
 type AdjacentProject = Pick<Project, "slug" | "title"> | null
@@ -33,6 +35,8 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
     const toc: TocItem[] = [
         project.businessProblem && { id: "problem", text: "The Problem" },
         project.overview && { id: "overview", text: "Overview" },
+        project.screenshots?.length && { id: "screenshots", text: "Screenshots" },
+        project.process?.length && { id: "process", text: "How I Built It" },
         project.features?.length && { id: "features", text: "Features" },
         project.technicalDetails && { id: "technical-details", text: "Technical Details" },
         project.architecture?.length && { id: "architecture", text: "Architecture" },
@@ -128,6 +132,18 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                         {project.overview && (
                             <Block id="overview" title="Overview">
                                 <p className="leading-relaxed text-fg-secondary">{project.overview}</p>
+                            </Block>
+                        )}
+
+                        {project.screenshots && project.screenshots.length > 0 && (
+                            <Block id="screenshots" title="Screenshots">
+                                <ScreenshotGallery images={project.screenshots} title={project.title} />
+                            </Block>
+                        )}
+
+                        {project.process && project.process.length > 0 && (
+                            <Block id="process" title="How I Built It">
+                                <ProcessTimeline steps={project.process} />
                             </Block>
                         )}
 

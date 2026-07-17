@@ -9,7 +9,7 @@ export function MetricCard({ label, value, suffix = "" }: { label: string; value
                 <NumberTicker value={value} />
                 {suffix && <span className="text-brand">{suffix}</span>}
             </p>
-            <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-fg-muted">{label}</p>
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-fg-muted">{label}</p>
         </div>
     )
 }

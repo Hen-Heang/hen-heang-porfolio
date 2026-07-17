@@ -31,6 +31,8 @@ export function MessagesInbox() {
     }, [])
 
     useEffect(() => {
+        // Remote data is intentionally loaded when this client-only inbox mounts.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         void load()
     }, [load])
 

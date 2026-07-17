@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
     "seed": "npx tsx scripts/seed.ts"
   },
   "dependencies": {
@@ -33,11 +34,12 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.9.4",
     "lucide-react": "^0.503.0",
+    "motion": "^12.42.2",
     "next": "^16.1.7",
     "next-themes": "^0.4.6",
     "radix-ui": "^1.6.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
     "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^15.6.6",
     "remark-gfm": "^4.0.1",
@@ -48,6 +50,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.10.4",
     "@types/react": "^19.2.14",

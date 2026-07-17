@@ -28,27 +28,36 @@ export function ProjectFilterBar({
     counts: Record<ProjectFilter, number>
 }) {
     return (
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by type">
-            {filters.map((filter) => {
-                const isActive = filter.id === active
-                return (
-                    <Link
-                        key={filter.id}
-                        href={filter.id === "all" ? "/projects" : `/projects?filter=${filter.id}`}
-                        scroll={false}
-                        aria-current={isActive ? "true" : undefined}
-                        className={cn(
-                            "inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors",
-                            isActive
-                                ? "border-brand bg-brand/10 text-brand"
-                                : "border-border text-fg-secondary hover:border-border-strong hover:text-fg",
-                        )}
-                    >
-                        {filter.label}
-                        <span className="font-mono text-xs text-fg-muted">{counts[filter.id]}</span>
-                    </Link>
-                )
-            })}
+        // Below `sm`, the strip scrolls horizontally instead of wrapping to
+        // several lines; the mask fades the trailing edge as a scroll
+        // affordance. At `sm` and up it reverts to a plain wrapping row.
+        <div className="overflow-x-auto [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)] sm:overflow-visible sm:[mask-image:none] [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border-strong">
+            <div
+                className="flex w-max gap-2 pb-2 sm:w-auto sm:flex-wrap sm:pb-0"
+                role="group"
+                aria-label="Filter projects by type"
+            >
+                {filters.map((filter) => {
+                    const isActive = filter.id === active
+                    return (
+                        <Link
+                            key={filter.id}
+                            href={filter.id === "all" ? "/projects" : `/projects?filter=${filter.id}`}
+                            scroll={false}
+                            aria-current={isActive ? "page" : undefined}
+                            className={cn(
+                                "inline-flex h-11 shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm font-medium transition-colors",
+                                isActive
+                                    ? "border-brand bg-brand/10 text-brand"
+                                    : "border-border text-fg-secondary hover:border-border-strong hover:text-fg",
+                            )}
+                        >
+                            {filter.label}
+                            <span className="font-mono text-xs text-fg-muted">{counts[filter.id]}</span>
+                        </Link>
+                    )
+                })}
+            </div>
         </div>
     )
 }

@@ -25,7 +25,12 @@ export function matchesBackendQuery(item: BackendItemSummary, query: string): bo
         ...item.technologies,
         ...item.keywords,
     ].map(normalize)
-    return normalized.split(/\s+/).every((token) => haystack.some((value) => value.includes(token)))
+    return normalized.split(/\s+/).every((token) => {
+        const variants = token.endsWith("s") && token.length > 3
+            ? [token, token.slice(0, -1)]
+            : [token, `${token}s`]
+        return haystack.some((value) => variants.some((variant) => value.includes(variant)))
+    })
 }
 
 export function filterBackendItems(items: BackendItemSummary[], filters: BackendSearchFilters): BackendItemSummary[] {
