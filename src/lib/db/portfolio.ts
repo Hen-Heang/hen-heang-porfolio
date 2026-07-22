@@ -69,9 +69,12 @@ function mapProject(r: any): unknown {
     description: r.description,
     technologies: r.technologies,
     image: r.image,
+    imageFit: s?.imageFit,
     github: r.github ?? undefined,
     demo: r.demo ?? undefined,
     featured: s?.featured,
+    hidden: s?.hidden,
+    previewImage: s?.previewImage,
     businessProblem: s?.businessProblem,
     overview: r.overview ?? undefined,
     process: s?.process,
@@ -99,7 +102,7 @@ const ProjectListSchema = z.array(ProjectSchema)
 // call getProjects()/getProjectBySlug()/getAdjacentProjects() in the same
 // request tree and should share one round-trip.
 export const getProjects = cache(async (): Promise<Project[]> => {
-  return withFallback(
+  const all = await withFallback(
     async () => {
       const sb = getSupabaseClient()
       if (!sb) return null
@@ -111,6 +114,7 @@ export const getProjects = cache(async (): Promise<Project[]> => {
     staticProjects,
     'projects',
   )
+  return all.filter((p) => !p.hidden)
 })
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {

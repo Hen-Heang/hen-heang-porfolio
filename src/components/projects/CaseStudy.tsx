@@ -8,6 +8,7 @@ import { ArchitecturePreview } from "@/src/components/system/ArchitecturePreview
 import { ProcessTimeline } from "@/src/components/system/ProcessTimeline"
 import { CaseStudyTOC, type TocItem } from "@/src/components/projects/CaseStudyTOC"
 import { ScreenshotGallery } from "@/src/components/projects/ScreenshotGallery"
+import { cn } from "@/src/lib/utils/utils"
 import type { Project } from "@/src/lib/types"
 
 type AdjacentProject = Pick<Project, "slug" | "title"> | null
@@ -56,13 +57,18 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                     <ArrowLeft size={16} aria-hidden /> Back to Projects
                 </Link>
 
-                <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+                <div
+                    className={cn(
+                        "relative aspect-video overflow-hidden rounded-xl border border-border",
+                        project.imageFit === "contain" && "bg-[#000611]",
+                    )}
+                >
                     <Image
                         src={project.image || "/image/placeholder_image.png"}
                         alt={project.title}
                         fill
                         priority
-                        className="object-cover"
+                        className={project.imageFit === "contain" ? "object-contain" : "object-cover"}
                     />
                 </div>
 

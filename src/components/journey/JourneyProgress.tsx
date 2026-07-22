@@ -74,7 +74,7 @@ export function JourneyProgress() {
                             <MagicCard
                                 key={item.id}
                                 className="h-full rounded-xl"
-                                gradientFrom="#2dd4bf"
+                                gradientFrom="#22d3ee"
                                 gradientTo="#38bdf8"
                                 gradientOpacity={0.1}
                             >

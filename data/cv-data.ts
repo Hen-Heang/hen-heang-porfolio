@@ -121,7 +121,7 @@ export const cvData = {
     {
       name: "H-Phsar",
       description:
-        "Backend API for a Cambodian B2B marketplace connecting distributors and retailers. Designed the data model for stores, product catalogs, and carts; implemented an order state machine, OTP-based verification, and real-time order notifications over WebSocket.",
+        "Backend API for a B2B marketplace connecting distributors and retailers. Designed the data model for stores, product catalogs, and carts; implemented an order state machine, OTP-based verification, and real-time order notifications over WebSocket.",
       technologies: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL", "WebSocket"],
       github: "https://github.com/Hen-Heang/h-phsar-api-full",
       live: "",

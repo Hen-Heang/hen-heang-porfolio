@@ -48,8 +48,8 @@ test.describe("Projects index", () => {
     test("grid card CTA is visible without hover and github/live links are separate from the card link", async ({ page }) => {
         await page.setViewportSize({ width: 1440, height: 1200 })
         await page.goto("/projects")
-        // We Commerce is in the "All projects" grid, not the featured section.
-        const card = page.locator("a.static-link", { hasText: "We Commerce" }).locator("xpath=../..")
+        // Money Flow is in the "All projects" grid, not the featured section.
+        const card = page.locator("a.static-link", { hasText: "Money Flow" }).locator("xpath=../..")
         const cta = card.getByText("View case study", { exact: true })
         // Not hovering — the CTA must already be in the accessibility tree and rendered (opacity/visibility default state).
         await expect(cta).toBeVisible()

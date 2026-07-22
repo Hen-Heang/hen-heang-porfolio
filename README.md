@@ -45,7 +45,7 @@ This site is not just a project list — each major project is a full **engineer
 
 | Project | What it is | Stack |
 |---------|-----------|-------|
-| [**H-Phsar**](https://henheang.site/projects/h-phsar) ⭐ | Cambodian B2B marketplace API — distributor/retailer stores, order state machine, OTP auth, real-time notifications | Spring Boot 3, MyBatis, PostgreSQL, WebSocket |
+| [**H-Phsar**](https://henheang.site/projects/h-phsar) ⭐ | B2B marketplace API — distributor/retailer stores, order state machine, OTP auth, real-time notifications | Spring Boot 3, MyBatis, PostgreSQL, WebSocket |
 | [**AuthHub**](https://henheang.site/projects/authhub) | Reusable authentication service with JWT revocation, MFA, RBAC, audit logging, rate limiting, and PostgreSQL-backed security state | Spring Boot 3.5, Java 17, Spring Security, Flyway |
 | [**We Commerce**](https://henheang.site/projects/we-commerce) | Full-stack multi-vendor marketplace — DB-tracked JWT auth, cart/checkout with simulated ABA Pay & KHQR | Spring Boot 3, Java 21, Next.js, TanStack Query |
 | [**Hengo**](https://henheang.site/projects/hengo) ⭐ | AI companion for daily growth — goals, daily missions, and Korean learning with an AI coach and spaced repetition | Next.js, TypeScript, TanStack Query, Spring Boot |

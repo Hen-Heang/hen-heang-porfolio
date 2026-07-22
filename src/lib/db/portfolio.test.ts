@@ -27,7 +27,7 @@ describe("portfolio repository — Supabase-absent fallback", () => {
         const { projects } = await import("@/data/projects")
 
         const result = await getProjects()
-        expect(result).toEqual(projects)
+        expect(result).toEqual(projects.filter((p) => !p.hidden))
         expect(result.length).toBeGreaterThan(0)
     })
 
@@ -60,7 +60,7 @@ describe("portfolio repository — Supabase-absent fallback", () => {
         const { projects } = await import("@/data/projects")
 
         const result = await getProjects()
-        expect(result).toEqual(projects)
+        expect(result).toEqual(projects.filter((p) => !p.hidden))
     })
 
     it("falls back to static data when the Supabase query errors", async () => {
@@ -71,6 +71,6 @@ describe("portfolio repository — Supabase-absent fallback", () => {
         const { projects } = await import("@/data/projects")
 
         const result = await getProjects()
-        expect(result).toEqual(projects)
+        expect(result).toEqual(projects.filter((p) => !p.hidden))
     })
 })

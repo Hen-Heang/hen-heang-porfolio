@@ -53,9 +53,9 @@ export const deployedProjects: BentoProject[] = [
     {
         id: "h-phsar",
         title: "H-Phsar",
-        subtitle: "Cambodian B2B Marketplace API",
+        subtitle: "B2B Marketplace API",
         description:
-            "A B2B marketplace API connecting Cambodian distributors and retailers — stores, catalogs, carts, an order state machine, and real-time notifications on Spring Boot 3.",
+            "A B2B marketplace API connecting distributors and retailers — stores, catalogs, carts, an order state machine, and real-time notifications on Spring Boot 3.",
         emoji: "🏪",
         url: "https://github.com/Hen-Heang/h-phsar-api-full",
         github: "https://github.com/Hen-Heang/h-phsar-api-full",

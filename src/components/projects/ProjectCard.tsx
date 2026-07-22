@@ -17,13 +17,21 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
 
     return (
         <div className={cn("group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface", interactiveCard)}>
-            <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-background">
+            <div
+                className={cn(
+                    "relative aspect-[16/10] overflow-hidden border-b border-border",
+                    project.imageFit === "contain" ? "bg-[#000611]" : "bg-background",
+                )}
+            >
                 <Image
                     src={project.image}
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    className={cn(
+                        project.imageFit === "contain" ? "object-contain" : "object-cover",
+                        "transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+                    )}
                 />
             </div>
 

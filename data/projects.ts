@@ -3,14 +3,16 @@ import type { Project } from "@/src/lib/types"
 export const projects: Project[] = [
     {
         slug: "h-phsar",
-        title: "H-Phsar — Cambodian B2B Marketplace API",
+        title: "H-Phsar — B2B Marketplace API",
         featured: true,
-        description: "A B2B online marketplace API connecting Cambodian distributors and retailers — stores, product catalogs, carts, an order state machine, and real-time notifications. Spring Boot 3 on PostgreSQL.",
+        description: "A B2B online marketplace API connecting distributors and retailers — stores, product catalogs, carts, an order state machine, and real-time notifications. Spring Boot 3 on PostgreSQL.",
         technologies: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL", "Spring Security", "WebSocket"],
-        image: "/image/h-phsar-preview.svg",
+        image: "/h-phsar-poster-image.png",
+        imageFit: "contain",
+        previewImage: true,
         github: "https://github.com/Hen-Heang/h-phsar-api-full",
         demo: "#",
-        businessProblem: "Wholesale trade between Cambodian distributors and retailers still runs on phone calls and paper: orders get lost, prices stay opaque, and neither side has a record of what was agreed. H-Phsar (ផ្សារ — 'market' in Khmer) digitizes that relationship into one platform both sides can trust.",
+        businessProblem: "Wholesale trade between distributors and retailers still runs on phone calls and paper: orders get lost, prices stay opaque, and neither side has a record of what was agreed. H-Phsar (ផ្សារ — 'market' in Khmer) digitizes that relationship into one platform both sides can trust.",
         overview: "H-Phsar is a two-sided marketplace API. Distributors set up stores, manage catalogs and stock, and drive every order through an explicit lifecycle — accept, dispatch, deliver, invoice. Retailers browse and rate stores, build carts with draft support, place orders, and track their progress. Accounts are verified with a 4-digit OTP sent by email, and each role gets its own endpoints, reports, and notifications.",
         process: [
             { phase: "Discovery & Planning", detail: "Scoped the two-sided marketplace domain from real wholesale trade friction, and drafted the order lifecycle and role split before writing any code." },
@@ -169,6 +171,7 @@ export const projects: Project[] = [
     {
         slug: "we-commerce",
         title: "We Commerce — Multi-Vendor Marketplace",
+        hidden: true,
         description: "A full-stack multi-vendor e-commerce marketplace: Spring Boot 3.4 / Java 21 REST API with database-tracked JWT auth, and a Next.js 16 storefront with cart, checkout, and simulated Cambodian payment flows (ABA Pay, KHQR).",
         technologies: ["Spring Boot 3", "Java 21", "PostgreSQL", "Next.js", "TanStack Query", "Zustand"],
         image: "/image/we-commerce-preview.svg",

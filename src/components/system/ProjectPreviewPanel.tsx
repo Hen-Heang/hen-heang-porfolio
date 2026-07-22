@@ -85,8 +85,14 @@ export function ProjectPreviewPanel({ preview, className }: { preview: ProjectPr
 
         case "image":
             return (
-                <div className={cn("relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-background", className)}>
-                    <Image src={preview.src} alt={preview.alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+                <div className={cn("relative aspect-[4/3] overflow-hidden rounded-xl border border-border", preview.imageFit === "contain" ? "bg-[#000611]" : "bg-background", className)}>
+                    <Image
+                        src={preview.src}
+                        alt={preview.alt}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className={preview.imageFit === "contain" ? "object-contain" : "object-cover"}
+                    />
                 </div>
             )
 

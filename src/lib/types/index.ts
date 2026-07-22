@@ -35,9 +35,15 @@ export interface Project {
     description: string
     technologies: string[]
     image: string
+    /** How `image` should fit its container — "contain" for non-landscape assets (e.g. a portrait poster) that would otherwise be cropped by the default cover fit. */
+    imageFit?: "cover" | "contain"
     github?: string
     demo?: string
     featured?: boolean
+    /** Excluded from all public listings (home, /projects, sitemap) while keeping its case-study data intact. */
+    hidden?: boolean
+    /** Show the poster image in the homepage Selected Work panel instead of the architecture/api/database/workflow preview that `getProjectPreview` would otherwise pick. */
+    previewImage?: boolean
     businessProblem?: string
     overview?: string
     process?: ProcessStep[]

@@ -7,7 +7,7 @@ export type ProjectPreview =
     | { kind: "api"; endpoints: ApiEndpoint[] }
     | { kind: "database"; tables: string[] }
     | { kind: "workflow"; steps: ProcessStep[] }
-    | { kind: "image"; src: string; alt: string }
+    | { kind: "image"; src: string; alt: string; imageFit?: "cover" | "contain" }
     | { kind: "none" }
 
 /**
@@ -15,8 +15,12 @@ export type ProjectPreview =
  * using only data that already exists on it — never fabricated. Checked in
  * order of how technically substantive the preview is; falls back to a
  * project screenshot, and only to "none" if even that is missing.
+ * `previewImage` overrides this order to force the poster image forward.
  */
 export function getProjectPreview(project: Project): ProjectPreview {
+    if (project.previewImage && project.image) {
+        return { kind: "image", src: project.image, alt: `${project.title} — preview`, imageFit: project.imageFit }
+    }
     if (project.architecture && project.architecture.length > 0) {
         return { kind: "architecture", layers: project.architecture, note: project.architectureNote }
     }
@@ -30,7 +34,7 @@ export function getProjectPreview(project: Project): ProjectPreview {
         return { kind: "workflow", steps: project.process }
     }
     if (project.image) {
-        return { kind: "image", src: project.image, alt: `${project.title} — preview` }
+        return { kind: "image", src: project.image, alt: `${project.title} — preview`, imageFit: project.imageFit }
     }
     return { kind: "none" }
 }

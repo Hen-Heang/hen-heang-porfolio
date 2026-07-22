@@ -17,7 +17,7 @@ export function LoadingSpinner({ size = "md", className = "" }: LoadingSpinnerPr
     return (
         <div className={`flex items-center justify-center ${className}`}>
             <motion.div
-                className={`${sizeClasses[size]} border-2 border-teal-200 dark:border-teal-800 border-t-teal-500 dark:border-t-teal-400 rounded-full`}
+                className={`${sizeClasses[size]} border-2 border-cyan-200 dark:border-cyan-800 border-t-cyan-500 dark:border-t-cyan-400 rounded-full`}
                 animate={{ rotate: 360 }}
                 transition={{
                     duration: 1,
@@ -35,7 +35,7 @@ export function LoadingDots({ className = "" }: { className?: string }) {
             {[0, 1, 2].map((index) => (
                 <motion.div
                     key={index}
-                    className="w-2 h-2 bg-teal-500 rounded-full"
+                    className="w-2 h-2 bg-cyan-500 rounded-full"
                     animate={{
                         scale: [1, 1.2, 1],
                         opacity: [0.5, 1, 0.5]
@@ -55,7 +55,7 @@ export function LoadingDots({ className = "" }: { className?: string }) {
 export function LoadingPulse({ className = "" }: { className?: string }) {
     return (
         <motion.div
-            className={`w-8 h-8 bg-gradient-to-r from-teal-500 to-indigo-500 rounded-full ${className}`}
+            className={`w-8 h-8 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full ${className}`}
             animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.7, 1, 0.7]
@@ -75,7 +75,7 @@ export function LoadingWave({ className = "" }: { className?: string }) {
             {[0, 1, 2, 3, 4].map((index) => (
                 <motion.div
                     key={index}
-                    className="w-1 h-6 bg-gradient-to-t from-teal-500 to-indigo-500 rounded-full"
+                    className="w-1 h-6 bg-gradient-to-t from-cyan-500 to-indigo-500 rounded-full"
                     animate={{
                         scaleY: [1, 2, 1],
                         opacity: [0.5, 1, 0.5]
