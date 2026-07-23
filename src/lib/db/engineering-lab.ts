@@ -29,6 +29,7 @@ export async function getEngineeringLabIndex(): Promise<{ items: EngineeringLabS
             source: "AI Engineering" as const,
             type: "Article",
             tags: a.tags,
+            difficulty: a.difficulty,
         })),
         ...prompts.map((p) => ({
             title: p.title,
@@ -53,6 +54,7 @@ export async function getEngineeringLabIndex(): Promise<{ items: EngineeringLabS
             source: "Backend Engineering" as const,
             type: item.status === "planned" ? `Planned ${item.type}` : item.type,
             tags: [item.category, item.difficulty, ...item.technologies],
+            difficulty: item.difficulty,
         })),
         ...roadmap
             .filter((t) => t.hasCard)
@@ -63,6 +65,7 @@ export async function getEngineeringLabIndex(): Promise<{ items: EngineeringLabS
                 source: "DevOps Basics" as const,
                 type: "Topic",
                 tags: [t.category],
+                difficulty: t.difficulty,
             })),
         ...labs.map((l) => ({
             title: l.title,
@@ -71,6 +74,7 @@ export async function getEngineeringLabIndex(): Promise<{ items: EngineeringLabS
             source: "DevOps Basics" as const,
             type: "Lab",
             tags: [],
+            difficulty: l.difficulty,
         })),
         ...commandCategories.flatMap((c) =>
             c.commands.map((cmd) => ({

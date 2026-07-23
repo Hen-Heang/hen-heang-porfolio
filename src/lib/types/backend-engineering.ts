@@ -45,6 +45,12 @@ export interface BackendSource {
     accessedAt: string
 }
 
+/** Lesson-specific retrieval-check questions. Optional — items without one fall back to the generic prompts already shown on every detail page. */
+export interface BackendKnowledgeCheck {
+    questions: string[]
+    suggestedAnswers?: string[]
+}
+
 export interface BackendBaseItem {
     id: string
     slug: string
@@ -64,6 +70,7 @@ export interface BackendBaseItem {
     updatedAt: string
     versionScope: string
     sources: BackendSource[]
+    knowledgeCheck?: BackendKnowledgeCheck
 }
 
 export interface BackendPlannedItem extends BackendBaseItem {

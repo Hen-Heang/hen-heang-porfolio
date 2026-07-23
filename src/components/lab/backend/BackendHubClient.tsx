@@ -1,6 +1,7 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { BookOpenCheck, Filter, Map, Search, X } from "lucide-react"
 import { BACKEND_CATEGORIES, BACKEND_CONTENT_TYPES, type BackendItemSummary } from "@/src/lib/types/backend-engineering"
 import { filterBackendItems, sortBackendItems } from "@/src/lib/backend/search"
@@ -17,14 +18,41 @@ const categoryLabel: Record<string, string> = {
     "distributed-systems": "Distributed Systems", devops: "DevOps", observability: "Operations", capstone: "Capstone",
 }
 
+const paramOrDefault = (params: URLSearchParams, key: string, fallback: string): string => params.get(key) ?? fallback
+
 export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendItemSummary[]; roadmapLevelCount: number }) {
-    const [query, setQuery] = useState("")
-    const [level, setLevel] = useState("all")
-    const [category, setCategory] = useState("all")
-    const [difficulty, setDifficulty] = useState("all")
-    const [type, setType] = useState("all")
-    const [status, setStatus] = useState("published")
+    const router = useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+
+    const [query, setQuery] = useState(() => paramOrDefault(searchParams, "q", ""))
+    const level = paramOrDefault(searchParams, "level", "all")
+    const category = paramOrDefault(searchParams, "category", "all")
+    const difficulty = paramOrDefault(searchParams, "difficulty", "all")
+    const type = paramOrDefault(searchParams, "type", "all")
+    const status = paramOrDefault(searchParams, "status", "published")
     const progress = useBackendProgress()
+
+    const updateParams = useCallback(
+        (next: Record<string, string | undefined>) => {
+            const params = new URLSearchParams(searchParams.toString())
+            for (const [key, value] of Object.entries(next)) {
+                if (value && value !== "all") params.set(key, value)
+                else params.delete(key)
+            }
+            router.push(`${pathname}${params.toString() ? `?${params}` : ""}`, { scroll: false })
+        },
+        [pathname, router, searchParams],
+    )
+
+    // Debounce the free-text query → URL sync so typing doesn't spam browser history.
+    useEffect(() => {
+        const handle = setTimeout(() => {
+            if (query !== paramOrDefault(searchParams, "q", "")) updateParams({ q: query || undefined })
+        }, 250)
+        return () => clearTimeout(handle)
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-sync when the debounced query itself changes
+    }, [query])
 
     const results = useMemo(() => sortBackendItems(filterBackendItems(items, {
         query,
@@ -38,16 +66,12 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
     const publishedCount = items.filter((item) => item.status === "published").length
     const completedCount = items.filter((item) => item.status === "published" && progress.has(item.id)).length
     const nextItem = items.find((item) => item.status === "published" && !progress.has(item.id))
-    const progressPercentage = publishedCount ? Math.round((completedCount / publishedCount) * 100) : 0
-    const hasFilters = Boolean(query || level !== "all" || category !== "all" || difficulty !== "all" || type !== "all" || status !== "published")
+    const activeFilterCount = [level !== "all", category !== "all", difficulty !== "all", type !== "all", status !== "published"].filter(Boolean).length
+    const hasFilters = Boolean(query) || activeFilterCount > 0
 
     function resetFilters() {
         setQuery("")
-        setLevel("all")
-        setCategory("all")
-        setDifficulty("all")
-        setType("all")
-        setStatus("published")
+        router.push(pathname, { scroll: false })
     }
 
     return (
@@ -83,15 +107,15 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
                         <input value={query} onChange={(event) => setQuery(event.target.value)} aria-label="Search backend curriculum" placeholder="Search transactions, Java, security, PostgreSQL…" className="min-h-11 w-full rounded-xl border border-border bg-background py-2 pl-10 pr-4 text-base text-fg outline-none transition-colors placeholder:text-fg-muted focus:border-brand" />
                     </div>
                     <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
-                        <FilterSelect label="Level" value={level} onChange={setLevel} options={[{ value: "all", label: "All levels" }, ...Array.from({ length: roadmapLevelCount }, (_, value) => ({ value: String(value), label: `Level ${value}` }))]} />
-                        <FilterSelect label="Category" value={category} onChange={setCategory} options={[{ value: "all", label: "All categories" }, ...BACKEND_CATEGORIES.map((value) => ({ value, label: categoryLabel[value] }))]} />
-                        <FilterSelect label="Difficulty" value={difficulty} onChange={setDifficulty} options={[{ value: "all", label: "All difficulties" }, { value: "beginner", label: "Beginner" }, { value: "intermediate", label: "Intermediate" }, { value: "advanced", label: "Advanced" }]} />
-                        <FilterSelect label="Content type" value={type} onChange={setType} options={[{ value: "all", label: "All types" }, ...BACKEND_CONTENT_TYPES.map((value) => ({ value, label: value.replaceAll("-", " ") }))]} />
-                        <FilterSelect label="Status" value={status} onChange={setStatus} options={[{ value: "published", label: "Ready to learn" }, { value: "all", label: "All statuses" }, { value: "planned", label: "Planned" }]} />
+                        <FilterSelect label="Level" value={level} onChange={(value) => updateParams({ level: value })} options={[{ value: "all", label: "All levels" }, ...Array.from({ length: roadmapLevelCount }, (_, value) => ({ value: String(value), label: `Level ${value}` }))]} />
+                        <FilterSelect label="Category" value={category} onChange={(value) => updateParams({ category: value })} options={[{ value: "all", label: "All categories" }, ...BACKEND_CATEGORIES.map((value) => ({ value, label: categoryLabel[value] }))]} />
+                        <FilterSelect label="Difficulty" value={difficulty} onChange={(value) => updateParams({ difficulty: value })} options={[{ value: "all", label: "All difficulties" }, { value: "beginner", label: "Beginner" }, { value: "intermediate", label: "Intermediate" }, { value: "advanced", label: "Advanced" }]} />
+                        <FilterSelect label="Content type" value={type} onChange={(value) => updateParams({ type: value })} options={[{ value: "all", label: "All types" }, ...BACKEND_CONTENT_TYPES.map((value) => ({ value, label: value.replaceAll("-", " ") }))]} />
+                        <FilterSelect label="Status" value={status} onChange={(value) => updateParams({ status: value })} options={[{ value: "published", label: "Ready to learn" }, { value: "all", label: "All statuses" }, { value: "planned", label: "Planned" }]} />
                     </div>
                     {hasFilters && (
                         <button type="button" onClick={resetFilters} className="mt-3 inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-fg">
-                            <X size={12} aria-hidden="true" /> Clear filters
+                            <X size={12} aria-hidden="true" /> Clear filters{activeFilterCount > 0 ? ` (${activeFilterCount} active)` : ""}
                         </button>
                     )}
                 </div>

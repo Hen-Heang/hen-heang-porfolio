@@ -192,9 +192,11 @@ export const cvData: CVData = {
   ] satisfies SkillGroup[],
 
   /**
-   * Featured projects. `featured: true` = shown on /resume (top 3, backend-first).
-   * /cv shows all four. Set github/live/caseStudy to null when a link isn't
+   * Featured projects. `featured: true` = shown on /resume (backend-first).
+   * /cv shows all three. Set github/live/caseStudy to null when a link isn't
    * publicly reachable — never leave a broken or misleading link.
+   * We Commerce is intentionally omitted here (unlisted/hidden everywhere,
+   * matching `hidden: true` on its data/projects.ts entry).
    */
   projects: [
     {
@@ -210,22 +212,6 @@ export const cvData: CVData = {
       github: "https://github.com/Hen-Heang/h-phsar-api-full",
       live: null,
       caseStudy: "/projects/h-phsar",
-      featured: true,
-    },
-    {
-      name: "We Commerce",
-      category: "Backend API",
-      description:
-        "Multi-vendor marketplace API built with Spring Boot 3.4 and Java 21, paired with a Next.js 16 storefront.",
-      bullets: [
-        "Implemented database-tracked JWT revocation to secure session logout across a multi-vendor marketplace.",
-        "Built cart, checkout, and simulated ABA Pay / KHQR payment flows in the companion Next.js storefront.",
-      ],
-      technologies: ["Spring Boot 3", "Java 21", "PostgreSQL", "Next.js", "TanStack Query"],
-      github: "https://github.com/Hen-Heang/we-commerce-api",
-      live: "https://we-commerce-frontend.vercel.app",
-      // No public case-study route — this project is unlisted on /projects.
-      caseStudy: null,
       featured: true,
     },
     {

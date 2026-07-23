@@ -39,7 +39,7 @@ export const careerKnowledge: KnowledgeSection[] = [
         content: [
             "Heang's employer work at Bizplay and KOSIGN involves proprietary business systems — the source code, internal URLs, customer data, and production details belong to those companies and aren't shareable, the same way any employee's day job code isn't public.",
             "",
-            "What can be discussed instead: his responsibilities and the technologies used — Java, MyBatis, Spring Boot, Spring Security/JWT, PostgreSQL, Oracle, SQL query design and optimization, and enterprise frontend work with JavaScript/jQuery — plus the general shape of the systems (government-facing financial web applications at Bizplay; a B2B billing platform integrated with banking systems at KOSIGN). For code-level detail, his personal projects (H-Phsar, AuthHub, We Commerce, Hengo, Money Flow) are fully public on GitHub and cover the same stack.",
+            "What can be discussed instead: his responsibilities and the technologies used — Java, MyBatis, Spring Boot, Spring Security/JWT, PostgreSQL, Oracle, SQL query design and optimization, and enterprise frontend work with JavaScript/jQuery — plus the general shape of the systems (government-facing financial web applications at Bizplay; a B2B billing platform integrated with banking systems at KOSIGN). For code-level detail, his personal projects (H-Phsar, AuthHub, Hengo, Money Flow) are fully public on GitHub and cover the same stack.",
         ].join("\n"),
     },
 ]

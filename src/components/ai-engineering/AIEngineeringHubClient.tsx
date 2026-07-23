@@ -1,15 +1,16 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import Link from "next/link"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
-import { Search, Sparkles, FileCode2, MessageSquareCode, Terminal, ArrowRight, X } from "lucide-react"
+import { Search, FileCode2, MessageSquareCode, Terminal, ArrowRight, X } from "lucide-react"
 import type { AICategory, Article } from "@/src/lib/types/ai-engineering"
 import { ArticleCard } from "@/src/components/ai-engineering/ArticleCard"
 import { CategoryCard } from "@/src/components/ai-engineering/CategoryCard"
 import { Tag } from "@/src/components/ai-engineering/Tag"
-import { NumberTicker } from "@/src/components/ui/NumberTicker"
+import { LabNav } from "@/src/components/lab/ui/LabNav"
+import { LabPathHeader } from "@/src/components/lab/ui/LabPathHeader"
 
 export function AIEngineeringHubClient({
     articles,
@@ -74,66 +75,16 @@ export function AIEngineeringHubClient({
 
     return (
         <div className="px-4 md:px-8 py-10 max-w-6xl mx-auto">
-            <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-fg-muted">
-                <Link href="/lab" className="hover:text-fg transition-colors">
-                    Engineering Lab
-                </Link>
-                <span>/</span>
-                <span className="text-fg-secondary">AI Engineering</span>
-            </nav>
-
-            {/* Hero */}
-            <motion.section
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="relative mb-14 overflow-hidden rounded-3xl border border-border bg-surface px-6 py-14 md:px-12 md:py-20 text-center"
-            >
-                <div className="pointer-events-none absolute inset-0 opacity-40">
-                    <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-brand/20 blur-[100px]" />
-                    <div className="absolute -bottom-24 right-1/4 h-64 w-64 rounded-full bg-success/10 blur-[100px]" />
-                </div>
-
-                <span className="relative inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-fg-secondary">
-                    <Sparkles size={11} className="text-brand" />
-                    Engineering Knowledge Hub
-                </span>
-
-                <h1 className="relative mt-5 text-4xl md:text-5xl font-bold tracking-tight text-fg">
-                    AI Engineering
-                </h1>
-                <p className="relative mt-3 text-base md:text-lg leading-relaxed text-fg-secondary">
-                    Building modern backend systems with AI-assisted engineering.
-                </p>
-                <p className="relative mx-auto mt-4 max-w-2xl text-xs md:text-sm leading-relaxed text-fg-muted">
-                    AI accelerates development, but engineers remain responsible for architecture, quality, security,
-                    and business logic. Here&apos;s how I use Claude Code and Codex as a collaborator — not a
-                    replacement — while building with Java, Spring Boot, MyBatis, and PostgreSQL.
-                </p>
-
-                <div className="relative mt-8 flex justify-center gap-8">
-                    {[
-                        { label: "Articles", value: articles.length },
-                        { label: "Prompts", value: promptCount },
-                        { label: "Snippets", value: snippetCount },
-                    ].map((s) => (
-                        <div key={s.label} className="text-center">
-                            <p className="text-xl font-bold text-fg">
-                                <NumberTicker value={s.value} />
-                            </p>
-                            <p className="text-[10px] font-semibold uppercase tracking-wider text-fg-muted">{s.label}</p>
-                        </div>
-                    ))}
-                </div>
-            </motion.section>
+            <LabNav active="ai" />
+            <LabPathHeader
+                label="AI Engineering"
+                title="AI-assisted engineering, not AI engineering"
+                description="AI accelerates development, but engineers remain responsible for architecture, quality, security, and business logic. Here's how I use Claude Code and Codex as a collaborator — not a replacement — while building with Java, Spring Boot, MyBatis, and PostgreSQL."
+                accent="warning"
+            />
 
             {/* Quick links */}
-            <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
-                className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-3"
-            >
+            <div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <Link
                     href="/ai-engineering/prompts"
                     className="group flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4 hover:border-border-strong transition-colors"
@@ -142,7 +93,7 @@ export function AIEngineeringHubClient({
                         <MessageSquareCode size={18} className="text-brand" />
                         <div>
                             <p className="text-sm font-semibold text-fg">Prompt Library</p>
-                            <p className="text-xs text-fg-muted">Copy-ready prompts for real backend work</p>
+                            <p className="text-xs text-fg-muted">{promptCount} copy-ready prompts for real backend work</p>
                         </div>
                     </div>
                 </Link>
@@ -154,7 +105,7 @@ export function AIEngineeringHubClient({
                         <FileCode2 size={18} className="text-brand" />
                         <div>
                             <p className="text-sm font-semibold text-fg">Code Snippets</p>
-                            <p className="text-xs text-fg-muted">MyBatis, idempotency, Thymeleaf patterns</p>
+                            <p className="text-xs text-fg-muted">{snippetCount} snippets — MyBatis, idempotency, Thymeleaf patterns</p>
                         </div>
                     </div>
                 </Link>
@@ -170,7 +121,7 @@ export function AIEngineeringHubClient({
                         </div>
                     </div>
                 </Link>
-            </motion.div>
+            </div>
 
             {/* How I use AI — compact workflow, not a claim of expertise */}
             <section className="mb-12 rounded-2xl border border-border bg-surface px-5 py-6 md:px-8 md:py-8">

@@ -13,6 +13,11 @@ export const BackendSourceSchema = z.object({
     accessedAt: IsoDateSchema,
 })
 
+const BackendKnowledgeCheckSchema = z.object({
+    questions: z.array(z.string().min(8)).min(1),
+    suggestedAnswers: z.array(z.string().min(8)).optional(),
+})
+
 const BackendBaseSchema = z.object({
     id: z.string().regex(/^backend-[a-z0-9-]+$/),
     slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -32,6 +37,7 @@ const BackendBaseSchema = z.object({
     updatedAt: IsoDateSchema,
     versionScope: z.string().min(4),
     sources: z.array(BackendSourceSchema).min(1),
+    knowledgeCheck: BackendKnowledgeCheckSchema.optional(),
 })
 
 const BackendBlockSchema = z.union([

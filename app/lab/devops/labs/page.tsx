@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
 import { labs } from "@/data/lab/devops/labs"
 import { LabCard } from "@/src/components/lab/devops/LabCard"
+import { LabNav } from "@/src/components/lab/ui/LabNav"
 
 export const metadata: Metadata = {
     title: "Hands-on Labs — DevOps Basics",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function LabsPage() {
     return (
         <div className="px-4 md:px-8 py-10 max-w-5xl mx-auto">
+            <LabNav active="practice" />
             <div className="mb-8">
                 <h1 className="mb-1 text-3xl md:text-4xl font-bold tracking-tight text-fg">Hands-on Labs</h1>
                 <p className="max-w-2xl text-base md:text-lg leading-relaxed text-fg-secondary">

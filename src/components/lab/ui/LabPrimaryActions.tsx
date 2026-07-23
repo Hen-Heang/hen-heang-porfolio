@@ -25,7 +25,7 @@ export function LabPrimaryActions({ actions }: { actions: LabAction[] }) {
                                 : "inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg"
                         }
                     >
-                        {Icon && <Icon size={15} aria-hidden="true" />} {action.label}
+                        {Icon && <Icon size={15} aria-hidden={true} />} {action.label}
                     </Link>
                 )
             })}

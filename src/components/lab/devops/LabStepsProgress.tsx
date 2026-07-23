@@ -43,6 +43,20 @@ function readLabProgress(serialized: string, labSlug: string): Set<number> {
     }
 }
 
+/** Raw per-lab step-index progress for every DevOps lab — used by the /lab/progress summary to compute which labs are fully done. */
+export function useAllDevOpsLabSteps(): Record<string, number[]> {
+    const serialized = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+    return useMemo(() => {
+        try {
+            const parsed: unknown = JSON.parse(serialized)
+            if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {}
+            return parsed as Record<string, number[]>
+        } catch {
+            return {}
+        }
+    }, [serialized])
+}
+
 export function LabStepsProgress({ labSlug, steps }: { labSlug: string; steps: LabStep[] }) {
     const serialized = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
     const completed = useMemo(() => readLabProgress(serialized, labSlug), [labSlug, serialized])

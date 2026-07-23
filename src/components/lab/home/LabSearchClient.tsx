@@ -4,6 +4,7 @@ import { useMemo, useState } from "react"
 import Link from "next/link"
 import { ArrowRight, Search, X } from "lucide-react"
 import type { EngineeringLabSearchItem, EngineeringLabSource } from "@/src/lib/types/engineering-lab"
+import { rankLabSearch } from "@/src/lib/lab/search"
 import { Tag } from "@/src/components/ai-engineering/Tag"
 
 const sourceTextColors: Record<EngineeringLabSource, string> = {
@@ -24,18 +25,8 @@ export function LabSearchClient({ items, children }: { items: EngineeringLabSear
     const [query, setQuery] = useState("")
 
     const results = useMemo(() => {
-        const q = query.trim().toLowerCase()
-        if (!q) return []
-        return items
-            .filter(
-                (item) =>
-                    item.title.toLowerCase().includes(q) ||
-                    item.description.toLowerCase().includes(q) ||
-                    item.source.toLowerCase().includes(q) ||
-                    item.type.toLowerCase().includes(q) ||
-                    item.tags.some((t) => t.toLowerCase().includes(q))
-            )
-            .slice(0, 24)
+        if (!query.trim()) return []
+        return rankLabSearch(query, items, { limit: 24 })
     }, [items, query])
 
     return (
@@ -66,9 +57,14 @@ export function LabSearchClient({ items, children }: { items: EngineeringLabSear
 
             {query.trim() ? (
                 <div className="mb-14 animate-in fade-in-0 duration-150 motion-reduce:animate-none">
-                    <p className="mb-4 font-mono text-base font-semibold uppercase tracking-wider text-fg-muted">
-                        {results.length} result{results.length === 1 ? "" : "s"}
-                    </p>
+                    <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                        <p aria-live="polite" className="font-mono text-base font-semibold uppercase tracking-wider text-fg-muted">
+                            {results.length} result{results.length === 1 ? "" : "s"}
+                        </p>
+                        <Link href={`/lab/library?q=${encodeURIComponent(query.trim())}`} className="flex items-center gap-1 text-sm font-medium text-brand hover:underline">
+                            Open in full library <ArrowRight size={12} aria-hidden="true" />
+                        </Link>
+                    </div>
                     {results.length === 0 ? (
                         <div className="py-16 text-center text-base text-fg-muted">Nothing matches yet — try a different term.</div>
                     ) : (

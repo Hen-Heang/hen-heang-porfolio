@@ -1,16 +1,38 @@
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Brain, CheckCircle2, Clock3, GitBranch, Layers3 } from "lucide-react"
+import { ArrowLeft, ArrowRight, Brain, CheckCircle2, ChevronDown, Clock3, GitBranch, Layers3 } from "lucide-react"
 import type { BackendAdjacentItems } from "@/src/lib/backend/navigation"
 import type { BackendKnowledgeItem, BackendPublishedItem } from "@/src/lib/types/backend-engineering"
 import { BackendChecklistContent, BackendInterviewContent, BackendLabContent, BackendNarrativeContent, BackendRelatedLinks, BackendSources } from "@/src/components/lab/backend/BackendContentRenderer"
 import { BackendProgressButton } from "@/src/components/lab/backend/BackendProgress"
+import { BackendCompletionFlow } from "@/src/components/lab/backend/BackendCompletionFlow"
 import { OnPageNav } from "@/src/components/lab/ui/OnPageNav"
+import { ReadingProgressBar } from "@/src/components/lab/ui/ReadingProgressBar"
+import { SaveForLaterButton } from "@/src/components/lab/ui/SaveForLaterButton"
+import { TrackLabVisit } from "@/src/components/lab/ui/TrackLabVisit"
+
+function PrerequisitesList({ prerequisites }: { prerequisites: BackendKnowledgeItem[] }) {
+    return prerequisites.length ? (
+        <ul className="mt-3 space-y-2">
+            {prerequisites.map((prerequisite) => (
+                <li key={prerequisite.id}>
+                    <Link href={prerequisite.status === "published" ? `/lab/backend/${prerequisite.slug}` : "/lab/backend/roadmap"} className="text-base leading-5 text-fg-secondary hover:text-fg">
+                        {prerequisite.title}
+                    </Link>
+                </li>
+            ))}
+        </ul>
+    ) : (
+        <p className="mt-2 text-base text-fg-muted">Start here; no published prerequisite.</p>
+    )
+}
 
 export function BackendDetail({ item, prerequisites, related, adjacent }: { item: BackendPublishedItem; prerequisites: BackendKnowledgeItem[]; related: BackendKnowledgeItem[]; adjacent: BackendAdjacentItems }) {
     const sections = item.type === "lab" ? item.overview : item.type === "checklist" || item.type === "interview" ? [] : item.sections
 
     return (
         <article className="mx-auto max-w-5xl px-4 py-8 md:px-8 md:py-10">
+            <ReadingProgressBar />
+            <TrackLabVisit itemId={item.id} href={`/lab/backend/${item.slug}`} title={item.title} path="backend" />
             <Link href="/lab/backend" className="inline-flex items-center gap-1.5 text-base text-fg-muted transition-colors hover:text-fg"><ArrowLeft size={14} aria-hidden="true" /> Backend Engineering</Link>
             <header className="mt-6 border-b border-border pb-8">
                 <div className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-fg-muted">
@@ -42,22 +64,51 @@ export function BackendDetail({ item, prerequisites, related, adjacent }: { item
                                 <h2 id="knowledge-check-heading" className="mt-1 text-xl font-bold text-fg">Before you continue</h2>
                             </div>
                         </div>
-                        <ul className="mt-4 space-y-2 text-base leading-6 text-fg-secondary">
-                            <li>Explain the main idea in your own words without rereading the page.</li>
-                            <li>Name one production problem this knowledge helps prevent.</li>
-                            <li>Describe where you would apply it in a Spring Boot project.</li>
-                        </ul>
-                        <div className="mt-5"><BackendProgressButton itemId={item.id} /></div>
+                        {item.knowledgeCheck ? (
+                            <>
+                                <ol className="mt-4 space-y-2 text-base leading-6 text-fg-secondary">
+                                    {item.knowledgeCheck.questions.map((question, index) => <li key={question}>{index + 1}. {question}</li>)}
+                                </ol>
+                                {item.knowledgeCheck.suggestedAnswers && item.knowledgeCheck.suggestedAnswers.length > 0 && (
+                                    <details className="group mt-4">
+                                        <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-sm font-medium text-warning marker:content-none">
+                                            <ChevronDown size={13} className="transition-transform group-open:rotate-180" aria-hidden="true" /> Show suggested answers
+                                        </summary>
+                                        <ul className="mt-3 space-y-2 border-l-2 border-warning/30 pl-4 text-base leading-6 text-fg-secondary">
+                                            {item.knowledgeCheck.suggestedAnswers.map((answer) => <li key={answer}>{answer}</li>)}
+                                        </ul>
+                                    </details>
+                                )}
+                            </>
+                        ) : (
+                            <ul className="mt-4 space-y-2 text-base leading-6 text-fg-secondary">
+                                <li>Explain the main idea in your own words without rereading the page.</li>
+                                <li>Name one production problem this knowledge helps prevent.</li>
+                                <li>Describe where you would apply it in a Spring Boot project.</li>
+                            </ul>
+                        )}
+                        <div className="mt-5 flex flex-wrap gap-3">
+                            <BackendProgressButton itemId={item.id} />
+                            <SaveForLaterButton itemId={item.id} />
+                        </div>
                     </section>
+                    <BackendCompletionFlow itemId={item.id} next={adjacent.next ?? null} />
                     <BackendSources sources={item.sources} />
                     <BackendRelatedLinks items={related} />
                 </div>
 
                 <aside className="order-first lg:order-last">
                     <div className="space-y-5 lg:sticky lg:top-20">
-                        <div className="rounded-2xl border border-border bg-surface p-4">
+                        <details className="group rounded-2xl border border-border bg-surface p-4 lg:hidden">
+                            <summary className="flex min-h-6 cursor-pointer list-none items-center justify-between gap-3 marker:content-none">
+                                <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-fg-muted">Prerequisites</span>
+                                <ChevronDown size={14} className="text-fg-muted transition-transform group-open:rotate-180" aria-hidden="true" />
+                            </summary>
+                            <PrerequisitesList prerequisites={prerequisites} />
+                        </details>
+                        <div className="hidden rounded-2xl border border-border bg-surface p-4 lg:block">
                             <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-fg-muted">Prerequisites</p>
-                            {prerequisites.length ? <ul className="mt-3 space-y-2">{prerequisites.map((prerequisite) => <li key={prerequisite.id}><Link href={prerequisite.status === "published" ? `/lab/backend/${prerequisite.slug}` : "/lab/backend/roadmap"} className="text-base leading-5 text-fg-secondary hover:text-fg">{prerequisite.title}</Link></li>)}</ul> : <p className="mt-2 text-base text-fg-muted">Start here; no published prerequisite.</p>}
+                            <PrerequisitesList prerequisites={prerequisites} />
                         </div>
                         <OnPageNav sections={[{ id: "learning-objectives", title: "Learning objectives" }, ...sections.map((section) => ({ id: section.id, title: section.title })), { id: "knowledge-check", title: "Knowledge check" }]} />
                     </div>

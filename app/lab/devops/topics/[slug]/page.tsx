@@ -8,7 +8,11 @@ import { getLearningCard } from "@/data/lab/devops/topics"
 import { DifficultyBadge } from "@/src/components/ai-engineering/DifficultyBadge"
 import { LearningCardView } from "@/src/components/lab/devops/LearningCardView"
 import { OnPageNav } from "@/src/components/lab/ui/OnPageNav"
+import { ReadingProgressBar } from "@/src/components/lab/ui/ReadingProgressBar"
+import { SaveForLaterButton } from "@/src/components/lab/ui/SaveForLaterButton"
+import { TrackLabVisit } from "@/src/components/lab/ui/TrackLabVisit"
 import { DevOpsProgressButton } from "@/src/components/lab/devops/DevOpsProgress"
+import { DevOpsCompletionFlow } from "@/src/components/lab/devops/DevOpsCompletionFlow"
 
 export async function generateStaticParams() {
     return roadmap.filter((t) => t.hasCard).map((t) => ({ slug: t.slug }))
@@ -57,6 +61,8 @@ export default async function DevOpsTopicPage({
 
     return (
         <div className="mx-auto max-w-5xl px-4 py-10 md:px-8">
+            <ReadingProgressBar />
+            <TrackLabVisit itemId={topic.slug} href={`/lab/devops/topics/${topic.slug}`} title={topic.title} path="devops" />
             <Link href="/lab/devops" className="mb-6 inline-flex items-center gap-1.5 text-base text-fg-muted transition-colors hover:text-fg"><ArrowLeft size={14} aria-hidden="true" /> DevOps learning path</Link>
             <header className="mb-8">
                 <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -84,8 +90,12 @@ export default async function DevOpsTopicPage({
                             <li>Name one common failure it helps you diagnose or prevent.</li>
                             <li>Repeat one example command from memory, then verify it.</li>
                         </ul>
-                        <div className="mt-5"><DevOpsProgressButton topicSlug={topic.slug} /></div>
+                        <div className="mt-5 flex flex-wrap gap-3">
+                            <DevOpsProgressButton topicSlug={topic.slug} />
+                            <SaveForLaterButton itemId={topic.slug} />
+                        </div>
                     </section>
+                    <DevOpsCompletionFlow topicSlug={topic.slug} next={next} />
                 </div>
                 <aside className="order-first lg:order-last">
                     <div className="lg:sticky lg:top-20">

@@ -38,7 +38,7 @@ export const positioningKnowledge: KnowledgeSection[] = [
         content: [
             "**Best-fit roles:** backend or Java/Spring Boot developer positions, especially where REST API design, MyBatis/JPA data access, and PostgreSQL/Oracle are core to the job. Full-stack roles that lean backend-heavy but need occasional Next.js/TypeScript frontend work are also a strong match.",
             "",
-            `**Strongest backend evidence:** production REST APIs and data-access work at ${profileData.company} (Korean enterprise, government/corporate financial systems) and KOSIGN (B2B billing platform integrated with banking systems), plus five personal Spring Boot projects (H-Phsar, AuthHub, We Commerce, Dev Lab, and the Hengo backend) covering authentication, order/state-machine logic, and schema design end to end.`,
+            `**Strongest backend evidence:** production REST APIs and data-access work at ${profileData.company} (Korean enterprise, government/corporate financial systems) and KOSIGN (B2B billing platform integrated with banking systems), plus personal Spring Boot projects (H-Phsar, AuthHub, Dev Lab, and the Hengo backend) covering authentication, order/state-machine logic, and schema design end to end.`,
             "",
             "**Enterprise experience:** yes — both employers operate in regulated, enterprise-scale environments (government-facing systems, banking integrations).",
             "",

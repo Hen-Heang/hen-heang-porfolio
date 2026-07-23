@@ -7,6 +7,8 @@ export interface EngineeringLabSearchItem {
     source: EngineeringLabSource
     type: string
     tags: string[]
+    /** Not available for every item (prompts/snippets/commands/infrastructure terms don't carry one) — filters treat "unknown" as its own bucket rather than hiding the item. */
+    difficulty?: "beginner" | "intermediate" | "advanced"
 }
 
 export interface LabMetric {

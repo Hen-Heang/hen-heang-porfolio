@@ -15,8 +15,6 @@ export interface PerformanceEntry {
  */
 export const performanceTechniques: PerformanceEntry[] = [
     { category: "Caching", slug: "hengo", project: bySlug("hengo").title, text: bySlug("hengo").solutions![1] },
-    { category: "Optimistic UI", slug: "we-commerce", project: bySlug("we-commerce").title, text: bySlug("we-commerce").solutions![1] },
-    { category: "Optimistic UI", slug: "we-commerce", project: bySlug("we-commerce").title, text: bySlug("we-commerce").lessonsLearned![2] },
     { category: "Background Jobs", slug: "money-flow", project: bySlug("money-flow").title, text: bySlug("money-flow").solutions![0] },
     { category: "Reliability", slug: "money-flow", project: bySlug("money-flow").title, text: bySlug("money-flow").solutions![1] },
     { category: "Data Access", slug: "money-flow", project: bySlug("money-flow").title, text: bySlug("money-flow").solutions![2] },

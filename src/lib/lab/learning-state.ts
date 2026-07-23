@@ -22,6 +22,14 @@ const CHANGE_EVENT = "henheang:lab-state-change"
 
 export type LabPath = "backend" | "devops" | "ai"
 
+export interface RecentLabVisit {
+    itemId: string
+    href: string
+    title: string
+    path: LabPath
+    visitedAt: string
+}
+
 export interface LabLearningState {
     selectedPath?: LabPath
     lastVisitedItemId?: string
@@ -30,11 +38,23 @@ export interface LabLearningState {
     lastVisitedPath?: LabPath
     lastVisitedAt?: string
     savedItemIds: string[]
+    /** Most recent visits first, deduplicated by itemId, capped at 5 — powers the /lab/progress "Recently viewed" list. */
+    recentlyViewed: RecentLabVisit[]
 }
 
-const DEFAULT_STATE: LabLearningState = { savedItemIds: [] }
+const MAX_RECENT = 5
+
+const DEFAULT_STATE: LabLearningState = { savedItemIds: [], recentlyViewed: [] }
 
 const isLabPath = (value: unknown): value is LabPath => value === "backend" || value === "devops" || value === "ai"
+
+const isRecentVisit = (value: unknown): value is RecentLabVisit =>
+    typeof value === "object" && value !== null &&
+    typeof (value as RecentLabVisit).itemId === "string" &&
+    typeof (value as RecentLabVisit).href === "string" &&
+    typeof (value as RecentLabVisit).title === "string" &&
+    isLabPath((value as RecentLabVisit).path) &&
+    typeof (value as RecentLabVisit).visitedAt === "string"
 
 function subscribe(callback: () => void): () => void {
     window.addEventListener("storage", callback)
@@ -66,6 +86,7 @@ function parse(serialized: string): LabLearningState {
             lastVisitedPath: isLabPath(p.lastVisitedPath) ? p.lastVisitedPath : undefined,
             lastVisitedAt: typeof p.lastVisitedAt === "string" ? p.lastVisitedAt : undefined,
             savedItemIds: Array.isArray(p.savedItemIds) ? p.savedItemIds.filter((v): v is string => typeof v === "string") : [],
+            recentlyViewed: Array.isArray(p.recentlyViewed) ? p.recentlyViewed.filter(isRecentVisit) : [],
         }
     } catch {
         return DEFAULT_STATE
@@ -87,17 +108,24 @@ export function useLabLearningState(): LabLearningState {
     return useMemo(() => parse(serialized), [serialized])
 }
 
-/** Records the most recently visited Lab item — called once on mount by <TrackLabVisit>. */
+/** Records the most recently visited Lab item — called once on mount by <TrackLabVisit>. Updates both the single "last visited" (for Continue Learning) and the "recently viewed" list (for /lab/progress). */
 export function recordLabVisit(entry: { itemId: string; href: string; title: string; path: LabPath }): void {
     if (typeof window === "undefined") return
     const current = parse(getSnapshot())
+    const visitedAt = new Date().toISOString()
+    const recentlyViewed = [
+        { ...entry, visitedAt },
+        ...current.recentlyViewed.filter((visit) => visit.itemId !== entry.itemId),
+    ].slice(0, MAX_RECENT)
+
     write({
         ...current,
         lastVisitedItemId: entry.itemId,
         lastVisitedHref: entry.href,
         lastVisitedTitle: entry.title,
         lastVisitedPath: entry.path,
-        lastVisitedAt: new Date().toISOString(),
+        lastVisitedAt: visitedAt,
+        recentlyViewed,
     })
 }
 
