@@ -1,4 +1,5 @@
-import { User } from "lucide-react"
+import Link from "next/link"
+import { User, FileText, Github } from "lucide-react"
 import { CVHeader } from "./CVHeader"
 import { CVSection } from "./CVSection"
 import { CVExperience } from "./CVExperience"
@@ -9,44 +10,61 @@ import { CVLanguages } from "./CVLanguages"
 import { CVDownloadButton } from "./CVDownloadButton"
 import type { CVData } from "@/data/cv-data"
 
-// The wrapping <div id="cv-content"> is the target for PDF generation.
+// The wrapping <div data-print-root> is the target for the browser's print/PDF output.
 export function CVPage({ cv }: { cv: CVData }) {
   return (
-    <div id="cv-print-root" className="min-h-screen bg-[#f8fafc] py-12 px-4 print:bg-white print:p-0">
+    <div className="min-h-screen bg-slate-50 py-10 px-4 print:bg-white print:p-0">
       {/* Toolbar (hidden when printing) */}
-      <div className="max-w-5xl mx-auto mb-6 flex justify-end print:hidden">
+      <div className="max-w-5xl mx-auto mb-6 flex flex-wrap justify-end gap-3 print:hidden">
+        <Link
+          href="/resume"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-slate-700 text-sm font-semibold border border-slate-200 hover:border-slate-300 hover:text-slate-900 transition-colors"
+        >
+          <FileText size={15} aria-hidden />
+          View ATS Resume
+        </Link>
+        {cv.personal.github && (
+          <a
+            href={cv.personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-slate-700 text-sm font-semibold border border-slate-200 hover:border-slate-300 hover:text-slate-900 transition-colors"
+          >
+            <Github size={15} aria-hidden />
+            View GitHub
+          </a>
+        )}
         <CVDownloadButton />
       </div>
 
       {/* CV Document */}
       <div
-        id="cv-content"
+        id="cv-print-root"
+        data-print-root
         className="
-          max-w-5xl mx-auto bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)]
-          print:shadow-none print:rounded-none print:max-w-none
+          max-w-5xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-[0_1px_3px_rgba(15,23,42,0.06)]
+          print:shadow-none print:rounded-none print:border-0 print:max-w-none
         "
       >
-        <div className="px-8 py-12 md:px-16 md:py-16 print:px-10 print:py-8">
+        <div className="px-6 py-10 sm:px-10 md:px-14 md:py-14 print:px-10 print:py-8">
           <CVHeader cv={cv} />
 
           {/* Professional Summary */}
-          <CVSection title="About Me" icon={User} className="mb-12 print:mb-8">
-            <p className="text-[15px] text-gray-600 leading-relaxed font-medium">
-              {cv.summary}
-            </p>
+          <CVSection title="Professional Summary" icon={User} className="mb-10 print:mb-8">
+            <p className="text-[14px] text-slate-600 leading-relaxed">{cv.summary}</p>
           </CVSection>
 
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 print:grid-cols-12 print:gap-10">
-            {/* Left Column - Main Experience & Projects */}
-            <div className="lg:col-span-8 print:col-span-8 space-y-12 print:space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 print:grid-cols-12 print:gap-8">
+            {/* Left Column - Experience & Projects */}
+            <div className="lg:col-span-8 print:col-span-8 space-y-10 print:space-y-8">
               <CVExperience cv={cv} />
               <CVProjects cv={cv} />
             </div>
 
             {/* Right Column - Skills, Education, Languages */}
-            <div className="lg:col-span-4 print:col-span-4 space-y-12 print:space-y-8">
-              <div className="lg:sticky lg:top-8 space-y-12 print:space-y-8">
+            <div className="lg:col-span-4 print:col-span-4 space-y-10 print:space-y-8">
+              <div className="lg:sticky lg:top-8 print:static space-y-10 print:space-y-8">
                 <CVSkills cv={cv} />
                 <CVEducation cv={cv} />
                 <CVLanguages cv={cv} />
@@ -55,15 +73,11 @@ export function CVPage({ cv }: { cv: CVData }) {
           </div>
         </div>
       </div>
-      
+
       {/* Footer hint for users */}
-      <div className="max-w-5xl mx-auto mt-8 text-center text-gray-400 text-xs print:hidden">
-        <p>© {new_short_year()} Hen Heang — Built with Next.js & Tailwind CSS</p>
+      <div className="max-w-5xl mx-auto mt-8 text-center text-slate-400 text-xs print:hidden">
+        <p>© {new Date().getFullYear()} Hen Heang — Built with Next.js &amp; Tailwind CSS</p>
       </div>
     </div>
   )
-}
-
-function new_short_year() {
-  return new Date().getFullYear()
 }

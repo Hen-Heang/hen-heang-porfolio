@@ -110,12 +110,18 @@ Open [http://localhost:3000](http://localhost:3000).
 Copy `.env.example` to `.env.local` and fill in what you need — see that file for the full list. None are required to run the site:
 
 - **Supabase** (`NEXT_PUBLIC_SUPABASE_URL`/`_ANON_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`) — optional. Profile/dashboard/CV/projects/skills/experience/education/achievements are all served from Supabase when configured, and automatically fall back to the typed data in `data/*.ts` when it's absent or a query fails — the public site never renders empty because of a Supabase outage. The contact form specifically needs the service-role key to accept submissions.
-- **`OPENAI_API_KEY`** / `OPENAI_MODEL` — optional. Without it the AI assistant returns a graceful "not configured" message.
+- **`OPENAI_API_KEY`** — optional. Without it the AI assistant returns a graceful "not configured" message.
+- **`OPENAI_MODEL`** / **`OPENAI_DEEP_MODEL`** / **`OPENAI_FALLBACK_MODEL`** — optional, all have built-in defaults. `src/lib/ai/models.ts` deterministically routes each question to the default model (ordinary Q&A) or the deep model (comparisons, role-fit judgment, architecture trade-offs); the fallback model is only used when a visitor explicitly retries a failed answer.
 - **`UPSTASH_REDIS_REST_URL`** / `_TOKEN` — optional. Rate limiting (AI chat + contact form) uses Upstash Redis when configured, which is required for correctness across Vercel's multiple serverless instances; without it, both fall back to an in-memory limiter that's fine for local dev only.
+- **`RUN_LIVE_EVALS`** — optional, dev-only. Set to `1` (with a real `OPENAI_API_KEY`) to run the live-model portion of the assistant eval suite (`src/lib/ai/evals/live-model.test.ts`), which makes real, billed OpenAI API calls. Left unset, normal `pnpm test` runs skip it entirely.
 
 ### Content workflow
 
 Public content (profile, dashboard, CV, projects, skills, experience, education, achievements, contact messages) is editable at `/admin` by the owner account (gated by Supabase RLS + an email check). Admin-entered JSON is validated against the same Zod schemas (`src/lib/schemas/content.ts`) the public site uses before it's saved, so malformed content can't reach — or break — the live pages. Editing the static files in `data/*.ts` changes only the fallback shown when Supabase is unavailable.
+
+### AI portfolio assistant
+
+The chat widget (`src/components/assistant/`) is a retrieval-grounded assistant, not a general chatbot: `app/api/chat/route.ts` retrieves the most relevant sections from `data/knowledge/*` (backed by the same Supabase-or-static content the rest of the site renders, via `src/lib/ai/live-knowledge.ts`) and answers only from that context, per the rules in `src/lib/ai/system-prompt.ts`. Retrieval (`src/lib/ai/retrieval.ts`) is Unicode-aware and alias-expanded (`src/lib/ai/aliases.ts`) so English, Korean, and Khmer questions all retrieve the right sections. See `src/lib/ai/evals/portfolio-questions.ts` for the assistant's eval dataset.
 
 ### Testing
 

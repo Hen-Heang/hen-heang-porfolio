@@ -74,7 +74,12 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                        <h1 className="text-display-sm text-fg">{project.title}</h1>
+                        {(project.category || project.ownership) && (
+                            <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
+                                {[project.category, project.ownership].filter(Boolean).join(" · ")}
+                            </p>
+                        )}
+                        <h1 className="mt-2 text-display-sm text-fg">{project.title}</h1>
                         <div className="mt-4 flex flex-wrap items-center gap-5 text-sm text-fg-secondary">
                             {project.role && (
                                 <span className="inline-flex items-center gap-2">
@@ -118,6 +123,12 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                         </a>
                     )}
                 </div>
+
+                {project.confidential && (
+                    <p className="mt-4 text-sm italic text-fg-muted">
+                        Project details and source code are private due to company confidentiality.
+                    </p>
+                )}
 
                 <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${project.title} technologies`}>
                     {project.technologies.map((tech) => (

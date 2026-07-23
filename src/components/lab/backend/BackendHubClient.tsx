@@ -1,12 +1,15 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import Link from "next/link"
-import { ArrowRight, BookOpenCheck, Filter, Map, Search, X } from "lucide-react"
+import { BookOpenCheck, Filter, Map, Search, X } from "lucide-react"
 import { BACKEND_CATEGORIES, BACKEND_CONTENT_TYPES, type BackendItemSummary } from "@/src/lib/types/backend-engineering"
 import { filterBackendItems, sortBackendItems } from "@/src/lib/backend/search"
 import { BackendCard } from "@/src/components/lab/backend/BackendCard"
 import { useBackendProgress } from "@/src/components/lab/backend/BackendProgress"
+import { LabNav } from "@/src/components/lab/ui/LabNav"
+import { LabPathHeader } from "@/src/components/lab/ui/LabPathHeader"
+import { LabProgressSummary } from "@/src/components/lab/ui/LabProgressSummary"
+import { LabPrimaryActions } from "@/src/components/lab/ui/LabPrimaryActions"
 
 const categoryLabel: Record<string, string> = {
     foundations: "Foundations", java: "Java", http: "Web & HTTP", database: "Database", spring: "Spring Boot",
@@ -49,42 +52,21 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
 
     return (
         <div>
-            <section className="rounded-3xl border border-border bg-gradient-to-br from-surface to-background p-6 md:p-8">
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="max-w-3xl">
-                        <span className="font-mono text-sm uppercase tracking-[0.2em] text-brand">Backend Engineering Lab</span>
-                        <h1 className="mt-3 text-4xl font-bold tracking-tight text-fg md:text-5xl">From fundamentals to production systems</h1>
-                        <p className="mt-4 text-lg leading-relaxed text-fg-secondary md:text-xl">
-                            A Java- and Spring-focused curriculum for learning, reviewing, demonstrating production reasoning, and preparing for backend interviews.
-                        </p>
-                    </div>
-                    <div className="grid min-w-64 grid-cols-2 gap-3">
-                        <div className="rounded-2xl border border-border bg-background p-4">
-                            <p className="font-mono text-2xl font-bold text-fg">{roadmapLevelCount}</p>
-                            <p className="mt-1 text-sm text-fg-muted">Roadmap levels</p>
-                        </div>
-                        <div className="rounded-2xl border border-border bg-background p-4">
-                            <p className="font-mono text-2xl font-bold text-fg">{completedCount}/{publishedCount}</p>
-                            <p className="mt-1 text-sm text-fg-muted">Completed locally</p>
-                        </div>
-                        <div className="col-span-2 rounded-2xl border border-border bg-background p-4">
-                            <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-fg-muted"><span>Learning progress</span><span>{progressPercentage}%</span></div>
-                            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-elevated"><div className="h-full rounded-full bg-brand transition-[width]" style={{ width: `${progressPercentage}%` }} /></div>
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-7 flex flex-wrap gap-3">
-                    <Link href={nextItem ? `/lab/backend/${nextItem.slug}` : "/lab/backend/roadmap"} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
-                        <BookOpenCheck size={16} aria-hidden="true" /> {nextItem ? `Continue: ${nextItem.title}` : "Review completed path"} <ArrowRight size={14} aria-hidden="true" />
-                    </Link>
-                    <Link href="/lab/backend/roadmap" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg">
-                        <Map size={16} aria-hidden="true" /> View roadmap
-                    </Link>
-                    <a href="#catalog" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg">
-                        <BookOpenCheck size={16} aria-hidden="true" /> Browse content
-                    </a>
-                </div>
-            </section>
+            <LabNav active="backend" />
+            <LabPathHeader
+                label="Backend Engineering Lab"
+                title="From fundamentals to production systems"
+                description="A Java- and Spring-focused curriculum for learning, reviewing, demonstrating production reasoning, and preparing for backend interviews."
+                accent="brand"
+            >
+                <LabProgressSummary completed={completedCount} total={publishedCount} accent="brand" />
+                <LabPrimaryActions
+                    actions={[
+                        { href: nextItem ? `/lab/backend/${nextItem.slug}` : "/lab/backend/roadmap", label: nextItem ? `Continue: ${nextItem.title}` : "Review completed path", icon: BookOpenCheck },
+                        { href: "/lab/backend/roadmap", label: `View roadmap (${roadmapLevelCount} levels)`, icon: Map, variant: "secondary" },
+                    ]}
+                />
+            </LabPathHeader>
 
             <section id="catalog" className="mt-10 scroll-mt-24" aria-labelledby="backend-catalog-heading">
                 <div className="mb-5 flex flex-wrap items-end justify-between gap-3">

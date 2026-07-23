@@ -35,7 +35,7 @@ const focusSection: KnowledgeSection = {
     title: "Current focus and engineering philosophy",
     keywords: [
         "focus", "learning", "currently", "now", "philosophy", "approach",
-        "ai", "llm", "claude", "gemini", "devops", "docker", "ci/cd", "system design",
+        "devops", "docker", "ci/cd", "system design",
     ],
     content: [
         `Current technical focus: ${currentFocus.join(", ")}.`,
@@ -47,26 +47,8 @@ const focusSection: KnowledgeSection = {
     ].join("\n"),
 }
 
-const aiToolsSection: KnowledgeSection = {
-    id: "skills-ai-tools",
-    category: "skills",
-    title: "AI engineering and tools",
-    keywords: [
-        "ai", "artificial intelligence", "llm", "claude", "claude code", "gemini",
-        "openai", "gpt", "prompt", "prompting", "ai engineering", "ai tools",
-        "copilot", "assistant", "machine learning",
-    ],
-    content: [
-        "Heang works with AI as an engineering collaborator, not just a code generator:",
-        "- **Claude Code** and **Gemini** for AI-assisted development workflows — prompt patterns, code review, and debugging.",
-        "- Built LLM features into real products: the Money Flow finance app ships an AI chat over personal spending data powered by **Google Gemini** through the Vercel AI SDK, and Hengo has an AI coach for Korean learning with four modes (free chat, message analysis, phrasing generation, spaced-repetition review).",
-        "- This portfolio itself includes an AI assistant built with the **OpenAI Responses API** and the Vercel AI SDK.",
-        "- Maintains a prompt library on the portfolio's AI Engineering page covering backend, API design, database, code review, bug fixing, refactoring, system design, and learning prompts.",
-    ].join("\n"),
-}
-
 export function buildSkillsKnowledge(skills: SkillCategory[]): KnowledgeSection[] {
-    return [...buildSkillSections(skills), focusSection, aiToolsSection]
+    return [...buildSkillSections(skills), focusSection]
 }
 
-export const skillsKnowledge: KnowledgeSection[] = [...skillSections, focusSection, aiToolsSection]
+export const skillsKnowledge: KnowledgeSection[] = [...skillSections, focusSection]

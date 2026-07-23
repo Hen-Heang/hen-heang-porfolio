@@ -40,7 +40,7 @@ export function Timeline({ items, className }: { items: TimelineEntry[]; classNa
     return (
         <ol className={cn("flex flex-col", className)}>
             {items.map((item, i) => (
-                <li key={`${item.org}-${item.period}-${item.title}`} className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-8">
+                <li key={`${item.org}-${item.period}-${item.title}`} className="grid gap-2 md:grid-cols-[150px_minmax(0,1fr)] md:gap-8 lg:grid-cols-[180px_minmax(0,1fr)]">
                     <p className="pt-0.5 font-mono text-sm text-fg-muted md:text-right">{item.period}</p>
                     <div
                         className={cn(

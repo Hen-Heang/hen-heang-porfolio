@@ -3,6 +3,9 @@
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 
+/** Only http(s)/mailto links are ever rendered as clickable — blocks `javascript:`/`data:` and any other scheme a prompt-injected answer might try to slip in. */
+const SAFE_HREF = /^(https?:|mailto:)/i
+
 /**
  * Markdown renderer tuned for compact chat bubbles: tight spacing, accent
  * links that open in a new tab, and horizontally scrollable code blocks.
@@ -16,16 +19,19 @@ export function MarkdownContent({ text }: { text: string }) {
                 remarkPlugins={[remarkGfm]}
                 components={{
                     p: ({ children }) => <p>{children}</p>,
-                    a: ({ href, children }) => (
-                        <a
-                            href={href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-brand underline underline-offset-2 decoration-brand/40 hover:decoration-brand"
-                        >
-                            {children}
-                        </a>
-                    ),
+                    a: ({ href, children }) => {
+                        if (!href || !SAFE_HREF.test(href)) return <span>{children}</span>
+                        return (
+                            <a
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-brand underline underline-offset-2 decoration-brand/40 hover:decoration-brand"
+                            >
+                                {children}
+                            </a>
+                        )
+                    },
                     ul: ({ children }) => <ul className="list-disc pl-5 space-y-1">{children}</ul>,
                     ol: ({ children }) => <ol className="list-decimal pl-5 space-y-1">{children}</ol>,
                     li: ({ children }) => <li>{children}</li>,

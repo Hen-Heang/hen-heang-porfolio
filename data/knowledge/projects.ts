@@ -17,6 +17,10 @@ export function buildProjectsKnowledge(projects: Project[]): KnowledgeSection[] 
         id: `project-${project.slug}`,
         category: "projects",
         title: project.title,
+        projectSlug: project.slug,
+        sourceLabel: `${project.title} case study`,
+        sourceUrl: `https://henheang.site/projects/${project.slug}`,
+        updatedAt: project.updatedAt,
         keywords: [
             project.slug,
             ...project.slug.split("-"),
@@ -64,8 +68,11 @@ export function buildProjectsKnowledge(projects: Project[]): KnowledgeSection[] 
                 : []),
             "",
             `Technologies: ${project.technologies.join(", ")}`,
-            project.github ? `GitHub: ${project.github}` : "",
-            project.demo && project.demo !== "#" ? `Live demo: ${project.demo}` : "",
+            project.confidential
+                ? "This is confidential professional work — source code and a live demo aren't shareable, but the responsibilities and technologies above are accurate."
+                : "",
+            !project.confidential && project.github ? `GitHub: ${project.github}` : "",
+            !project.confidential && project.demo && project.demo !== "#" ? `Live demo: ${project.demo}` : "",
             `Project page: https://henheang.site/projects/${project.slug}`,
         ]
             .filter((line) => line !== "")

@@ -2,9 +2,11 @@ import "server-only"
 
 import { renderSections, type KnowledgeSection } from "@/data/knowledge"
 import { getLiveKnowledgeBase } from "./live-knowledge"
+import { expandWithAliases } from "./aliases"
+import type { PageContext } from "./page-context"
 
 /**
- * Lightweight keyword retrieval over the knowledge base.
+ * Hybrid keyword retrieval over the knowledge base.
  *
  * The contract is intentionally the same as an embeddings retriever would
  * have — `retrieve(query, sections) → KnowledgeSection[]` — so this module
@@ -23,11 +25,25 @@ const MAX_SECTIONS = 6
 /** Sections scoring below this fraction of the top score are dropped. */
 const RELATIVE_SCORE_CUTOFF = 0.25
 
+/**
+ * Unicode-aware tokenizer. Keeps any Unicode letter, mark, or number together
+ * (`\p{L}`/`\p{N}` cover Latin, Hangul, and Khmer script alike, so Korean and
+ * Khmer questions don't collapse to zero tokens the way an ASCII-only split
+ * would; `\p{M}` is essential for Khmer specifically — its dependent vowels
+ * and the COENG subscript signs are combining *marks*, not letters, so
+ * without it a Khmer word would fracture at every diacritic), plus `+ # .`
+ * so tech terms like C++, C#, Next.js, and Node.js survive as single tokens
+ * instead of being cut apart.
+ */
 const tokenize = (text: string): string[] =>
-    text
-        .toLowerCase()
-        .split(/[^a-z0-9+.#]+/)
-        .filter((token) => token.length > 1)
+    expandWithAliases(
+        text
+            .normalize("NFC")
+            .toLowerCase()
+            .split(/[^\p{L}\p{M}\p{N}+#.]+/u)
+            .map((token) => token.replace(/^\.+|\.+$/g, ""))
+            .filter((token) => token.length > 1),
+    )
 
 function scoreSection(section: KnowledgeSection, queryTokens: string[]): number {
     let score = 0
@@ -79,13 +95,46 @@ export const keywordRetriever: Retriever = {
     },
 }
 
+/** Coarse retrieval hints derived from the page the visitor is asking from. Never treated as fact — only nudges which sections get pulled in. */
+const PAGE_CONTEXT_HINTS: Record<PageContext, string> = {
+    home: "profile positioning overview",
+    "projects-index": "projects catalog",
+    "project-detail": "projects",
+    resume: "resume cv experience skills",
+    articles: "articles engineering lab",
+    other: "",
+}
+
+export interface BuildContextOptions {
+    /** Coarse page-context hint — a retrieval nudge only, never trusted as fact. */
+    page?: PageContext
+    /** When `page` is "project-detail", pins that project's section into the result regardless of score. */
+    projectSlug?: string
+}
+
 /**
- * Builds the focused context block for a chat turn. Uses the latest user
- * message plus the previous one so short follow-ups ("tell me more") keep
- * the topic's sections in scope.
+ * Builds the focused context block for a chat turn.
+ *
+ * The query weights the latest user message most heavily, includes the prior
+ * turn so short follow-ups ("tell me more") keep the topic in scope, and
+ * folds in a page-context hint — without ever sending unbounded history to
+ * retrieval.
  */
-export async function buildContext(userMessages: string[]): Promise<string> {
+export async function buildContext(userMessages: string[], options: BuildContextOptions = {}): Promise<string> {
     const sections = await getLiveKnowledgeBase()
-    const query = userMessages.slice(-2).join("\n")
-    return renderSections(keywordRetriever.retrieve(query, sections))
+    const [latest, previous] = [...userMessages].reverse()
+    const query = [latest, latest, previous, options.page ? PAGE_CONTEXT_HINTS[options.page] : ""]
+        .filter(Boolean)
+        .join("\n")
+
+    const retrieved = keywordRetriever.retrieve(query, sections)
+
+    if (options.page === "project-detail" && options.projectSlug) {
+        const pinned = sections.find((s) => s.id === `project-${options.projectSlug}`)
+        if (pinned && !retrieved.some((s) => s.id === pinned.id)) {
+            return renderSections([...retrieved, pinned])
+        }
+    }
+
+    return renderSections(retrieved)
 }

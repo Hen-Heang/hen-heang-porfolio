@@ -5,49 +5,39 @@ import type { CVData } from "@/data/cv-data"
 export function CVExperience({ cv }: { cv: CVData }) {
   return (
     <CVSection title="Professional Experience" icon={Briefcase}>
-      <div className="relative border-l-2 border-[#1a365d]/10 ml-2.5 pl-6 space-y-10 print:space-y-6">
-        {cv.experience.map((job, i) => (
-          <div key={i} className="relative">
-            {/* Timeline Dot */}
-            <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-white bg-[#1a365d] shadow-sm" />
+      <div className="relative border-l border-slate-200 ml-1.5 pl-6 space-y-8 print:space-y-6">
+        {cv.experience.map((job) => (
+          <div key={`${job.company}-${job.startDate}`} className="relative print:break-inside-avoid">
+            {/* Timeline dot */}
+            <div className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full border-2 border-white bg-blue-600 print:hidden" />
 
-            {/* Company + Dates */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1 mb-1">
-              <h3 className="font-extrabold text-[#1a365d] text-base tracking-tight">
-                {job.company}
-              </h3>
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-0.5 rounded border border-gray-100 whitespace-nowrap">
-                {job.startDate} — {job.current ? <span className="text-[#3182ce]">Present</span> : job.endDate}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1 mb-0.5">
+              <h3 className="font-bold text-slate-900 text-base">{job.company}</h3>
+              <span className="text-xs font-medium text-slate-500 whitespace-nowrap">
+                {job.startDate} – {job.current ? "Present" : job.endDate}
               </span>
             </div>
 
-            {/* Title + Location */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3">
-              <span className="text-sm font-semibold text-gray-700 italic">
-                {job.title}
-              </span>
-              <span className="text-xs text-gray-400 font-medium">
-                • {job.location}
-              </span>
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-3">
+              <span className="text-sm font-semibold text-slate-700">{job.title}</span>
+              <span className="text-xs text-slate-500">· {job.location}</span>
             </div>
 
-            {/* Bullet points */}
-            <ul className="space-y-2 mb-4">
-              {job.bullets.map((bullet, j) => (
-                <li key={j} className="flex gap-3 text-[13px] text-gray-600 leading-relaxed group">
-                  <span className="mt-1.5 h-1 w-1.5 flex-shrink-0 rounded-full bg-[#3182ce]/40 group-hover:bg-[#3182ce] transition-colors" />
+            <ul className="space-y-1.5 mb-3">
+              {job.bullets.map((bullet) => (
+                <li key={bullet} className="flex gap-2.5 text-[13.5px] text-slate-600 leading-relaxed">
+                  <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-slate-300 print:hidden" />
                   {bullet}
                 </li>
               ))}
             </ul>
 
-            {/* Tech stack tags */}
-            {job.stack && (
+            {job.stack && job.stack.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 {job.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2 py-0.5 text-[10px] font-bold rounded bg-[#1a365d]/5 text-[#1a365d] border border-[#1a365d]/10 uppercase tracking-tighter"
+                    className="px-2 py-0.5 text-[11px] font-medium rounded bg-slate-100 text-slate-600 border border-slate-200"
                   >
                     {tech}
                   </span>

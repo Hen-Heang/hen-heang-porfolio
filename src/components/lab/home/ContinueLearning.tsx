@@ -1,0 +1,129 @@
+"use client"
+
+import Link from "next/link"
+import { ArrowRight, Map, PlayCircle } from "lucide-react"
+import type { BackendItemSummary } from "@/src/lib/types/backend-engineering"
+import type { RoadmapTopic } from "@/src/lib/types/devops-lab"
+import { useBackendProgress } from "@/src/components/lab/backend/BackendProgress"
+import { useDevOpsProgress } from "@/src/components/lab/devops/DevOpsProgress"
+import { useLabLearningState } from "@/src/lib/lab/learning-state"
+import { computeContinueLearning, type ContinueLearningItem } from "@/src/lib/lab/continue-learning"
+
+const backendToItem = (item: BackendItemSummary): ContinueLearningItem => ({
+    id: item.id,
+    title: item.title,
+    href: `/lab/backend/${item.slug}`,
+    metaLabel: `Backend Engineering · Level ${item.level}`,
+    estimatedMinutes: item.estimatedMinutes,
+})
+
+const devopsToItem = (topic: RoadmapTopic): ContinueLearningItem => ({
+    id: topic.slug,
+    title: topic.title,
+    href: `/lab/devops/topics/${topic.slug}`,
+    metaLabel: "DevOps Basics",
+})
+
+/** The homepage's primary next-action card — computed from real local progress, never fabricated streaks/metrics. */
+export function ContinueLearning({ backendItems, devopsTopics }: { backendItems: BackendItemSummary[]; devopsTopics: RoadmapTopic[] }) {
+    const backendProgress = useBackendProgress()
+    const devopsProgress = useDevOpsProgress()
+    const state = useLabLearningState()
+
+    const publishedBackend = backendItems.filter((item) => item.status === "published")
+    const availableDevOps = devopsTopics.filter((topic) => topic.hasCard)
+
+    const backendDone = publishedBackend.filter((item) => backendProgress.has(item.id)).length
+    const devopsDone = availableDevOps.filter((topic) => devopsProgress.has(topic.slug)).length
+
+    const nextBackendRaw = publishedBackend.find((item) => !backendProgress.has(item.id))
+    const nextDevOpsRaw = availableDevOps.find((topic) => !devopsProgress.has(topic.slug))
+
+    const lastVisitedBackend = state.lastVisitedPath === "backend" ? publishedBackend.find((item) => item.id === state.lastVisitedItemId) : undefined
+    const lastVisitedDevOps = state.lastVisitedPath === "devops" ? availableDevOps.find((topic) => topic.slug === state.lastVisitedItemId) : undefined
+    const lastVisitedItem = lastVisitedBackend ? backendToItem(lastVisitedBackend) : lastVisitedDevOps ? devopsToItem(lastVisitedDevOps) : undefined
+    const lastVisitedCompleted = lastVisitedBackend
+        ? backendProgress.has(lastVisitedBackend.id)
+        : lastVisitedDevOps
+            ? devopsProgress.has(lastVisitedDevOps.slug)
+            : false
+
+    const result = computeContinueLearning({
+        nextBackend: nextBackendRaw ? backendToItem(nextBackendRaw) : undefined,
+        nextDevOps: nextDevOpsRaw ? devopsToItem(nextDevOpsRaw) : undefined,
+        backendDone,
+        backendTotal: publishedBackend.length,
+        devopsDone,
+        devopsTotal: availableDevOps.length,
+        lastVisitedItemId: state.lastVisitedItemId,
+        lastVisitedPath: state.lastVisitedPath,
+        lastVisitedItem,
+        lastVisitedCompleted,
+        selectedPath: state.selectedPath,
+    })
+
+    if (result.mode === "start-here") {
+        return (
+            <section className="mb-10 rounded-3xl border border-border bg-surface p-6 md:p-7" aria-labelledby="continue-learning-heading">
+                <p className="font-mono text-sm font-semibold uppercase tracking-[0.18em] text-brand">Start here</p>
+                <h2 id="continue-learning-heading" className="mt-2 text-2xl font-bold text-fg">Backend Engineering Foundations</h2>
+                <p className="mt-2 max-w-xl text-base leading-6 text-fg-secondary">
+                    A structured path through Java, Spring Boot, databases, APIs, testing, and production systems.
+                </p>
+                <Link href="/lab/backend/roadmap" className="group mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
+                    Start Backend Path <ArrowRight size={14} aria-hidden="true" className="transition-transform group-hover:translate-x-1" />
+                </Link>
+            </section>
+        )
+    }
+
+    if (result.mode === "all-caught-up") {
+        return (
+            <section className="mb-10 rounded-3xl border border-border bg-surface p-6 md:p-7" aria-labelledby="continue-learning-heading">
+                <p className="font-mono text-sm font-semibold uppercase tracking-[0.18em] text-success">All caught up</p>
+                <h2 id="continue-learning-heading" className="mt-2 text-2xl font-bold text-fg">You&apos;ve completed everything available right now</h2>
+                <p className="mt-2 max-w-xl text-base leading-6 text-fg-secondary">Review a roadmap to reinforce what you&apos;ve learned, or explore the full library for something new.</p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                    <Link href="/lab/backend/roadmap" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
+                        <Map size={15} aria-hidden="true" /> View roadmap
+                    </Link>
+                    <Link href="/lab/library" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg">
+                        Browse the library
+                    </Link>
+                </div>
+            </section>
+        )
+    }
+
+    const { item, completed, total, roadmapHref } = result
+    const percent = total > 0 ? Math.round((completed / total) * 100) : 0
+
+    return (
+        <section className="mb-10 rounded-3xl border border-border bg-surface p-6 md:p-7" aria-labelledby="continue-learning-heading">
+            <p className="font-mono text-sm font-semibold uppercase tracking-[0.18em] text-brand">Continue learning</p>
+            <h2 id="continue-learning-heading" className="mt-2 text-2xl font-bold text-fg">{item.title}</h2>
+            <p className="mt-1.5 text-base text-fg-muted">{item.metaLabel}{item.estimatedMinutes ? ` · ${item.estimatedMinutes} min` : ""}</p>
+
+            {total > 0 && (
+                <div className="mt-4 max-w-sm">
+                    <div className="mb-1.5 flex items-center justify-between font-mono text-[11px] text-fg-muted">
+                        <span>{completed} of {total} lessons completed</span>
+                        <span>{percent}%</span>
+                    </div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-surface-elevated">
+                        <div className="h-full rounded-full bg-brand transition-[width]" style={{ width: `${percent}%` }} />
+                    </div>
+                </div>
+            )}
+
+            <div className="mt-5 flex flex-wrap gap-3">
+                <Link href={item.href} className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
+                    <PlayCircle size={16} aria-hidden="true" /> Continue lesson <ArrowRight size={14} aria-hidden="true" className="transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link href={roadmapHref} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg">
+                    <Map size={15} aria-hidden="true" /> View roadmap
+                </Link>
+            </div>
+        </section>
+    )
+}

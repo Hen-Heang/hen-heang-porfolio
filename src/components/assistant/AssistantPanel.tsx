@@ -3,12 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport } from "ai"
-import { RotateCcw, Send, Sparkles, Square, X } from "lucide-react"
+import { RefreshCw, RotateCcw, Send, Sparkles, Square, X } from "lucide-react"
 
 import { MessageBubble } from "./MessageBubble"
 import { StarterChips } from "./StarterChips"
 import { TypingIndicator } from "./TypingIndicator"
 import { clearAssistantHistory, loadAssistantHistory, saveAssistantHistory } from "./history"
+import type { PageContext } from "@/src/lib/ai/page-context"
+import { profileData } from "@/data/profile"
 
 const MAX_INPUT_CHARS = 1_000
 /** How close to the bottom (px) the user must be for auto-scroll to engage. */
@@ -26,8 +28,22 @@ function friendlyError(error: Error | undefined): string {
     return "Something went wrong. Please try again in a moment."
 }
 
+/** Privacy-safe "was this helpful?" signal — vote and page only, never the question/answer text. Best-effort; failures are silently ignored. */
+function sendFeedback(vote: "up" | "down", page: PageContext): void {
+    void fetch("/api/assistant-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ vote, page }),
+        keepalive: true,
+    }).catch(() => {})
+}
+
 interface AssistantPanelProps {
     onClose: () => void
+    /** Coarse page-context hint (home/projects-index/project-detail/resume/articles/other) — a retrieval nudge, never treated as fact. */
+    page?: PageContext
+    /** Project slug when `page` is "project-detail". */
+    projectSlug?: string
 }
 
 /**
@@ -35,12 +51,23 @@ interface AssistantPanelProps {
  * AssistantWidget — dialog semantics (focus trap, Escape, focus
  * restoration) come from Radix; this component owns only the chat state.
  */
-export default function AssistantPanel({ onClose }: AssistantPanelProps) {
+export default function AssistantPanel({ onClose, page = "other", projectSlug }: AssistantPanelProps) {
     // The panel only mounts after a click, so localStorage is available.
     const [initialMessages] = useState(loadAssistantHistory)
 
-    const { messages, sendMessage, status, stop, error, clearError, setMessages } = useChat({
-        transport: new DefaultChatTransport({ api: "/api/chat" }),
+    const { messages, sendMessage, regenerate, status, stop, error, clearError, setMessages } = useChat({
+        transport: new DefaultChatTransport({
+            api: "/api/chat",
+            prepareSendMessagesRequest: ({ messages: reqMessages, trigger }) => ({
+                body: {
+                    messages: reqMessages,
+                    page,
+                    projectSlug,
+                    // Regenerating after a failed/unsatisfying answer retries on the cost-sensitive fallback model.
+                    preferFallback: trigger === "regenerate-message",
+                },
+            }),
+        }),
         messages: initialMessages,
     })
 
@@ -94,6 +121,12 @@ export default function AssistantPanel({ onClose }: AssistantPanelProps) {
         [isBusy, clearError, sendMessage],
     )
 
+    const retry = useCallback(() => {
+        clearError()
+        stickToBottom.current = true
+        void regenerate()
+    }, [clearError, regenerate])
+
     const clearConversation = () => {
         stop()
         clearError()
@@ -145,11 +178,27 @@ export default function AssistantPanel({ onClose }: AssistantPanelProps) {
             >
                 {messages.length === 0 && (
                     <div className="space-y-4">
-                        <div className="rounded-2xl rounded-bl-md border border-border bg-background/60 px-4 py-3 text-sm leading-relaxed text-fg-secondary">
-                            Hi! I&apos;m Heang&apos;s AI assistant. Ask me about his experience, projects, tech
-                            stack, or how to get in touch. 👋
+                        <div className="space-y-3 rounded-2xl rounded-bl-md border border-border bg-background/60 px-4 py-3 text-sm leading-relaxed text-fg-secondary">
+                            <p>
+                                Ask about Heang&apos;s experience, backend projects, enterprise work, AI-assisted
+                                development, or availability.
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                <a
+                                    href="/resume"
+                                    className="inline-flex items-center rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs font-medium text-fg-secondary transition-colors hover:border-brand/40 hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                                >
+                                    View resume
+                                </a>
+                                <a
+                                    href={`mailto:${profileData.email}`}
+                                    className="inline-flex items-center rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs font-medium text-fg-secondary transition-colors hover:border-brand/40 hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                                >
+                                    Contact Heang
+                                </a>
+                            </div>
                         </div>
-                        <StarterChips onSelect={submit} disabled={isBusy} />
+                        <StarterChips onSelect={submit} disabled={isBusy} page={page} />
                     </div>
                 )}
 
@@ -158,14 +207,27 @@ export default function AssistantPanel({ onClose }: AssistantPanelProps) {
                         key={message.id}
                         message={message}
                         isStreaming={status === "streaming" && index === messages.length - 1 && message.role === "assistant"}
+                        onFeedback={
+                            message.role === "assistant" && index === messages.length - 1
+                                ? (vote) => sendFeedback(vote, page)
+                                : undefined
+                        }
                     />
                 ))}
 
                 {showTyping && <TypingIndicator />}
 
                 {errorText && (
-                    <div role="alert" className="rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400">
-                        {errorText}
+                    <div role="alert" className="space-y-2 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400">
+                        <p>{errorText}</p>
+                        <button
+                            type="button"
+                            onClick={retry}
+                            className="inline-flex items-center gap-1.5 rounded-full border border-red-500/30 bg-background/60 px-3 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:text-red-400"
+                        >
+                            <RefreshCw className="h-3 w-3" aria-hidden />
+                            Retry
+                        </button>
                     </div>
                 )}
             </div>
@@ -219,7 +281,7 @@ export default function AssistantPanel({ onClose }: AssistantPanelProps) {
                     )}
                 </div>
                 <p className="mt-1.5 flex items-center justify-between px-1 text-[10px] text-fg-muted">
-                    <span>AI-generated from portfolio data — may be imperfect.</span>
+                    <span>Answers are generated from Hen Heang&apos;s public portfolio data — may be imperfect.</span>
                     {input.length > MAX_INPUT_CHARS * 0.8 && (
                         <span aria-live="polite">{MAX_INPUT_CHARS - input.length} left</span>
                     )}

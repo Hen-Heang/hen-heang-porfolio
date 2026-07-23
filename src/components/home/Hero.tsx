@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import { ArrowRight, Github } from "lucide-react"
+import { ArrowRight, ArrowUpRight, FileText, Github } from "lucide-react"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
@@ -8,19 +8,29 @@ import { TechnicalPanel, type TechnicalTab } from "@/src/components/system/Techn
 import type { Project } from "@/src/lib/types"
 import type { ProfileContentParsed } from "@/src/lib/schemas/content"
 
-const backendSignature = [
-    { label: "Runtime", value: "Java · Spring Boot" },
-    { label: "Data layer", value: "MyBatis · PostgreSQL" },
-    { label: "System focus", value: "APIs · auth · transactions" },
-] as const
-
 /**
- * Builds the hero's technical views from real project data. The API response
- * body and pipeline stages are labeled illustrative in their captions.
+ * Builds the hero's technical views from real project data, architecture
+ * first (the default, visible-on-mobile tab) per the recommended priority:
+ * architecture, then API request, then database. The API response body and
+ * pipeline stages are labeled illustrative in their captions. Pipeline is
+ * extra desktop-only depth — mobile only ever shows the first tab.
  */
 function buildTabs(projects: Project[]): TechnicalTab[] {
     const bySlug = (slug: string) => projects.find((p) => p.slug === slug)
     const tabs: TechnicalTab[] = []
+
+    const hphsar = bySlug("h-phsar")
+    if (hphsar?.architecture?.length) {
+        tabs.push({
+            id: "architecture",
+            label: "architecture",
+            data: {
+                kind: "architecture",
+                layers: hphsar.architecture,
+                caption: "H-Phsar marketplace API — request flow through the real production layers.",
+            },
+        })
+    }
 
     const authhub = bySlug("authhub")
     const authEndpoint = authhub?.apiEndpoints?.[0]
@@ -42,19 +52,6 @@ function buildTabs(projects: Project[]): TechnicalTab[] {
                     "}",
                 ],
                 caption: `Real endpoint from ${authhub.title.split("—")[0].trim()} (JWT with refresh + revocation). Response body illustrative.`,
-            },
-        })
-    }
-
-    const hphsar = bySlug("h-phsar")
-    if (hphsar?.architecture?.length) {
-        tabs.push({
-            id: "architecture",
-            label: "architecture",
-            data: {
-                kind: "architecture",
-                layers: hphsar.architecture,
-                caption: "H-Phsar marketplace API — request flow through the real production layers.",
             },
         })
     }
@@ -96,58 +93,64 @@ export function Hero({ profile, projects }: { profile: ProfileContentParsed; pro
     return (
         <section className="pb-section pt-16 md:pt-24">
             <Container>
-                <Eyebrow className="mb-6">
-                    Backend Developer · Java &amp; Spring Boot · {profile.location}
-                </Eyebrow>
-                <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-fg sm:text-5xl lg:text-7xl">
-                    I build the systems <span className="text-brand">behind the screen.</span>
-                </h1>
-
-                <div className="mt-12 grid items-start gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-16">
+                <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="flex max-w-xl flex-col items-start">
-                        <p className="text-lg leading-relaxed text-fg-secondary">
+                        <Eyebrow className="mb-5">
+                            Backend Developer · {profile.location}
+                        </Eyebrow>
+
+                        <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-fg sm:text-5xl">
+                            {profile.name}
+                        </h1>
+
+                        <p className="mt-4 text-balance text-xl font-medium leading-snug text-fg-secondary sm:text-2xl">
+                            I build dependable backend systems with{" "}
+                            <span className="text-brand">Java and Spring Boot.</span>
+                        </p>
+
+                        <p className="mt-6 text-base leading-relaxed text-fg-secondary">
                             {profile.bio}
                         </p>
 
                         <div className="mt-8 flex flex-wrap items-center gap-3">
                             <Link
-                                href="/projects"
+                                href="#work"
                                 className="inline-flex h-11 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover"
                             >
-                                Inspect backend work
+                                View Selected Work
                                 <ArrowRight size={15} aria-hidden />
+                            </Link>
+                            <Link
+                                href="/resume"
+                                className="inline-flex h-11 items-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
+                            >
+                                <FileText size={15} aria-hidden />
+                                Download Resume
                             </Link>
                             <a
                                 href={profile.socialLinks.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex h-11 items-center rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
+                                className="inline-flex h-11 items-center gap-1.5 px-2 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                                aria-label="View Hen Heang on GitHub (opens in a new tab)"
                             >
                                 <Github size={16} aria-hidden />
-                                View GitHub
+                                GitHub
+                                <ArrowUpRight size={13} aria-hidden />
                             </a>
                         </div>
 
-                        <dl className="mt-10 grid w-full gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
-                            {backendSignature.map((item) => (
-                                <div key={item.label} className="bg-surface px-4 py-4">
-                                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-fg-muted">
-                                        {item.label}
-                                    </dt>
-                                    <dd className="mt-1.5 text-sm font-medium leading-snug text-fg">
-                                        {item.value}
-                                    </dd>
-                                </div>
-                            ))}
-                        </dl>
+                        <p className="mt-10 font-mono text-xs text-fg-muted">
+                            {profile.yearsExperience} years experience · Java / Spring · Cambodia → South Korea
+                        </p>
 
-                        <div className="mt-10 flex flex-wrap gap-2.5">
-                            <StatusBadge status="live" pulse>
-                                {profile.available ? "Open to backend roles" : "Currently engaged"}
-                            </StatusBadge>
-                            <StatusBadge status="archived">Based in {profile.location.split(",")[0]}</StatusBadge>
-                            <StatusBadge status="archived">{profile.yearsExperience} years in enterprise teams</StatusBadge>
-                        </div>
+                        {profile.available && (
+                            <div className="mt-3">
+                                <StatusBadge status="live" pulse>
+                                    Open to backend roles
+                                </StatusBadge>
+                            </div>
+                        )}
                     </div>
 
                     <TechnicalPanel tabs={tabs} />

@@ -9,7 +9,7 @@ export const profileData = {
     email: "henheang15@gmail.com",
     available: true,
     yearsExperience: "2+",
-    bio: "Backend developer in Seoul turning business rules into dependable Java services. I design REST APIs, transaction flows, and data models with Spring Boot, MyBatis, and PostgreSQL/Oracle — then carry the contract through to Next.js clients when a product needs it.",
+    bio: "Backend developer in Seoul turning business rules into dependable Java services. I design REST APIs, transaction flows, and data models with Spring Boot, MyBatis, and PostgreSQL/Oracle — then carry the contract through to Next.js clients when a product needs it, with practical experience integrating AI features and using AI-assisted development workflows.",
     description:
         "Backend Developer (Java & Spring Boot) based in Seoul with 2+ years of experience in the Korean enterprise sector. I build backend systems and REST APIs with Java, Spring Boot, and MyBatis on PostgreSQL/Oracle, and extend to frontends with Next.js and TypeScript when needed.",
     profileImage: "/image/heang_new.jpeg",
@@ -22,6 +22,8 @@ export const profileData = {
     },
     portfolioUrl: "https://henheang.site",
     cvUrl: "https://henheang.site/cv",
+    // TODO: this number doesn't match a valid Korean phone format (mobile: 010-XXXX-XXXX).
+    // Confirm the correct number before publishing — not invented here, left as-is.
     phone: "+82 86-7985-72",
     ides: ["IntelliJ IDEA", "WebStorm"],
     linkedinCoreSkills: [
@@ -36,10 +38,11 @@ export const profileData = {
         "REST APIs · Spring Security",
         "Next.js · TypeScript",
     ],
+    // Single source of truth for language levels — data/cv-data.ts reuses this list.
     languages: [
         { name: "Khmer", level: "Native" },
-        { name: "English", level: "Professional" },
-        { name: "Korean", level: "Intermediate" },
+        { name: "English", level: "Professional working proficiency" },
+        { name: "Korean", level: "Elementary conversational" },
     ],
     heroTechStack: [
         { name: "Java",       color: "#f89820", icon: "☕" },

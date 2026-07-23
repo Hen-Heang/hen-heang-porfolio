@@ -1,6 +1,5 @@
 import React from "react"
 import { ExternalLink, Github } from "lucide-react"
-import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { TextLink } from "@/src/components/system/TextLink"
 import { ProjectPreviewPanel } from "@/src/components/system/ProjectPreviewPanel"
 import { getProjectPreview } from "@/src/lib/utils/project-preview"
@@ -8,41 +7,37 @@ import { cn } from "@/src/lib/utils/utils"
 import type { Project } from "@/src/lib/types"
 
 interface ProjectFeatureProps {
-    index: number
     project: Project
     reverse?: boolean
 }
 
 /**
- * Large editorial project panel for the homepage's Selected Work section:
- * numbered, problem → solution narrative, real stack, and a technical
- * preview. Falls back through architecture/api/database/workflow/image data
- * (see `getProjectPreview`) and drops to a single full-width column when a
- * project has none of it, rather than leaving an empty second column.
+ * Large editorial project panel for the homepage's Selected Work section and
+ * the /projects featured slots: category/ownership/status metadata, a
+ * problem → solution narrative, what I personally contributed, engineering
+ * focus, real stack, and a technical preview. Falls back through
+ * architecture/api/database/workflow/image data (see `getProjectPreview`)
+ * and drops to a single full-width column when a project has none of it,
+ * rather than leaving an empty second column.
  */
-export function ProjectFeature({ index, project, reverse = false }: ProjectFeatureProps) {
+export function ProjectFeature({ project, reverse = false }: ProjectFeatureProps) {
     const isLive = Boolean(project.demo && project.demo !== "#")
     const shortTitle = project.title.split("—")[0].trim()
     const preview = getProjectPreview(project)
     const hasPreview = preview.kind !== "none"
+    const contributions = project.solutions?.slice(0, 3) ?? []
+    const metadata = [project.category, project.ownership, isLive ? "Live" : "Source available"].filter(Boolean)
 
     return (
         <article className={`group grid items-start gap-10 ${hasPreview ? "lg:grid-cols-2 lg:gap-16" : ""}`}>
             <div className={cn(reverse && hasPreview ? "lg:order-2" : undefined, !hasPreview && "max-w-3xl")}>
-                <div className="flex items-center gap-4">
-                    <span className="font-mono text-sm text-fg-muted" aria-hidden>
-                        {String(index).padStart(2, "0")}
-                    </span>
-                    <div className="flex flex-wrap items-center gap-2">
-                        {isLive ? (
-                            <StatusBadge status="live">Live</StatusBadge>
-                        ) : (
-                            <StatusBadge status="archived">Source available</StatusBadge>
-                        )}
-                    </div>
-                </div>
+                {metadata.length > 0 && (
+                    <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
+                        {metadata.join(" / ")}
+                    </p>
+                )}
 
-                <h3 className="mt-5 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
                     {project.title}
                 </h3>
 
@@ -57,6 +52,27 @@ export function ProjectFeature({ index, project, reverse = false }: ProjectFeatu
                     <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">Solution</p>
                     <p className="mt-2 leading-relaxed text-fg-secondary">{project.description}</p>
                 </div>
+
+                {contributions.length > 0 && (
+                    <div className="mt-5">
+                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">My contribution</p>
+                        <ul className="mt-2 space-y-1.5">
+                            {contributions.map((item) => (
+                                <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-fg-secondary">
+                                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-fg-muted" aria-hidden />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                {project.engineeringFocus && project.engineeringFocus.length > 0 && (
+                    <div className="mt-5">
+                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">Engineering focus</p>
+                        <p className="mt-2 text-sm text-fg-secondary">{project.engineeringFocus.slice(0, 4).join(" · ")}</p>
+                    </div>
+                )}
 
                 {(project.role || project.duration) && (
                     <p className="mt-5 text-sm text-fg-muted">
@@ -74,6 +90,12 @@ export function ProjectFeature({ index, project, reverse = false }: ProjectFeatu
                         </li>
                     ))}
                 </ul>
+
+                {project.confidential && (
+                    <p className="mt-5 text-sm italic text-fg-muted">
+                        Project details and source code are private due to company confidentiality.
+                    </p>
+                )}
 
                 <div className="mt-7 flex flex-wrap items-center gap-5">
                     <TextLink href={`/projects/${project.slug}`}>

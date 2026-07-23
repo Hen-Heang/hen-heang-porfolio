@@ -14,7 +14,7 @@ export const experiences: ExperienceItem[] = [
             "Improving performance and stability of enterprise web applications",
             "Working in cross-functional team using Korean enterprise development patterns"
         ],
-        stack: ["Java", "MyBatis", "SQL", "JavaScript", "jQuery", "HTML/CSS", "REST APIs"]
+        stack: ["Java", "MyBatis", "Oracle", "JavaScript", "jQuery", "SQL", "HTML/CSS", "REST APIs"]
     },
     {
         role: "Software Engineer",
@@ -29,6 +29,6 @@ export const experiences: ExperienceItem[] = [
             "Developed REST APIs with Spring Boot and MyBatis",
             "Collaborated with Korean development teams on enterprise projects"
         ],
-        stack: ["Java 8+", "Spring Boot", "Spring Security", "PostgreSQL", "MyBatis", "Next.js", "TypeScript"]
+        stack: ["Java 8+", "Spring Boot", "MyBatis", "PostgreSQL", "Spring Security", "Next.js", "TypeScript"]
     }
 ]

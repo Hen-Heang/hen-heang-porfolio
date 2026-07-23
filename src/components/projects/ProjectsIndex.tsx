@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import Link from "next/link"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
@@ -74,16 +75,23 @@ export function ProjectsIndex({ projects, filter }: { projects: Project[]; filte
                     <ProjectFilterBar active={filter} counts={counts} />
                 </div>
 
+                <p className="mt-6 font-mono text-xs uppercase tracking-[0.15em] text-fg-muted" role="status">
+                    {filtered.length} {filtered.length === 1 ? "project" : "projects"}
+                </p>
+
                 {filtered.length === 0 ? (
-                    <p className="mt-16 text-center text-fg-muted">
-                        No projects in this category yet.
-                    </p>
+                    <div className="mt-16 flex flex-col items-center gap-4 text-center" role="status">
+                        <p className="text-fg-muted">No projects in this category yet.</p>
+                        <Link href="/projects" className="text-sm font-medium text-brand hover:text-brand-hover">
+                            View all projects
+                        </Link>
+                    </div>
                 ) : (
                     <>
                         {featured.length > 0 && (
-                            <section className="mt-16 flex flex-col gap-16 md:gap-20">
+                            <section className="mt-10 flex flex-col gap-16 md:gap-20">
                                 {featured.map((project, i) => (
-                                    <ProjectFeature key={project.slug} index={i + 1} project={project} reverse={i % 2 === 1} />
+                                    <ProjectFeature key={project.slug} project={project} reverse={i % 2 === 1} />
                                 ))}
                             </section>
                         )}
@@ -97,16 +105,17 @@ export function ProjectsIndex({ projects, filter }: { projects: Project[]; filte
                                 )}
                                 <motion.div layout className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
                                     <AnimatePresence initial={false} mode="popLayout">
-                                        {remaining.map((project, i) => (
+                                        {remaining.map((project) => (
                                             <motion.div
                                                 layout
                                                 key={project.slug}
+                                                className="h-full"
                                                 initial={reduceMotion ? false : { y: 8 }}
                                                 animate={{ y: 0 }}
                                                 exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98 }}
                                                 transition={{ duration: 0.2 }}
                                             >
-                                                <ProjectCard project={project} index={i + 1} />
+                                                <ProjectCard project={project} />
                                             </motion.div>
                                         ))}
                                     </AnimatePresence>

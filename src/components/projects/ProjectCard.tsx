@@ -2,21 +2,21 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, ExternalLink, Github } from "lucide-react"
-import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { cn, interactiveCard } from "@/src/lib/utils/utils"
 import type { Project } from "@/src/lib/types"
 
 /**
- * Card for the projects index. Exactly one link covers the whole card
- * (case study); GitHub/live are separate, always-visible anchors placed
- * outside the stretched-link overlay so there is no nested-link conflict
- * and no hover-only affordance.
+ * Card for the projects index and the homepage's supporting-project slots.
+ * Exactly one link covers the whole card (case study); GitHub/live are
+ * separate, always-visible anchors placed outside the stretched-link overlay
+ * so there is no nested-link conflict and no hover-only affordance.
  */
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function ProjectCard({ project }: { project: Project }) {
     const isLive = Boolean(project.demo && project.demo !== "#")
+    const metadata = [project.category, isLive ? "Live" : "Source available"].filter(Boolean)
 
     return (
-        <div className={cn("group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface", interactiveCard)}>
+        <div className={cn("group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface", interactiveCard)}>
             <div
                 className={cn(
                     "relative aspect-[16/10] overflow-hidden border-b border-border",
@@ -36,14 +36,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             </div>
 
             <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs text-fg-muted">{String(index).padStart(2, "0")}</span>
-                    {isLive ? (
-                        <StatusBadge status="live">Live</StatusBadge>
-                    ) : (
-                        <StatusBadge status="archived">Source</StatusBadge>
-                    )}
-                </div>
+                {metadata.length > 0 && (
+                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg-muted">
+                        {metadata.join(" · ")}
+                    </p>
+                )}
 
                 <h3 className="mt-3 text-lg font-semibold tracking-tight text-fg">
                     <Link href={`/projects/${project.slug}`} className="static-link">
@@ -52,9 +49,19 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                     </Link>
                 </h3>
 
-                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-fg-secondary">
+                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-fg-secondary">
                     {project.description}
                 </p>
+
+                {project.role && (
+                    <p className="mt-3 text-xs text-fg-muted">Role: {project.role}</p>
+                )}
+
+                {project.engineeringFocus && project.engineeringFocus.length > 0 && (
+                    <p className="mt-2 text-xs text-fg-muted">
+                        {project.engineeringFocus.slice(0, 3).join(" · ")}
+                    </p>
+                )}
 
                 <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand transition-colors group-hover:text-brand-hover">
                     View case study
@@ -64,7 +71,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                 <div className="flex-1" />
 
                 <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`${project.title} technologies`}>
-                    {project.technologies.slice(0, 3).map((tech) => (
+                    {project.technologies.slice(0, 4).map((tech) => (
                         <li
                             key={tech}
                             className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-fg-secondary"
@@ -73,6 +80,12 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                         </li>
                     ))}
                 </ul>
+
+                {project.confidential && (
+                    <p className="relative z-10 mt-4 text-xs italic text-fg-muted">
+                        Source private — confidential professional work.
+                    </p>
+                )}
 
                 {project.github && (
                     <div className="relative z-10 mt-4 flex items-center gap-4 border-t border-border pt-4">

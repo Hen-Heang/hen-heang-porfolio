@@ -1,5 +1,16 @@
 import { profileData } from "./profile"
 
+// NOTE: `getSiteContent("dashboard")` (src/lib/db/portfolio.ts) is defined
+// and schema-validated (DashboardContentSchema) but has no caller anywhere
+// in app/ — this file's exports are not currently rendered on any route.
+// `deployedProjects`/`workProjects` duplicate data already canonical in
+// data/projects.ts and are not kept in sync with it (e.g. `screenshot` paths
+// below don't exist under public/). Left in place rather than deleted since
+// removing it also means removing DashboardContentSchema and the
+// getSiteContent("dashboard") plumbing — a bigger change than this pass's
+// homepage scope. Treat data/projects.ts as the source of truth for project
+// content; don't add new consumers of this file without reconciling it first.
+
 export const profile = {
     name: profileData.name,
     koreanName: profileData.koreanName,

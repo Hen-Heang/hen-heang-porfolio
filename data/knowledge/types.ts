@@ -12,9 +12,12 @@
 
 export type KnowledgeCategory =
     | "profile"
+    | "positioning"
     | "experience"
+    | "career"
     | "projects"
     | "skills"
+    | "ai-engineering"
     | "articles"
     | "contact"
     | "faq"
@@ -34,4 +37,12 @@ export interface KnowledgeSection {
     core?: boolean
     /** Markdown content — the only text the model may answer from */
     content: string
+    /** Human-readable label for a linked source, e.g. "H-Phsar case study" */
+    sourceLabel?: string
+    /** URL the assistant may surface alongside this section's content */
+    sourceUrl?: string
+    /** ISO date the underlying fact was last verified/updated, if known */
+    updatedAt?: string
+    /** Project slug this section belongs to, when applicable */
+    projectSlug?: string
 }

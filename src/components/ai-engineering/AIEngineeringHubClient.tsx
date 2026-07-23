@@ -107,8 +107,8 @@ export function AIEngineeringHubClient({
                 </p>
                 <p className="relative mx-auto mt-4 max-w-2xl text-xs md:text-sm leading-relaxed text-fg-muted">
                     AI accelerates development, but engineers remain responsible for architecture, quality, security,
-                    and business logic. Here&apos;s how I use Claude Code, ChatGPT, and Copilot as a collaborator —
-                    not a replacement — while building with Java, Spring Boot, MyBatis, and PostgreSQL.
+                    and business logic. Here&apos;s how I use Claude Code and Codex as a collaborator — not a
+                    replacement — while building with Java, Spring Boot, MyBatis, and PostgreSQL.
                 </p>
 
                 <div className="relative mt-8 flex justify-center gap-8">
@@ -171,6 +171,32 @@ export function AIEngineeringHubClient({
                     </div>
                 </Link>
             </motion.div>
+
+            {/* How I use AI — compact workflow, not a claim of expertise */}
+            <section className="mb-12 rounded-2xl border border-border bg-surface px-5 py-6 md:px-8 md:py-8">
+                <h2 className="text-lg font-bold text-fg">How I Use AI in Engineering</h2>
+                <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                    {[
+                        { step: "Understand", detail: "Analyze requirements and unfamiliar code." },
+                        { step: "Plan", detail: "Create implementation steps and identify risks." },
+                        { step: "Implement", detail: "Use AI assistance while maintaining existing architecture." },
+                        { step: "Verify", detail: "Run tests, inspect diffs, and manually validate behavior." },
+                        { step: "Document", detail: "Update technical notes, READMEs, and project guidance." },
+                    ].map((item, i) => (
+                        <div key={item.step}>
+                            <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
+                                {String(i + 1).padStart(2, "0")}
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-fg">{item.step}</p>
+                            <p className="mt-1 text-xs leading-relaxed text-fg-secondary">{item.detail}</p>
+                        </div>
+                    ))}
+                </div>
+                <p className="mt-6 border-t border-border pt-4 text-xs leading-relaxed text-fg-muted">
+                    AI assists the workflow; architecture decisions, verification, and final code quality remain my
+                    responsibility.
+                </p>
+            </section>
 
             {/* Categories */}
             <section className="mb-12">

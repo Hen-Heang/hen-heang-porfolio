@@ -7,19 +7,17 @@ interface CVSectionProps {
   className?: string
 }
 
-/** Reusable section wrapper with navy heading + bottom border divider. */
+/** Reusable section wrapper with heading + bottom border divider. */
 export function CVSection({ title, icon: Icon, children, className = "" }: CVSectionProps) {
   return (
     <section className={`mb-8 last:mb-0 print:mb-6 ${className}`}>
-      <div className="flex items-center gap-2 border-b-2 border-[#1a365d]/10 pb-1.5 mb-5 print:mb-4">
-        {Icon && <Icon size={16} className="text-[#1a365d] print:text-[#1a365d]" />}
-        <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-[#1a365d]">
+      <div className="flex items-center gap-2 border-b border-slate-200 pb-2 mb-5 print:mb-4">
+        {Icon && <Icon size={15} className="text-blue-600 print:hidden" aria-hidden />}
+        <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-slate-900">
           {title}
         </h2>
       </div>
-      <div className="px-1">
-        {children}
-      </div>
+      <div>{children}</div>
     </section>
   )
 }

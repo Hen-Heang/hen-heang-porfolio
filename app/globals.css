@@ -8,14 +8,14 @@
     margin: 12mm 14mm;
   }
 
-  /* Hide everything outside the CV document when printing */
+  /* Hide everything outside the printable document (CV or ATS resume) */
   body > * {
     display: none !important;
   }
 
-  /* Show only the CV content */
-  #cv-print-root,
-  #cv-print-root * {
+  /* Show only the page's print root ([data-print-root] on /cv and /resume) */
+  [data-print-root],
+  [data-print-root] * {
     display: revert !important;
   }
 }

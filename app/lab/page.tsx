@@ -1,15 +1,19 @@
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
 import { projects } from "@/data/projects"
-import { currentFocus } from "@/data/lab/overview"
 import { roadmap as devopsRoadmap } from "@/data/lab/devops/roadmap"
+import { labs as devopsLabs } from "@/data/lab/devops/labs"
 import { getEngineeringLabIndex } from "@/src/lib/db/engineering-lab"
 import { getBackendSummaries } from "@/src/lib/backend/catalog"
+import { LabNav } from "@/src/components/lab/ui/LabNav"
 import { LabHero } from "@/src/components/lab/home/LabHero"
 import { LabCategoryNav } from "@/src/components/lab/home/LabCategoryNav"
-import { LabFeaturedWork } from "@/src/components/lab/home/LabFeaturedWork"
+import { ApplyInProjects } from "@/src/components/lab/home/ApplyInProjects"
+import { HandsOnPractice } from "@/src/components/lab/home/HandsOnPractice"
 import { LabSearchClient } from "@/src/components/lab/home/LabSearchClient"
 import { LabLearningDashboard } from "@/src/components/lab/home/LabLearningDashboard"
+import { ContinueLearning } from "@/src/components/lab/home/ContinueLearning"
+import { ProgressSummary } from "@/src/components/lab/home/ProgressSummary"
 
 export const revalidate = 60
 
@@ -29,24 +33,30 @@ export const metadata: Metadata = {
 export default async function EngineeringLabPage() {
     const { items } = await getEngineeringLabIndex()
     const backendItems = getBackendSummaries()
+    const backendLabs = backendItems.filter((item) => item.type === "lab" && item.status === "published")
 
-    const featured = projects
+    const appliedProjects = projects
         .filter((p) => p.featured)
+        .slice(0, 2)
         .map((p) => ({
             slug: p.slug,
             title: p.title,
             description: p.description,
-            architecture: p.architecture ?? [],
+            conceptsDemonstrated: p.engineeringFocus ?? [],
         }))
 
     return (
         <div className="px-4 md:px-8 py-8 max-w-6xl mx-auto">
-            <LabHero currentFocus={currentFocus} />
+            <LabNav active="overview" />
+            <LabHero />
+            <ContinueLearning backendItems={backendItems} devopsTopics={devopsRoadmap} />
             <LabLearningDashboard backendItems={backendItems} devopsTopics={devopsRoadmap} />
             <LabSearchClient items={items}>
                 <LabCategoryNav />
-                <LabFeaturedWork featured={featured} />
             </LabSearchClient>
+            <HandsOnPractice devopsLabs={devopsLabs} backendLabs={backendLabs} />
+            <ApplyInProjects projects={appliedProjects} />
+            <ProgressSummary backendItems={backendItems} devopsTopics={devopsRoadmap} />
         </div>
     )
 }

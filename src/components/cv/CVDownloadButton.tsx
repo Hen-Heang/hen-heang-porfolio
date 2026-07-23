@@ -8,25 +8,18 @@ import { Download } from "lucide-react"
  * The print: Tailwind variants in each component control the PDF layout.
  */
 export function CVDownloadButton() {
-  const handleDownload = () => {
-    window.print()
-  }
-
   return (
     <button
-      onClick={handleDownload}
+      onClick={() => window.print()}
+      title="Opens the browser print dialog"
       className="
-        group flex items-center gap-2.5 px-6 py-3 rounded-full
-        bg-white text-[#1a365d] text-sm font-bold
-        shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100
-        hover:bg-[#1a365d] hover:text-white hover:shadow-xl hover:-translate-y-0.5
-        active:scale-95 transition-all duration-300 print:hidden
+        flex items-center gap-2 px-5 py-2.5 rounded-lg
+        bg-slate-900 text-white text-sm font-semibold
+        hover:bg-slate-800 active:scale-[0.98] transition-all
       "
     >
-      <div className="w-8 h-8 rounded-full bg-[#1a365d]/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-        <Download size={16} />
-      </div>
-      <span>Download PDF</span>
+      <Download size={15} aria-hidden />
+      Download Resume
     </button>
   )
 }

@@ -1,22 +1,80 @@
 /**
  * CV Data - Single Source of Truth
  * ================================
- * Edit ONLY this file to update your CV.
- * All CV components read from this file.
+ * Edit ONLY this file to update your CV. Both /cv (portfolio-style) and
+ * /resume (ATS-friendly) render from this same data through `getSiteContent("cv")`.
  *
  * Sections you can update:
  *  - personal    → name, title, contact info, links
  *  - summary     → professional summary paragraph
  *  - experience  → work history (newest first)
  *  - education   → degrees, certifications, training
- *  - skills      → skill categories with progress %
- *  - projects    → featured projects
- *  - languages   → spoken languages
+ *  - skills      → skill categories (text lists, no proficiency bars)
+ *  - projects    → featured projects (`featured: true` shows on /resume too)
+ *  - languages   → spoken languages (text level, no percentages)
  */
 
 import { profileData } from "./profile"
 
-export const cvData = {
+export type PersonalInfo = {
+  name: string
+  title: string
+  subtitle?: string
+  photo?: string
+  location: string
+  phone?: string
+  email: string
+  linkedin?: string
+  github?: string
+  portfolio?: string
+}
+
+export type ExperienceItem = {
+  company: string
+  title: string
+  location: string
+  startDate: string
+  endDate: string
+  current?: boolean
+  bullets: string[]
+  stack?: string[]
+}
+
+export type EducationItem = {
+  school: string
+  degree: string
+  startDate: string
+  endDate: string
+  description?: string
+}
+
+export type ProjectItem = {
+  name: string
+  /** Short label, e.g. "Backend API" — shown as a category tag. */
+  category?: string
+  description: string
+  /** 1-2 technical achievement bullets. */
+  bullets?: string[]
+  technologies: string[]
+  github?: string | null
+  live?: string | null
+  /** Internal case-study route, e.g. "/projects/h-phsar". Omit if none is publicly viewable. */
+  caseStudy?: string | null
+  /** Shown on /resume (top 3); all featured + non-featured projects may show on /cv. */
+  featured?: boolean
+}
+
+export type LanguageItem = {
+  name: string
+  level: string
+}
+
+export type SkillGroup = {
+  category: string
+  items: string[]
+}
+
+export const cvData: CVData = {
   personal: {
     name: profileData.fullName,
     title: "Backend Developer (Java & Spring Boot)",
@@ -28,10 +86,10 @@ export const cvData = {
     linkedin: profileData.socialLinks.linkedin,
     github: profileData.socialLinks.github,
     portfolio: profileData.portfolioUrl,
-  },
+  } satisfies PersonalInfo,
 
   summary:
-    "Backend Developer with 2+ years of experience designing and building REST APIs and enterprise applications with Java, Spring Boot, and MyBatis. Delivered a large-scale B2B billing platform integrated with Vietnamese banking systems, including PostgreSQL schema design, query optimisation, and Spring Security with JWT authentication. Currently develop backend services and SQL-driven business logic on Oracle for government-facing financial systems in a Korean enterprise environment. Comfortable extending work to the frontend with Next.js and TypeScript when a feature calls for it. Focused on clean architecture and maintainable code within cross-functional teams.",
+    "Backend Developer with 2+ years of experience building Java and Spring Boot applications in Cambodian and Korean enterprise environments. Experienced in REST APIs, MyBatis, Spring Security, PostgreSQL, Oracle, and SQL-driven business logic for financial and B2B platforms. Also experienced in integrating practical LLM-powered application features and using AI-assisted development workflows — Claude Code and Codex — for code analysis, implementation, review, testing, and documentation.",
 
   experience: [
     {
@@ -42,10 +100,10 @@ export const cvData = {
       endDate: "Present",
       current: true,
       bullets: [
-        "Develop backend services and SQL queries with Java, MyBatis, and Oracle database for government-facing financial systems",
-        "Implement supporting frontend pages with HTML/CSS and JavaScript (jQuery)",
-        "Maintain and improve stability of enterprise web applications in a Korean enterprise environment",
-        "Collaborate in cross-functional teams following Korean enterprise development patterns",
+        "Implement Java and MyBatis services and SQL queries against an Oracle database for government-facing financial systems.",
+        "Build supporting frontend pages with HTML, CSS, and JavaScript (jQuery) for internal enterprise tools.",
+        "Maintain and improve the stability of enterprise web applications in a Korean enterprise environment.",
+        "Collaborate with cross-functional teams following Korean enterprise development conventions.",
       ],
       stack: ["Java", "MyBatis", "Oracle", "JavaScript", "jQuery", "HTML/CSS"],
     },
@@ -57,15 +115,15 @@ export const cvData = {
       endDate: "October 2025",
       current: false,
       bullets: [
-        "Designed and developed REST APIs with Spring Boot and MyBatis for a large-scale B2B billing platform integrated with Vietnamese banking systems",
-        "Designed PostgreSQL schemas and optimised query performance for high-volume transactions",
-        "Implemented Spring Security with JWT authentication to secure enterprise-grade APIs",
-        "Integrated Zalo, SMS, and Telegram delivery channels for transactional notifications",
-        "Collaborated daily with Korean development teams on architecture design and code reviews",
+        "Designed and developed REST APIs with Spring Boot and MyBatis for a large-scale B2B billing platform integrated with Vietnamese banking systems.",
+        "Designed PostgreSQL schemas and optimized query performance for high-volume transactions.",
+        "Implemented Spring Security with JWT authentication to secure enterprise-grade APIs.",
+        "Integrated Zalo, SMS, and Telegram delivery channels for transactional notifications.",
+        "Collaborated daily with Korean development teams on architecture design and code reviews.",
       ],
       stack: ["Java 8+", "Spring Boot", "Spring Security", "PostgreSQL", "MyBatis", "Next.js", "TypeScript"],
     },
-  ],
+  ] satisfies ExperienceItem[],
 
   education: [
     {
@@ -89,10 +147,12 @@ export const cvData = {
       endDate: "July 2021",
       description: "Introduction to programming concepts and problem solving with C++.",
     },
-  ],
+  ] satisfies EducationItem[],
 
   /**
-   * Categorised skill lists shown on the CV. Order reflects priority for backend roles.
+   * Categorised skill lists. Order reflects priority for backend roles.
+   * IDE names (IntelliJ IDEA, WebStorm) are filtered out of the ATS resume
+   * view in ResumeSkills — they stay here for the portfolio CV only.
    */
   skills: [
     {
@@ -101,62 +161,123 @@ export const cvData = {
     },
     {
       category: "Database",
-      items: ["PostgreSQL", "Oracle", "MySQL", "SQL Optimisation"],
+      items: ["PostgreSQL", "Oracle", "MySQL", "SQL Optimization", "Schema Design"],
+    },
+    {
+      // Supporting capability, not the primary identity — kept as plain text
+      // tags (no proficiency levels) and placed after core backend/database
+      // skills. Every item here is verified: app/api/chat/route.ts (OpenAI
+      // Responses API), data/projects.ts money-flow (Google Gemini via
+      // Vercel AI SDK), and data/progress.ts "ai" entry (Claude Code, Codex,
+      // Prompt Design, AI-supported code review — self-reported, in progress).
+      category: "AI & Developer Productivity",
+      items: [
+        "Claude Code",
+        "Codex",
+        "Google Gemini API",
+        "OpenAI API",
+        "LLM Integration",
+        "Prompt Design",
+        "AI-Assisted Code Review",
+      ],
     },
     {
       category: "Frontend",
-      items: ["Next.js", "React", "TypeScript", "JavaScript", "jQuery", "HTML5", "CSS3", "Tailwind CSS"],
+      items: ["Next.js", "React", "TypeScript", "JavaScript", "jQuery", "Tailwind CSS"],
     },
     {
-      category: "Tools & DevOps",
-      items: ["Git", "GitHub", "IntelliJ IDEA", "WebStorm", "VS Code", "Vercel", "Railway", "Claude Code", "Postman", "Swagger"],
+      category: "Tools & Delivery",
+      items: ["Git", "GitHub", "IntelliJ IDEA", "WebStorm", "Postman", "Swagger", "Vercel", "Railway"],
     },
-  ],
+  ] satisfies SkillGroup[],
 
   /**
-   * Featured projects shown on CV.
-   * live: set to null if no live URL.
+   * Featured projects. `featured: true` = shown on /resume (top 3, backend-first).
+   * /cv shows all four. Set github/live/caseStudy to null when a link isn't
+   * publicly reachable — never leave a broken or misleading link.
    */
   projects: [
     {
       name: "H-Phsar",
+      category: "Backend API",
       description:
-        "Backend API for a B2B marketplace connecting distributors and retailers. Designed the data model for stores, product catalogs, and carts; implemented an order state machine, OTP-based verification, and real-time order notifications over WebSocket.",
+        "Backend API for a B2B marketplace connecting distributors and retailers, built on Spring Boot 3 and PostgreSQL.",
+      bullets: [
+        "Designed the data model for stores, product catalogs, and carts, and implemented an order state machine with OTP-based verification.",
+        "Delivered real-time order notifications over WebSocket.",
+      ],
       technologies: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL", "WebSocket"],
       github: "https://github.com/Hen-Heang/h-phsar-api-full",
-      live: "",
-    },
-    {
-      name: "Hengo",
-      description:
-        "Spring Boot REST API behind an AI-assisted goal-tracking app, paired with a Next.js/TypeScript client. Implemented endpoints for daily missions, spaced-repetition scheduling, and XP progression, consumed via TanStack Query.",
-      technologies: ["Next.js", "TypeScript", "TanStack Query", "Tailwind CSS", "Spring Boot"],
-      github: "https://github.com/Hen-Heang/koriai-frontend",
-      live: "https://koriai-frontend.vercel.app/",
+      live: null,
+      caseStudy: "/projects/h-phsar",
+      featured: true,
     },
     {
       name: "We Commerce",
+      category: "Backend API",
       description:
-        "Multi-vendor marketplace API built with Spring Boot 3.4 and Java 21, with database-tracked JWT revocation for session security. Paired with a Next.js 16 storefront implementing cart, checkout, and simulated ABA Pay / KHQR payment flows.",
+        "Multi-vendor marketplace API built with Spring Boot 3.4 and Java 21, paired with a Next.js 16 storefront.",
+      bullets: [
+        "Implemented database-tracked JWT revocation to secure session logout across a multi-vendor marketplace.",
+        "Built cart, checkout, and simulated ABA Pay / KHQR payment flows in the companion Next.js storefront.",
+      ],
       technologies: ["Spring Boot 3", "Java 21", "PostgreSQL", "Next.js", "TanStack Query"],
       github: "https://github.com/Hen-Heang/we-commerce-api",
-      live: "",
+      live: "https://we-commerce-frontend.vercel.app",
+      // No public case-study route — this project is unlisted on /projects.
+      caseStudy: null,
+      featured: true,
     },
     {
       name: "Money Flow",
+      category: "Backend API",
       description:
-        "Personal finance API and PWA on Supabase Postgres with row-level security, exposing budgeting, savings-goal, and recurring-transaction logic, plus an AI chat endpoint over Google Gemini for spending insights. Backed up daily to Neon.",
+        "Personal finance API and PWA on Supabase Postgres with row-level security, backed up daily to Neon.",
+      bullets: [
+        "Implemented budgeting, savings-goal, and recurring-transaction logic behind Postgres row-level security.",
+        "Added an AI chat endpoint over Google Gemini for spending insights and web-push budget alerts.",
+      ],
       technologies: ["Next.js", "TypeScript", "Supabase", "Google Gemini", "Web Push"],
       github: "https://github.com/Hen-Heang/money-flow",
       live: "https://money-flow.henheang.site/",
+      caseStudy: "/projects/money-flow",
+      featured: true,
     },
-  ],
+    {
+      name: "Hengo",
+      category: "Full-Stack App",
+      // NOTE: Hengo was originally built and shipped as "KoriAI" — the GitHub
+      // repo and Vercel deployment were never renamed, so these URLs are
+      // correct even though the product is now called Hengo.
+      description:
+        "Spring Boot REST API behind an AI-assisted goal-tracking and Korean-learning app, paired with a Next.js/TypeScript client.",
+      bullets: [
+        "Implemented endpoints for daily missions, spaced-repetition vocabulary scheduling, and XP progression.",
+        "Built the Next.js/TypeScript client with TanStack Query against the API contract.",
+      ],
+      technologies: ["Next.js", "TypeScript", "TanStack Query", "Tailwind CSS", "Spring Boot"],
+      github: "https://github.com/Hen-Heang/koriai-frontend",
+      live: "https://koriai-frontend.vercel.app/",
+      caseStudy: "/projects/hengo",
+      featured: false,
+    },
+  ] satisfies ProjectItem[],
 
-  languages: [
-    { name: "Khmer", level: "Native", proficiency: 100 },
-    { name: "English", level: "Professional Working", proficiency: 70 },
-    { name: "Korean", level: "Elementary (TOPIK I)", proficiency: 30 },
-  ],
+  languages: profileData.languages,
 }
 
-export type CVData = typeof cvData
+/**
+ * The shape both /cv and /resume components render against. Defined
+ * independently of `cvData`'s literal type — `getSiteContent("cv")` returns
+ * this same (schema-parsed, optional-field) shape when content comes from
+ * Supabase instead of this static fallback, and components must accept both.
+ */
+export type CVData = {
+  personal: PersonalInfo
+  summary: string
+  experience: ExperienceItem[]
+  education: EducationItem[]
+  skills: SkillGroup[]
+  projects: ProjectItem[]
+  languages: LanguageItem[]
+}

@@ -140,25 +140,27 @@ export function TechnicalPanel({ tabs }: { tabs: TechnicalTab[] }) {
                     200 OK · operational
                 </span>
             </div>
-            <div className="border-b border-border px-3 py-2">
-                <TabsList aria-label="Engineering views" className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-none bg-transparent p-0">
-                    {tabs.map((tab) => (
-                        <TabsTrigger
-                            key={tab.id}
-                            value={tab.id}
-                            className="whitespace-nowrap rounded-md px-2.5 py-1 font-mono text-xs text-fg-muted transition-colors hover:text-fg-secondary data-[state=active]:bg-surface-hover data-[state=active]:text-fg data-[state=active]:shadow-none"
-                        >
-                            {tab.label}
-                        </TabsTrigger>
-                    ))}
-                </TabsList>
-            </div>
+            {tabs.length > 1 && (
+                <div className="hidden border-b border-border px-3 py-2 sm:block">
+                    <TabsList aria-label="Engineering views" className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-none bg-transparent p-0">
+                        {tabs.map((tab) => (
+                            <TabsTrigger
+                                key={tab.id}
+                                value={tab.id}
+                                className="whitespace-nowrap rounded-md px-2.5 py-1 font-mono text-xs text-fg-muted transition-colors hover:text-fg-secondary data-[state=active]:bg-surface-hover data-[state=active]:text-fg data-[state=active]:shadow-none"
+                            >
+                                {tab.label}
+                            </TabsTrigger>
+                        ))}
+                    </TabsList>
+                </div>
+            )}
 
             {tabs.map((tab) => (
                 <TabsContent
                     key={tab.id}
                     value={tab.id}
-                    className="mt-0 h-[260px] p-4 outline-none animate-in fade-in-0 sm:h-[320px] sm:p-5"
+                    className="mt-0 h-[240px] p-4 outline-none animate-in fade-in-0 sm:h-[320px] sm:p-5"
                 >
                     <TabContent data={tab.data} />
                 </TabsContent>

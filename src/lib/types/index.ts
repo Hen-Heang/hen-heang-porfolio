@@ -29,6 +29,12 @@ export interface ProcessStep {
     detail: string
 }
 
+/** Broad shape of the system — drives the category label on cards and the flagship panel. */
+export type ProjectCategory = "Backend API" | "Full-Stack Application" | "Enterprise System" | "Frontend Application"
+
+/** Who the work was built for — distinguishes solo/team side projects from paid company work. */
+export type ProjectOwnership = "Personal Project" | "Team Project" | "Professional Work"
+
 export interface Project {
     slug: string
     title: string
@@ -44,6 +50,12 @@ export interface Project {
     hidden?: boolean
     /** Show the poster image in the homepage Selected Work panel instead of the architecture/api/database/workflow preview that `getProjectPreview` would otherwise pick. */
     previewImage?: boolean
+    category?: ProjectCategory
+    ownership?: ProjectOwnership
+    /** Short topic labels for what the engineering work actually covered (e.g. "Authentication", "Order workflow") — distinct from `technologies` (the stack) and `architecture` (system layers). */
+    engineeringFocus?: string[]
+    /** Company work whose source/screenshots can't be shown — case-study and card UI hide GitHub/demo links and surface a confidentiality note instead. */
+    confidential?: boolean
     businessProblem?: string
     overview?: string
     process?: ProcessStep[]

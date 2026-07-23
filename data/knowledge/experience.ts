@@ -37,8 +37,8 @@ export function buildExperienceKnowledge(
             title: "Work experience",
             keywords: [
                 "experience", "work", "job", "career", "company", "bizplay", "kosign",
-                "employer", "history", "role", "professional", "enterprise", "korea",
-                "cambodia", "billing", "financial", "b2b", "years",
+                "employer", "history", "role", "professional", "professionally", "enterprise", "korea",
+                "cambodia", "billing", "financial", "b2b", "years", "backend", "systems", "built",
             ],
             content: experienceContent,
         },
@@ -47,7 +47,7 @@ export function buildExperienceKnowledge(
             category: "experience",
             title: "Education and training",
             keywords: [
-                "education", "study", "university", "degree", "bootcamp", "training",
+                "education", "educational", "background", "study", "university", "degree", "bootcamp", "training",
                 "school", "hrd", "computer science", "learn", "certificate",
             ],
             content: educationContent,

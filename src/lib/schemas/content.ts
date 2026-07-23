@@ -38,6 +38,10 @@ export const ProjectSchema = z.object({
     featured: z.boolean().optional(),
     hidden: z.boolean().optional(),
     previewImage: z.boolean().optional(),
+    category: z.enum(["Backend API", "Full-Stack Application", "Enterprise System", "Frontend Application"]).optional(),
+    ownership: z.enum(["Personal Project", "Team Project", "Professional Work"]).optional(),
+    engineeringFocus: z.array(z.string()).optional(),
+    confidential: z.boolean().optional(),
     businessProblem: z.string().optional(),
     overview: z.string().optional(),
     process: z.array(ProcessStepSchema).optional(),
@@ -174,9 +178,9 @@ const CvExperienceSchema = z.object({
     location: z.string(),
     startDate: z.string(),
     endDate: z.string(),
-    current: z.boolean(),
+    current: z.boolean().optional(),
     bullets: z.array(z.string()),
-    stack: z.array(z.string()),
+    stack: z.array(z.string()).optional(),
 })
 
 const CvEducationSchema = z.object({
@@ -184,36 +188,42 @@ const CvEducationSchema = z.object({
     degree: z.string().min(1),
     startDate: z.string(),
     endDate: z.string(),
-    description: z.string(),
+    description: z.string().optional(),
 })
 
 const CvProjectSchema = z.object({
     name: z.string().min(1),
+    category: z.string().optional(),
     description: z.string(),
+    bullets: z.array(z.string()).optional(),
     technologies: z.array(z.string()),
-    github: z.string(),
-    live: z.string(),
+    github: z.string().nullable().optional(),
+    live: z.string().nullable().optional(),
+    caseStudy: z.string().nullable().optional(),
+    featured: z.boolean().optional(),
 })
 
 export const CvContentSchema = z.object({
     personal: z.object({
         name: z.string().min(1),
         title: z.string().min(1),
-        subtitle: z.string(),
-        photo: z.string(),
+        subtitle: z.string().optional(),
+        photo: z.string().optional(),
         location: z.string(),
-        phone: z.string(),
+        // TODO: verify this phone number — see TODO in data/profile.ts.
+        phone: z.string().optional(),
         email: z.string().email(),
-        linkedin: z.string().url(),
-        github: z.string().url(),
-        portfolio: z.string().url(),
+        linkedin: z.string().url().optional(),
+        github: z.string().url().optional(),
+        portfolio: z.string().url().optional(),
     }),
     summary: z.string(),
     experience: z.array(CvExperienceSchema),
     education: z.array(CvEducationSchema),
     skills: z.array(SkillCategorySchema.extend({ items: z.array(z.string()) })),
     projects: z.array(CvProjectSchema),
-    languages: z.array(z.object({ name: z.string(), level: z.string(), proficiency: z.number() })),
+    // Text-based proficiency only — no percentages/progress bars on recruiter-facing pages.
+    languages: z.array(z.object({ name: z.string(), level: z.string() })),
 })
 export type CvContentParsed = z.infer<typeof CvContentSchema>
 
