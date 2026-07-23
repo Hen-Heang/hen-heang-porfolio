@@ -62,13 +62,19 @@ function mapProject(r: any): unknown {
   // model, API endpoints, featured, …), so merge those from the static
   // project with the same slug — otherwise Supabase-sourced projects lose
   // their richest sections. Rows with unknown slugs simply omit them.
+  //
+  // `image` is sourced from static too (not the DB row): it's a case-study
+  // asset that ships with a code change (new poster, new screenshot), and
+  // committing data/projects.ts should be enough to make it live without
+  // also needing a matching /admin edit or a database reseed. Falls back to
+  // the DB row's image for admin-only projects that have no static entry.
   const s = staticProjects.find((p) => p.slug === r.slug)
   return {
     slug: r.slug,
     title: r.title,
     description: r.description,
     technologies: r.technologies,
-    image: r.image,
+    image: s?.image ?? r.image,
     imageFit: s?.imageFit,
     github: r.github ?? undefined,
     demo: r.demo ?? undefined,
